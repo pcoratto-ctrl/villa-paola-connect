@@ -43,7 +43,7 @@ const PosizioneSection = () => {
           >
             <div className="rounded-[calc(1.5rem-12px)] overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.67890!2d16.2!3d38.98!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDU4JzQ4LjAiTiAxNsKwMTInMDAuMCJF!5e0!3m2!1sit!2sit!4v1600000000000!5m2!1sit!2sit"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d16.1817!3d38.941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDU2JzI3LjYiTiAxNsKwMTAnNTQuMSJF!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
@@ -71,7 +71,7 @@ const PosizioneSection = () => {
                 <div>
                   <p className="font-medium text-foreground mb-1">Indirizzo</p>
                   <p className="text-muted-foreground">
-                    Contrada Caposuvero<br />
+                    SS18, Contrada Caposuvero 31<br />
                     Gizzeria Lido, Calabria, Italia
                   </p>
                 </div>

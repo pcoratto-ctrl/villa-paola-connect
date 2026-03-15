@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { Phone, MessageCircle, Clock, MapPin } from "lucide-react";
+import { Phone, MessageCircle, Clock, MapPin, Mail } from "lucide-react";
 
 const PHONE_NUMBER = "+393355384250";
+const EMAIL = "R.falfo@agenzietripodi.com";
 const WHATSAPP_URL = `https://wa.me/393355384250?text=Buongiorno%2C%20vorrei%20informazioni%20su%20Villa%20Paola%20Caposuvero`;
 
 const ContattiSection = () => {
@@ -70,11 +71,23 @@ const ContattiSection = () => {
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
                 Scrivici su WhatsApp
               </a>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full border border-border text-foreground text-base font-medium hover:bg-muted transition-all duration-200 active:scale-95"
+              >
+                <Mail className="w-5 h-5" strokeWidth={1.5} />
+                Scrivici una email
+              </a>
             </div>
 
-            <div className="mt-8 flex items-center justify-center gap-2 text-muted-foreground text-sm">
+            <div className="mt-6 flex items-center justify-center gap-2 text-muted-foreground text-sm">
+              <Mail className="w-4 h-4" strokeWidth={1.5} />
+              <a href={`mailto:${EMAIL}`} className="hover:text-foreground transition-colors">{EMAIL}</a>
+            </div>
+
+            <div className="mt-3 flex items-center justify-center gap-2 text-muted-foreground text-sm">
               <MapPin className="w-4 h-4" strokeWidth={1.5} />
-              <span>Contrada Caposuvero, Gizzeria Lido, Calabria</span>
+              <span>SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria</span>
             </div>
           </div>
         </motion.div>
