@@ -38,7 +38,7 @@ const Footer = () => {
             <div className="flex flex-col gap-3">
               <a href={`tel:${PHONE_NUMBER}`} className="flex items-center gap-3 text-muted-foreground text-sm hover:text-foreground transition-colors">
                 <Phone className="w-4 h-4" strokeWidth={1.5} />
-                +39 333 123 4567
+                +39 335 538 4250
               </a>
               <div className="flex items-start gap-3 text-muted-foreground text-sm">
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" strokeWidth={1.5} />

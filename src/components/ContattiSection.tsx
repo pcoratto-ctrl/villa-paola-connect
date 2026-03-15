@@ -42,7 +42,7 @@ const ContattiSection = () => {
               href={`tel:${PHONE_NUMBER}`}
               className="font-display text-3xl md:text-4xl text-primary hover:opacity-80 transition-opacity"
             >
-              +39 333 123 4567
+              +39 335 538 4250
             </a>
 
             <div className="flex items-center justify-center gap-2 mt-4 text-muted-foreground text-sm">
