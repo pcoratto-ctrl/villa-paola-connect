@@ -22,7 +22,7 @@ const Footer = () => {
           <div>
             <p className="font-medium text-foreground text-sm mb-4">Esplora</p>
             <nav className="flex flex-col gap-2">
-              {["La Villa", "Servizi", "Galleria", "Posizione", "Contatti"].map((label) => (
+              {["La Villa", "Servizi", "Galleria", "Recensioni", "Posizione", "Contatti"].map((label) => (
                 <a
                   key={label}
                   href={`#${label.toLowerCase().replace(" ", "").replace("lavilla", "villa")}`}
