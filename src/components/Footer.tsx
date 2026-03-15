@@ -42,9 +42,13 @@ const Footer = () => {
                 <Phone className="w-4 h-4" strokeWidth={1.5} />
                 +39 335 538 4250
               </a>
+              <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 text-muted-foreground text-sm hover:text-foreground transition-colors">
+                <Mail className="w-4 h-4" strokeWidth={1.5} />
+                {EMAIL}
+              </a>
               <div className="flex items-start gap-3 text-muted-foreground text-sm">
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span>Contrada Caposuvero<br />Gizzeria Lido, Calabria, Italia</span>
+                <span>SS18, Contrada Caposuvero 31<br />Gizzeria Lido, Calabria, Italia</span>
               </div>
             </div>
           </div>
