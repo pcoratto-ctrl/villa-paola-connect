@@ -43,7 +43,7 @@ const PosizioneSection = () => {
           >
             <div className="rounded-[calc(1.5rem-12px)] overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d16.1817!3d38.941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDU2JzI3LjYiTiAxNsKwMTAnNTQuMSJF!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2949.1276407277846!2d16.15359086450813!3d38.9549634504173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133fdd8bb1030d7f%3A0xe19638cf63fa3e39!2sContrada%20Capo%20Sperone%2C%2031%2C%2088040%20Gizzeria%20CZ!5e1!3m2!1sit!2sit!4v1773575805100!5m2!1sit!2sit"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
