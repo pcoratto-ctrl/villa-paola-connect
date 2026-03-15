@@ -71,6 +71,13 @@ const ContattiSection = () => {
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
                 Scrivici su WhatsApp
               </a>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full border border-border text-foreground text-base font-medium hover:bg-muted transition-all duration-200 active:scale-95"
+              >
+                <Mail className="w-5 h-5" strokeWidth={1.5} />
+                Scrivici una email
+              </a>
             </div>
 
             <div className="mt-8 flex items-center justify-center gap-2 text-muted-foreground text-sm">
