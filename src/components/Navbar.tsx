@@ -8,6 +8,7 @@ const navLinks = [
   { label: "La Villa", href: "#villa" },
   { label: "Servizi", href: "#servizi" },
   { label: "Galleria", href: "#galleria" },
+  { label: "Recensioni", href: "#recensioni" },
   { label: "Posizione", href: "#posizione" },
   { label: "Contatti", href: "#contatti" },
 ];
