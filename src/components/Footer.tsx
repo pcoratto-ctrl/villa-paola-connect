@@ -59,7 +59,7 @@ const Footer = () => {
             © {new Date().getFullYear()} Villa Paola Caposuvero. Tutti i diritti riservati.
           </p>
           <p className="text-muted-foreground text-xs">
-            Contrada Caposuvero, Gizzeria Lido, Calabria
+            SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria
           </p>
         </div>
       </div>

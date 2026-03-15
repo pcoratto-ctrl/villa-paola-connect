@@ -71,7 +71,7 @@ const PosizioneSection = () => {
                 <div>
                   <p className="font-medium text-foreground mb-1">Indirizzo</p>
                   <p className="text-muted-foreground">
-                    Contrada Caposuvero<br />
+                    SS18, Contrada Caposuvero 31<br />
                     Gizzeria Lido, Calabria, Italia
                   </p>
                 </div>
