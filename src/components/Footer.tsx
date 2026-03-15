@@ -1,6 +1,6 @@
 import { Phone, MapPin, Mail } from "lucide-react";
 
-const EMAIL = "R.falfo@agenzietripodi.com";
+const EMAIL = "R.falvo@agenzietripodi.com";
 
 const PHONE_NUMBER = "+393355384250";
 
