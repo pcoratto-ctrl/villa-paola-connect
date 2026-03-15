@@ -80,11 +80,6 @@ const ContattiSection = () => {
               </a>
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-2 text-muted-foreground text-sm">
-              <Mail className="w-4 h-4" strokeWidth={1.5} />
-              <a href={`mailto:${EMAIL}`} className="hover:text-foreground transition-colors">{EMAIL}</a>
-            </div>
-
             <div className="mt-3 flex items-center justify-center gap-2 text-muted-foreground text-sm">
               <MapPin className="w-4 h-4" strokeWidth={1.5} />
               <span>SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria</span>
