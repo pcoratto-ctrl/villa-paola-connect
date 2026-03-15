@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const PHONE_NUMBER = "+393331234567";
+const PHONE_NUMBER = "+393355384250";
 
 const MobileCta = () => {
   const [visible, setVisible] = useState(false);

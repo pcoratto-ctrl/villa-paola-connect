@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, Clock, MapPin } from "lucide-react";
 
-const PHONE_NUMBER = "+393331234567";
-const WHATSAPP_URL = `https://wa.me/393331234567?text=Buongiorno%2C%20vorrei%20informazioni%20su%20Villa%20Paola%20Caposuvero`;
+const PHONE_NUMBER = "+393355384250";
+const WHATSAPP_URL = `https://wa.me/393355384250?text=Buongiorno%2C%20vorrei%20informazioni%20su%20Villa%20Paola%20Caposuvero`;
 
 const ContattiSection = () => {
   return (
@@ -42,7 +42,7 @@ const ContattiSection = () => {
               href={`tel:${PHONE_NUMBER}`}
               className="font-display text-3xl md:text-4xl text-primary hover:opacity-80 transition-opacity"
             >
-              +39 333 123 4567
+              +39 335 538 4250
             </a>
 
             <div className="flex items-center justify-center gap-2 mt-4 text-muted-foreground text-sm">

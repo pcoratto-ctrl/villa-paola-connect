@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 
-const PHONE_NUMBER = "+393331234567";
+const PHONE_NUMBER = "+393355384250";
 
 const CtaSection = () => {
   return (
