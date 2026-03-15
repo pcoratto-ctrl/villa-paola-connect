@@ -4,7 +4,6 @@ import VillaSection from "@/components/VillaSection";
 import ServiziSection from "@/components/ServiziSection";
 import GalleriaSection from "@/components/GalleriaSection";
 import PosizioneSection from "@/components/PosizioneSection";
-import TestimonialSection from "@/components/TestimonialSection";
 import ContattiSection from "@/components/ContattiSection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
