@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, MessageCircle, Clock, MapPin } from "lucide-react";
+import { Phone, MessageCircle, Clock, MapPin, Mail } from "lucide-react";
 
 const PHONE_NUMBER = "+393355384250";
 const WHATSAPP_URL = `https://wa.me/393355384250?text=Buongiorno%2C%20vorrei%20informazioni%20su%20Villa%20Paola%20Caposuvero`;
