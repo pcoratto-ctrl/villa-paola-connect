@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Phone, ChevronDown } from "lucide-react";
+import heroAsset from "@/assets/villa-hero.jpg.asset.json";
 
 const PHONE_NUMBER = "+393355384250";
 
@@ -14,7 +15,7 @@ const HeroSection = () => {
         className="absolute inset-0"
       >
         <img
-          src="/images/villa-1.jpg"
+          src={heroAsset.url}
           alt="Villa Paola Caposuvero - Vista panoramica"
           className="w-full h-full object-cover"
         />
