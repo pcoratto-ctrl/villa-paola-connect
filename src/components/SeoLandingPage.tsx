@@ -9,7 +9,7 @@ import PosizioneSection from "@/components/PosizioneSection";
 import RecensioniHighlight from "@/components/RecensioniHighlight";
 import FaqSection from "@/components/FaqSection";
 import DisponibilitaSection from "@/components/DisponibilitaSection";
-import heroAsset from "@/assets/villa/hero-desktop.webp.asset.json";
+import heroAsset from "@/assets/villa/hero-tramonto-desktop.webp.asset.json";
 
 const WHATSAPP_URL =
   "https://wa.me/393355384250?text=" +

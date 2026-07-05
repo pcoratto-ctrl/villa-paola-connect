@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle } from "lucide-react";
-import ctaImg from "@/assets/villa/cta-tramonto.webp.asset.json";
+import ctaImg from "@/assets/villa/cta-tramonto-finale.webp.asset.json";
 
 
 const WHATSAPP_URL =

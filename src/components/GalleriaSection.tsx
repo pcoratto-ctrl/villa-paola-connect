@@ -1,32 +1,38 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import g01 from "@/assets/villa/gallery-01-villa-giardino-tramonto.webp.asset.json";
-import g02 from "@/assets/villa/gallery-02-tramonto-spiaggia.webp.asset.json";
-import g03 from "@/assets/villa/gallery-03-terrazza-pranzo-mare.webp.asset.json";
-import g04 from "@/assets/villa/gallery-04-giardino-salotto-mare.webp.asset.json";
-import g05 from "@/assets/villa/gallery-05-pranzo-terrazza-vista-mare.webp.asset.json";
-import g06 from "@/assets/villa/gallery-06-tramonto-mare-incorniciato.webp.asset.json";
-import g07 from "@/assets/villa/gallery-07-tramonto-morbido-mare.webp.asset.json";
-import g08 from "@/assets/villa/gallery-08-vino-calabrese-vista-mare.webp.asset.json";
-import g09 from "@/assets/villa/gallery-09-terrazza-sera-mare.webp.asset.json";
-import g10 from "@/assets/villa/gallery-10-barbecue-terrazza.webp.asset.json";
-import g11 from "@/assets/villa/gallery-11-tavola-vista-mare.webp.asset.json";
-import g12 from "@/assets/villa/gallery-12-salotto-giardino-mare.webp.asset.json";
+import g01 from "@/assets/villa/gallery/01-casa-vista-mare.webp.asset.json";
+import g02 from "@/assets/villa/gallery/02-esterno-villa-giardino-mare.webp.asset.json";
+import g03 from "@/assets/villa/gallery/03-giardino-vista-mare.webp.asset.json";
+import g04 from "@/assets/villa/gallery/04-pranzo-terrazza-vista-mare.webp.asset.json";
+import g05 from "@/assets/villa/gallery/05-relax-giardino-mare.webp.asset.json";
+import g06 from "@/assets/villa/gallery/06-percorso-esterno-casa.webp.asset.json";
+import g07 from "@/assets/villa/gallery/07-casa-giardino-sedute.webp.asset.json";
+import g08 from "@/assets/villa/gallery/08-casa-sera.webp.asset.json";
+import g09 from "@/assets/villa/gallery/09-terrazza-vista-mare.webp.asset.json";
+import g10 from "@/assets/villa/gallery/10-soggiorno.webp.asset.json";
+import g11 from "@/assets/villa/gallery/11-cucina.webp.asset.json";
+import g12 from "@/assets/villa/gallery/12-camera-doppia.webp.asset.json";
+import g13 from "@/assets/villa/gallery/13-camera-matrimoniale.webp.asset.json";
+import g14 from "@/assets/villa/gallery/14-bagno.webp.asset.json";
+import g15 from "@/assets/villa/gallery/15-tramonto-mare.webp.asset.json";
 
 const photos = [
-  { src: g01.url, alt: "Villa Paola Caposuvero, giardino al tramonto vista mare a Gizzeria" },
-  { src: g02.url, alt: "Tramonto sulla spiaggia davanti a Villa Paola Caposuvero" },
-  { src: g03.url, alt: "Terrazza vista mare Villa Paola Caposuvero, pronta per il pranzo" },
-  { src: g04.url, alt: "Giardino e salotto fronte mare Villa Paola Caposuvero" },
-  { src: g05.url, alt: "Pranzo in terrazza vista mare, casa vacanze sul mare in Calabria" },
-  { src: g06.url, alt: "Tramonto sul mare incorniciato dalla villa a Gizzeria Lido" },
-  { src: g07.url, alt: "Tramonto morbido sul Mediterraneo davanti alla villa" },
-  { src: g08.url, alt: "Calice di vino calabrese con vista sul mare" },
-  { src: g09.url, alt: "Terrazza al tramonto Villa Paola Caposuvero" },
-  { src: g10.url, alt: "Barbecue in terrazza Villa Paola Caposuvero" },
-  { src: g11.url, alt: "Tavola apparecchiata vista mare, villa per famiglie a Gizzeria Lido" },
-  { src: g12.url, alt: "Salotto in giardino vista mare Villa Paola Caposuvero" },
+  { src: g01.url, alt: "Villa Paola Caposuvero fronte mare a Gizzeria" },
+  { src: g02.url, alt: "Esterno villa e giardino vista mare Villa Paola Caposuvero" },
+  { src: g03.url, alt: "Giardino vista mare Villa Paola Caposuvero" },
+  { src: g04.url, alt: "Pranzo in terrazza vista mare, casa vacanze sul mare in Calabria" },
+  { src: g05.url, alt: "Relax in giardino fronte mare Villa Paola Caposuvero" },
+  { src: g06.url, alt: "Percorso esterno tra casa e giardino Villa Paola Caposuvero" },
+  { src: g07.url, alt: "Casa e giardino con sedute Villa Paola Caposuvero" },
+  { src: g08.url, alt: "Villa Paola Caposuvero al tramonto" },
+  { src: g09.url, alt: "Terrazza vista mare Villa Paola Caposuvero" },
+  { src: g10.url, alt: "Interni Villa Paola Caposuvero — soggiorno" },
+  { src: g11.url, alt: "Cucina Villa Paola Caposuvero" },
+  { src: g12.url, alt: "Camera doppia Villa Paola Caposuvero" },
+  { src: g13.url, alt: "Camera matrimoniale Villa Paola Caposuvero" },
+  { src: g14.url, alt: "Bagno Villa Paola Caposuvero" },
+  { src: g15.url, alt: "Tramonto sul mare a Villa Paola Caposuvero" },
 ];
 
 const GalleriaSection = () => {
@@ -54,7 +60,7 @@ const GalleriaSection = () => {
             Scopri ogni <span className="italic">angolo</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Il mare, la terrazza, i tramonti: una piccola anteprima della tua prossima vacanza.
+            Il mare, la terrazza, gli spazi interni: un percorso visivo della tua prossima vacanza.
           </p>
         </motion.div>
 
@@ -72,7 +78,7 @@ const GalleriaSection = () => {
             <img
               src={photos[0].src}
               alt={photos[0].alt}
-              className="w-full h-full min-h-[300px] md:min-h-[520px] object-cover hover:scale-105 transition-transform duration-700"
+              className="w-full h-full min-h-[300px] md:min-h-[520px] object-cover hover:scale-[1.03] transition-transform duration-700"
               loading="lazy"
             />
           </div>
@@ -85,7 +91,7 @@ const GalleriaSection = () => {
               <img
                 src={photo.src}
                 alt={photo.alt}
-                className="w-full h-[180px] md:h-[254px] object-cover hover:scale-105 transition-transform duration-700"
+                className="w-full h-[180px] md:h-[254px] object-cover hover:scale-[1.03] transition-transform duration-700"
                 loading="lazy"
               />
             </div>
@@ -108,7 +114,7 @@ const GalleriaSection = () => {
               <img
                 src={photo.src}
                 alt={photo.alt}
-                className="w-full h-[180px] md:h-[240px] object-cover hover:scale-105 transition-transform duration-700"
+                className="w-full h-[180px] md:h-[240px] object-cover hover:scale-[1.03] transition-transform duration-700"
                 loading="lazy"
               />
             </div>
