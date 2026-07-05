@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Bed, Bath, Maximize, Users, Waves, Eye, PawPrint, Plane } from "lucide-react";
-import terrazzaImg from "@/assets/villa/section-terrazza.webp.asset.json";
-import giardinoImg from "@/assets/villa/gallery-04-giardino-salotto-mare.webp.asset.json";
+import terrazzaImg from "@/assets/villa/terrazza-pranzo.webp.asset.json";
+import giardinoImg from "@/assets/villa/casa-mare-giardino.webp.asset.json";
+
 
 
 const stats = [
