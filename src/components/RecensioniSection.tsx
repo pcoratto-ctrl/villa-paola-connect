@@ -108,9 +108,7 @@ const RecensioniSection = () => {
               <ReviewCard key={review.id} review={review} />
             ))}
           </div>
-        ) : (
-          <p className="text-center text-muted-foreground mb-16">Nessuna recensione ancora. Sii il primo a lasciarne una!</p>
-        )}
+        ) : null}
 
         {/* Submit Form */}
         <motion.div

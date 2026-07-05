@@ -56,11 +56,11 @@ const ContattiSection = () => {
             {/* CTAs */}
             <div className="flex flex-col gap-3">
               <a
-                href={`tel:${PHONE_NUMBER}`}
+                href="#disponibilita"
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
               >
                 <Phone className="w-5 h-5" strokeWidth={1.5} />
-                Prenota ora
+                Verifica la disponibilità
               </a>
               <a
                 href={WHATSAPP_URL}
