@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { CalendarCheck, ChevronDown } from "lucide-react";
-import heroAsset from "@/assets/villa-hero.jpg.asset.json";
+import heroDesktop from "@/assets/villa/hero-desktop.webp.asset.json";
+import heroMobile from "@/assets/villa/hero-mobile.webp.asset.json";
 
 const HeroSection = () => {
   return (
@@ -11,11 +12,15 @@ const HeroSection = () => {
         transition={{ duration: 1.8, ease: [0.4, 0, 0.2, 1] }}
         className="absolute inset-0"
       >
-        <img
-          src={heroAsset.url}
-          alt="Villa Paola Caposuvero — villa sul mare a Gizzeria, Calabria"
-          className="w-full h-full object-cover"
-        />
+        <picture>
+          <source media="(max-width: 767px)" srcSet={heroMobile.url} />
+          <img
+            src={heroDesktop.url}
+            alt="Villa Paola Caposuvero — giardino fronte mare a Gizzeria, Calabria"
+            className="w-full h-full object-cover"
+            fetchPriority="high"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/25 via-foreground/10 to-foreground/55" />
       </motion.div>
 

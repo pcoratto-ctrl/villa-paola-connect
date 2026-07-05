@@ -1,28 +1,32 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import g01 from "@/assets/villa/gallery-01-villa-giardino-tramonto.webp.asset.json";
+import g02 from "@/assets/villa/gallery-02-tramonto-spiaggia.webp.asset.json";
+import g03 from "@/assets/villa/gallery-03-terrazza-pranzo-mare.webp.asset.json";
+import g04 from "@/assets/villa/gallery-04-giardino-salotto-mare.webp.asset.json";
+import g05 from "@/assets/villa/gallery-05-pranzo-terrazza-vista-mare.webp.asset.json";
+import g06 from "@/assets/villa/gallery-06-tramonto-mare-incorniciato.webp.asset.json";
+import g07 from "@/assets/villa/gallery-07-tramonto-morbido-mare.webp.asset.json";
+import g08 from "@/assets/villa/gallery-08-vino-calabrese-vista-mare.webp.asset.json";
+import g09 from "@/assets/villa/gallery-09-terrazza-sera-mare.webp.asset.json";
+import g10 from "@/assets/villa/gallery-10-barbecue-terrazza.webp.asset.json";
+import g11 from "@/assets/villa/gallery-11-tavola-vista-mare.webp.asset.json";
+import g12 from "@/assets/villa/gallery-12-salotto-giardino-mare.webp.asset.json";
 
 const photos = [
-  { src: "/images/villa-1.jpg", alt: "Vista esterna della villa", category: "Esterni" },
-  { src: "/images/villa-2.jpg", alt: "Vista panoramica", category: "Vista mare" },
-  { src: "/images/villa-3.jpg", alt: "Soggiorno", category: "Interni" },
-  { src: "/images/villa-4.jpg", alt: "Zona living", category: "Interni" },
-  { src: "/images/villa-5.jpg", alt: "Camera da letto principale", category: "Camere" },
-  { src: "/images/villa-6.jpg", alt: "Dettagli interni", category: "Interni" },
-  { src: "/images/villa-7.jpg", alt: "Cucina attrezzata", category: "Cucina" },
-  { src: "/images/villa-8.jpg", alt: "Camera da letto", category: "Camere" },
-  { src: "/images/villa-9.jpg", alt: "Bagno", category: "Bagni" },
-  { src: "/images/villa-11.jpg", alt: "Terrazza esterna", category: "Esterni" },
-  { src: "/images/villa-12.jpg", alt: "Zona pranzo esterna", category: "Esterni" },
-  { src: "/images/villa-13.jpg", alt: "Dettagli della villa", category: "Interni" },
-  { src: "/images/villa-14.jpg", alt: "Spazi comuni", category: "Interni" },
-  { src: "/images/villa-15.jpg", alt: "Camera", category: "Camere" },
-  { src: "/images/villa-16.jpg", alt: "Vista mare dalla terrazza", category: "Vista mare" },
-  { src: "/images/villa-20.jpg", alt: "Arredamento", category: "Interni" },
-  { src: "/images/villa-21.jpg", alt: "Zona relax", category: "Interni" },
-  { src: "/images/villa-22.jpg", alt: "Giardino", category: "Esterni" },
-  { src: "/images/villa-23.jpg", alt: "Panorama", category: "Vista mare" },
-  { src: "/images/villa-24.jpg", alt: "Dettagli bagno", category: "Bagni" },
+  { src: g01.url, alt: "Villa Paola Caposuvero, giardino al tramonto vista mare a Gizzeria" },
+  { src: g02.url, alt: "Tramonto sulla spiaggia davanti a Villa Paola Caposuvero" },
+  { src: g03.url, alt: "Terrazza vista mare Villa Paola Caposuvero, pronta per il pranzo" },
+  { src: g04.url, alt: "Giardino e salotto fronte mare Villa Paola Caposuvero" },
+  { src: g05.url, alt: "Pranzo in terrazza vista mare, casa vacanze sul mare in Calabria" },
+  { src: g06.url, alt: "Tramonto sul mare incorniciato dalla villa a Gizzeria Lido" },
+  { src: g07.url, alt: "Tramonto morbido sul Mediterraneo davanti alla villa" },
+  { src: g08.url, alt: "Calice di vino calabrese con vista sul mare" },
+  { src: g09.url, alt: "Terrazza al tramonto Villa Paola Caposuvero" },
+  { src: g10.url, alt: "Barbecue in terrazza Villa Paola Caposuvero" },
+  { src: g11.url, alt: "Tavola apparecchiata vista mare, villa per famiglie a Gizzeria Lido" },
+  { src: g12.url, alt: "Salotto in giardino vista mare Villa Paola Caposuvero" },
 ];
 
 const GalleriaSection = () => {
@@ -45,24 +49,21 @@ const GalleriaSection = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            Galleria
-          </p>
+          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">Galleria</p>
           <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
             Scopri ogni <span className="italic">angolo</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            54 foto per farvi sentire già in vacanza.
+            Il mare, la terrazza, i tramonti: una piccola anteprima della tua prossima vacanza.
           </p>
         </motion.div>
 
-        {/* Bento Grid - first 5 photos */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-2"
+          className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-3"
         >
           <div
             className="col-span-2 row-span-2 cursor-pointer overflow-hidden rounded-villa"
@@ -71,7 +72,7 @@ const GalleriaSection = () => {
             <img
               src={photos[0].src}
               alt={photos[0].alt}
-              className="w-full h-full min-h-[300px] md:min-h-[500px] object-cover hover:scale-105 transition-transform duration-700"
+              className="w-full h-full min-h-[300px] md:min-h-[520px] object-cover hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
           </div>
@@ -84,20 +85,19 @@ const GalleriaSection = () => {
               <img
                 src={photo.src}
                 alt={photo.alt}
-                className="w-full h-[200px] md:h-[248px] object-cover hover:scale-105 transition-transform duration-700"
+                className="w-full h-[180px] md:h-[254px] object-cover hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />
             </div>
           ))}
         </motion.div>
 
-        {/* Masonry Grid - remaining photos */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3"
         >
           {photos.slice(5).map((photo, i) => (
             <div
@@ -108,7 +108,7 @@ const GalleriaSection = () => {
               <img
                 src={photo.src}
                 alt={photo.alt}
-                className="w-full h-[180px] md:h-[220px] object-cover hover:scale-105 transition-transform duration-700"
+                className="w-full h-[180px] md:h-[240px] object-cover hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />
             </div>
@@ -116,7 +116,6 @@ const GalleriaSection = () => {
         </motion.div>
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {lightboxIndex !== null && (
           <motion.div

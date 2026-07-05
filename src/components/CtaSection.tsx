@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle } from "lucide-react";
+import ctaImg from "@/assets/villa/cta-tramonto.webp.asset.json";
+
 
 const WHATSAPP_URL =
   "https://wa.me/393355384250?text=" +
@@ -19,11 +21,12 @@ const CtaSection = () => {
           className="relative rounded-villa overflow-hidden"
         >
           <img
-            src="/images/villa-16.jpg"
-            alt="Vista mare dalla terrazza di Villa Paola Caposuvero"
+            src={ctaImg.url}
+            alt="Tramonto sul mare davanti a Villa Paola Caposuvero"
             className="w-full h-[440px] md:h-[540px] object-cover"
             loading="lazy"
           />
+
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/75 via-foreground/40 to-foreground/10" />
           <div className="absolute inset-0 flex flex-col items-center justify-end p-8 md:p-16 text-center">
             <h2 className="font-display text-4xl md:text-5xl text-primary-foreground mb-4 max-w-3xl leading-tight">

@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { Bed, Bath, Maximize, Users, Waves, Eye, PawPrint, Plane } from "lucide-react";
+import terrazzaImg from "@/assets/villa/section-terrazza.webp.asset.json";
+import giardinoImg from "@/assets/villa/gallery-04-giardino-salotto-mare.webp.asset.json";
+
 
 const stats = [
   { icon: Maximize, value: "120 m²", label: "Superficie" },
@@ -81,8 +84,8 @@ const VillaSection = () => {
           <div className="p-3 bg-card rounded-villa shadow-soft border border-border">
             <div className="rounded-[calc(1.5rem-12px)] overflow-hidden">
               <img
-                src="/images/villa-3.jpg"
-                alt="Soggiorno luminoso di Villa Paola Caposuvero a Gizzeria"
+                src={giardinoImg.url}
+                alt="Giardino fronte mare Villa Paola Caposuvero"
                 className="w-full h-[300px] md:h-[400px] object-cover"
                 loading="lazy"
               />
@@ -91,8 +94,8 @@ const VillaSection = () => {
           <div className="p-3 bg-card rounded-villa shadow-soft border border-border">
             <div className="rounded-[calc(1.5rem-12px)] overflow-hidden">
               <img
-                src="/images/villa-16.jpg"
-                alt="Terrazza vista mare di Villa Paola Caposuvero"
+                src={terrazzaImg.url}
+                alt="Terrazza vista mare Villa Paola Caposuvero"
                 className="w-full h-[300px] md:h-[400px] object-cover"
                 loading="lazy"
               />
