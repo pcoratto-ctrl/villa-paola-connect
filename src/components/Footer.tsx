@@ -37,7 +37,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <p className="font-medium text-foreground text-sm mb-4">Esplora</p>
+            <p className="font-medium text-white/90 text-sm mb-4">Esplora</p>
             <nav className="flex flex-col gap-2">
               {[
                 { l: "La Villa", h: "/#villa" },
@@ -48,7 +48,7 @@ const Footer = () => {
                 { l: "Disponibilità", h: "/#disponibilita" },
                 { l: "FAQ", h: "/#faq" },
               ].map((i) => (
-                <a key={i.h} href={i.h} className="text-muted-foreground text-sm hover:text-foreground transition-colors">
+                <a key={i.h} href={i.h} className="text-white/60 text-sm hover:text-white transition-colors">
                   {i.l}
                 </a>
               ))}
@@ -56,10 +56,10 @@ const Footer = () => {
           </div>
 
           <div>
-            <p className="font-medium text-foreground text-sm mb-4">Approfondisci</p>
+            <p className="font-medium text-white/90 text-sm mb-4">Approfondisci</p>
             <nav className="flex flex-col gap-2">
               {seoLinks.map((s) => (
-                <Link key={s.to} to={s.to} className="text-muted-foreground text-sm hover:text-foreground transition-colors">
+                <Link key={s.to} to={s.to} className="text-white/60 text-sm hover:text-white transition-colors">
                   {s.label}
                 </Link>
               ))}
@@ -67,25 +67,25 @@ const Footer = () => {
           </div>
 
           <div>
-            <p className="font-medium text-foreground text-sm mb-4">Contatti</p>
+            <p className="font-medium text-white/90 text-sm mb-4">Contatti</p>
             <div className="flex flex-col gap-3">
-              <a href={`tel:${PHONE_NUMBER}`} className="flex items-center gap-3 text-muted-foreground text-sm hover:text-foreground transition-colors">
+              <a href={`tel:${PHONE_NUMBER}`} className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
                 <Phone className="w-4 h-4" strokeWidth={1.5} />
                 +39 335 538 4250
               </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground text-sm hover:text-foreground transition-colors">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
                 <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
                 Scrivici su WhatsApp
               </a>
-              <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 text-muted-foreground text-sm hover:text-foreground transition-colors">
+              <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
                 <Mail className="w-4 h-4" strokeWidth={1.5} />
                 Contattaci via email
               </a>
-              <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground text-sm hover:text-foreground transition-colors">
+              <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
                 <Facebook className="w-4 h-4" strokeWidth={1.5} />
                 Recensioni su Facebook
               </a>
-              <div className="flex items-start gap-3 text-muted-foreground text-sm">
+              <div className="flex items-start gap-3 text-white/60 text-sm">
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
                 <span>SS18, Contrada Caposuvero 31<br />Gizzeria Lido, Calabria, Italia</span>
               </div>
@@ -93,17 +93,17 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border flex flex-col gap-4">
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col gap-4">
           <nav className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start">
-            <Link to="/privacy-policy" className="text-muted-foreground text-xs hover:text-foreground transition-colors">Privacy Policy</Link>
-            <Link to="/cookie-policy" className="text-muted-foreground text-xs hover:text-foreground transition-colors">Cookie Policy</Link>
-            <Link to="/termini-condizioni" className="text-muted-foreground text-xs hover:text-foreground transition-colors">Termini e condizioni</Link>
+            <Link to="/privacy-policy" className="text-white/60 text-xs hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/cookie-policy" className="text-white/60 text-xs hover:text-white transition-colors">Cookie Policy</Link>
+            <Link to="/termini-condizioni" className="text-white/60 text-xs hover:text-white transition-colors">Termini e condizioni</Link>
           </nav>
           <div className="flex flex-col md:flex-row items-center justify-between gap-2">
-            <p className="text-muted-foreground text-xs text-center md:text-left">
+            <p className="text-white/60 text-xs text-center md:text-left">
               © {new Date().getFullYear()} Villa Paola Caposuvero — SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria
             </p>
-            <p className="text-muted-foreground text-xs text-center md:text-right">
+            <p className="text-white/60 text-xs text-center md:text-right">
               CIN: [da inserire] · CIR: [da inserire, se presente] · P.IVA: [da inserire, se presente]
             </p>
           </div>
