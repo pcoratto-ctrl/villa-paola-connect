@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { CalendarCheck, ChevronDown } from "lucide-react";
-import heroDesktop from "@/assets/villa/hero-tramonto-desktop.webp.asset.json";
-import heroMobile from "@/assets/villa/hero-tramonto-mobile.webp.asset.json";
+import heroDesktop from "@/assets/villa/hero-terrazza-desktop.webp.asset.json";
+import heroMobile from "@/assets/villa/hero-terrazza-mobile.webp.asset.json";
 
 const HeroSection = () => {
   return (
@@ -16,9 +16,9 @@ const HeroSection = () => {
           <source media="(max-width: 767px)" srcSet={heroMobile.url} />
           <img
             src={heroDesktop.url}
-            alt="Tramonto sul mare a Villa Paola Caposuvero, Gizzeria — Calabria"
+            alt="Terrazza vista mare a Villa Paola Caposuvero, Gizzeria — Calabria"
             className="w-full h-full object-cover"
-            style={{ objectPosition: "56% 50%" }}
+            style={{ objectPosition: "center 58%" }}
             fetchPriority="high"
           />
         </picture>
@@ -84,7 +84,7 @@ const HeroSection = () => {
 
       <style>{`
         @media (max-width: 767px) {
-          section picture img { object-position: 61% 50% !important; }
+          section picture img { object-position: center 55% !important; }
         }
       `}</style>
     </section>
