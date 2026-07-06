@@ -19,17 +19,19 @@ const seoLinks = [
 
 const Footer = () => {
   return (
-    <footer className="villa-section py-16 md:py-20 border-t border-border bg-background">
+    <footer
+      className="villa-section py-16 md:py-20"
+      style={{ backgroundColor: "#111820", color: "rgba(255,255,255,0.75)" }}
+    >
       <div className="villa-container">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
-          <div className="md:col-span-1">
+          <div className="md:col-span-1 flex flex-col items-start">
             <img
               src={logoAsset.url}
               alt="Villa Paola Caposuvero logo"
-              className="h-14 w-auto object-contain mb-4"
+              className="w-[200px] md:w-[280px] h-auto object-contain mb-4"
             />
-            <p className="font-display text-lg text-foreground mb-2">Villa Paola Caposuvero</p>
-            <p className="text-muted-foreground text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>
               Villa sul mare con accesso diretto alla spiaggia a Gizzeria, Calabria.
             </p>
           </div>
