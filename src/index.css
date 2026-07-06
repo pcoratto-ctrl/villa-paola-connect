@@ -88,6 +88,10 @@
 }
 
 @layer base {
+  html, body {
+    overflow-x: hidden;
+  }
+
   * {
     @apply border-border;
   }
@@ -95,27 +99,44 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
+    -webkit-tap-highlight-color: transparent;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
     text-wrap: balance;
+    overflow-wrap: break-word;
   }
 
   p {
     text-wrap: pretty;
     line-height: 1.7;
+    overflow-wrap: break-word;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Section anchors: don't hide under sticky navbar */
+  section[id], div[id] {
+    scroll-margin-top: 80px;
   }
 }
 
 @layer components {
   .villa-section {
-    @apply px-6 md:px-8 lg:px-16 xl:px-24;
+    @apply px-5 md:px-8 lg:px-16 xl:px-24;
   }
 
   .villa-container {
     @apply max-w-7xl mx-auto;
+  }
+
+  .safe-bottom {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
   }
 }
 
