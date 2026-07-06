@@ -22,7 +22,7 @@ const amenities = [
   { icon: WashingMachine, label: "Lavatrice", available: true },
   { icon: Flame, label: "Barbecue", available: true },
   { icon: ShowerHead, label: "Biancheria e asciugamani", available: true },
-  { icon: PawPrint, label: "Animali non ammessi", available: false },
+  { icon: PawPrint, label: "Animali ammessi", available: true },
 ];
 
 const ServiziSection = () => {
@@ -39,7 +39,7 @@ const ServiziSection = () => {
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             Servizi
           </p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
             Tutto ciò che serve per un <span className="italic">soggiorno perfetto</span>
           </h2>
           <p className="text-muted-foreground text-lg">

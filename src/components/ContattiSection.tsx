@@ -19,7 +19,7 @@ const ContattiSection = () => {
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             Contatti
           </p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
             Prenota la tua <span className="italic">vacanza</span>
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">

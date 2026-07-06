@@ -13,7 +13,7 @@ const TerminiCondizioni = () => (
     <Navbar />
     <main className="villa-section py-24 md:py-32 bg-villa-warm-white">
       <div className="villa-container max-w-3xl">
-        <h1 className="font-display text-4xl md:text-5xl mb-8 text-foreground">Termini e condizioni</h1>
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl mb-8 text-foreground">Termini e condizioni</h1>
         <div className="text-muted-foreground leading-relaxed space-y-6">
           <p>L'utilizzo del sito villapaolacaposuvero.it implica l'accettazione dei presenti Termini e Condizioni.</p>
 

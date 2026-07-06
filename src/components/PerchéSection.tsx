@@ -38,7 +38,7 @@ const PerchéSection = () => {
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             Perché scegliere Villa Paola
           </p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground">
             Perché qui la vacanza <span className="italic">è più semplice.</span>
           </h2>
         </motion.div>

@@ -78,7 +78,7 @@ const DisponibilitaSection = () => {
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             Richiedi disponibilità
           </p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
             Richiedi le date <span className="italic">disponibili</span>
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">

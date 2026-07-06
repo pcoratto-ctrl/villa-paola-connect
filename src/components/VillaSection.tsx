@@ -32,7 +32,7 @@ const VillaSection = () => {
           className="max-w-3xl mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">La Villa</p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-tight">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-tight">
             Una villa sul mare pensata per vivere{" "}
             <span className="italic text-primary">la Calabria senza filtri.</span>
           </h2>

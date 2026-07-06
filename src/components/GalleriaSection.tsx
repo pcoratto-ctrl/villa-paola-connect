@@ -56,7 +56,7 @@ const GalleriaSection = () => {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">Galleria</p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
             Scopri ogni <span className="italic">angolo</span>
           </h2>
           <p className="text-muted-foreground text-lg">

@@ -15,7 +15,7 @@ const PrivacyPolicy = () => (
     <Navbar />
     <main className="villa-section py-24 md:py-32 bg-villa-warm-white">
       <div className="villa-container max-w-3xl">
-        <h1 className="font-display text-4xl md:text-5xl mb-8 text-foreground">Informativa sulla Privacy</h1>
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl mb-8 text-foreground">Informativa sulla Privacy</h1>
         <div className="prose prose-neutral max-w-none text-muted-foreground leading-relaxed space-y-6">
           <p>Ai sensi del Regolamento UE 2016/679 (GDPR), la presente informativa descrive le modalità di trattamento dei dati personali degli utenti che consultano il sito villapaolacaposuvero.it e utilizzano il modulo di richiesta disponibilità.</p>
 

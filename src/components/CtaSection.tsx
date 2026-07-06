@@ -29,7 +29,7 @@ const CtaSection = () => {
 
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/75 via-foreground/40 to-foreground/10" />
           <div className="absolute inset-0 flex flex-col items-center justify-end p-8 md:p-16 text-center">
-            <h2 className="font-display text-4xl md:text-5xl text-primary-foreground mb-4 max-w-3xl leading-tight">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-primary-foreground mb-4 max-w-3xl leading-tight">
               Il mare è già lì.
               <br />
               <span className="italic">Devi solo scegliere le date.</span>
