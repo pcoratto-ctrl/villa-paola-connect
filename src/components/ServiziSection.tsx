@@ -22,7 +22,7 @@ const amenities = [
   { icon: WashingMachine, label: "Lavatrice", available: true },
   { icon: Flame, label: "Barbecue", available: true },
   { icon: ShowerHead, label: "Biancheria e asciugamani", available: true },
-  { icon: PawPrint, label: "Animali non ammessi", available: false },
+  { icon: PawPrint, label: "Animali ammessi", available: true },
 ];
 
 const ServiziSection = () => {
