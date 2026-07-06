@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CalendarCheck, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoAsset from "@/assets/villa-paola-logo.jpg.asset.json";
+import logoAsset from "@/assets/villa-paola-logo-menu.png.asset.json";
 
 const navLinks = [
   { label: "La Villa", href: "/#villa" },
@@ -13,39 +13,27 @@ const navLinks = [
 ];
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 60);
-    handler();
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-background/90 backdrop-blur-xl shadow-soft" : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50"
+        style={{
+          background: "rgba(255,255,255,0.88)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(0,0,0,0.06)",
+        }}
       >
         <div className="villa-section">
           <div className="villa-container flex items-center justify-between h-16 md:h-20">
             <a href="/" aria-label="Villa Paola Caposuvero — home" className="flex items-center">
-              <span
-                className={`inline-flex items-center justify-center transition-all duration-300 ${
-                  scrolled
-                    ? "bg-transparent p-0 shadow-none"
-                    : "bg-white/95 shadow-soft px-3 py-1.5 rounded-full"
-                }`}
-              >
-                <img
-                  src={logoAsset.url}
-                  alt="Villa Paola Caposuvero logo"
-                  className="h-9 md:h-11 w-auto object-contain"
-                />
-              </span>
+              <img
+                src={logoAsset.url}
+                alt="Villa Paola Caposuvero logo"
+                className="h-[42px] md:h-[58px] w-auto object-contain"
+              />
             </a>
 
             <div className="hidden md:flex items-center gap-8">
@@ -53,9 +41,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors duration-300 hover:opacity-70 ${
-                    scrolled ? "text-foreground" : "text-primary-foreground/90"
-                  }`}
+                  className="text-sm font-medium text-foreground transition-colors duration-300 hover:opacity-70"
                 >
                   {link.label}
                 </a>
@@ -71,9 +57,7 @@ const Navbar = () => {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`md:hidden p-2 transition-colors ${
-                scrolled ? "text-foreground" : "text-primary-foreground"
-              }`}
+              className="md:hidden p-2 text-foreground"
               aria-label="Menu"
             >
               {mobileOpen ? <X className="w-6 h-6" strokeWidth={1.5} /> : <Menu className="w-6 h-6" strokeWidth={1.5} />}
