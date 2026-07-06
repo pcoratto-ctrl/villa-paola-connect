@@ -91,13 +91,20 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-muted-foreground text-xs">
-            © {new Date().getFullYear()} Villa Paola Caposuvero. Tutti i diritti riservati.
-          </p>
-          <p className="text-muted-foreground text-xs">
-            SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria
-          </p>
+        <div className="mt-12 pt-8 border-t border-border flex flex-col gap-4">
+          <nav className="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-start">
+            <Link to="/privacy-policy" className="text-muted-foreground text-xs hover:text-foreground transition-colors">Privacy Policy</Link>
+            <Link to="/cookie-policy" className="text-muted-foreground text-xs hover:text-foreground transition-colors">Cookie Policy</Link>
+            <Link to="/termini-condizioni" className="text-muted-foreground text-xs hover:text-foreground transition-colors">Termini e condizioni</Link>
+          </nav>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-2">
+            <p className="text-muted-foreground text-xs text-center md:text-left">
+              © {new Date().getFullYear()} Villa Paola Caposuvero — SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria
+            </p>
+            <p className="text-muted-foreground text-xs text-center md:text-right">
+              CIN: [da inserire] · CIR: [da inserire, se presente] · P.IVA: [da inserire, se presente]
+            </p>
+          </div>
         </div>
       </div>
     </footer>

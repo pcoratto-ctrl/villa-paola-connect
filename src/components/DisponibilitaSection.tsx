@@ -23,13 +23,24 @@ const DisponibilitaSection = () => {
     departure_date: "",
     guests_count: "",
     message: "",
+    website: "", // honeypot
   });
+  const [privacyOk, setPrivacyOk] = useState(false);
 
   const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (form.website) {
+      // honeypot triggered — silently succeed
+      setSent(true);
+      return;
+    }
+    if (!privacyOk) {
+      toast({ title: "Devi accettare l'informativa privacy", variant: "destructive" });
+      return;
+    }
     if (!form.guest_name.trim() || !form.email.trim()) {
       toast({ title: "Nome ed email sono obbligatori", variant: "destructive" });
       return;
