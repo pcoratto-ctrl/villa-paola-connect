@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import g01 from "@/assets/villa/gallery/01-casa-vista-mare.webp.asset.json";
 import g02 from "@/assets/villa/gallery/02-esterno-villa-giardino-mare.webp.asset.json";
 import g03 from "@/assets/villa/gallery/03-giardino-vista-mare.webp.asset.json";
 import g04 from "@/assets/villa/gallery/04-pranzo-terrazza-vista-mare.webp.asset.json";
@@ -18,7 +17,7 @@ import g14 from "@/assets/villa/gallery/14-bagno.webp.asset.json";
 import g15 from "@/assets/villa/gallery/15-tramonto-mare.webp.asset.json";
 
 const photos = [
-  { src: g01.url, alt: "Villa Paola Caposuvero fronte mare a Gizzeria" },
+  
   { src: g02.url, alt: "Esterno villa e giardino vista mare Villa Paola Caposuvero" },
   { src: g03.url, alt: "Giardino vista mare Villa Paola Caposuvero" },
   { src: g04.url, alt: "Pranzo in terrazza vista mare, casa vacanze sul mare in Calabria" },
