@@ -69,7 +69,7 @@ const FaqSection = ({ faqs = villaFaqs, includeSchema = true }: Props) => {
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             Domande frequenti
           </p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground">
             Le risposte prima <span className="italic">di partire.</span>
           </h2>
         </motion.div>

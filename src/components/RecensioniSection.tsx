@@ -83,7 +83,7 @@ const RecensioniSection = () => {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">Recensioni</p>
-          <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
             Cosa dicono i nostri <span className="italic">ospiti</span>
           </h2>
           {avgRating && reviews && reviews.length > 0 && (

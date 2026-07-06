@@ -13,7 +13,7 @@ const CookiePolicy = () => (
     <Navbar />
     <main className="villa-section py-24 md:py-32 bg-villa-warm-white">
       <div className="villa-container max-w-3xl">
-        <h1 className="font-display text-4xl md:text-5xl mb-8 text-foreground">Cookie Policy</h1>
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl mb-8 text-foreground">Cookie Policy</h1>
         <div className="text-muted-foreground leading-relaxed space-y-6">
           <p>Il sito villapaolacaposuvero.it utilizza esclusivamente cookie tecnici necessari al corretto funzionamento delle pagine (ad esempio la gestione della sessione e delle preferenze di visualizzazione). Non vengono installati cookie di profilazione o pubblicitari.</p>
 

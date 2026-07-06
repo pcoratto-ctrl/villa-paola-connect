@@ -43,7 +43,7 @@ const HeroSection = () => {
             <p className="text-primary-foreground/85 text-sm md:text-base font-medium tracking-widest uppercase mb-4">
               Villa Paola Caposuvero · Gizzeria · Calabria
             </p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-primary-foreground leading-[1.05] mb-6">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-primary-foreground leading-[1.05] mb-6">
               Il mare davanti a te.
               <br />
               <span className="italic">Senza nulla da attraversare.</span>
