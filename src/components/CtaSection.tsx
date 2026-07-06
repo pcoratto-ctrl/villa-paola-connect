@@ -18,30 +18,30 @@ const CtaSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="relative rounded-villa overflow-hidden"
+          className="relative rounded-villa overflow-hidden min-h-[520px] md:min-h-[540px]"
         >
           <img
             src={ctaImg.url}
             alt="Tramonto sul mare davanti a Villa Paola Caposuvero"
-            className="w-full h-[440px] md:h-[540px] object-cover"
+            className="absolute inset-0 w-full h-full object-cover"
             loading="lazy"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/75 via-foreground/40 to-foreground/10" />
-          <div className="absolute inset-0 flex flex-col items-center justify-end p-8 md:p-16 text-center">
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/50 to-foreground/20" />
+          <div className="relative flex flex-col items-center justify-end min-h-[520px] md:min-h-[540px] px-5 py-10 sm:p-12 md:p-16 text-center">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-primary-foreground mb-4 max-w-3xl leading-tight">
               Il mare è già lì.
               <br />
               <span className="italic">Devi solo scegliere le date.</span>
             </h2>
-            <p className="text-primary-foreground/85 text-lg max-w-xl mb-8">
+            <p className="text-primary-foreground/90 text-base sm:text-lg max-w-xl mb-8">
               Raccontaci quando vorresti partire e ti invieremo disponibilità, dettagli
               e un preventivo personalizzato per il tuo soggiorno a Villa Paola Caposuvero.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <a
                 href="#disponibilita"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-4 min-h-[52px] rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
               >
                 <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
                 Richiedi le date disponibili
@@ -50,7 +50,7 @@ const CtaSection = () => {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-primary-foreground/15 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/30 hover:bg-primary-foreground/25 transition-all duration-200"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-4 min-h-[52px] rounded-full bg-primary-foreground/20 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/30 hover:bg-primary-foreground/25 transition-all duration-200"
               >
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
                 Scrivici su WhatsApp
