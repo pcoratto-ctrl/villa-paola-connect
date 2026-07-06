@@ -46,11 +46,11 @@ const HeroSection = () => {
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-primary-foreground leading-[1.05] mb-6">
               Il mare davanti a te.
               <br />
-              <span className="italic">Il tramonto come sfondo.</span>
+              <span className="italic">Senza nulla da attraversare.</span>
             </h1>
             <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
-              Una villa fronte mare dove il Mediterraneo diventa casa: silenzio,
-              privacy e il tempo lento della tua vacanza.
+              Una villa fronte mare dove svegliarsi con la luce del Mediterraneo,
+              vivere la terrazza in piena privacy e ritrovare il tempo lento della vacanza.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a

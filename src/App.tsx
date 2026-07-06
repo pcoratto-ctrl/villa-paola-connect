@@ -7,6 +7,9 @@ import Index from "./pages/Index.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import CookiePolicy from "./pages/CookiePolicy.tsx";
+import TerminiCondizioni from "./pages/TerminiCondizioni.tsx";
 import {
   VillaSulMareCalabria,
   VillaAccessoDirettoSpiaggia,
@@ -34,6 +37,9 @@ const App = () => (
           <Route path="/villa-per-famiglie-calabria" element={<VillaPerFamiglie />} />
           <Route path="/villa-pet-friendly-calabria" element={<VillaPetFriendly />} />
           <Route path="/vacanze-settembre-calabria" element={<VacanzeSettembre />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/termini-condizioni" element={<TerminiCondizioni />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
