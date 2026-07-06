@@ -17,7 +17,7 @@ import g14 from "@/assets/villa/gallery/14-bagno.webp.asset.json";
 import g15 from "@/assets/villa/gallery/15-tramonto-mare.webp.asset.json";
 
 const photos = [
-  { src: g01.url, alt: "Villa Paola Caposuvero fronte mare a Gizzeria" },
+  
   { src: g02.url, alt: "Esterno villa e giardino vista mare Villa Paola Caposuvero" },
   { src: g03.url, alt: "Giardino vista mare Villa Paola Caposuvero" },
   { src: g04.url, alt: "Pranzo in terrazza vista mare, casa vacanze sul mare in Calabria" },
