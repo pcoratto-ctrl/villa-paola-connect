@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import g01 from "@/assets/villa/gallery/01-casa-vista-mare.webp.asset.json";
 import g02 from "@/assets/villa/gallery/02-esterno-villa-giardino-mare.webp.asset.json";
 import g03 from "@/assets/villa/gallery/03-giardino-vista-mare.webp.asset.json";
 import g04 from "@/assets/villa/gallery/04-pranzo-terrazza-vista-mare.webp.asset.json";
