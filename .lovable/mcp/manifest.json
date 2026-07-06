@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "villa-paola-mcp",
+      "version": "0.1.0",
+      "title": "Villa Paola Caposuvero"
+    },
+    "tools": [
+      {
+        "name": "get_villa_info",
+        "title": "Get villa info",
+        "description": "Return essential facts about Villa Paola Caposuvero: location, features, contacts, and how to book.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_reviews",
+        "title": "List approved reviews",
+        "description": "Return the latest approved guest reviews for Villa Paola Caposuvero (public data).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "default": 10,
+              "description": "Maximum number of reviews to return (1-50)."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_availability_request",
+        "title": "Submit availability request",
+        "description": "Send a new availability/quote request for Villa Paola Caposuvero. The owner will follow up by email or WhatsApp; this does not confirm a booking.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "guest_name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "description": "Full name of the guest."
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "maxLength": 200,
+              "description": "Contact email."
+            },
+            "phone": {
+              "type": "string",
+              "maxLength": 40,
+              "description": "Phone number (with country code)."
+            },
+            "arrival_date": {
+              "type": "string",
+              "description": "Requested arrival date (YYYY-MM-DD)."
+            },
+            "departure_date": {
+              "type": "string",
+              "description": "Requested departure date (YYYY-MM-DD)."
+            },
+            "guests_count": {
+              "type": "integer",
+              "description": "Number of guests."
+            },
+            "message": {
+              "type": "string",
+              "maxLength": 1500,
+              "description": "Free-form message or special requests."
+            }
+          },
+          "required": [
+            "guest_name",
+            "email"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
