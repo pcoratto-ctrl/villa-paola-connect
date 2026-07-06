@@ -1,6 +1,6 @@
 import { Phone, MapPin, Mail, MessageCircle, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
-import logoAsset from "@/assets/villa-paola-logo.jpg.asset.json";
+import logoAsset from "@/assets/villa-paola-logo-footer.png.asset.json";
 
 const EMAIL = "R.falvo@agenzietripodi.com";
 const PHONE_NUMBER = "+393355384250";
