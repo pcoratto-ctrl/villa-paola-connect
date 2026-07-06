@@ -23,13 +23,24 @@ const DisponibilitaSection = () => {
     departure_date: "",
     guests_count: "",
     message: "",
+    website: "", // honeypot
   });
+  const [privacyOk, setPrivacyOk] = useState(false);
 
   const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (form.website) {
+      // honeypot triggered — silently succeed
+      setSent(true);
+      return;
+    }
+    if (!privacyOk) {
+      toast({ title: "Devi accettare l'informativa privacy", variant: "destructive" });
+      return;
+    }
     if (!form.guest_name.trim() || !form.email.trim()) {
       toast({ title: "Nome ed email sono obbligatori", variant: "destructive" });
       return;
@@ -164,6 +175,24 @@ const DisponibilitaSection = () => {
                 />
               </div>
 
+              {/* Honeypot anti-spam — hidden from users */}
+              <input
+                type="text" name="website" tabIndex={-1} autoComplete="off"
+                value={form.website} onChange={update("website")}
+                className="hidden" aria-hidden="true"
+              />
+
+              <label className="flex items-start gap-3 text-sm text-foreground cursor-pointer">
+                <input
+                  type="checkbox" required
+                  checked={privacyOk} onChange={(e) => setPrivacyOk(e.target.checked)}
+                  className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-ring"
+                />
+                <span>
+                  Ho letto l'<a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Informativa Privacy</a>. *
+                </span>
+              </label>
+
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
                   type="submit" disabled={submit.isPending}
@@ -184,6 +213,10 @@ const DisponibilitaSection = () => {
               <p className="text-xs text-muted-foreground pt-2 flex items-center gap-2">
                 <CalendarCheck className="w-3.5 h-3.5" strokeWidth={1.5} />
                 Non è una prenotazione: ti confermeremo disponibilità e dettagli via email o WhatsApp.
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Inviando la richiesta dichiari di aver letto l'Informativa Privacy.
+                I dati saranno usati solo per rispondere alla tua richiesta di disponibilità.
               </p>
             </form>
           )}
