@@ -1,5 +1,17 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /it/
+Disallow: /sample-page/
+Disallow: /hello-world/
+Disallow: /blog/
+Disallow: /author/
+Disallow: /eventi/
+Disallow: /negozio/
+Disallow: /pattern/
+Disallow: /temi/
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
 
 Sitemap: https://villapaolacaposuvero.it/sitemap.xml
