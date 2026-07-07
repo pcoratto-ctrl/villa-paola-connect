@@ -102,15 +102,6 @@ const RecensioniHighlight = () => {
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-5xl mx-auto"
         >
           <a
-            href={GOOGLE_REVIEWS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-card text-foreground text-sm font-medium hover:bg-muted transition-colors"
-          >
-            <ExternalLink className="w-4 h-4" strokeWidth={1.5} />
-            {r.buttons.googleReviews[lang]}
-          </a>
-          <a
             href={FACEBOOK_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
