@@ -36,7 +36,6 @@ const Index = () => {
         <GalleriaSection />
         <PosizioneSection />
         <DisponibilitaSection />
-        <RecensioniSection />
         <FaqSection />
         <ContattiSection />
         <CtaSection />
