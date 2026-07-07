@@ -210,9 +210,9 @@ const DisponibilitaSection = () => {
                 </a>
               </div>
 
-              <p className="text-xs text-muted-foreground pt-2 flex items-center gap-2">
-                <CalendarCheck className="w-3.5 h-3.5" strokeWidth={1.5} />
-                Non è una prenotazione: ti confermeremo disponibilità e dettagli via email o WhatsApp.
+              <p className="text-xs text-muted-foreground pt-2 flex items-start gap-2">
+                <CalendarCheck className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" strokeWidth={1.5} />
+                La richiesta non comporta alcuna prenotazione automatica. La disponibilità sarà confermata direttamente dalla struttura.
               </p>
               <p className="text-xs text-muted-foreground">
                 Inviando la richiesta dichiari di aver letto l'Informativa Privacy.
