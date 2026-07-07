@@ -3,9 +3,10 @@ import { Star, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import t from "@/i18n/translations";
 
-const GOOGLE_REVIEWS_URL = "GOOGLE_REVIEWS_URL";
-const FACEBOOK_REVIEWS_URL = "FACEBOOK_REVIEWS_URL";
-const GOOGLE_WRITE_REVIEW_URL = "GOOGLE_WRITE_REVIEW_URL";
+const GOOGLE_REVIEWS_URL =
+  "https://www.google.com/travel/hotels/entity/CiUIwtyLgMj-_47FARDF-ePi9oLg7asBGg0vZy8xMXo4bm15MnN2EAI/reviews?utm_campaign=sharing&utm_medium=link&utm_source=htls&ts=CAEaIAoCGgASGhIUCgcI6g8QChgFEgcI6g8QChgLGAYyAhAAKgkKBToDRVVSGgA";
+const FACEBOOK_REVIEWS_URL = "https://www.facebook.com/profile.php?id=61588044700058&sk=reviews";
+const GOOGLE_WRITE_REVIEW_URL = GOOGLE_REVIEWS_URL;
 
 const Stars = ({ n = 5 }: { n?: number }) => (
   <div className="flex gap-1">

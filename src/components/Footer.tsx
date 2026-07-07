@@ -104,7 +104,7 @@ const Footer = () => {
               © {new Date().getFullYear()} Villa Paola Caposuvero — SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria
             </p>
             <p className="text-white/60 text-xs text-center md:text-right">
-              CIN: [da inserire] · CIR: [da inserire, se presente] · P.IVA: [da inserire, se presente]
+              CIN: IT079060C299OUQTIW · CIR: 079060-AAT-00018
             </p>
           </div>
         </div>
