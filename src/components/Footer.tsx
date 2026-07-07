@@ -5,7 +5,7 @@ import logoAsset from "@/assets/villa-paola-logo-footer.png.asset.json";
 const EMAIL = "R.falvo@agenzietripodi.com";
 const PHONE_NUMBER = "+393355384250";
 const WHATSAPP_URL = "https://wa.me/393355384250";
-const FACEBOOK_URL = "https://www.facebook.com/share/1GR9Wac3ns/";
+const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61588044700058&sk=reviews";
 
 const seoLinks = [
   { to: "/villa-sul-mare-calabria", label: "Villa sul mare in Calabria" },
@@ -104,7 +104,7 @@ const Footer = () => {
               © {new Date().getFullYear()} Villa Paola Caposuvero — SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria
             </p>
             <p className="text-white/60 text-xs text-center md:text-right">
-              CIN: [da inserire] · CIR: [da inserire, se presente] · P.IVA: [da inserire, se presente]
+              CIN: IT079060C299OUQTIW · CIR: 079060-AAT-00018
             </p>
           </div>
         </div>
