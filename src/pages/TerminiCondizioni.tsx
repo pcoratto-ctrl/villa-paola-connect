@@ -31,8 +31,8 @@ const TerminiCondizioni = () => (
 
           <h2 className="font-display text-2xl text-foreground mt-8">Dati identificativi</h2>
           <p>
-            CIN: [da inserire]<br />
-            CIR: [da inserire, se presente]<br />
+            CIN: IT079060C299OUQTIW<br />
+            CIR: 079060-AAT-00018<br />
             P.IVA: [da inserire, se presente]
           </p>
 
