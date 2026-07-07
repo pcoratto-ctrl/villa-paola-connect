@@ -5,7 +5,7 @@ import logoAsset from "@/assets/villa-paola-logo-footer.png.asset.json";
 const EMAIL = "R.falvo@agenzietripodi.com";
 const PHONE_NUMBER = "+393355384250";
 const WHATSAPP_URL = "https://wa.me/393355384250";
-const FACEBOOK_URL = "https://www.facebook.com/share/1GR9Wac3ns/";
+const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61588044700058&sk=reviews";
 
 const seoLinks = [
   { to: "/villa-sul-mare-calabria", label: "Villa sul mare in Calabria" },
