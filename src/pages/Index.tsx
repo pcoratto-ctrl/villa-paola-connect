@@ -6,7 +6,6 @@ import VillaSection from "@/components/VillaSection";
 import PerchéSection from "@/components/PerchéSection";
 import ServiziSection from "@/components/ServiziSection";
 import GalleriaSection from "@/components/GalleriaSection";
-import RecensioniSection from "@/components/RecensioniSection";
 import PosizioneSection from "@/components/PosizioneSection";
 import DisponibilitaSection from "@/components/DisponibilitaSection";
 import FaqSection from "@/components/FaqSection";
