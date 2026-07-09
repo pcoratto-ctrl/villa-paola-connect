@@ -6,63 +6,67 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 210 20% 12%;
+    /* Cream / sand background system (Villa Paola redesign) */
+    --background: 39 47% 94%;          /* #F6F1E7 cream */
+    --foreground: 185 30% 12%;         /* warm near-black on cream */
 
-    --card: 40 15% 99%;
-    --card-foreground: 210 20% 12%;
+    --card: 39 47% 96%;
+    --card-foreground: 185 30% 12%;
 
-    --popover: 40 20% 98%;
-    --popover-foreground: 210 20% 12%;
+    --popover: 39 47% 94%;
+    --popover-foreground: 185 30% 12%;
 
-    --primary: 205 25% 45%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 185 57% 17%;            /* #123E42 deep teal */
+    --primary-foreground: 39 47% 94%;  /* cream on teal */
 
-    --secondary: 35 15% 92%;
-    --secondary-foreground: 210 20% 12%;
+    --secondary: 32 46% 84%;           /* #EBD9C4 sand */
+    --secondary-foreground: 185 57% 17%;
 
-    --muted: 35 15% 92%;
-    --muted-foreground: 210 10% 45%;
+    --muted: 32 30% 88%;
+    --muted-foreground: 108 4% 38%;    /* #5E645D sage muted for soft text */
 
-    --accent: 160 15% 35%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 14 47% 52%;              /* #C0674A terracotta */
+    --accent-foreground: 39 47% 94%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 39 47% 94%;
 
-    --border: 0 0% 0% / 0.08;
-    --input: 35 15% 88%;
-    --ring: 205 25% 45%;
+    --border: 185 20% 15% / 0.12;
+    --input: 32 30% 80%;
+    --ring: 185 57% 17%;
 
-    --radius: 0.75rem;
+    --radius: 0.25rem;                 /* 4px — no pills */
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 39 47% 94%;
+    --sidebar-foreground: 185 30% 20%;
+    --sidebar-primary: 185 57% 17%;
+    --sidebar-primary-foreground: 39 47% 94%;
+    --sidebar-accent: 32 46% 90%;
+    --sidebar-accent-foreground: 185 57% 17%;
+    --sidebar-border: 185 20% 15% / 0.12;
+    --sidebar-ring: 185 57% 17%;
 
-    /* Custom villa tokens */
-    --villa-sand: 35 25% 90%;
-    --villa-sea: 205 25% 45%;
-    --villa-sea-light: 205 30% 92%;
-    --villa-sage: 160 15% 35%;
-    --villa-sage-light: 160 15% 92%;
-    --villa-warm-white: 40 30% 97%;
-    --villa-charcoal: 210 20% 12%;
-    --villa-charcoal-light: 210 15% 35%;
+    /* Custom villa tokens — exact mockup palette */
+    --villa-sand: 32 46% 84%;          /* #EBD9C4 */
+    --villa-sea: 185 57% 17%;          /* #123E42 (alias of primary) */
+    --villa-sea-light: 185 30% 88%;
+    --villa-sage: 108 4% 38%;          /* #5E645D */
+    --villa-sage-light: 108 8% 82%;
+    --villa-warm-white: 39 47% 96%;
+    --villa-charcoal: 185 30% 12%;
+    --villa-charcoal-light: 185 15% 32%;
+    --villa-terracotta: 14 47% 52%;    /* #C0674A eyebrow / accents */
+    --villa-brass: 38 40% 50%;         /* #B0894F lines / hover / stats */
 
     --font-display: 'Instrument Serif', serif;
     --font-body: 'Public Sans', sans-serif;
 
-    --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.04), 0 1px 2px -1px hsl(0 0% 0% / 0.04);
-    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.06);
-    --shadow-elevated: 0 10px 40px -8px hsl(0 0% 0% / 0.1);
-    --shadow-cta: 0 8px 24px -6px hsl(205 25% 45% / 0.35);
+    --shadow-soft: 0 1px 3px 0 hsl(185 30% 12% / 0.05), 0 1px 2px -1px hsl(185 30% 12% / 0.04);
+    --shadow-card: 0 4px 24px -4px hsl(185 30% 12% / 0.08);
+    --shadow-elevated: 0 10px 40px -8px hsl(185 30% 12% / 0.12);
+    --shadow-cta: 0 6px 20px -6px hsl(185 57% 17% / 0.35);
   }
+
 
   .dark {
     --background: 210 20% 8%;
