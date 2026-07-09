@@ -60,6 +60,8 @@ export default {
           "warm-white": "hsl(var(--villa-warm-white))",
           charcoal: "hsl(var(--villa-charcoal))",
           "charcoal-light": "hsl(var(--villa-charcoal-light))",
+          terracotta: "hsl(var(--villa-terracotta))",
+          brass: "hsl(var(--villa-brass))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
