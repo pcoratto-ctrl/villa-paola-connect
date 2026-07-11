@@ -3,8 +3,11 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { meseLabel } from "@/lib/types";
+import { SEZIONI_COMMENTO } from "@/lib/commento";
 
 export const maxDuration = 60;
+
+const SEPARATORE_OBIETTIVI = "===VALUTAZIONE OBIETTIVI===";
 
 const topPostSchema = z.object({ testo: z.string(), metrica: z.string() });
 
@@ -19,12 +22,20 @@ const datiSchema = z.object({
   risultati_note: z.string(),
 });
 
+const contestoSchema = z.object({
+  cosa_fatto: z.string().optional(),
+  andato_bene: z.string().optional(),
+  non_funzionato: z.string().optional(),
+  priorita_prossimo: z.string().optional(),
+});
+
 const bodySchema = z.object({
   clientId: z.string().uuid(),
   canale: z.enum(["instagram", "tiktok", "linkedin"]),
   mese: z.number().int().min(1).max(12),
   anno: z.number().int().min(2020).max(2100),
   dati: datiSchema,
+  contesto: contestoSchema.nullable().optional(),
   prev: datiSchema.nullable(),
 });
 
@@ -46,13 +57,23 @@ function datiToText(d: z.infer<typeof datiSchema>): string {
   return lines.join("\n");
 }
 
+function contestoToText(c: z.infer<typeof contestoSchema> | null | undefined): string {
+  if (!c) return "";
+  const parts: string[] = [];
+  if (c.cosa_fatto) parts.push(`- Cosa è stato fatto questo mese: ${c.cosa_fatto}`);
+  if (c.andato_bene) parts.push(`- Cosa è andato bene (secondo chi gestisce i social): ${c.andato_bene}`);
+  if (c.non_funzionato) parts.push(`- Cosa non ha funzionato: ${c.non_funzionato}`);
+  if (c.priorita_prossimo) parts.push(`- Priorità già individuate per il prossimo mese: ${c.priorita_prossimo}`);
+  return parts.join("\n");
+}
+
 export async function POST(request: Request) {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return NextResponse.json({ error: "Non autenticato." }, { status: 401 });
+    return NextResponse.json({ error: "Sessione scaduta: accedi di nuovo e riprova." }, { status: 401 });
   }
 
   let body: z.infer<typeof bodySchema>;
@@ -77,14 +98,25 @@ export async function POST(request: Request) {
     body.canale === "instagram" ? "Instagram" : body.canale === "tiktok" ? "TikTok" : "LinkedIn";
 
   const confrontoBlock = body.prev
-    ? `DATI DEL MESE PRECEDENTE (per il confronto):\n${datiToText(body.prev)}\n\nConfronta i due mesi indicando le variazioni percentuali dei numeri principali (reach, impression, follower, engagement). Calcola tu le percentuali dai numeri forniti e arrotondale a una cifra decimale.`
-    : `NON è disponibile il mese precedente: non fare confronti con altri mesi e non inventare dati storici. Segnala con naturalezza che questo report costituisce la base di partenza e che dal prossimo mese il confronto sarà automatico.`;
+    ? `DATI DEL MESE PRECEDENTE (per il confronto):
+${datiToText(body.prev)}
+
+Nella sezione "Lettura dei numeri principali" confronta i due mesi indicando le variazioni percentuali dei numeri principali (reach, impression, follower, engagement). Calcola le percentuali esclusivamente dai numeri forniti sopra e arrotondale a una cifra decimale.`
+    : `NON è disponibile il mese precedente. REGOLA VINCOLANTE: non fare alcun confronto con altri mesi, non citare percentuali di crescita o calo, non ipotizzare trend. Nella sezione "Lettura dei numeri principali" dillo esplicitamente (questo report è la base di partenza, dal prossimo mese il confronto sarà automatico) e commenta solo i valori assoluti del mese.`;
 
   const obiettiviBlock = client.obiettivi_testo
-    ? `OBIETTIVI DEL CLIENTE: ${client.obiettivi_testo}`
+    ? `OBIETTIVI DEL CLIENTE (dalla scheda cliente): ${client.obiettivi_testo}`
     : "OBIETTIVI DEL CLIENTE: non specificati.";
 
-  const prompt = `Scrivi il commento per il report mensile social di un cliente. Il testo verrà inserito in un PDF che il social media manager consegnerà al cliente finale.
+  const contestoText = contestoToText(body.contesto);
+  const contestoBlock = contestoText
+    ? `CONTESTO DEL MESE (scritto da chi gestisce i social — usalo come fonte principale per le sezioni qualitative):
+${contestoText}`
+    : `CONTESTO DEL MESE: non fornito. REGOLA VINCOLANTE: non inventare attività, iniziative o valutazioni qualitative non deducibili dai numeri e dalle note. Basati solo sui dati forniti.`;
+
+  const titoli = SEZIONI_COMMENTO.map((t, i) => `${i + 1}. ${t}`).join("\n");
+
+  const prompt = `Scrivi il commento per il report mensile social di un cliente. Il testo verrà inserito in un PDF che il social media manager consegnerà al cliente finale, quindi deve essere pronto da leggere senza ritocchi.
 
 CLIENTE: ${client.nome}
 CANALE: ${canaleLabel} (solo organico, nessuna sponsorizzata)
@@ -95,22 +127,37 @@ ${obiettiviBlock}
 DATI DEL MESE:
 ${datiToText(body.dati)}
 
+${contestoBlock}
+
 ${confrontoBlock}
 
-ISTRUZIONI DI SCRITTURA:
-- Scrivi in italiano, 3-5 paragrafi separati da riga vuota.
-- Struttura: cosa è andato bene; cosa è cambiato rispetto al mese scorso (con percentuali, solo se disponibile); chiudi con 2-3 raccomandazioni concrete per il mese successivo, collegate agli obiettivi del cliente.
-- Tono da consulente: professionale, chiaro, costruttivo. Dai del "noi" al team che gestisce i social.
-- Niente gergo tecnico non spiegato, niente inglesismi inutili, niente emoji, niente elenchi puntati: solo paragrafi di prosa (le raccomandazioni possono essere numerate nel testo, es. "1) ... 2) ...").
-- Usa i numeri reali forniti, formattati all'italiana (es. 24.900). Non inventare dati.
-- Non aggiungere titoli, saluti o firme: solo il corpo del commento.`;
+STRUTTURA OBBLIGATORIA — il commento deve avere ESATTAMENTE queste 5 sezioni, in quest'ordine, ognuna introdotta dal suo titolo su una riga a sé (numerato, senza grassetti o markdown):
+${titoli}
+
+Contenuto delle sezioni:
+1. Sintesi del mese: 3-4 frasi che un cliente non tecnico capisce al volo; il quadro generale del mese.
+2. Cosa è andato bene: parti dai punti indicati nel contesto (se presenti) e dai contenuti migliori.
+3. Cosa migliorare: onesto ma costruttivo; se il contesto indica cosa non ha funzionato, parti da lì.
+4. Lettura dei numeri principali: reach, impression, follower, engagement spiegati in modo semplice${body.prev ? ", con i confronti percentuali sul mese precedente" : ", senza confronti con altri mesi"}.
+5. Priorità consigliate per il prossimo mese: 2-3 priorità concrete e realizzabili, collegate agli obiettivi del cliente${body.contesto?.priorita_prossimo ? " e coerenti con le priorità già individuate nel contesto" : ""}.
+
+REGOLE VINCOLANTI:
+- NON inventare numeri, metriche, attività o risultati non forniti sopra. Se un'informazione manca, non c'è: scrivilo o ometti.
+- Tono: consulente pratico che parla a un imprenditore; italiano naturale, frasi brevi, niente gergo tecnico non spiegato, niente inglesismi inutili, niente frasi vuote di riempimento, niente emoji, niente elenchi puntati (le priorità possono essere numerate nel testo: "1) … 2) …").
+- Dai del "noi" al team che gestisce i social.
+- Numeri formattati all'italiana (es. 24.900; percentuali con la virgola: 3,8%).
+- Non aggiungere saluti, firme o altre sezioni oltre alle 5 richieste.
+
+DOPO le 5 sezioni, aggiungi una riga contenente esattamente:
+${SEPARATORE_OBIETTIVI}
+e sotto scrivi 2-4 frasi di valutazione PRUDENTE dell'andamento rispetto agli obiettivi del cliente. Regole per questa parte: nessun numero o percentuale inventati; se gli obiettivi non sono specificati o i dati forniti non bastano per valutarli, scrivi esplicitamente che i dati disponibili non sono sufficienti per una valutazione e cosa servirebbe per misurarli. Questa parte comparirà nel PDF nella sezione "Obiettivi del cliente".`;
 
   const anthropic = new Anthropic({ maxRetries: 3 });
 
   try {
     const response = await anthropic.messages.create({
       model: "claude-sonnet-5",
-      max_tokens: 2000,
+      max_tokens: 2500,
       messages: [{ role: "user", content: prompt }],
     });
 
@@ -121,20 +168,32 @@ ISTRUZIONI DI SCRITTURA:
       );
     }
 
-    const commento = response.content
+    const testo = response.content
       .filter((b) => b.type === "text")
       .map((b) => b.text)
       .join("\n")
       .trim();
 
-    if (!commento) {
+    if (!testo) {
       return NextResponse.json(
-        { error: "Risposta vuota dall'AI. Riprova." },
+        { error: "Risposta vuota dall'AI. Riprova tra qualche istante." },
         { status: 502 }
       );
     }
 
-    return NextResponse.json({ commento });
+    // Separa il commento (5 sezioni) dalla valutazione obiettivi
+    const [commentoRaw, valutazioneRaw] = testo.split(SEPARATORE_OBIETTIVI);
+    const commento = (commentoRaw ?? "").trim();
+    const valutazione_obiettivi = (valutazioneRaw ?? "").trim();
+
+    if (!commento) {
+      return NextResponse.json(
+        { error: "Risposta AI in un formato inatteso. Riprova." },
+        { status: 502 }
+      );
+    }
+
+    return NextResponse.json({ commento, valutazione_obiettivi });
   } catch (err) {
     if (err instanceof Anthropic.RateLimitError) {
       return NextResponse.json(
