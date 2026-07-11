@@ -11,47 +11,46 @@ import {
 import type { Client, Report, ReportData } from "@/lib/types";
 import { meseLabel } from "@/lib/types";
 import { formatNumber, formatPct, pctChange, shadeColor } from "@/lib/utils";
+import { parseCommento, sintesiBlocks, SEZIONI_COMMENTO } from "@/lib/commento";
 
 const styles = StyleSheet.create({
   page: { fontFamily: "Helvetica", fontSize: 10, color: "#1e293b", padding: 0 },
-  contentPage: { fontFamily: "Helvetica", fontSize: 10, color: "#1e293b", padding: 40 },
-  h2: { fontSize: 14, fontFamily: "Helvetica-Bold", marginBottom: 12 },
-  kpiRow: { flexDirection: "row", gap: 10, marginBottom: 20 },
+  contentPage: { fontFamily: "Helvetica", fontSize: 10, color: "#1e293b", padding: 48 },
+  h2: { fontSize: 18, fontFamily: "Helvetica-Bold", marginBottom: 6 },
+  h2Sub: { fontSize: 10, color: "#64748b", marginBottom: 24 },
+  h3: { fontSize: 12, fontFamily: "Helvetica-Bold", marginBottom: 10 },
+  kpiRow: { flexDirection: "row", gap: 12, marginBottom: 28 },
   kpiBox: {
     flex: 1,
     borderWidth: 1,
     borderColor: "#e2e8f0",
-    borderRadius: 8,
-    padding: 10,
+    borderRadius: 10,
+    padding: 12,
   },
   kpiLabel: { fontSize: 7, color: "#64748b", textTransform: "uppercase", letterSpacing: 0.5 },
-  kpiValue: { fontSize: 16, fontFamily: "Helvetica-Bold", marginTop: 4 },
-  kpiDelta: { fontSize: 8, marginTop: 3 },
-  section: { marginBottom: 20 },
+  kpiValue: { fontSize: 17, fontFamily: "Helvetica-Bold", marginTop: 5 },
+  kpiDelta: { fontSize: 8, marginTop: 4 },
+  section: { marginBottom: 26 },
   barLabel: { fontSize: 9, color: "#475569", marginBottom: 3 },
-  barTrack: { height: 14, backgroundColor: "#f1f5f9", borderRadius: 4, marginBottom: 8 },
+  barTrack: { height: 14, backgroundColor: "#f1f5f9", borderRadius: 4, marginBottom: 9 },
   barFill: { height: 14, borderRadius: 4 },
+  paragraph: { fontSize: 10.5, lineHeight: 1.75, color: "#334155", marginBottom: 10 },
   footer: {
     position: "absolute",
-    bottom: 24,
-    left: 40,
-    right: 40,
+    bottom: 26,
+    left: 48,
+    right: 48,
     flexDirection: "row",
     justifyContent: "space-between",
     fontSize: 8,
     color: "#94a3b8",
+    borderTopWidth: 1,
+    borderTopColor: "#e2e8f0",
+    paddingTop: 8,
   },
 });
 
-function Kpi({
-  label,
-  value,
-  delta,
-}: {
-  label: string;
-  value: string;
-  delta: number | null;
-}) {
+function Kpi({ label, value, delta }: { label: string; value: string; delta: number | null }) {
   return (
     <View style={styles.kpiBox}>
       <Text style={styles.kpiLabel}>{label}</Text>
@@ -92,6 +91,46 @@ function HBar({
   );
 }
 
+// Blocco della pagina "In sintesi": bordo colorato a sinistra, molto respiro
+function SintesiBlock({
+  titolo,
+  testo,
+  color,
+  bg,
+}: {
+  titolo: string;
+  testo: string;
+  color: string;
+  bg: string;
+}) {
+  return (
+    <View
+      style={{
+        borderLeftWidth: 4,
+        borderLeftColor: color,
+        backgroundColor: bg,
+        borderRadius: 8,
+        padding: 18,
+        marginBottom: 16,
+      }}
+    >
+      <Text style={{ fontSize: 12, fontFamily: "Helvetica-Bold", color, marginBottom: 8 }}>
+        {titolo}
+      </Text>
+      <Text style={{ fontSize: 10.5, lineHeight: 1.7, color: "#334155" }}>{testo}</Text>
+    </View>
+  );
+}
+
+function PdfFooter({ nome, testo }: { nome: string; testo: string }) {
+  return (
+    <View style={styles.footer} fixed>
+      <Text>{nome}</Text>
+      <Text>{testo}</Text>
+    </View>
+  );
+}
+
 type PdfProps = {
   report: Report;
   client: Client;
@@ -105,12 +144,24 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
   const d = report.dati_json;
   const color = client.colore_primario;
   const light = shadeColor(color, 55);
+  const bgSoft = shadeColor(color, 92);
   const periodo = meseLabel(report.mese, report.anno);
   const canale =
     report.canale === "instagram" ? "Instagram" : report.canale === "tiktok" ? "TikTok" : "LinkedIn";
   const followerDelta = d.follower_fine - d.follower_inizio;
   const maxRI = Math.max(d.reach, d.impression, prev?.reach ?? 0, prev?.impression ?? 0);
   const footerText = whiteLabel ? `Report ${canale} · ${periodo}` : "Creato con Klaro · klaro.app";
+
+  // Sezione "In sintesi": dal contesto del mese, con fallback sul commento AI
+  const sintesi = sintesiBlocks(d.contesto, report.commento_ai);
+  const hasSintesi = Boolean(sintesi.bene || sintesi.migliorare || sintesi.priorita);
+  const hasObiettivi = Boolean(client.obiettivi_testo || d.valutazione_obiettivi);
+
+  // Commento: se segue la struttura a 5 sezioni, ogni sezione ha il suo titolo
+  const sezioni = report.commento_ai ? parseCommento(report.commento_ai) : null;
+  const strutturato = Boolean(
+    sezioni && (sezioni.andato_bene || sezioni.migliorare || sezioni.numeri || sezioni.priorita)
+  );
 
   return (
     <Document title={`Report ${client.nome} — ${periodo}`} author={client.nome}>
@@ -120,32 +171,32 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
           style={{
             backgroundColor: color,
             height: "60%",
-            padding: 48,
+            padding: 52,
             justifyContent: "flex-end",
           }}
         >
           {logoDataUri && (
             <Image
               src={logoDataUri}
-              style={{ width: 72, height: 72, borderRadius: 12, marginBottom: 28, objectFit: "cover" }}
+              style={{ width: 76, height: 76, borderRadius: 14, marginBottom: 30, objectFit: "cover" }}
             />
           )}
-          <Text style={{ color: "#ffffff", opacity: 0.75, fontSize: 10, letterSpacing: 2, textTransform: "uppercase" }}>
+          <Text style={{ color: "#ffffff", opacity: 0.75, fontSize: 10, letterSpacing: 2.5, textTransform: "uppercase" }}>
             Report mensile — {canale} organico
           </Text>
-          <Text style={{ color: "#ffffff", fontSize: 32, fontFamily: "Helvetica-Bold", marginTop: 8 }}>
+          <Text style={{ color: "#ffffff", fontSize: 34, fontFamily: "Helvetica-Bold", marginTop: 10 }}>
             {client.nome}
           </Text>
-          <Text style={{ color: "#ffffff", opacity: 0.9, fontSize: 16, marginTop: 6 }}>{periodo}</Text>
+          <Text style={{ color: "#ffffff", opacity: 0.9, fontSize: 17, marginTop: 8 }}>{periodo}</Text>
         </View>
-        <View style={{ padding: 48, flex: 1, justifyContent: "space-between" }}>
+        <View style={{ padding: 52, flex: 1, justifyContent: "space-between" }}>
           <View>
             {client.obiettivi_testo ? (
               <>
-                <Text style={{ fontSize: 9, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>
+                <Text style={{ fontSize: 9, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>
                   Obiettivi
                 </Text>
-                <Text style={{ fontSize: 11, lineHeight: 1.6, color: "#334155" }}>
+                <Text style={{ fontSize: 11, lineHeight: 1.7, color: "#334155" }}>
                   {client.obiettivi_testo}
                 </Text>
               </>
@@ -155,9 +206,54 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
         </View>
       </Page>
 
+      {/* ---- IN SINTESI + OBIETTIVI ---- */}
+      {(hasSintesi || hasObiettivi) && (
+        <Page size="A4" style={styles.contentPage}>
+          {hasSintesi && (
+            <>
+              <Text style={[styles.h2, { color }]}>In sintesi</Text>
+              <Text style={styles.h2Sub}>
+                Il mese di {periodo} in tre punti, prima dei numeri.
+              </Text>
+              {sintesi.bene ? (
+                <SintesiBlock titolo="Cosa è andato bene" testo={sintesi.bene} color={color} bg={bgSoft} />
+              ) : null}
+              {sintesi.migliorare ? (
+                <SintesiBlock titolo="Cosa migliorare" testo={sintesi.migliorare} color={color} bg={bgSoft} />
+              ) : null}
+              {sintesi.priorita ? (
+                <SintesiBlock titolo="Priorità del prossimo mese" testo={sintesi.priorita} color={color} bg={bgSoft} />
+              ) : null}
+            </>
+          )}
+
+          {hasObiettivi && (
+            <View style={{ marginTop: hasSintesi ? 14 : 0 }}>
+              <Text style={[styles.h2, { color }]}>Obiettivi del cliente</Text>
+              <Text style={styles.h2Sub}>Come sta andando rispetto a ciò che conta davvero.</Text>
+              {client.obiettivi_testo ? (
+                <Text style={[styles.paragraph, { fontFamily: "Helvetica-Oblique" }]}>
+                  “{client.obiettivi_testo}”
+                </Text>
+              ) : null}
+              <Text style={styles.paragraph}>
+                {d.valutazione_obiettivi ||
+                  "I dati di questo mese non sono sufficienti per una valutazione affidabile dell'andamento rispetto agli obiettivi: la aggiorneremo nei prossimi report."}
+              </Text>
+            </View>
+          )}
+          <PdfFooter nome={client.nome} testo={footerText} />
+        </Page>
+      )}
+
       {/* ---- NUMERI ---- */}
       <Page size="A4" style={styles.contentPage}>
         <Text style={[styles.h2, { color }]}>I numeri di {periodo}</Text>
+        <Text style={styles.h2Sub}>
+          {prev && prevLabel
+            ? `Con il confronto rispetto a ${prevLabel}.`
+            : "Primo mese misurato: dal prossimo report vedrai anche il confronto."}
+        </Text>
 
         <View style={styles.kpiRow}>
           <Kpi label="Reach" value={formatNumber(d.reach)} delta={prev ? pctChange(d.reach, prev.reach) : null} />
@@ -175,7 +271,7 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
         </View>
 
         <View style={styles.section}>
-          <Text style={{ fontSize: 11, fontFamily: "Helvetica-Bold", marginBottom: 10 }}>
+          <Text style={styles.h3}>
             Reach e impression{prev && prevLabel ? ` — confronto con ${prevLabel}` : ""}
           </Text>
           {prev && prevLabel ? (
@@ -194,9 +290,7 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
         </View>
 
         <View style={styles.section}>
-          <Text style={{ fontSize: 11, fontFamily: "Helvetica-Bold", marginBottom: 10 }}>
-            Crescita follower
-          </Text>
+          <Text style={styles.h3}>Crescita follower</Text>
           <HBar label="Inizio mese" value={d.follower_inizio} max={Math.max(d.follower_inizio, d.follower_fine)} color={light} />
           <HBar label="Fine mese" value={d.follower_fine} max={Math.max(d.follower_inizio, d.follower_fine)} color={color} />
         </View>
@@ -204,22 +298,22 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
         {/* Highlights */}
         <View
           style={{
-            backgroundColor: shadeColor(color, 88),
+            backgroundColor: bgSoft,
             borderRadius: 10,
-            padding: 16,
-            marginBottom: 20,
+            padding: 18,
+            marginBottom: 26,
           }}
         >
           <Text style={{ fontSize: 11, fontFamily: "Helvetica-Bold", color, marginBottom: 8 }}>
             Highlights del mese
           </Text>
-          <Text style={{ fontSize: 10, lineHeight: 1.6, color: "#334155" }}>
+          <Text style={{ fontSize: 10, lineHeight: 1.7, color: "#334155" }}>
             {d.numero_post} contenuti pubblicati · {formatNumber(d.reach)} persone raggiunte ·{" "}
             {followerDelta >= 0 ? "+" : ""}
             {formatNumber(followerDelta)} follower · engagement {String(d.engagement_rate).replace(".", ",")}%
           </Text>
           {d.risultati_note ? (
-            <Text style={{ fontSize: 10, lineHeight: 1.6, color: "#334155", marginTop: 6 }}>
+            <Text style={{ fontSize: 10, lineHeight: 1.7, color: "#334155", marginTop: 6 }}>
               {d.risultati_note}
             </Text>
           ) : null}
@@ -227,11 +321,9 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
 
         {d.top_post.length > 0 && (
           <View style={styles.section}>
-            <Text style={{ fontSize: 11, fontFamily: "Helvetica-Bold", marginBottom: 10 }}>
-              Top {d.top_post.length} contenuti
-            </Text>
+            <Text style={styles.h3}>Top {d.top_post.length} contenuti</Text>
             {d.top_post.map((p, i) => (
-              <View key={i} style={{ flexDirection: "row", marginBottom: 8, alignItems: "flex-start" }}>
+              <View key={i} style={{ flexDirection: "row", marginBottom: 9, alignItems: "flex-start" }}>
                 <View
                   style={{
                     width: 18,
@@ -258,26 +350,46 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
           </View>
         )}
 
-        <View style={styles.footer} fixed>
-          <Text>{client.nome}</Text>
-          <Text>{footerText}</Text>
-        </View>
+        <PdfFooter nome={client.nome} testo={footerText} />
       </Page>
 
       {/* ---- COMMENTO ---- */}
       <Page size="A4" style={styles.contentPage}>
         <Text style={[styles.h2, { color }]}>Il commento del consulente</Text>
-        {(report.commento_ai ?? "Commento non disponibile.")
-          .split(/\n\n+/)
-          .map((par, i) => (
-            <Text key={i} style={{ fontSize: 10.5, lineHeight: 1.7, color: "#334155", marginBottom: 12 }}>
-              {par}
+        <Text style={styles.h2Sub}>La lettura del mese, sezione per sezione.</Text>
+
+        {strutturato && sezioni ? (
+          (
+            [
+              [SEZIONI_COMMENTO[0], sezioni.sintesi],
+              [SEZIONI_COMMENTO[1], sezioni.andato_bene],
+              [SEZIONI_COMMENTO[2], sezioni.migliorare],
+              [SEZIONI_COMMENTO[3], sezioni.numeri],
+              [SEZIONI_COMMENTO[4], sezioni.priorita],
+            ] as [string, string][]
+          )
+            .filter(([, testo]) => testo.trim().length > 0)
+            .map(([titolo, testo]) => (
+              <View key={titolo} style={{ marginBottom: 16 }} wrap={false}>
+                <Text style={{ fontSize: 12, fontFamily: "Helvetica-Bold", color, marginBottom: 6 }}>
+                  {titolo}
+                </Text>
+                {testo.split(/\n\n+/).map((par, i) => (
+                  <Text key={i} style={styles.paragraph}>
+                    {par.trim()}
+                  </Text>
+                ))}
+              </View>
+            ))
+        ) : (
+          (report.commento_ai ?? "Commento non disponibile.").split(/\n\n+/).map((par, i) => (
+            <Text key={i} style={styles.paragraph}>
+              {par.trim()}
             </Text>
-          ))}
-        <View style={styles.footer} fixed>
-          <Text>{client.nome}</Text>
-          <Text>{footerText}</Text>
-        </View>
+          ))
+        )}
+
+        <PdfFooter nome={client.nome} testo={footerText} />
       </Page>
     </Document>
   );
