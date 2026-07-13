@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { renderReportPdf } from "@/lib/pdf/ReportPdf";
-import { isWhiteLabel } from "@/lib/plans";
+import { resolvePlan } from "@/lib/plans";
 import { prevMonth } from "@/lib/utils";
 import { meseLabel } from "@/lib/types";
 import type { Client, Report } from "@/lib/types";
@@ -60,7 +60,7 @@ export async function GET(request: Request) {
       .eq("mese", p.mese)
       .eq("anno", p.anno)
       .maybeSingle(),
-    supabase.from("profiles").select("piano").eq("id", user.id).single(),
+    supabase.from("profiles").select("piano, created_at").eq("id", user.id).single(),
   ]);
 
   try {
@@ -72,7 +72,7 @@ export async function GET(request: Request) {
       prev: prev?.dati_json ?? null,
       prevLabel: prev ? meseLabel(prev.mese, prev.anno) : null,
       logoDataUri,
-      whiteLabel: isWhiteLabel(profile?.piano ?? "free"),
+      whiteLabel: resolvePlan(profile?.piano, profile?.created_at).whiteLabel,
     });
 
     const filename = `report-${r.clients.nome.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${r.anno}-${String(r.mese).padStart(2, "0")}.pdf`;

@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { PLAN_PRICE } from "@/lib/plans";
 
+// rawPlan è il piano salvato su profiles.piano (free/starter/pro): durante la
+// prova gratuita è "free", quindi i bottoni di upgrade restano visibili.
 export default function BillingButtons({
-  piano,
+  rawPlan,
   hasCustomer,
 }: {
-  piano: string;
+  rawPlan: string;
   hasCustomer: boolean;
 }) {
   const [loading, setLoading] = useState<string | null>(null);
@@ -33,22 +36,22 @@ export default function BillingButtons({
   return (
     <div className="mt-5">
       <div className="flex flex-col gap-3 sm:flex-row">
-        {piano !== "starter" && (
+        {rawPlan !== "starter" && (
           <button
             className="btn-secondary flex-1"
             disabled={loading !== null}
             onClick={() => go("/api/stripe/checkout", { plan: "starter" }, "starter")}
           >
-            {loading === "starter" ? "Apertura pagamento…" : "Passa a Starter — €19/mese"}
+            {loading === "starter" ? "Apertura pagamento…" : `Passa a Starter — ${PLAN_PRICE.starter}`}
           </button>
         )}
-        {piano !== "pro" && (
+        {rawPlan !== "pro" && (
           <button
             className="btn-primary flex-1"
             disabled={loading !== null}
             onClick={() => go("/api/stripe/checkout", { plan: "pro" }, "pro")}
           >
-            {loading === "pro" ? "Apertura pagamento…" : "Passa a Pro — €39/mese"}
+            {loading === "pro" ? "Apertura pagamento…" : `Passa a Pro — ${PLAN_PRICE.pro}`}
           </button>
         )}
       </div>

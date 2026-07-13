@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { maxClients, PLAN_LABELS } from "@/lib/plans";
+import { PLAN_LABELS, resolvePlan } from "@/lib/plans";
 import type { Client, Profile } from "@/lib/types";
 
 export default async function DashboardPage() {
@@ -18,9 +18,10 @@ export default async function DashboardPage() {
       .order("created_at", { ascending: true }),
   ]);
 
-  const p = profile as Profile | null;
+  const p = profile as (Profile & { created_at?: string }) | null;
   const list = (clients ?? []) as (Client & { reports: { count: number }[] })[];
-  const limit = maxClients(p?.piano ?? "free");
+  const plan = resolvePlan(p?.piano, p?.created_at);
+  const limit = plan.maxClients;
   const atLimit = list.length >= limit;
 
   return (
@@ -29,14 +30,11 @@ export default async function DashboardPage() {
         <div>
           <h1 className="text-2xl font-bold text-slate-900">I tuoi clienti</h1>
           <p className="mt-1 text-sm text-slate-500">
-            Piano: {PLAN_LABELS[p?.piano ?? "free"]} · {list.length}/{limit} clienti
+            Piano: {PLAN_LABELS[plan.plan]} · {list.length}/{limit} clienti
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
-          <Link
-            href={atLimit ? "/settings" : "/clients/new"}
-            className={atLimit ? "btn-secondary" : "btn-secondary"}
-          >
+          <Link href={atLimit ? "/settings" : "/clients/new"} className="btn-secondary">
             + Nuovo cliente
           </Link>
           <Link href="/reports/new" className="btn-primary">
@@ -45,13 +43,36 @@ export default async function DashboardPage() {
         </div>
       </div>
 
+      {plan.isTrial && (
+        <p className="mt-4 rounded-xl bg-brand-50 p-4 text-sm text-brand-700">
+          Prova gratuita attiva: hai tutte le funzionalità (fino a {limit} clienti, PDF senza
+          marchio Klaro).{" "}
+          {plan.trialDaysLeft <= 3 ? (
+            <>
+              Restano <strong>{plan.trialDaysLeft} giorni</strong>.{" "}
+              <Link href="/settings" className="font-semibold underline">
+                Scegli un piano
+              </Link>{" "}
+              per non perdere l&apos;accesso completo.
+            </>
+          ) : (
+            <>
+              Restano {plan.trialDaysLeft} giorni. Poi si passa al piano Gratuito (1 cliente),
+              a meno che tu non scelga un piano.
+            </>
+          )}
+        </p>
+      )}
+
       {atLimit && (
         <p className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-800">
-          Hai raggiunto il limite di clienti del tuo piano.{" "}
+          {plan.plan === "free"
+            ? "Il piano Gratuito include 1 cliente. "
+            : "Hai raggiunto il limite di clienti del tuo piano. "}
           <Link href="/settings" className="font-semibold underline">
             Passa a un piano superiore
           </Link>{" "}
-          per aggiungerne altri.
+          per aggiungerne altri (i report restano sempre illimitati).
         </p>
       )}
 

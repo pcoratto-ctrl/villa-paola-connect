@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { PLAN_LABELS, PLAN_LIMITS } from "@/lib/plans";
+import { PLAN_LABELS, resolvePlan } from "@/lib/plans";
 import BillingButtons from "@/components/BillingButtons";
 import type { Profile } from "@/lib/types";
 
@@ -20,8 +20,8 @@ export default async function SettingsPage({
     .eq("id", user!.id)
     .single();
 
-  const p = profile as Profile | null;
-  const piano = p?.piano ?? "free";
+  const p = profile as (Profile & { created_at?: string }) | null;
+  const plan = resolvePlan(p?.piano, p?.created_at);
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -53,14 +53,23 @@ export default async function SettingsPage({
         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
           Abbonamento
         </h2>
-        <p className="mt-2 text-lg font-semibold text-slate-900">{PLAN_LABELS[piano]}</p>
+        <p className="mt-2 text-lg font-semibold text-slate-900">{PLAN_LABELS[plan.plan]}</p>
+
+        {plan.isTrial && (
+          <p className="mt-1 text-sm font-medium text-brand-700">
+            Prova gratuita: restano {plan.trialDaysLeft}{" "}
+            {plan.trialDaysLeft === 1 ? "giorno" : "giorni"}. Poi, senza un piano attivo, si passa
+            automaticamente al Gratuito (1 cliente).
+          </p>
+        )}
+
         <p className="mt-1 text-sm text-slate-500">
-          Limite clienti: {PLAN_LIMITS[piano]}.{" "}
-          {piano === "free"
-            ? "Il PDF include il marchio Klaro; con i piani a pagamento è white-label."
-            : "PDF white-label attivo: nessun marchio Klaro nei report."}
+          Limite clienti: {plan.maxClients} · Report sempre illimitati.{" "}
+          {plan.whiteLabel
+            ? "PDF white-label attivo: nessun marchio Klaro nei report."
+            : "Il PDF include un discreto footer «Creato con Klaro»; con un piano a pagamento sparisce."}
         </p>
-        <BillingButtons piano={piano} hasCustomer={Boolean(p?.stripe_customer_id)} />
+        <BillingButtons rawPlan={plan.rawPlan} hasCustomer={Boolean(p?.stripe_customer_id)} />
       </section>
     </div>
   );

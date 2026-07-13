@@ -159,16 +159,37 @@ export default function LandingPage() {
 
       {/* Prezzi */}
       <section className="py-16">
-        <div className="mx-auto max-w-4xl px-5">
+        <div className="mx-auto max-w-5xl px-5">
           <h2 className="text-center text-3xl font-bold text-slate-900">Prezzi semplici</h2>
           <p className="mt-3 text-center text-slate-600">
-            Inizia gratis con un cliente di prova. Passa a un piano quando sei pronto.
+            Provi tutto gratis per 14 giorni, senza carta. I report sono sempre illimitati: paghi
+            solo in base al numero di clienti.
           </p>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {/* Free */}
             <div className="card flex flex-col">
+              <h3 className="text-lg font-semibold text-slate-900">Gratuito</h3>
+              <p className="mt-2 text-4xl font-extrabold text-slate-900">
+                €0<span className="text-base font-medium text-slate-500">/mese</span>
+              </p>
+              <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-600">
+                <li>✓ 1 cliente</li>
+                <li>✓ Report illimitati</li>
+                <li>✓ Commento AI con confronto mensile</li>
+                <li className="text-slate-400">• PDF con footer «Creato con Klaro»</li>
+              </ul>
+              <Link href="/register" className="btn-secondary mt-6 w-full">
+                Inizia gratis
+              </Link>
+              <p className="mt-2 text-center text-xs text-slate-400">
+                Include 14 giorni di prova completa
+              </p>
+            </div>
+            {/* Starter */}
+            <div className="card flex flex-col border-brand-500 ring-2 ring-brand-100">
               <h3 className="text-lg font-semibold text-slate-900">Starter</h3>
               <p className="mt-2 text-4xl font-extrabold text-slate-900">
-                €19<span className="text-base font-medium text-slate-500">/mese</span>
+                €15<span className="text-base font-medium text-slate-500">/mese</span>
               </p>
               <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-600">
                 <li>✓ Fino a 5 clienti</li>
@@ -176,11 +197,12 @@ export default function LandingPage() {
                 <li>✓ Commento AI con confronto mensile</li>
                 <li>✓ PDF white-label (senza marchio Klaro)</li>
               </ul>
-              <Link href="/register" className="btn-secondary mt-6 w-full">
+              <Link href="/register" className="btn-primary mt-6 w-full">
                 Inizia con Starter
               </Link>
             </div>
-            <div className="card flex flex-col border-brand-500 ring-2 ring-brand-100">
+            {/* Pro */}
+            <div className="card flex flex-col">
               <h3 className="text-lg font-semibold text-slate-900">Pro</h3>
               <p className="mt-2 text-4xl font-extrabold text-slate-900">
                 €39<span className="text-base font-medium text-slate-500">/mese</span>
@@ -191,7 +213,7 @@ export default function LandingPage() {
                 <li>✓ Commento AI con confronto mensile</li>
                 <li>✓ PDF white-label (senza marchio Klaro)</li>
               </ul>
-              <Link href="/register" className="btn-primary mt-6 w-full">
+              <Link href="/register" className="btn-secondary mt-6 w-full">
                 Inizia con Pro
               </Link>
             </div>
