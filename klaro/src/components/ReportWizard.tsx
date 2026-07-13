@@ -376,7 +376,13 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
 
       {/* STEP 2: numeri */}
       {step === 2 && (
-        <div className="space-y-5">
+        <form
+          className="space-y-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+            goToContext();
+          }}
+        >
           <div className="card space-y-4">
             <h2 className="font-semibold text-slate-900">Periodo e canale</h2>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -434,12 +440,13 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                   ["follower_fine", "Follower a fine mese", "es. 2687"],
                   ["numero_post", "Numero di post pubblicati", "es. 16"],
                 ] as [keyof FormState, string, string][]
-              ).map(([key, label, ph]) => (
+              ).map(([key, label, ph], idx) => (
                 <div key={key}>
                   <label className="label">{label} *</label>
                   <input
                     className="input"
                     inputMode="numeric"
+                    autoFocus={idx === 0}
                     value={form[key] as string}
                     onChange={(e) => set(key, e.target.value as FormState[typeof key])}
                     placeholder={ph}
@@ -460,7 +467,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
           </div>
 
           <div className="card space-y-4">
-            <h2 className="font-semibold text-slate-900">I 3 contenuti migliori</h2>
+            <h2 className="font-semibold text-slate-900">Contenuti più performanti (fino a 3)</h2>
             {form.top_post.map((p, i) => (
               <div key={i} className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_180px]">
                 <div>
@@ -503,15 +510,19 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
             </ul>
           )}
 
+          <p className="text-xs text-slate-400">
+            Suggerimento: usa Tab per passare da un campo all&apos;altro e Invio per proseguire.
+          </p>
+
           <div className="flex flex-col gap-3 sm:flex-row">
-            <button className="btn-secondary" onClick={() => setStep(1)}>
+            <button type="button" className="btn-secondary" onClick={() => setStep(1)}>
               ← Indietro
             </button>
-            <button className="btn-primary flex-1" onClick={goToContext}>
+            <button type="submit" className="btn-primary flex-1">
               Continua: contesto del mese →
             </button>
           </div>
-        </div>
+        </form>
       )}
 
       {/* STEP 3: contesto del mese */}
