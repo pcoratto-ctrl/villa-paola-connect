@@ -154,9 +154,20 @@ DOPO le 5 sezioni, aggiungi una riga contenente esattamente:
 ${SEPARATORE_OBIETTIVI}
 e sotto scrivi 2-4 frasi di valutazione PRUDENTE dell'andamento rispetto agli obiettivi del cliente. Regole per questa parte: nessun numero o percentuale inventati; se gli obiettivi non sono specificati o i dati forniti non bastano per valutarli, scrivi esplicitamente che i dati disponibili non sono sufficienti per una valutazione e cosa servirebbe per misurarli. Questa parte comparirà nel PDF nella sezione "Obiettivi del cliente".`;
 
-  const anthropic = new Anthropic({ maxRetries: 3 });
+  // Se la chiave non è configurata sul server, dà un messaggio chiaro invece di
+  // far lanciare il costruttore dell'SDK con un 500 generico.
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return NextResponse.json(
+      {
+        error:
+          "Il commento automatico non è ancora attivo: manca la chiave ANTHROPIC_API_KEY tra le variabili d'ambiente del server. Nel frattempo puoi scrivere il commento a mano qui sotto.",
+      },
+      { status: 503 }
+    );
+  }
 
   try {
+    const anthropic = new Anthropic({ maxRetries: 3 });
     const response = await anthropic.messages.create({
       model: "claude-sonnet-5",
       max_tokens: 2500,
