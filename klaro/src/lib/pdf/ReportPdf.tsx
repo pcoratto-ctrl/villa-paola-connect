@@ -321,7 +321,7 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
 
         {d.top_post.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.h3}>Top {d.top_post.length} contenuti</Text>
+            <Text style={styles.h3}>Contenuti più performanti</Text>
             {d.top_post.map((p, i) => (
               <View key={i} style={{ flexDirection: "row", marginBottom: 9, alignItems: "flex-start" }}>
                 <View
