@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, Clock, MapPin, Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const PHONE_NUMBER = "+393355384250";
 const EMAIL = "R.falvo@agenzietripodi.com";
 const WHATSAPP_URL = `https://wa.me/393355384250?text=Buongiorno%2C%20vorrei%20informazioni%20su%20Villa%20Paola%20Caposuvero`;
 
 const ContattiSection = () => {
+  const { t } = useTranslation();
   return (
     <section id="contatti" className="villa-section py-24 md:py-32">
       <div className="villa-container">
@@ -17,14 +19,13 @@ const ContattiSection = () => {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            Contatti
+            {t("contact.eyebrow")}
           </p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
-            Prenota la tua <span className="italic">vacanza</span>
+            {t("contact.titleStart")} <span className="italic">{t("contact.titleEmph")}</span>
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Per informazioni, disponibilità e prenotazioni, contattaci direttamente. 
-            Saremo felici di aiutarti a organizzare il soggiorno perfetto.
+            {t("contact.subtitle")}
           </p>
         </motion.div>
 
@@ -36,9 +37,8 @@ const ContattiSection = () => {
           className="max-w-lg mx-auto"
         >
           <div className="p-8 md:p-12 rounded-villa bg-card shadow-card border border-border text-center">
-            {/* Phone */}
             <Phone className="w-10 h-10 text-primary mx-auto mb-6" strokeWidth={1.5} />
-            <p className="font-display text-2xl text-foreground mb-2">Chiamaci</p>
+            <p className="font-display text-2xl text-foreground mb-2">{t("contact.callUs")}</p>
             <a
               href={`tel:${PHONE_NUMBER}`}
               className="font-display text-3xl md:text-4xl text-primary hover:opacity-80 transition-opacity"
@@ -48,19 +48,18 @@ const ContattiSection = () => {
 
             <div className="flex items-center justify-center gap-2 mt-4 text-muted-foreground text-sm">
               <Clock className="w-4 h-4" strokeWidth={1.5} />
-              <span>Lun – Dom, 9:00 – 20:00</span>
+              <span>{t("contact.hours")}</span>
             </div>
 
             <div className="my-8 h-px bg-border" />
 
-            {/* CTAs */}
             <div className="flex flex-col gap-3">
               <a
                 href="#disponibilita"
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
               >
                 <Phone className="w-5 h-5" strokeWidth={1.5} />
-                Verifica la disponibilità
+                {t("contact.ctaAvailability")}
               </a>
               <a
                 href={WHATSAPP_URL}
@@ -69,20 +68,20 @@ const ContattiSection = () => {
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-accent text-accent-foreground text-base font-medium hover:opacity-90 transition-all duration-200 active:scale-95"
               >
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
-                Scrivici su WhatsApp
+                {t("contact.ctaWhatsapp")}
               </a>
               <a
                 href={`mailto:${EMAIL}`}
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full border border-border text-foreground text-base font-medium hover:bg-muted transition-all duration-200 active:scale-95"
               >
                 <Mail className="w-5 h-5" strokeWidth={1.5} />
-                Scrivici una email
+                {t("contact.ctaEmail")}
               </a>
             </div>
 
             <div className="mt-3 flex items-center justify-center gap-2 text-muted-foreground text-sm">
               <MapPin className="w-4 h-4" strokeWidth={1.5} />
-              <span>SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria</span>
+              <span>{t("contact.address")}</span>
             </div>
           </div>
         </motion.div>

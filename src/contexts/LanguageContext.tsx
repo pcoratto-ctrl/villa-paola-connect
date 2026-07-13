@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useEffect, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 export type Language = "it" | "en";
 
@@ -13,24 +14,16 @@ const LanguageContext = createContext<LanguageContextValue>({
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Language>(() => {
-    try {
-      const stored = localStorage.getItem("villa-language");
-      if (stored === "it" || stored === "en") return stored;
-    } catch {
-      // ignore
-    }
-    return "it";
-  });
+  const { i18n } = useTranslation();
+  const lang: Language = i18n.language.startsWith("en") ? "en" : "it";
 
   const setLang = (next: Language) => {
-    setLangState(next);
-    try {
-      localStorage.setItem("villa-language", next);
-    } catch {
-      // ignore
-    }
+    if (next !== lang) i18n.changeLanguage(next);
   };
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   return (
     <LanguageContext.Provider value={{ lang, setLang }}>

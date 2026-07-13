@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { CalendarCheck, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import logoAsset from "@/assets/villa-paola-logo-menu.png.asset.json";
 
-const navLinks = [
-  { label: "Recensioni", href: "/#recensioni" },
-  { label: "La Villa", href: "/#villa" },
-  { label: "Servizi", href: "/#servizi" },
-  { label: "Galleria", href: "/#galleria" },
-  { label: "Posizione", href: "/#posizione" },
-  { label: "Contatti", href: "/#contatti" },
-];
-
 const Navbar = () => {
+  const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinks = [
+    { label: t("nav.reviews"), href: "/#recensioni" },
+    { label: t("nav.villa"), href: "/#villa" },
+    { label: t("nav.services"), href: "/#servizi" },
+    { label: t("nav.gallery"), href: "/#galleria" },
+    { label: t("nav.location"), href: "/#posizione" },
+    { label: t("nav.contact"), href: "/#contatti" },
+  ];
 
   return (
     <>
@@ -36,7 +39,7 @@ const Navbar = () => {
               />
             </a>
 
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-6 lg:gap-8">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -46,22 +49,26 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
+              <LanguageSwitcher />
               <a
                 href="/#disponibilita"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
               >
                 <CalendarCheck className="w-4 h-4" strokeWidth={1.5} />
-                Verifica disponibilità
+                {t("nav.checkAvailability")}
               </a>
             </div>
 
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 text-foreground"
-              aria-label="Menu"
-            >
-              {mobileOpen ? <X className="w-6 h-6" strokeWidth={1.5} /> : <Menu className="w-6 h-6" strokeWidth={1.5} />}
-            </button>
+            <div className="md:hidden flex items-center gap-2">
+              <LanguageSwitcher />
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="p-2 text-foreground"
+                aria-label={t("nav.menu")}
+              >
+                {mobileOpen ? <X className="w-6 h-6" strokeWidth={1.5} /> : <Menu className="w-6 h-6" strokeWidth={1.5} />}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -85,13 +92,16 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
+              <div className="pt-2">
+                <LanguageSwitcher />
+              </div>
               <a
                 href="/#disponibilita"
                 onClick={() => setMobileOpen(false)}
                 className="mt-4 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta"
               >
                 <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
-                Verifica disponibilità
+                {t("nav.checkAvailability")}
               </a>
             </div>
           </motion.div>

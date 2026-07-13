@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import ctaImg from "@/assets/villa/cta-tramonto-finale.webp.asset.json";
-
 
 const WHATSAPP_URL =
   "https://wa.me/393355384250?text=" +
@@ -10,6 +10,7 @@ const WHATSAPP_URL =
   );
 
 const CtaSection = () => {
+  const { t } = useTranslation();
   return (
     <section className="villa-section py-24 md:py-32">
       <div className="villa-container">
@@ -22,7 +23,7 @@ const CtaSection = () => {
         >
           <img
             src={ctaImg.url}
-            alt="Tramonto sul mare davanti a Villa Paola Caposuvero"
+            alt={t("cta.imageAlt")}
             className="absolute inset-0 w-full h-full object-cover"
             loading="lazy"
           />
@@ -30,13 +31,12 @@ const CtaSection = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/50 to-foreground/20" />
           <div className="relative flex flex-col items-center justify-end min-h-[520px] md:min-h-[540px] px-5 py-10 sm:p-12 md:p-16 text-center">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-primary-foreground mb-4 max-w-3xl leading-tight">
-              Il mare è già lì.
+              {t("cta.titleLine1")}
               <br />
-              <span className="italic">Devi solo scegliere le date.</span>
+              <span className="italic">{t("cta.titleLine2")}</span>
             </h2>
             <p className="text-primary-foreground/90 text-base sm:text-lg max-w-xl mb-8">
-              Raccontaci quando vorresti partire e ti invieremo disponibilità, dettagli
-              e un preventivo personalizzato per il tuo soggiorno a Villa Paola Caposuvero.
+              {t("cta.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <a
@@ -44,7 +44,7 @@ const CtaSection = () => {
                 className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-4 min-h-[52px] rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
               >
                 <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
-                Richiedi le date disponibili
+                {t("cta.primary")}
               </a>
               <a
                 href={WHATSAPP_URL}
@@ -53,7 +53,7 @@ const CtaSection = () => {
                 className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-4 min-h-[52px] rounded-full bg-primary-foreground/20 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/30 hover:bg-primary-foreground/25 transition-all duration-200"
               >
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
-                Scrivici su WhatsApp
+                {t("cta.secondary")}
               </a>
             </div>
           </div>

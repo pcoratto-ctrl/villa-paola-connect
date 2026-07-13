@@ -1,31 +1,24 @@
 import { motion } from "framer-motion";
 import {
-  Wifi,
-  Waves,
-  Wind,
-  Baby,
-  PawPrint,
-  UtensilsCrossed,
-  Tv,
-  WashingMachine,
-  Flame,
-  ShowerHead,
+  Wifi, Waves, Wind, Baby, PawPrint, UtensilsCrossed, Tv, WashingMachine, Flame, ShowerHead,
 } from "lucide-react";
-
-const amenities = [
-  { icon: Wifi, label: "Wi-Fi gratuito", available: true },
-  { icon: Waves, label: "Spiaggia privata", available: true },
-  { icon: Wind, label: "Aria condizionata", available: true },
-  { icon: UtensilsCrossed, label: "Cucina attrezzata", available: true },
-  { icon: Baby, label: "Adatto ai bambini", available: true },
-  { icon: Tv, label: "TV a schermo piatto", available: true },
-  { icon: WashingMachine, label: "Lavatrice", available: true },
-  { icon: Flame, label: "Barbecue", available: true },
-  { icon: ShowerHead, label: "Biancheria e asciugamani", available: true },
-  { icon: PawPrint, label: "Animali ammessi", available: true },
-];
+import { useTranslation } from "react-i18next";
 
 const ServiziSection = () => {
+  const { t } = useTranslation();
+  const amenities = [
+    { icon: Wifi, label: t("services.amenities.wifi") },
+    { icon: Waves, label: t("services.amenities.beach") },
+    { icon: Wind, label: t("services.amenities.ac") },
+    { icon: UtensilsCrossed, label: t("services.amenities.kitchen") },
+    { icon: Baby, label: t("services.amenities.kids") },
+    { icon: Tv, label: t("services.amenities.tv") },
+    { icon: WashingMachine, label: t("services.amenities.washer") },
+    { icon: Flame, label: t("services.amenities.bbq") },
+    { icon: ShowerHead, label: t("services.amenities.linen") },
+    { icon: PawPrint, label: t("services.amenities.pets") },
+  ];
+
   return (
     <section id="servizi" className="villa-section py-24 md:py-32 bg-villa-warm-white">
       <div className="villa-container">
@@ -37,14 +30,13 @@ const ServiziSection = () => {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            Servizi
+            {t("services.eyebrow")}
           </p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
-            Tutto ciò che serve per un <span className="italic">soggiorno perfetto</span>
+            {t("services.titleStart")} <span className="italic">{t("services.titleEmph")}</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Ogni dettaglio è pensato per il vostro comfort. Dalla cucina attrezzata alla spiaggia privata, 
-            Villa Paola offre tutto il necessario per una vacanza senza pensieri.
+            {t("services.subtitle")}
           </p>
         </motion.div>
 
@@ -58,22 +50,14 @@ const ServiziSection = () => {
           {amenities.map((amenity) => (
             <div
               key={amenity.label}
-              className={`flex flex-col items-center text-center p-6 rounded-villa bg-card shadow-soft border border-border transition-shadow duration-200 hover:shadow-card ${
-                !amenity.available ? "opacity-50" : ""
-              }`}
+              className="flex flex-col items-center text-center p-6 rounded-villa bg-card shadow-soft border border-border transition-shadow duration-200 hover:shadow-card"
             >
-              <amenity.icon
-                className={`w-7 h-7 mb-4 ${
-                  amenity.available ? "text-primary" : "text-muted-foreground"
-                }`}
-                strokeWidth={1.5}
-              />
+              <amenity.icon className="w-7 h-7 mb-4 text-primary" strokeWidth={1.5} />
               <p className="text-sm font-medium text-foreground">{amenity.label}</p>
             </div>
           ))}
         </motion.div>
 
-        {/* Additional amenities list */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,8 +66,7 @@ const ServiziSection = () => {
           className="mt-12 text-center"
         >
           <p className="text-muted-foreground text-sm">
-            E inoltre: frigorifero · forno · microonde · lavastoviglie · utensili da cucina · 
-            zona pranzo esterna · patio · guardaroba · soggiorno
+            {t("services.extra")}
           </p>
         </motion.div>
       </div>

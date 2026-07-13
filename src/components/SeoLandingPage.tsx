@@ -1,13 +1,14 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { CalendarCheck, MessageCircle, ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MobileCta from "@/components/MobileCta";
 import PerchéSection from "@/components/PerchéSection";
 import PosizioneSection from "@/components/PosizioneSection";
 import RecensioniHighlight from "@/components/RecensioniHighlight";
-import FaqSection from "@/components/FaqSection";
+import FaqSection, { type FaqItem } from "@/components/FaqSection";
 import DisponibilitaSection from "@/components/DisponibilitaSection";
 import heroAsset from "@/assets/villa/hero-terrazza-desktop.webp.asset.json";
 
@@ -25,14 +26,16 @@ export interface SeoLandingPageProps {
   eyebrow: string;
   intro: string;
   body: string[];
-  faqs?: { q: string; a: string }[];
+  faqs?: FaqItem[];
 }
 
 const SeoLandingPage = ({ slug, title, description, h1, eyebrow, intro, body, faqs }: SeoLandingPageProps) => {
+  const { t, i18n } = useTranslation();
   const canonical = `https://villapaolacaposuvero.it/${slug}`;
   return (
     <>
       <Helmet>
+        <html lang={i18n.language} />
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />
@@ -52,7 +55,7 @@ const SeoLandingPage = ({ slug, title, description, h1, eyebrow, intro, body, fa
           <div className="villa-section">
             <div className="villa-container max-w-4xl">
               <Link to="/" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground text-sm mb-6">
-                <ArrowLeft className="w-4 h-4" /> Torna alla home
+                <ArrowLeft className="w-4 h-4" /> {t("seoLanding.backHome")}
               </Link>
               <p className="text-primary-foreground/85 text-sm font-medium tracking-widest uppercase mb-4">
                 {eyebrow}
@@ -64,21 +67,13 @@ const SeoLandingPage = ({ slug, title, description, h1, eyebrow, intro, body, fa
                 {intro}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href="#disponibilita"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all"
-                >
+                <a href="#disponibilita" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all">
                   <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
-                  Verifica la disponibilità
+                  {t("seoLanding.ctaAvailability")}
                 </a>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary-foreground/15 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/25"
-                >
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary-foreground/15 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/25">
                   <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
-                  Scrivici su WhatsApp
+                  {t("seoLanding.ctaWhatsapp")}
                 </a>
               </div>
             </div>
@@ -88,14 +83,12 @@ const SeoLandingPage = ({ slug, title, description, h1, eyebrow, intro, body, fa
         <section className="villa-section py-20 md:py-24">
           <div className="villa-container max-w-3xl space-y-6">
             {body.map((p, i) => (
-              <p key={i} className="text-foreground text-lg leading-relaxed">
-                {p}
-              </p>
+              <p key={i} className="text-foreground text-lg leading-relaxed">{p}</p>
             ))}
             <p className="text-muted-foreground pt-4">
-              Vuoi vedere la villa nel dettaglio?{" "}
+              {t("seoLanding.wantMore")}{" "}
               <Link to="/" className="text-primary font-medium hover:underline">
-                Torna alla home di Villa Paola Caposuvero
+                {t("seoLanding.backHomeInline")}
               </Link>
               .
             </p>

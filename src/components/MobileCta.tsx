@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { CalendarCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const MobileCta = () => {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const [hidden, setHidden] = useState(false);
 
@@ -13,8 +15,6 @@ const MobileCta = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Hide when the availability form or the footer is on screen, to avoid
-  // covering the submit button / legal links.
   useEffect(() => {
     const targets = [
       document.getElementById("disponibilita"),
@@ -28,7 +28,7 @@ const MobileCta = () => {
       },
       { rootMargin: "0px 0px -20% 0px", threshold: 0.05 }
     );
-    targets.forEach((t) => io.observe(t));
+    targets.forEach((tg) => io.observe(tg));
     return () => io.disconnect();
   }, []);
 
@@ -49,7 +49,7 @@ const MobileCta = () => {
             className="w-full inline-flex items-center justify-center gap-2 px-6 min-h-[52px] py-3.5 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta active:scale-95 transition-transform"
           >
             <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
-            Verifica disponibilità
+            {t("mobileCta.label")}
           </a>
         </motion.div>
       )}
