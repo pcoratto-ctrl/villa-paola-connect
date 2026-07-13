@@ -1,0 +1,401 @@
+{
+  "nav": {
+    "reviews": "Reviews",
+    "villa": "The Villa",
+    "services": "Amenities",
+    "gallery": "Gallery",
+    "location": "Location",
+    "contact": "Contact",
+    "checkAvailability": "Check availability",
+    "menu": "Menu",
+    "backHome": "Back to home",
+    "languageLabel": "Language"
+  },
+  "hero": {
+    "eyebrow": "Villa Paola Caposuvero · Gizzeria · Calabria",
+    "titleLine1": "The sea right in front of you.",
+    "titleLine2": "With nothing in between.",
+    "subtitle": "A beachfront villa where you wake up to the light of the Mediterranean, live the terrace in full privacy and rediscover the slow rhythm of a real holiday.",
+    "ctaPrimary": "Check availability",
+    "ctaSecondary": "See the villa",
+    "imageAlt": "Sea-view terrace at Villa Paola Caposuvero, Gizzeria — Calabria"
+  },
+  "villa": {
+    "eyebrow": "The Villa",
+    "titleStart": "A seaside villa made to enjoy",
+    "titleEmph": "Calabria without filters.",
+    "body": "Villa Paola Caposuvero is a bright, welcoming home just steps from the sea in Gizzeria. Spacious rooms, a large terrace, comfortable bedrooms and a private location make it ideal for families and small groups looking for a simple, authentic and relaxing holiday.",
+    "stats": {
+      "surface": "Size",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "guests": "Guests"
+    },
+    "features": {
+      "beachAccess": "Direct beach access",
+      "seaView": "Sea view",
+      "families": "Great for families",
+      "airport": "Close to Lamezia Terme airport",
+      "pets": "Pets allowed"
+    },
+    "imageAltGarden": "Beachfront garden at Villa Paola Caposuvero",
+    "imageAltTerrace": "Sea-view terrace at Villa Paola Caposuvero"
+  },
+  "why": {
+    "eyebrow": "Why choose Villa Paola",
+    "titleStart": "Why the holiday here",
+    "titleEmph": "is simply easier.",
+    "cards": {
+      "sea": {
+        "title": "Effortless sea",
+        "text": "Step out of the villa and you are already by the sea — no stress, no long drives."
+      },
+      "privacy": {
+        "title": "Privacy and quiet",
+        "text": "A villa for those who truly want to switch off, far from noise and crowds."
+      },
+      "family": {
+        "title": "Perfect for families and groups",
+        "text": "Comfortable spaces, independent bedrooms and rooms designed to share the holiday without giving up privacy."
+      },
+      "location": {
+        "title": "Great location",
+        "text": "In Gizzeria, close to Lamezia Terme, the Tyrrhenian coast of Calabria and the main points of interest."
+      }
+    }
+  },
+  "services": {
+    "eyebrow": "Amenities",
+    "titleStart": "Everything you need for a",
+    "titleEmph": "perfect stay",
+    "subtitle": "Every detail is designed for your comfort. From the fully equipped kitchen to the private beach, Villa Paola offers everything you need for a carefree holiday.",
+    "extra": "Also included: fridge · oven · microwave · dishwasher · kitchenware · outdoor dining area · patio · wardrobes · living room",
+    "amenities": {
+      "wifi": "Free Wi-Fi",
+      "beach": "Private beach",
+      "ac": "Air conditioning",
+      "kitchen": "Equipped kitchen",
+      "kids": "Kid-friendly",
+      "tv": "Flat-screen TV",
+      "washer": "Washing machine",
+      "bbq": "Barbecue",
+      "linen": "Linen and towels",
+      "pets": "Pets allowed"
+    }
+  },
+  "gallery": {
+    "eyebrow": "Gallery",
+    "titleStart": "Discover every",
+    "titleEmph": "corner",
+    "subtitle": "The sea, the terrace, the interiors: a visual tour of your next holiday.",
+    "close": "Close",
+    "prev": "Previous photo",
+    "next": "Next photo"
+  },
+  "position": {
+    "eyebrow": "Location",
+    "titleStart": "In the heart of the",
+    "titleEmph": "Calabrian coast",
+    "body": "Villa Paola Caposuvero is located in Gizzeria Lido, in the beautiful Contrada Caposuvero, in a privileged position between Calabria's crystal-clear sea and its green inland. Lamezia Terme international airport is only 15 minutes away.",
+    "mapTitle": "Villa Paola Caposuvero location",
+    "addressTitle": "Address",
+    "addressLine": "SS18, Contrada Caposuvero 31\nGizzeria Lido, Calabria, Italy",
+    "nearbyTitle": "Nearby",
+    "nearby": {
+      "beach": "Beach",
+      "beachDist": "Just a few steps",
+      "airport": "Lamezia Terme airport",
+      "airportDist": "~15 minutes",
+      "lido": "Lido Mediterraneo",
+      "lidoDist": "Nearby",
+      "center": "Gizzeria town centre",
+      "centerDist": "Short distance"
+    },
+    "tipLabel": "Local tip",
+    "tipText": "For a memorable dinner, we recommend <strong>Lido Mediterraneo</strong>, a short distance from the villa. Fresh fish and unforgettable sunsets."
+  },
+  "reviews": {
+    "eyebrow": "Guest reviews",
+    "title": "Our guests tell the story of Villa Paola better than we ever could.",
+    "subtitle": "Real experiences from guests who enjoyed the villa, the sea and the hospitality of Villa Paola Caposuvero.",
+    "card1": {
+      "name": "Solveig Merkel",
+      "country": "Germany",
+      "text": "Villa Paola is simply a special place. Roberto is a wonderful host: you feel welcomed, relaxed and very well looked after. Spending a holiday here was truly a dream. A place we warmly recommend. We would love to come back.",
+      "source": "Original review on Facebook"
+    },
+    "card2": {
+      "name": "Renat FoxBlack",
+      "country": "France",
+      "text": "A magnificent place, facing the sea and with all the comfort you need. A beautiful setting that we will certainly come back to very soon.",
+      "source": "Original review on Facebook"
+    },
+    "buttons": {
+      "google": "Read reviews on Google",
+      "facebook": "Read reviews on Facebook",
+      "writeGoogle": "Leave a Google review"
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "titleStart": "Book your",
+    "titleEmph": "holiday",
+    "subtitle": "For info, availability and bookings, contact us directly. We'll be happy to help you plan the perfect stay.",
+    "callUs": "Call us",
+    "hours": "Mon – Sun, 9:00 – 20:00",
+    "ctaAvailability": "Check availability",
+    "ctaWhatsapp": "Message us on WhatsApp",
+    "ctaEmail": "Send us an email",
+    "address": "SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria"
+  },
+  "availability": {
+    "eyebrow": "Request availability",
+    "titleStart": "Ask for the available",
+    "titleEmph": "dates",
+    "subtitle": "Tell us the dates you have in mind and we'll get back to you with availability, details and a personal quote.",
+    "form": {
+      "name": "Full name *",
+      "namePh": "John Smith",
+      "email": "Email *",
+      "emailPh": "john@email.com",
+      "phone": "Phone",
+      "phonePh": "+39 ...",
+      "guests": "Number of guests",
+      "guestsPh": "4",
+      "arrival": "Arrival date",
+      "departure": "Departure date",
+      "message": "Message / special requests",
+      "messagePh": "We're travelling with a small child and a medium-size dog...",
+      "privacyPrefix": "I have read the ",
+      "privacyLink": "Privacy Policy",
+      "privacySuffix": ". *",
+      "submit": "Get a personal quote",
+      "submitting": "Sending...",
+      "whatsapp": "WhatsApp",
+      "notice1": "Sending this form does not create an automatic booking. Availability is confirmed directly by the property.",
+      "notice2": "By submitting the form you confirm you have read the Privacy Policy. Your data will be used only to reply to your availability request."
+    },
+    "errors": {
+      "privacy": "You must accept the privacy policy",
+      "required": "Name and email are required",
+      "tooLong": "Text is too long",
+      "submit": "Submission error",
+      "submitDesc": "Please try again or message us on WhatsApp."
+    },
+    "success": {
+      "title": "Thank you!",
+      "text": "We received your request. We'll get back to you as soon as possible with availability and details."
+    }
+  },
+  "faq": {
+    "eyebrow": "Frequently asked questions",
+    "titleStart": "Answers before",
+    "titleEmph": "you leave.",
+    "items": [
+      { "q": "How far is Villa Paola Caposuvero from the sea?", "a": "The villa is just steps from the sea with direct beach access: no busy roads to cross to reach the coast." },
+      { "q": "How many people can the villa host?", "a": "Villa Paola Caposuvero has 3 bedrooms and 2 bathrooms and comfortably hosts families and small groups up to 6+ people." },
+      { "q": "Is it suitable for families?", "a": "Yes. Spacious rooms, a private location and direct beach access make the villa perfect for families looking for peace, sea and privacy." },
+      { "q": "How far is Lamezia Terme airport?", "a": "The villa is very convenient for guests arriving at Lamezia Terme international airport, only a short drive away." },
+      { "q": "How can I check availability?", "a": "You can fill in the 'Request availability' form on this site, message us on WhatsApp or call us directly. We'll reply with availability and a personal quote." },
+      { "q": "Are pets allowed?", "a": "Yes, pets are welcome at Villa Paola Caposuvero. Please mention your pet when sending the request." }
+    ]
+  },
+  "cta": {
+    "titleLine1": "The sea is already there.",
+    "titleLine2": "You only need to pick your dates.",
+    "subtitle": "Tell us when you'd like to travel and we'll send you availability, details and a personal quote for your stay at Villa Paola Caposuvero.",
+    "primary": "Ask for available dates",
+    "secondary": "Message us on WhatsApp",
+    "imageAlt": "Sunset over the sea in front of Villa Paola Caposuvero"
+  },
+  "mobileCta": {
+    "label": "Check availability"
+  },
+  "footer": {
+    "tagline": "Beachfront villa with direct beach access in Gizzeria, Calabria.",
+    "explore": "Explore",
+    "learnMore": "Learn more",
+    "contactsTitle": "Contact",
+    "phone": "+39 335 538 4250",
+    "whatsapp": "Message us on WhatsApp",
+    "email": "Contact us by email",
+    "facebook": "Reviews on Facebook",
+    "address": "SS18, Contrada Caposuvero 31\nGizzeria Lido, Calabria, Italy",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "terms": "Terms & conditions",
+    "copyright": "© {{year}} Villa Paola Caposuvero — SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria",
+    "cin": "CIN: IT079060C299OUQTIW · CIR: 079060-AAT-00018",
+    "links": {
+      "reviews": "Reviews",
+      "villa": "The Villa",
+      "why": "Why choose it",
+      "services": "Amenities",
+      "gallery": "Gallery",
+      "availability": "Availability",
+      "faq": "FAQ"
+    },
+    "seo": {
+      "seaVilla": "Seaside villa in Calabria",
+      "beach": "Villa with direct beach access",
+      "gizzeria": "Holiday home in Gizzeria",
+      "airport": "Villa near Lamezia airport",
+      "family": "Family villa in Calabria",
+      "pet": "Pet-friendly villa in Calabria",
+      "september": "September holidays in Calabria"
+    }
+  },
+  "notFound": {
+    "title": "Page not found — Villa Paola Caposuvero",
+    "heading": "404",
+    "text": "The page you're looking for doesn't exist or has been removed.",
+    "back": "Back to home"
+  },
+  "privacy": {
+    "metaTitle": "Privacy Policy | Villa Paola Caposuvero",
+    "metaDesc": "Privacy policy of Villa Paola Caposuvero: how we handle the data collected via the availability request form.",
+    "title": "Privacy Policy",
+    "intro": "Under EU Regulation 2016/679 (GDPR), this policy describes how we process the personal data of users who visit villapaolacaposuvero.it and use the availability request form.",
+    "controllerH": "Data controller",
+    "controller": "Villa Paola Caposuvero — Contrada Caposuvero 31, SS18, Gizzeria Lido (CZ), Italy.",
+    "dataH": "Data collected",
+    "data": "Via the availability form we collect: full name, email, phone (optional), stay dates, number of guests and any message.",
+    "purposeH": "Purpose",
+    "purpose": "Data is processed only to reply to your availability request, provide a quote and manage communication with the guest. It is not used for marketing nor shared with third parties.",
+    "basisH": "Legal basis",
+    "basis": "Processing is based on the consent of the data subject (art. 6.1.a GDPR) and on pre-contractual measures requested by the subject (art. 6.1.b GDPR).",
+    "retentionH": "Retention",
+    "retention": "Data is kept for the time needed to reply to the request and in any case no longer than 24 months, unless otherwise required by law.",
+    "vendorsH": "Vendors",
+    "vendors": "Data is stored on managed backend infrastructure with protected access and encryption in transit.",
+    "rightsH": "Your rights",
+    "rights": "You may at any time request access, correction, deletion or restriction of the processing of your data, or object to processing, by writing to {{email}}. You also have the right to file a complaint with the Italian Data Protection Authority.",
+    "updated": "Last updated: July 2026."
+  },
+  "cookies": {
+    "metaTitle": "Cookie Policy | Villa Paola Caposuvero",
+    "metaDesc": "Cookie policy of Villa Paola Caposuvero: which cookies we use and how to manage them.",
+    "title": "Cookie Policy",
+    "intro": "villapaolacaposuvero.it uses only technical cookies necessary for the correct functioning of the pages (for example session and display preferences). No profiling or advertising cookies are installed.",
+    "techH": "Technical cookies",
+    "tech": "These are cookies essential for browsing and do not require prior user consent (art. 122 Italian Privacy Code).",
+    "thirdH": "Third-party cookies",
+    "third": "The site does not integrate third-party analytics or tracking tools. If integrations are added in the future (e.g. Google Analytics), this policy will be updated and a consent banner will be shown.",
+    "manageH": "Managing cookies",
+    "manage": "You can disable cookies at any time via your browser settings. Disabling technical cookies may affect the site's functionality.",
+    "updated": "Last updated: July 2026."
+  },
+  "terms": {
+    "metaTitle": "Terms & conditions | Villa Paola Caposuvero",
+    "metaDesc": "Terms and conditions for the Villa Paola Caposuvero website.",
+    "title": "Terms & conditions",
+    "intro": "Using villapaolacaposuvero.it implies acceptance of these Terms and Conditions.",
+    "natureH": "Nature of the site",
+    "nature": "The site is purely informational and presents the Villa Paola Caposuvero property (Gizzeria Lido, Calabria). The \"Request availability\" form is a request for information and does not constitute a booking. Availability and pricing are confirmed via email or WhatsApp directly with the host.",
+    "contentH": "Content",
+    "content": "Texts, images and materials on the site are property of Villa Paola Caposuvero and may not be reproduced without written authorisation.",
+    "liabilityH": "Limitation of liability",
+    "liability": "Information is kept up to date with the utmost care but may contain inaccuracies. Villa Paola Caposuvero is not liable for any damages resulting from the use of the information on the site.",
+    "lawH": "Applicable law",
+    "law": "These terms are governed by Italian law. The court of Lamezia Terme has exclusive jurisdiction over any dispute.",
+    "idH": "Identifying data",
+    "updated": "Last updated: July 2026."
+  },
+  "index": {
+    "title": "Villa Paola Caposuvero | Seaside villa in Gizzeria, Calabria",
+    "description": "Seaside villa in Gizzeria with direct beach access: 3 bedrooms, sea-view terrace, perfect for families and small groups. Check availability now."
+  },
+  "seoPages": {
+    "seaVilla": {
+      "title": "Seaside villa in Calabria | Villa Paola Caposuvero, Gizzeria",
+      "description": "Discover Villa Paola Caposuvero, a seaside villa in Calabria at Gizzeria. Privacy, sea view, family space and easy access from Lamezia Terme.",
+      "eyebrow": "Seaside villa · Calabria",
+      "h1": "Seaside villa in Calabria for a carefree holiday",
+      "intro": "Villa Paola Caposuvero is a seaside villa in Gizzeria, on the Tyrrhenian coast of Calabria: spacious rooms, sea-view terrace and direct beach access, in a private and easy-to-reach location.",
+      "body": [
+        "Looking for a seaside villa in Calabria means looking for something simple: stepping out of the house and finding the Mediterranean right there. Villa Paola Caposuvero is designed for exactly that: no roads to cross, no stress, only the sound of the waves.",
+        "The villa hosts families and small groups up to 6+ people, with 3 bedrooms, 2 bathrooms and 120 sqm of space. The interiors are bright, well kept and ready to be enjoyed as a couple or with kids.",
+        "The location in Gizzeria, in the province of Catanzaro, lets you quickly reach Lamezia Terme international airport and the most beautiful villages on the Tyrrhenian coast of Calabria."
+      ]
+    },
+    "beach": {
+      "title": "Villa with direct beach access in Calabria | Villa Paola Caposuvero",
+      "description": "Villa with direct beach access in Calabria: Villa Paola Caposuvero in Gizzeria, sea a few steps away with no roads to cross. Great for families.",
+      "eyebrow": "Direct beach access",
+      "h1": "Villa with direct beach access in Calabria",
+      "intro": "At Villa Paola Caposuvero you don't have to cross busy roads to reach the sea: step out of the villa and you're already on the coast, safely, even with kids.",
+      "body": [
+        "Direct beach access is what really makes a difference on a seaside holiday. At Villa Paola Caposuvero the Mediterranean is the first thing you see in the morning and the last at sunset.",
+        "The beach in Gizzeria is wide, sandy and ideal for families: kids and less mobile guests can reach it in just a few steps, without needing a car.",
+        "The villa combines privacy, family space and proximity to the sea — a rare mix on the Tyrrhenian coast of Calabria."
+      ]
+    },
+    "gizzeria": {
+      "title": "Holiday home in Gizzeria (Calabria) | Villa Paola Caposuvero",
+      "description": "Holiday home in Gizzeria, Calabria: Villa Paola Caposuvero, 3 bedrooms, 120 sqm, direct beach access, close to Lamezia Terme airport.",
+      "eyebrow": "Holiday home · Gizzeria",
+      "h1": "Holiday home in Gizzeria, on the sea of Calabria",
+      "intro": "Villa Paola Caposuvero is the ideal holiday home in Gizzeria for guests seeking an authentic stay on the Tyrrhenian coast of Calabria: spacious, private, sea a few steps away.",
+      "body": [
+        "Gizzeria Lido is one of the most loved spots on the Tyrrhenian coast of Calabria: clean sea, sandy beaches, spectacular sunsets and a strategic location close to Lamezia Terme.",
+        "The villa has a living room, equipped kitchen, 3 bedrooms, 2 bathrooms, terrace and outdoor spaces. Perfect as a holiday home for families and small groups.",
+        "Within a few minutes of the villa you'll find restaurants, services, famous kite spots and the road to reach Lamezia Terme international airport."
+      ]
+    },
+    "airport": {
+      "title": "Villa near Lamezia Terme airport | Villa Paola Caposuvero",
+      "description": "Villa near Lamezia Terme airport: Villa Paola Caposuvero in Gizzeria, on the sea, convenient for short stays and business trips in Calabria.",
+      "eyebrow": "Near Lamezia Terme",
+      "h1": "Villa near Lamezia Terme airport, right on the sea",
+      "intro": "You land at Lamezia Terme and within minutes you're at the villa, with the sea in front of you. Villa Paola Caposuvero is the ideal choice for those who want to save time without giving up on the holiday.",
+      "body": [
+        "The location in Gizzeria makes Villa Paola Caposuvero especially convenient for guests arriving by plane: no long transfer, just a few kilometres and you're right by the sea.",
+        "Perfect also for short stays, long weekends or multi-week summer holidays. The mix of airport convenience and sea a few steps away is rare to find.",
+        "Contact us to check availability for your dates and receive a personal quote."
+      ]
+    },
+    "family": {
+      "title": "Family villa in Calabria | Villa Paola Caposuvero, Gizzeria",
+      "description": "Family villa in Calabria: Villa Paola Caposuvero, 3 bedrooms, direct beach access, safe and comfortable spaces for parents and kids.",
+      "eyebrow": "Ideal for families",
+      "h1": "Family villa in Calabria, with the sea just steps away",
+      "intro": "Villa Paola Caposuvero is designed for families: spacious rooms, independent bedrooms, privacy, direct beach access and the calm of a private location.",
+      "body": [
+        "Travelling with kids requires comfortable space, safety and simplicity. Villa Paola Caposuvero has all of this: no roads to cross to reach the sea, bright rooms and the option to cook at home.",
+        "The 3 bedrooms let parents, kids and grandparents each have their own space, without giving up shared holiday days.",
+        "Your four-legged friends are welcome too: pets are allowed at the villa."
+      ]
+    },
+    "pet": {
+      "title": "Pet-friendly villa in Calabria | Villa Paola Caposuvero, Gizzeria",
+      "description": "Pet-friendly villa in Calabria: at Villa Paola Caposuvero pets are welcome. Seaside holiday in Gizzeria with your dog and direct beach access.",
+      "eyebrow": "Pet friendly",
+      "h1": "Pet-friendly villa in Calabria, where your dog is welcome",
+      "intro": "At Villa Paola Caposuvero pets are allowed: enjoy your seaside holiday in Calabria bringing your four-legged friend with you.",
+      "body": [
+        "Finding a pet-friendly seaside villa isn't always easy. Villa Paola Caposuvero warmly welcomes families travelling with pets, without giving up any comfort.",
+        "The outdoor spaces, the private location and the closeness to the sea make the villa perfect also for long walks with your dog on the beach of Gizzeria.",
+        "Let us know about your pet when you send the availability request: we'll do our best to prepare everything for your stay."
+      ]
+    },
+    "september": {
+      "title": "September holidays in Calabria | Villa Paola Caposuvero, Gizzeria",
+      "description": "September holidays in Calabria: warm sea, fewer crowds and softer prices. Villa Paola Caposuvero in Gizzeria, on the sea with direct beach access.",
+      "eyebrow": "September in Calabria",
+      "h1": "September holidays in Calabria: the best season of the year",
+      "intro": "September in Calabria means warm sea, still-long days, less crowded beaches and softer prices. Villa Paola Caposuvero is the right place to enjoy all of it.",
+      "body": [
+        "September may be the best month for a seaside holiday in Calabria: the Mediterranean stays warm, the weather is perfect for long walks and the Tyrrhenian coast empties out from the summer crowds.",
+        "At Villa Paola Caposuvero you can enjoy spectacular sunsets, dinners on the terrace and days on the beach in complete calm, with direct beach access making all the difference.",
+        "If you're considering dates, contact us to check availability: September is in high demand precisely because of its uniqueness."
+      ]
+    }
+  },
+  "seoLanding": {
+    "backHome": "Back to home",
+    "ctaAvailability": "Check availability",
+    "ctaWhatsapp": "Message us on WhatsApp",
+    "backHomeInline": "Back to the Villa Paola Caposuvero home",
+    "wantMore": "Want to see the villa in detail?"
+  }
+}
