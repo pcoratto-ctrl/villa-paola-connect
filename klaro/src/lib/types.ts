@@ -5,6 +5,15 @@ export type TopPost = {
   metrica: string;
 };
 
+// "Contesto del mese": note qualitative opzionali che guidano il commento AI
+// e la sezione "In sintesi" del PDF. Vive dentro dati_json (nessuna migrazione DB).
+export type ContestoMese = {
+  cosa_fatto?: string;
+  andato_bene?: string;
+  non_funzionato?: string;
+  priorita_prossimo?: string;
+};
+
 export type ReportData = {
   reach: number;
   impression: number;
@@ -14,6 +23,10 @@ export type ReportData = {
   numero_post: number;
   top_post: TopPost[];
   risultati_note: string;
+  contesto?: ContestoMese;
+  // Valutazione prudente dell'andamento rispetto agli obiettivi del cliente
+  // (generata dall'AI, modificabile). Compare nel PDF.
+  valutazione_obiettivi?: string;
 };
 
 export type Profile = {

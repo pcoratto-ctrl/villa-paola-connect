@@ -51,17 +51,29 @@ export default async function ClientPage({ params }: { params: Promise<{ id: str
           <h2 className="mb-3 text-lg font-semibold text-slate-900">Storico report</h2>
           {list.length === 0 ? (
             <div className="card text-center text-sm text-slate-500">
-              Nessun report ancora per questo cliente.
+              Nessun report ancora per questo cliente. Il primo si crea in 5 minuti.
             </div>
           ) : (
             <div className="space-y-3">
+              {/* Azione rapida: nuova bozza precompilata dal report più recente */}
+              <Link
+                href={`/reports/new?client=${c.id}&duplicate=${list[0].id}`}
+                className="card flex items-center justify-between !border-dashed !p-4 text-sm transition hover:border-brand-400 hover:shadow-md"
+              >
+                <div>
+                  <p className="font-semibold text-brand-700">⧉ Duplica dal mese scorso</p>
+                  <p className="text-slate-500">
+                    Nuovo report con canale, contesto e follower di partenza già compilati da{" "}
+                    {meseLabel(list[0].mese, list[0].anno)}: inserisci solo i numeri nuovi.
+                  </p>
+                </div>
+              </Link>
               {list.map((r) => (
-                <Link
+                <div
                   key={r.id}
-                  href={`/reports/${r.id}`}
                   className="card flex items-center justify-between !p-4 transition hover:border-brand-300 hover:shadow-md"
                 >
-                  <div>
+                  <Link href={`/reports/${r.id}`} className="min-w-0 flex-1">
                     <p className="font-semibold text-slate-900">
                       {meseLabel(r.mese, r.anno)}
                     </p>
@@ -69,14 +81,24 @@ export default async function ClientPage({ params }: { params: Promise<{ id: str
                       {CANALI.find((ch) => ch.value === r.canale)?.label} ·{" "}
                       {r.stato === "bozza" ? "Bozza" : "Completo"}
                     </p>
+                  </Link>
+                  <div className="flex shrink-0 items-center gap-2">
+                    <Link
+                      href={`/reports/new?client=${c.id}&duplicate=${r.id}`}
+                      className="rounded-full border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-500 transition hover:border-brand-300 hover:text-brand-700"
+                      title="Crea il report del mese successivo partendo da questo"
+                    >
+                      ⧉ Duplica
+                    </Link>
+                    <Link
+                      href={`/reports/${r.id}`}
+                      className="rounded-full px-3 py-1 text-xs font-semibold text-white"
+                      style={{ backgroundColor: c.colore_primario }}
+                    >
+                      Apri →
+                    </Link>
                   </div>
-                  <span
-                    className="rounded-full px-3 py-1 text-xs font-semibold text-white"
-                    style={{ backgroundColor: c.colore_primario }}
-                  >
-                    Apri →
-                  </span>
-                </Link>
+                </div>
               ))}
             </div>
           )}

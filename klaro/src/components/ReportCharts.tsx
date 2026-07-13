@@ -176,7 +176,7 @@ export default function ReportCharts({
 
       {/* Top post */}
       <div className="card">
-        <h3 className="mb-4 text-sm font-semibold text-slate-900">Top 3 contenuti del mese</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-900">Contenuti più performanti</h3>
         <ol className="space-y-3">
           {data.top_post.map((p, i) => (
             <li key={i} className="flex items-start gap-3">

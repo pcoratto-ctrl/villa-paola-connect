@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import ReportCharts from "@/components/ReportCharts";
 import { CANALI, MESI, meseLabel } from "@/lib/types";
-import type { Canale, Client, Report, ReportData } from "@/lib/types";
+import type { Canale, Client, ContestoMese, Report, ReportData } from "@/lib/types";
 import { prevMonth } from "@/lib/utils";
 
 const DRAFT_KEY = "klaro-report-draft";
@@ -24,7 +24,13 @@ type FormState = {
   numero_post: string;
   top_post: { testo: string; metrica: string }[];
   risultati_note: string;
+  // Contesto del mese (tutto opzionale)
+  ctx_cosa_fatto: string;
+  ctx_andato_bene: string;
+  ctx_non_funzionato: string;
+  ctx_priorita: string;
   commento: string;
+  valutazione_obiettivi: string;
 };
 
 function defaultForm(clientId: string): FormState {
@@ -47,7 +53,12 @@ function defaultForm(clientId: string): FormState {
       { testo: "", metrica: "" },
     ],
     risultati_note: "",
+    ctx_cosa_fatto: "",
+    ctx_andato_bene: "",
+    ctx_non_funzionato: "",
+    ctx_priorita: "",
     commento: "",
+    valutazione_obiettivi: "",
   };
 }
 
@@ -55,6 +66,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const preselected = searchParams.get("client");
+  const duplicateId = searchParams.get("duplicate");
 
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<FormState>(() =>
@@ -66,27 +78,67 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
   const [aiError, setAiError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [duplicated, setDuplicated] = useState(false);
 
   const client = useMemo(
     () => clients.find((c) => c.id === form.clientId) ?? clients[0],
     [clients, form.clientId]
   );
 
-  // Ripristina la bozza salvata (così un errore non fa perdere i dati)
+  // All'apertura: se arriviamo da "Duplica dal mese scorso" precompila dal
+  // report indicato (canale, contesto, mese successivo — i numeri restano vuoti).
+  // Altrimenti ripristina l'eventuale bozza salvata su questo dispositivo.
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(DRAFT_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved) as FormState;
-        if (clients.some((c) => c.id === parsed.clientId)) setForm(parsed);
+    async function init() {
+      if (duplicateId) {
+        const supabase = createClient();
+        const { data } = await supabase
+          .from("reports")
+          .select("*")
+          .eq("id", duplicateId)
+          .maybeSingle();
+        if (data) {
+          const src = data as Report;
+          const next =
+            src.mese === 12
+              ? { mese: 1, anno: src.anno + 1 }
+              : { mese: src.mese + 1, anno: src.anno };
+          setForm((f) => ({
+            ...defaultForm(src.client_id),
+            canale: src.canale,
+            mese: next.mese,
+            anno: next.anno,
+            // Il follower di partenza del nuovo mese è quello di chiusura del precedente
+            follower_inizio: String(src.dati_json.follower_fine ?? ""),
+            ctx_cosa_fatto: src.dati_json.contesto?.cosa_fatto ?? "",
+            ctx_andato_bene: src.dati_json.contesto?.andato_bene ?? "",
+            ctx_non_funzionato: src.dati_json.contesto?.non_funzionato ?? "",
+            ctx_priorita: src.dati_json.contesto?.priorita_prossimo ?? "",
+            clientId: src.client_id,
+            top_post: f.top_post,
+          }));
+          setDuplicated(true);
+          setStep(2);
+          return;
+        }
       }
-    } catch {
-      /* bozza corrotta: si riparte dal form vuoto */
+      try {
+        const saved = localStorage.getItem(DRAFT_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved) as Partial<FormState>;
+          if (parsed.clientId && clients.some((c) => c.id === parsed.clientId)) {
+            setForm((f) => ({ ...f, ...parsed }));
+          }
+        }
+      } catch {
+        /* bozza corrotta: si riparte dal form vuoto */
+      }
     }
+    void init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Salva la bozza a ogni modifica
+  // Salva la bozza a ogni modifica: così un errore non fa perdere nulla
   useEffect(() => {
     try {
       localStorage.setItem(DRAFT_KEY, JSON.stringify(form));
@@ -118,17 +170,26 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
     for (const [key, label] of numFields) {
       const v = form[key] as string;
       if (v.trim() === "" || isNaN(Number(v)) || Number(v) < 0 || !Number.isInteger(Number(v))) {
-        errs.push(`${label}: inserisci un numero intero maggiore o uguale a 0.`);
+        errs.push(`${label}: serve un numero intero, senza punti né lettere (es. 24900).`);
       }
     }
     const er = Number(form.engagement_rate.replace(",", "."));
     if (form.engagement_rate.trim() === "" || isNaN(er) || er < 0 || er > 100) {
-      errs.push("Engagement rate: inserisci un valore tra 0 e 100 (es. 3,5).");
+      errs.push("Engagement rate: un valore tra 0 e 100, la virgola va bene (es. 3,5).");
     }
     if (!form.top_post.some((p) => p.testo.trim())) {
-      errs.push("Inserisci almeno uno dei 3 post migliori del mese.");
+      errs.push("Racconta almeno uno dei 3 contenuti migliori del mese: serve all'AI per il commento.");
     }
     return errs;
+  }
+
+  function buildContesto(): ContestoMese | undefined {
+    const c: ContestoMese = {};
+    if (form.ctx_cosa_fatto.trim()) c.cosa_fatto = form.ctx_cosa_fatto.trim();
+    if (form.ctx_andato_bene.trim()) c.andato_bene = form.ctx_andato_bene.trim();
+    if (form.ctx_non_funzionato.trim()) c.non_funzionato = form.ctx_non_funzionato.trim();
+    if (form.ctx_priorita.trim()) c.priorita_prossimo = form.ctx_priorita.trim();
+    return Object.keys(c).length > 0 ? c : undefined;
   }
 
   function buildData(): ReportData {
@@ -141,14 +202,19 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
       numero_post: Number(form.numero_post),
       top_post: form.top_post.filter((p) => p.testo.trim()),
       risultati_note: form.risultati_note.trim(),
+      contesto: buildContesto(),
+      valutazione_obiettivi: form.valutazione_obiettivi.trim() || undefined,
     };
   }
 
-  async function goToPreview() {
+  function goToContext() {
     const errs = validateNumbers();
     setErrors(errs);
     if (errs.length > 0) return;
+    setStep(3);
+  }
 
+  async function goToPreview() {
     // Cerca il report del mese precedente per il confronto
     const supabase = createClient();
     const p = prevMonth(form.mese, form.anno);
@@ -161,7 +227,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
       .eq("anno", p.anno)
       .maybeSingle();
     setPrevReport((data as Report) ?? null);
-    setStep(3);
+    setStep(4);
 
     // Genera il commento AI se non c'è già
     if (!form.commento.trim()) {
@@ -181,17 +247,21 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
           canale: form.canale,
           mese: form.mese,
           anno: form.anno,
-          dati: buildData(),
-          prev: prev?.dati_json ?? null,
+          dati: { ...buildData(), contesto: undefined, valutazione_obiettivi: undefined },
+          contesto: buildContesto() ?? null,
+          prev: prev?.dati_json
+            ? { ...prev.dati_json, contesto: undefined, valutazione_obiettivi: undefined }
+            : null,
         }),
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Errore nella generazione del commento.");
       set("commento", json.commento);
+      if (json.valutazione_obiettivi) set("valutazione_obiettivi", json.valutazione_obiettivi);
     } catch (err) {
       setAiError(
         (err instanceof Error ? err.message : "Errore imprevisto.") +
-          " I tuoi dati sono al sicuro: riprova o scrivi il commento a mano."
+          " Nessun dato è andato perso: la bozza è salvata su questo dispositivo. Riprova, oppure scrivi il commento a mano."
       );
     } finally {
       setAiLoading(false);
@@ -219,8 +289,8 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
     if (error) {
       setSaveError(
         error.code === "23505"
-          ? `Esiste già un report di ${meseLabel(form.mese, form.anno)} (${form.canale}) per questo cliente. Aprilo dallo storico del cliente oppure cambia mese.`
-          : `Errore nel salvataggio: ${error.message}. I dati restano salvati in bozza su questo dispositivo.`
+          ? `Esiste già un report di ${meseLabel(form.mese, form.anno)} (${form.canale}) per questo cliente. Aprilo dallo storico del cliente oppure scegli un altro mese.`
+          : `Salvataggio non riuscito: ${error.message}. La bozza resta salvata su questo dispositivo, puoi riprovare.`
       );
       setSaving(false);
       return;
@@ -229,7 +299,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
     router.push(`/reports/${data.id}`);
   }
 
-  const steps = ["Cliente", "Numeri del mese", "Anteprima e commento"];
+  const steps = ["Cliente", "Numeri", "Contesto", "Anteprima"];
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -237,6 +307,12 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
         ← Annulla
       </Link>
       <h1 className="mb-2 mt-2 text-2xl font-bold text-slate-900">Nuovo report</h1>
+      {duplicated && (
+        <p className="mb-4 rounded-xl bg-brand-50 p-4 text-sm text-brand-700">
+          Bozza creata dal report precedente: canale, contesto e follower di partenza sono già
+          compilati. Inserisci solo i numeri del nuovo mese e aggiorna il contesto.
+        </p>
+      )}
 
       {/* Indicatore step */}
       <ol className="mb-8 flex items-center gap-2 text-sm">
@@ -256,7 +332,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
             <span className={`hidden sm:inline ${step === i + 1 ? "font-semibold text-slate-900" : "text-slate-400"}`}>
               {s}
             </span>
-            {i < steps.length - 1 && <span className="mx-1 h-px w-6 bg-slate-300" />}
+            {i < steps.length - 1 && <span className="mx-1 h-px w-4 bg-slate-300 sm:w-6" />}
           </li>
         ))}
       </ol>
@@ -300,7 +376,13 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
 
       {/* STEP 2: numeri */}
       {step === 2 && (
-        <div className="space-y-5">
+        <form
+          className="space-y-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+            goToContext();
+          }}
+        >
           <div className="card space-y-4">
             <h2 className="font-semibold text-slate-900">Periodo e canale</h2>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -345,6 +427,10 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
 
           <div className="card space-y-4">
             <h2 className="font-semibold text-slate-900">I numeri del mese</h2>
+            <p className="text-sm text-slate-500">
+              Li trovi negli insight del profilo. Copia i valori così come sono, senza punti:
+              al resto (formattazione, confronti, percentuali) pensa Klaro.
+            </p>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {(
                 [
@@ -354,12 +440,13 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                   ["follower_fine", "Follower a fine mese", "es. 2687"],
                   ["numero_post", "Numero di post pubblicati", "es. 16"],
                 ] as [keyof FormState, string, string][]
-              ).map(([key, label, ph]) => (
+              ).map(([key, label, ph], idx) => (
                 <div key={key}>
                   <label className="label">{label} *</label>
                   <input
                     className="input"
                     inputMode="numeric"
+                    autoFocus={idx === 0}
                     value={form[key] as string}
                     onChange={(e) => set(key, e.target.value as FormState[typeof key])}
                     placeholder={ph}
@@ -380,7 +467,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
           </div>
 
           <div className="card space-y-4">
-            <h2 className="font-semibold text-slate-900">I 3 contenuti migliori</h2>
+            <h2 className="font-semibold text-slate-900">Contenuti più performanti (fino a 3)</h2>
             {form.top_post.map((p, i) => (
               <div key={i} className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_180px]">
                 <div>
@@ -423,8 +510,70 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
             </ul>
           )}
 
+          <p className="text-xs text-slate-400">
+            Suggerimento: usa Tab per passare da un campo all&apos;altro e Invio per proseguire.
+          </p>
+
           <div className="flex flex-col gap-3 sm:flex-row">
-            <button className="btn-secondary" onClick={() => setStep(1)}>
+            <button type="button" className="btn-secondary" onClick={() => setStep(1)}>
+              ← Indietro
+            </button>
+            <button type="submit" className="btn-primary flex-1">
+              Continua: contesto del mese →
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* STEP 3: contesto del mese */}
+      {step === 3 && (
+        <div className="space-y-5">
+          <div className="card space-y-1">
+            <h2 className="font-semibold text-slate-900">Contesto del mese</h2>
+            <p className="text-sm text-slate-500">
+              Due righe per campo bastano. Sono tutte facoltative, ma più contesto dai,
+              più il commento sembrerà scritto da te e non da un robot. Quello che scrivi
+              qui finisce anche nella sezione &quot;In sintesi&quot; del PDF.
+            </p>
+          </div>
+
+          {(
+            [
+              [
+                "ctx_cosa_fatto",
+                "Cosa è stato fatto questo mese",
+                "es. 8 reel, 4 caroselli, 2 collaborazioni con micro influencer, avviata la rubrica del venerdì…",
+              ],
+              [
+                "ctx_andato_bene",
+                "Cosa è andato bene",
+                "es. i reel col barman hanno superato ogni aspettativa, la rubrica ha portato commenti nuovi…",
+              ],
+              [
+                "ctx_non_funzionato",
+                "Cosa non ha funzionato",
+                "es. i post statici di prodotto quasi ignorati, poca risposta alle stories con sondaggio…",
+              ],
+              [
+                "ctx_priorita",
+                "Priorità per il prossimo mese",
+                "es. spingere il formato video, promuovere l'evento di apertura, testare 2 orari di pubblicazione…",
+              ],
+            ] as [keyof FormState, string, string][]
+          ).map(([key, label, ph]) => (
+            <div key={key} className="card">
+              <label className="label">{label}</label>
+              <textarea
+                className="input min-h-24"
+                value={form[key] as string}
+                onChange={(e) => set(key, e.target.value as FormState[typeof key])}
+                placeholder={ph}
+              />
+            </div>
+          ))}
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button className="btn-secondary" onClick={() => setStep(2)}>
               ← Indietro
             </button>
             <button className="btn-primary flex-1" onClick={goToPreview}>
@@ -434,8 +583,8 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
         </div>
       )}
 
-      {/* STEP 3: anteprima */}
-      {step === 3 && (
+      {/* STEP 4: anteprima */}
+      {step === 4 && (
         <div className="space-y-6">
           <div
             className="flex items-center justify-between rounded-2xl p-5 text-white"
@@ -457,7 +606,8 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
           {!prevReport && (
             <p className="rounded-xl bg-slate-100 p-4 text-sm text-slate-600">
               Non c&apos;è un report del mese precedente per questo cliente e canale: il commento
-              non farà confronti. Dal prossimo mese Klaro confronterà i numeri automaticamente.
+              non farà confronti (e lo dirà con trasparenza). Dal prossimo mese il confronto
+              sarà automatico.
             </p>
           )}
 
@@ -485,7 +635,8 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
             {aiLoading && (
               <div className="flex items-center gap-3 rounded-xl bg-slate-50 p-4 text-sm text-slate-500">
                 <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-brand-600" />
-                L&apos;AI sta analizzando i numeri e scrivendo il commento…
+                L&apos;AI sta leggendo numeri, contesto e obiettivi del cliente e sta scrivendo
+                il commento… di solito ci vogliono 15-30 secondi.
               </div>
             )}
             {aiError && (
@@ -497,22 +648,40 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                   className="input min-h-72 leading-relaxed"
                   value={form.commento}
                   onChange={(e) => set("commento", e.target.value)}
-                  placeholder="Il commento AI apparirà qui. Puoi modificarlo liberamente prima di generare il PDF."
+                  placeholder="Il commento AI apparirà qui, organizzato in 5 sezioni (sintesi, cosa è andato bene, cosa migliorare, lettura dei numeri, priorità). Puoi modificarlo liberamente prima di generare il PDF."
                 />
                 <p className="mt-2 text-xs text-slate-400">
-                  Rivedi e modifica il testo come preferisci: nel PDF andrà esattamente ciò che vedi qui.
+                  Rivedi e modifica come preferisci: nel PDF andrà esattamente ciò che vedi qui.
+                  Mantieni i titoli delle sezioni per un PDF ben impaginato.
                 </p>
               </>
             )}
           </div>
+
+          {client.obiettivi_testo && !aiLoading && (
+            <div className="card">
+              <h3 className="mb-1 text-sm font-semibold text-slate-900">
+                Andamento rispetto agli obiettivi (per il PDF)
+              </h3>
+              <p className="mb-3 text-xs text-slate-500">
+                Obiettivi del cliente: &quot;{client.obiettivi_testo}&quot;
+              </p>
+              <textarea
+                className="input min-h-24 leading-relaxed"
+                value={form.valutazione_obiettivi}
+                onChange={(e) => set("valutazione_obiettivi", e.target.value)}
+                placeholder="Valutazione prudente dell'andamento rispetto agli obiettivi. Se i dati non bastano, va bene scrivere che è presto per valutare."
+              />
+            </div>
+          )}
 
           {saveError && (
             <p className="rounded-xl bg-red-50 p-4 text-sm text-red-700">{saveError}</p>
           )}
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <button className="btn-secondary" onClick={() => setStep(2)}>
-              ← Modifica i numeri
+            <button className="btn-secondary" onClick={() => setStep(3)}>
+              ← Modifica contesto
             </button>
             <button
               className="btn-primary flex-1"

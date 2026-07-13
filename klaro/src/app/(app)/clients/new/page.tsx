@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { maxClients } from "@/lib/plans";
+import { resolvePlan } from "@/lib/plans";
 import ClientForm from "@/components/ClientForm";
 
 export default async function NewClientPage() {
@@ -11,11 +11,12 @@ export default async function NewClientPage() {
   } = await supabase.auth.getUser();
 
   const [{ data: profile }, { count }] = await Promise.all([
-    supabase.from("profiles").select("piano").eq("id", user!.id).single(),
+    supabase.from("profiles").select("piano, created_at").eq("id", user!.id).single(),
     supabase.from("clients").select("id", { count: "exact", head: true }).eq("user_id", user!.id),
   ]);
 
-  if ((count ?? 0) >= maxClients(profile?.piano ?? "free")) {
+  const plan = resolvePlan(profile?.piano, profile?.created_at);
+  if ((count ?? 0) >= plan.maxClients) {
     redirect("/settings?limit=1");
   }
 

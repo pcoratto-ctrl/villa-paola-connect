@@ -65,20 +65,26 @@ export default function LandingPage() {
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-5 pb-16 pt-10 text-center md:pt-20">
         <h1 className="mx-auto max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-slate-900 md:text-5xl">
-          Il report mensile per i tuoi clienti,{" "}
-          <span className="text-brand-600">pronto in 5 minuti</span>
+          Ogni fine mese perdi mezza giornata sui report per i clienti.{" "}
+          <span className="text-brand-600">Riprenditela.</span>
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-600">
-          Inserisci i numeri del mese di Instagram, TikTok o LinkedIn. Klaro genera un PDF
-          brandizzato con i colori del tuo cliente, grafici professionali e un commento
-          scritto dall&apos;AI che confronta i risultati col mese precedente.
+          Con Klaro inserisci i numeri del mese e in 5 minuti hai il PDF con i colori del tuo
+          cliente, il confronto col mese precedente, il commento da consulente scritto
+          dall&apos;AI (che rivedi tu) e perfino l&apos;email di accompagnamento già pronta.
+        </p>
+        <p className="mx-auto mt-4 max-w-2xl text-sm font-medium text-slate-500">
+          Fatto per social media manager freelance, consulenti marketing e piccole agenzie.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link href="/register" className="btn-primary !px-8 !py-4 !text-base">
             Crea il tuo primo report gratis
           </Link>
-          <p className="text-sm text-slate-500">Nessuna carta richiesta · Cliente demo incluso</p>
+          <Link href="/report-esempio" className="btn-secondary !px-8 !py-4 !text-base">
+            Vedi un report esempio
+          </Link>
         </div>
+        <p className="mt-4 text-sm text-slate-500">Nessuna carta richiesta · Cliente demo incluso</p>
       </section>
 
       {/* Mockup dei PDF */}
@@ -87,6 +93,33 @@ export default function LandingPage() {
           <MockupPdf title="Bar Centrale" color="#b45309" bars={[40, 55, 70, 90]} />
           <MockupPdf title="Studio Legale Rossi" color="#1e40af" bars={[30, 45, 60, 80]} />
           <MockupPdf title="Palestra FitLab" color="#047857" bars={[50, 40, 75, 95]} />
+        </div>
+      </section>
+
+      {/* Cosa ti evita */}
+      <section className="mx-auto max-w-6xl px-5 pb-20">
+        <div className="rounded-3xl bg-slate-900 p-8 text-white md:p-12">
+          <h2 className="text-2xl font-bold md:text-3xl">Cosa ti evita, ogni singolo mese</h2>
+          <p className="mt-2 max-w-2xl text-slate-300">
+            Il report va fatto comunque: è la cosa che dimostra il valore del tuo lavoro. Klaro
+            toglie di mezzo tutta la parte meccanica.
+          </p>
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+            {[
+              ["Ricopiare i numeri in una tabella", "li digiti una volta sola in un form guidato: formattazione, confronti e percentuali li calcola Klaro."],
+              ["Scrivere il commento da zero", "l'AI prepara una bozza da consulente basata sui tuoi numeri, sul contesto del mese e sugli obiettivi del cliente. Tu la rivedi, non la scrivi."],
+              ["Impaginare in Canva fino a mezzanotte", "il PDF esce già brandizzato con logo e colori del cliente: copertina, sintesi, grafici e commento."],
+              ["Scrivere l'email al cliente", "Klaro prepara anche il messaggio di accompagnamento: lo modifichi, lo copi e lo incolli."],
+            ].map(([t, d]) => (
+              <li key={t} className="rounded-2xl bg-white/5 p-5">
+                <p className="font-semibold">
+                  <span className="mr-2 text-emerald-400">✕→✓</span>
+                  {t}
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-slate-300">{d}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -126,16 +159,37 @@ export default function LandingPage() {
 
       {/* Prezzi */}
       <section className="py-16">
-        <div className="mx-auto max-w-4xl px-5">
+        <div className="mx-auto max-w-5xl px-5">
           <h2 className="text-center text-3xl font-bold text-slate-900">Prezzi semplici</h2>
           <p className="mt-3 text-center text-slate-600">
-            Inizia gratis con un cliente di prova. Passa a un piano quando sei pronto.
+            Provi tutto gratis per 14 giorni, senza carta. I report sono sempre illimitati: paghi
+            solo in base al numero di clienti.
           </p>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {/* Free */}
             <div className="card flex flex-col">
+              <h3 className="text-lg font-semibold text-slate-900">Gratuito</h3>
+              <p className="mt-2 text-4xl font-extrabold text-slate-900">
+                €0<span className="text-base font-medium text-slate-500">/mese</span>
+              </p>
+              <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-600">
+                <li>✓ 1 cliente</li>
+                <li>✓ Report illimitati</li>
+                <li>✓ Commento AI con confronto mensile</li>
+                <li className="text-slate-400">• PDF con footer «Creato con Klaro»</li>
+              </ul>
+              <Link href="/register" className="btn-secondary mt-6 w-full">
+                Inizia gratis
+              </Link>
+              <p className="mt-2 text-center text-xs text-slate-400">
+                Include 14 giorni di prova completa
+              </p>
+            </div>
+            {/* Starter */}
+            <div className="card flex flex-col border-brand-500 ring-2 ring-brand-100">
               <h3 className="text-lg font-semibold text-slate-900">Starter</h3>
               <p className="mt-2 text-4xl font-extrabold text-slate-900">
-                €19<span className="text-base font-medium text-slate-500">/mese</span>
+                €15<span className="text-base font-medium text-slate-500">/mese</span>
               </p>
               <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-600">
                 <li>✓ Fino a 5 clienti</li>
@@ -143,11 +197,12 @@ export default function LandingPage() {
                 <li>✓ Commento AI con confronto mensile</li>
                 <li>✓ PDF white-label (senza marchio Klaro)</li>
               </ul>
-              <Link href="/register" className="btn-secondary mt-6 w-full">
+              <Link href="/register" className="btn-primary mt-6 w-full">
                 Inizia con Starter
               </Link>
             </div>
-            <div className="card flex flex-col border-brand-500 ring-2 ring-brand-100">
+            {/* Pro */}
+            <div className="card flex flex-col">
               <h3 className="text-lg font-semibold text-slate-900">Pro</h3>
               <p className="mt-2 text-4xl font-extrabold text-slate-900">
                 €39<span className="text-base font-medium text-slate-500">/mese</span>
@@ -158,7 +213,7 @@ export default function LandingPage() {
                 <li>✓ Commento AI con confronto mensile</li>
                 <li>✓ PDF white-label (senza marchio Klaro)</li>
               </ul>
-              <Link href="/register" className="btn-primary mt-6 w-full">
+              <Link href="/register" className="btn-secondary mt-6 w-full">
                 Inizia con Pro
               </Link>
             </div>
@@ -175,12 +230,20 @@ export default function LandingPage() {
           <p className="mt-3 text-brand-100">
             Registrati e prova subito con il cliente demo: due mesi di dati già caricati.
           </p>
-          <Link
-            href="/register"
-            className="mt-7 inline-flex rounded-xl bg-white px-8 py-4 text-base font-semibold text-brand-700 shadow-lg transition hover:bg-brand-50"
-          >
-            Registrati gratis
-          </Link>
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="/register"
+              className="inline-flex rounded-xl bg-white px-8 py-4 text-base font-semibold text-brand-700 shadow-lg transition hover:bg-brand-50"
+            >
+              Registrati gratis
+            </Link>
+            <Link
+              href="/report-esempio"
+              className="inline-flex rounded-xl border border-white/40 px-8 py-4 text-base font-semibold text-white transition hover:bg-white/10"
+            >
+              Prima voglio vedere un esempio
+            </Link>
+          </div>
         </div>
       </section>
 

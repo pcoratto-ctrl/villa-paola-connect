@@ -12,7 +12,7 @@ Nessuna integrazione con le API dei social network.
 |---|---|
 | Frontend | Next.js 15 (App Router) + React + Tailwind CSS, mobile-first |
 | Backend / DB / Auth / Storage | Supabase (auth email+password, Postgres con RLS, bucket per i loghi) |
-| Pagamenti | Stripe Checkout + Customer Portal (abbonamenti €19 e €39/mese) |
+| Pagamenti | Stripe Checkout + Customer Portal (abbonamenti Starter e Pro) |
 | AI | Anthropic API — modello Claude Sonnet (`claude-sonnet-5`) |
 | PDF | `@react-pdf/renderer` lato server (route `/api/pdf`) — funziona anche su Vercel serverless |
 | Grafici | Recharts |
@@ -72,8 +72,12 @@ klaro/
 
 1. Crea un account su [stripe.com](https://stripe.com) e resta in **Test mode**.
 2. **Product catalog → Add product**, due prodotti con prezzo ricorrente mensile:
-   - *Klaro Starter* — €19,00/mese → copia il `price_...` → `STRIPE_PRICE_STARTER`
+   - *Klaro Starter* — €15,00/mese → copia il `price_...` → `STRIPE_PRICE_STARTER`
    - *Klaro Pro* — €39,00/mese → copia il `price_...` → `STRIPE_PRICE_PRO`
+
+   > Le cifre mostrate nell'app (landing e Impostazioni) sono in `src/lib/plans.ts`
+   > (`PLAN_PRICE`). Se scegli importi diversi in Stripe, allinea quei testi: Klaro
+   > non inventa mai un Price ID, li legge dagli env `STRIPE_PRICE_*`.
 3. **Developers → API keys**: copia la *Secret key* (`sk_test_...`) → `STRIPE_SECRET_KEY`.
 4. Webhook:
    - **In locale**: `stripe listen --forward-to localhost:3000/api/stripe/webhook`
@@ -159,12 +163,20 @@ Esegui in ordine (in locale o sull'URL di produzione con Stripe in test mode):
 - [ ] **Errore AI gestito** — (opzionale) metti una `ANTHROPIC_API_KEY` errata: la
       generazione mostra un errore chiaro, i dati inseriti NON si perdono (bozza salvata
       sul dispositivo) e puoi riprovare o scrivere il commento a mano.
-- [ ] **Limite piano** — sul piano gratuito prova a creare un 2° cliente: vieni portato
-      alle Impostazioni con l'invito all'upgrade.
+- [ ] **Prova gratuita** — un account appena registrato è in "Prova gratuita" per 14
+      giorni: la dashboard mostra i giorni rimanenti, il limite clienti è 20 e il PDF è
+      già white-label. La prova è calcolata dalla data di registrazione (`profiles.created_at`),
+      nessuna configurazione richiesta.
+- [ ] **Free tier dopo la prova** — per simulare la fine prova senza aspettare 14 giorni,
+      nel DB porta indietro `profiles.created_at` di oltre 14 giorni (es. SQL Editor:
+      `update profiles set created_at = now() - interval '20 days' where id = '<tuo-id>'`).
+      Ricarica: il piano diventa "Gratuito" (1 cliente) e il PDF torna col footer
+      "Creato con Klaro". Provando a creare un 2° cliente vieni portato alle Impostazioni.
 - [ ] **Pagamento Stripe (test)** — Impostazioni → "Passa a Starter" → nel Checkout usa la
       carta di test `4242 4242 4242 4242` (qualsiasi scadenza futura, CVC 123). Al ritorno
-      il piano diventa "Starter" (webhook) e puoi creare fino a 5 clienti.
-      "Gestisci abbonamento" apre il Customer Portal; disdicendo, il piano torna gratuito.
+      il piano diventa "Starter" (webhook) e puoi creare fino a 5 clienti; il PDF resta
+      white-label. "Gestisci abbonamento" apre il Customer Portal; disdicendo, il piano
+      torna al comportamento Gratuito.
 - [ ] **Mobile** — ripeti il flusso principale da smartphone: wizard a step verticali,
       bottoni grandi, grafici responsive, download PDF funzionante.
 
@@ -172,6 +184,12 @@ Esegui in ordine (in locale o sull'URL di produzione con Stripe in test mode):
 
 - **Dati demo**: creati da un trigger Postgres alla registrazione (`handle_new_user` in
   `schema.sql`), così ogni nuovo utente esplora l'app senza inserire nulla.
+- **Piani e prova gratuita** (`src/lib/plans.ts`): i limiti sono sul numero di clienti,
+  mai sui report (sempre illimitati). Gratuito = 1 cliente + footer "Creato con Klaro";
+  Starter = 5 clienti white-label; Pro = 20 clienti white-label. La prova gratuita di 14
+  giorni (`TRIAL_DAYS`) è dedotta da `profiles.created_at`: nessun campo DB nuovo, nessuna
+  migrazione. `resolvePlan()` calcola il piano effettivo e viene usato in dashboard,
+  creazione cliente, Impostazioni e generazione PDF.
 - **Gestione errori**: validazione dei numeri nel wizard; bozza in `localStorage` che
   sopravvive a errori AI/salvataggio; retry automatici (3) verso l'API Anthropic con
   messaggi chiari; se il PDF fallisce la pagina report è già un'anteprima HTML stampabile
