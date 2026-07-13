@@ -1,26 +1,27 @@
 import { motion } from "framer-motion";
 import { Bed, Bath, Maximize, Users, Waves, Eye, PawPrint, Plane } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import terrazzaImg from "@/assets/villa/terrazza-pranzo.webp.asset.json";
 import giardinoImg from "@/assets/villa/casa-mare-giardino.webp.asset.json";
 
-
-
-const stats = [
-  { icon: Maximize, value: "120 m²", label: "Superficie" },
-  { icon: Bed, value: "3", label: "Camere da letto" },
-  { icon: Bath, value: "2", label: "Bagni" },
-  { icon: Users, value: "6+", label: "Ospiti" },
-];
-
-const features = [
-  { icon: Waves, text: "Accesso diretto alla spiaggia" },
-  { icon: Eye, text: "Vista mare" },
-  { icon: Users, text: "Ideale per famiglie" },
-  { icon: Plane, text: "Vicino all'aeroporto di Lamezia Terme" },
-  { icon: PawPrint, text: "Animali ammessi" },
-];
-
 const VillaSection = () => {
+  const { t } = useTranslation();
+
+  const stats = [
+    { icon: Maximize, value: "120 m²", label: t("villa.stats.surface") },
+    { icon: Bed, value: "3", label: t("villa.stats.bedrooms") },
+    { icon: Bath, value: "2", label: t("villa.stats.bathrooms") },
+    { icon: Users, value: "6+", label: t("villa.stats.guests") },
+  ];
+
+  const features = [
+    { icon: Waves, text: t("villa.features.beachAccess") },
+    { icon: Eye, text: t("villa.features.seaView") },
+    { icon: Users, text: t("villa.features.families") },
+    { icon: Plane, text: t("villa.features.airport") },
+    { icon: PawPrint, text: t("villa.features.pets") },
+  ];
+
   return (
     <section id="villa" className="villa-section py-24 md:py-32">
       <div className="villa-container">
@@ -31,16 +32,13 @@ const VillaSection = () => {
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           className="max-w-3xl mb-16"
         >
-          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">La Villa</p>
+          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">{t("villa.eyebrow")}</p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 leading-tight">
-            Una villa sul mare pensata per vivere{" "}
-            <span className="italic text-primary">la Calabria senza filtri.</span>
+            {t("villa.titleStart")}{" "}
+            <span className="italic text-primary">{t("villa.titleEmph")}</span>
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Villa Paola Caposuvero è una residenza luminosa e accogliente a pochi passi
-            dal mare di Gizzeria. Gli spazi ampi, la terrazza, le camere confortevoli e
-            la posizione riservata la rendono ideale per famiglie e piccoli gruppi che
-            cercano una vacanza semplice, autentica e rilassante.
+            {t("villa.body")}
           </p>
         </motion.div>
 
@@ -86,7 +84,7 @@ const VillaSection = () => {
             <div className="rounded-[calc(1.5rem-12px)] overflow-hidden">
               <img
                 src={giardinoImg.url}
-                alt="Giardino fronte mare Villa Paola Caposuvero"
+                alt={t("villa.imageAltGarden")}
                 className="w-full h-[300px] md:h-[400px] object-cover"
                 loading="lazy"
               />
@@ -96,7 +94,7 @@ const VillaSection = () => {
             <div className="rounded-[calc(1.5rem-12px)] overflow-hidden">
               <img
                 src={terrazzaImg.url}
-                alt="Terrazza vista mare Villa Paola Caposuvero"
+                alt={t("villa.imageAltTerrace")}
                 className="w-full h-[300px] md:h-[400px] object-cover"
                 loading="lazy"
               />

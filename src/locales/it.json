@@ -1,0 +1,401 @@
+{
+  "nav": {
+    "reviews": "Recensioni",
+    "villa": "La Villa",
+    "services": "Servizi",
+    "gallery": "Galleria",
+    "location": "Posizione",
+    "contact": "Contatti",
+    "checkAvailability": "Verifica disponibilità",
+    "menu": "Menu",
+    "backHome": "Torna alla home",
+    "languageLabel": "Lingua"
+  },
+  "hero": {
+    "eyebrow": "Villa Paola Caposuvero · Gizzeria · Calabria",
+    "titleLine1": "Il mare davanti a te.",
+    "titleLine2": "Senza nulla da attraversare.",
+    "subtitle": "Una villa fronte mare dove svegliarsi con la luce del Mediterraneo, vivere la terrazza in piena privacy e ritrovare il tempo lento della vacanza.",
+    "ctaPrimary": "Verifica la disponibilità",
+    "ctaSecondary": "Guarda la villa",
+    "imageAlt": "Terrazza vista mare a Villa Paola Caposuvero, Gizzeria — Calabria"
+  },
+  "villa": {
+    "eyebrow": "La Villa",
+    "titleStart": "Una villa sul mare pensata per vivere",
+    "titleEmph": "la Calabria senza filtri.",
+    "body": "Villa Paola Caposuvero è una residenza luminosa e accogliente a pochi passi dal mare di Gizzeria. Gli spazi ampi, la terrazza, le camere confortevoli e la posizione riservata la rendono ideale per famiglie e piccoli gruppi che cercano una vacanza semplice, autentica e rilassante.",
+    "stats": {
+      "surface": "Superficie",
+      "bedrooms": "Camere da letto",
+      "bathrooms": "Bagni",
+      "guests": "Ospiti"
+    },
+    "features": {
+      "beachAccess": "Accesso diretto alla spiaggia",
+      "seaView": "Vista mare",
+      "families": "Ideale per famiglie",
+      "airport": "Vicino all'aeroporto di Lamezia Terme",
+      "pets": "Animali ammessi"
+    },
+    "imageAltGarden": "Giardino fronte mare Villa Paola Caposuvero",
+    "imageAltTerrace": "Terrazza vista mare Villa Paola Caposuvero"
+  },
+  "why": {
+    "eyebrow": "Perché scegliere Villa Paola",
+    "titleStart": "Perché qui la vacanza",
+    "titleEmph": "è più semplice.",
+    "cards": {
+      "sea": {
+        "title": "Mare senza pensieri",
+        "text": "Esci di casa e sei già vicino al mare, senza stress e senza lunghi spostamenti."
+      },
+      "privacy": {
+        "title": "Privacy e tranquillità",
+        "text": "Una villa pensata per chi vuole staccare davvero, lontano dal rumore e dalla confusione."
+      },
+      "family": {
+        "title": "Perfetta per famiglie e gruppi",
+        "text": "Spazi comodi, camere indipendenti e ambienti pensati per condividere la vacanza senza rinunciare alla privacy."
+      },
+      "location": {
+        "title": "Posizione strategica",
+        "text": "A Gizzeria, vicino a Lamezia Terme, alla costa tirrenica calabrese e ai principali punti di interesse della zona."
+      }
+    }
+  },
+  "services": {
+    "eyebrow": "Servizi",
+    "titleStart": "Tutto ciò che serve per un",
+    "titleEmph": "soggiorno perfetto",
+    "subtitle": "Ogni dettaglio è pensato per il vostro comfort. Dalla cucina attrezzata alla spiaggia privata, Villa Paola offre tutto il necessario per una vacanza senza pensieri.",
+    "extra": "E inoltre: frigorifero · forno · microonde · lavastoviglie · utensili da cucina · zona pranzo esterna · patio · guardaroba · soggiorno",
+    "amenities": {
+      "wifi": "Wi-Fi gratuito",
+      "beach": "Spiaggia privata",
+      "ac": "Aria condizionata",
+      "kitchen": "Cucina attrezzata",
+      "kids": "Adatto ai bambini",
+      "tv": "TV a schermo piatto",
+      "washer": "Lavatrice",
+      "bbq": "Barbecue",
+      "linen": "Biancheria e asciugamani",
+      "pets": "Animali ammessi"
+    }
+  },
+  "gallery": {
+    "eyebrow": "Galleria",
+    "titleStart": "Scopri ogni",
+    "titleEmph": "angolo",
+    "subtitle": "Il mare, la terrazza, gli spazi interni: un percorso visivo della tua prossima vacanza.",
+    "close": "Chiudi",
+    "prev": "Foto precedente",
+    "next": "Foto successiva"
+  },
+  "position": {
+    "eyebrow": "Posizione",
+    "titleStart": "Nel cuore della",
+    "titleEmph": "costa calabrese",
+    "body": "Villa Paola Caposuvero si trova a Gizzeria Lido, nella splendida Contrada Caposuvero, in una posizione privilegiata tra il mare cristallino della Calabria e l'entroterra verde. L'aeroporto internazionale di Lamezia Terme è raggiungibile in soli 15 minuti.",
+    "mapTitle": "Posizione Villa Paola Caposuvero",
+    "addressTitle": "Indirizzo",
+    "addressLine": "SS18, Contrada Caposuvero 31\nGizzeria Lido, Calabria, Italia",
+    "nearbyTitle": "Nei dintorni",
+    "nearby": {
+      "beach": "Spiaggia",
+      "beachDist": "A pochi passi",
+      "airport": "Aeroporto di Lamezia Terme",
+      "airportDist": "~15 minuti",
+      "lido": "Lido Mediterraneo",
+      "lidoDist": "Nelle vicinanze",
+      "center": "Centro di Gizzeria",
+      "centerDist": "Breve distanza"
+    },
+    "tipLabel": "Consiglio locale",
+    "tipText": "Per una cena memorabile, vi consigliamo il <strong>Lido Mediterraneo</strong>, a breve distanza dalla villa. Pesce freschissimo e tramonti indimenticabili."
+  },
+  "reviews": {
+    "eyebrow": "Recensioni degli ospiti",
+    "title": "Chi è stato qui racconta meglio di noi cosa rende speciale Villa Paola.",
+    "subtitle": "Esperienze reali di ospiti che hanno vissuto la villa, il mare e l'accoglienza di Villa Paola Caposuvero.",
+    "card1": {
+      "name": "Solveig Merkel",
+      "country": "Germania",
+      "text": "Villa Paola è semplicemente un posto speciale. Roberto è un padrone di casa fantastico: ci si sente accolti, tranquilli e seguiti con grande cura. Trascorrere qui le vacanze è stato un vero sogno. Un luogo che consigliamo con tutto il cuore. Torneremo volentieri.",
+      "source": "Recensione originale su Facebook"
+    },
+    "card2": {
+      "name": "Renat FoxBlack",
+      "country": "Francia",
+      "text": "Un posto magnifico, affacciato sul mare e con tutto il comfort necessario. Una splendida cornice che torneremo sicuramente a vivere molto presto.",
+      "source": "Recensione originale su Facebook"
+    },
+    "buttons": {
+      "google": "Leggi recensioni su Google",
+      "facebook": "Leggi recensioni su Facebook",
+      "writeGoogle": "Lascia una recensione su Google"
+    }
+  },
+  "contact": {
+    "eyebrow": "Contatti",
+    "titleStart": "Prenota la tua",
+    "titleEmph": "vacanza",
+    "subtitle": "Per informazioni, disponibilità e prenotazioni, contattaci direttamente. Saremo felici di aiutarti a organizzare il soggiorno perfetto.",
+    "callUs": "Chiamaci",
+    "hours": "Lun – Dom, 9:00 – 20:00",
+    "ctaAvailability": "Verifica la disponibilità",
+    "ctaWhatsapp": "Scrivici su WhatsApp",
+    "ctaEmail": "Scrivici una email",
+    "address": "SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria"
+  },
+  "availability": {
+    "eyebrow": "Richiedi disponibilità",
+    "titleStart": "Richiedi le date",
+    "titleEmph": "disponibili",
+    "subtitle": "Scrivici le date che ti interessano e ti risponderemo con disponibilità, dettagli e un preventivo personalizzato.",
+    "form": {
+      "name": "Nome e cognome *",
+      "namePh": "Mario Rossi",
+      "email": "Email *",
+      "emailPh": "mario@email.it",
+      "phone": "Telefono",
+      "phonePh": "+39 ...",
+      "guests": "Numero ospiti",
+      "guestsPh": "4",
+      "arrival": "Data di arrivo",
+      "departure": "Data di partenza",
+      "message": "Messaggio / richieste particolari",
+      "messagePh": "Viaggiamo con un bambino piccolo e un cane di taglia media...",
+      "privacyPrefix": "Ho letto l'",
+      "privacyLink": "Informativa Privacy",
+      "privacySuffix": ". *",
+      "submit": "Ricevi un preventivo personalizzato",
+      "submitting": "Invio...",
+      "whatsapp": "WhatsApp",
+      "notice1": "La richiesta non comporta alcuna prenotazione automatica. La disponibilità sarà confermata direttamente dalla struttura.",
+      "notice2": "Inviando la richiesta dichiari di aver letto l'Informativa Privacy. I dati saranno usati solo per rispondere alla tua richiesta di disponibilità."
+    },
+    "errors": {
+      "privacy": "Devi accettare l'informativa privacy",
+      "required": "Nome ed email sono obbligatori",
+      "tooLong": "Testo troppo lungo",
+      "submit": "Errore nell'invio",
+      "submitDesc": "Riprova o scrivici su WhatsApp."
+    },
+    "success": {
+      "title": "Grazie!",
+      "text": "Abbiamo ricevuto la tua richiesta. Ti risponderemo al più presto con disponibilità e dettagli."
+    }
+  },
+  "faq": {
+    "eyebrow": "Domande frequenti",
+    "titleStart": "Le risposte prima",
+    "titleEmph": "di partire.",
+    "items": [
+      { "q": "Quanto dista Villa Paola Caposuvero dal mare?", "a": "La villa si trova a pochi passi dal mare, con accesso diretto alla spiaggia: non devi attraversare strade trafficate per raggiungere la costa." },
+      { "q": "Quante persone può ospitare la villa?", "a": "Villa Paola Caposuvero dispone di 3 camere da letto, 2 bagni e può ospitare comodamente famiglie e piccoli gruppi fino a 6+ persone." },
+      { "q": "È adatta alle famiglie?", "a": "Sì. Gli spazi ampi, la posizione riservata e l'accesso diretto al mare rendono la villa perfetta per famiglie che cercano tranquillità, mare e privacy." },
+      { "q": "Quanto dista dall'aeroporto di Lamezia Terme?", "a": "La villa è in una posizione molto comoda per chi arriva dall'aeroporto internazionale di Lamezia Terme, a breve distanza in auto." },
+      { "q": "Come posso verificare la disponibilità?", "a": "Puoi compilare il modulo 'Richiedi disponibilità' su questo sito, scriverci su WhatsApp o chiamarci direttamente. Ti risponderemo con disponibilità e un preventivo personalizzato." },
+      { "q": "Gli animali sono ammessi?", "a": "Sì, gli animali domestici sono benvenuti a Villa Paola Caposuvero. Segnalaci la presenza del tuo animale al momento della richiesta." }
+    ]
+  },
+  "cta": {
+    "titleLine1": "Il mare è già lì.",
+    "titleLine2": "Devi solo scegliere le date.",
+    "subtitle": "Raccontaci quando vorresti partire e ti invieremo disponibilità, dettagli e un preventivo personalizzato per il tuo soggiorno a Villa Paola Caposuvero.",
+    "primary": "Richiedi le date disponibili",
+    "secondary": "Scrivici su WhatsApp",
+    "imageAlt": "Tramonto sul mare davanti a Villa Paola Caposuvero"
+  },
+  "mobileCta": {
+    "label": "Verifica disponibilità"
+  },
+  "footer": {
+    "tagline": "Villa sul mare con accesso diretto alla spiaggia a Gizzeria, Calabria.",
+    "explore": "Esplora",
+    "learnMore": "Approfondisci",
+    "contactsTitle": "Contatti",
+    "phone": "+39 335 538 4250",
+    "whatsapp": "Scrivici su WhatsApp",
+    "email": "Contattaci via email",
+    "facebook": "Recensioni su Facebook",
+    "address": "SS18, Contrada Caposuvero 31\nGizzeria Lido, Calabria, Italia",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "terms": "Termini e condizioni",
+    "copyright": "© {{year}} Villa Paola Caposuvero — SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria",
+    "cin": "CIN: IT079060C299OUQTIW · CIR: 079060-AAT-00018",
+    "links": {
+      "reviews": "Recensioni",
+      "villa": "La Villa",
+      "why": "Perché sceglierla",
+      "services": "Servizi",
+      "gallery": "Galleria",
+      "availability": "Disponibilità",
+      "faq": "FAQ"
+    },
+    "seo": {
+      "seaVilla": "Villa sul mare in Calabria",
+      "beach": "Villa con accesso diretto alla spiaggia",
+      "gizzeria": "Casa vacanze a Gizzeria",
+      "airport": "Villa vicino aeroporto Lamezia",
+      "family": "Villa per famiglie in Calabria",
+      "pet": "Villa pet friendly in Calabria",
+      "september": "Vacanze a settembre in Calabria"
+    }
+  },
+  "notFound": {
+    "title": "Pagina non trovata — Villa Paola Caposuvero",
+    "heading": "404",
+    "text": "La pagina che stai cercando non esiste o è stata rimossa.",
+    "back": "Torna alla home"
+  },
+  "privacy": {
+    "metaTitle": "Privacy Policy | Villa Paola Caposuvero",
+    "metaDesc": "Informativa privacy di Villa Paola Caposuvero: come trattiamo i dati raccolti tramite il modulo di richiesta disponibilità.",
+    "title": "Informativa sulla Privacy",
+    "intro": "Ai sensi del Regolamento UE 2016/679 (GDPR), la presente informativa descrive le modalità di trattamento dei dati personali degli utenti che consultano il sito villapaolacaposuvero.it e utilizzano il modulo di richiesta disponibilità.",
+    "controllerH": "Titolare del trattamento",
+    "controller": "Villa Paola Caposuvero — Contrada Caposuvero 31, SS18, Gizzeria Lido (CZ), Italia.",
+    "dataH": "Dati raccolti",
+    "data": "Attraverso il modulo di richiesta disponibilità raccogliamo: nome e cognome, email, telefono (facoltativo), date di soggiorno, numero di ospiti ed eventuale messaggio.",
+    "purposeH": "Finalità del trattamento",
+    "purpose": "I dati sono trattati esclusivamente per rispondere alla richiesta di disponibilità, fornire un preventivo e gestire la comunicazione con l'ospite. Non vengono utilizzati per finalità di marketing né ceduti a terzi.",
+    "basisH": "Base giuridica",
+    "basis": "Il trattamento si basa sul consenso dell'interessato (art. 6.1.a GDPR) e sull'esecuzione di misure precontrattuali richieste dallo stesso (art. 6.1.b GDPR).",
+    "retentionH": "Conservazione",
+    "retention": "I dati sono conservati per il tempo necessario a evadere la richiesta e comunque non oltre 24 mesi, salvo diverso obbligo di legge.",
+    "vendorsH": "Fornitori",
+    "vendors": "I dati sono conservati su infrastruttura backend gestita con accesso protetto e crittografia in transito.",
+    "rightsH": "Diritti dell'interessato",
+    "rights": "Puoi in ogni momento richiedere l'accesso, la rettifica, la cancellazione o la limitazione del trattamento dei tuoi dati, oppure opporti al trattamento, scrivendo a {{email}}. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.",
+    "updated": "Ultimo aggiornamento: luglio 2026."
+  },
+  "cookies": {
+    "metaTitle": "Cookie Policy | Villa Paola Caposuvero",
+    "metaDesc": "Cookie policy di Villa Paola Caposuvero: quali cookie utilizziamo e come gestirli.",
+    "title": "Cookie Policy",
+    "intro": "Il sito villapaolacaposuvero.it utilizza esclusivamente cookie tecnici necessari al corretto funzionamento delle pagine (ad esempio la gestione della sessione e delle preferenze di visualizzazione). Non vengono installati cookie di profilazione o pubblicitari.",
+    "techH": "Cookie tecnici",
+    "tech": "Sono cookie indispensabili per la navigazione e non richiedono il consenso preventivo dell'utente (art. 122 Codice Privacy).",
+    "thirdH": "Cookie di terze parti",
+    "third": "Il sito non integra strumenti di analisi o tracciamento di terze parti. In caso di future integrazioni (es. Google Analytics), la presente policy verrà aggiornata e verrà mostrato un banner per la raccolta del consenso.",
+    "manageH": "Gestione dei cookie",
+    "manage": "Puoi disabilitare i cookie in qualsiasi momento agendo sulle impostazioni del tuo browser. La disabilitazione dei cookie tecnici potrebbe compromettere il funzionamento del sito.",
+    "updated": "Ultimo aggiornamento: luglio 2026."
+  },
+  "terms": {
+    "metaTitle": "Termini e condizioni | Villa Paola Caposuvero",
+    "metaDesc": "Termini e condizioni d'uso del sito Villa Paola Caposuvero.",
+    "title": "Termini e condizioni",
+    "intro": "L'utilizzo del sito villapaolacaposuvero.it implica l'accettazione dei presenti Termini e Condizioni.",
+    "natureH": "Natura del sito",
+    "nature": "Il sito ha carattere puramente informativo e presenta l'immobile Villa Paola Caposuvero (Gizzeria Lido, Calabria). Il modulo \"Richiedi disponibilità\" è una richiesta di informazioni e non costituisce prenotazione. La conferma della disponibilità e delle condizioni economiche avviene tramite email o WhatsApp direttamente con il gestore.",
+    "contentH": "Contenuti",
+    "content": "Testi, immagini e materiali presenti sul sito sono proprietà di Villa Paola Caposuvero e non possono essere riprodotti senza autorizzazione scritta.",
+    "liabilityH": "Limitazione di responsabilità",
+    "liability": "Le informazioni pubblicate sono aggiornate con la massima cura ma potrebbero contenere imprecisioni. Villa Paola Caposuvero non risponde di eventuali danni derivanti dall'utilizzo delle informazioni presenti sul sito.",
+    "lawH": "Legge applicabile",
+    "law": "I presenti termini sono regolati dalla legge italiana. Per ogni controversia è competente il foro di Lamezia Terme.",
+    "idH": "Dati identificativi",
+    "updated": "Ultimo aggiornamento: luglio 2026."
+  },
+  "index": {
+    "title": "Villa Paola Caposuvero | Villa sul mare a Gizzeria, Calabria",
+    "description": "Villa sul mare a Gizzeria con accesso diretto alla spiaggia: 3 camere, terrazza vista mare, ideale per famiglie e piccoli gruppi. Verifica subito la disponibilità."
+  },
+  "seoPages": {
+    "seaVilla": {
+      "title": "Villa sul mare in Calabria | Villa Paola Caposuvero a Gizzeria",
+      "description": "Scopri Villa Paola Caposuvero, villa sul mare in Calabria a Gizzeria. Privacy, vista mare, spazi per famiglie e posizione comoda vicino Lamezia Terme.",
+      "eyebrow": "Villa sul mare · Calabria",
+      "h1": "Villa sul mare in Calabria per una vacanza senza pensieri",
+      "intro": "Villa Paola Caposuvero è una villa sul mare a Gizzeria, sulla costa tirrenica calabrese: spazi ampi, terrazza vista mare e accesso diretto alla spiaggia, in una posizione riservata e facile da raggiungere.",
+      "body": [
+        "Cercare una villa sul mare in Calabria significa cercare qualcosa di semplice: uscire di casa e trovarsi davanti al Mediterraneo. Villa Paola Caposuvero è pensata esattamente per questo: niente strade da attraversare, niente stress, solo il rumore delle onde.",
+        "La villa può ospitare famiglie e piccoli gruppi fino a 6+ persone, con 3 camere da letto, 2 bagni e 120 m² di superficie. Gli spazi interni sono luminosi, curati e pronti per essere vissuti sia in coppia che con i bambini.",
+        "La posizione a Gizzeria, in provincia di Catanzaro, permette di raggiungere in poco tempo l'aeroporto internazionale di Lamezia Terme e i borghi più belli della costa tirrenica calabrese."
+      ]
+    },
+    "beach": {
+      "title": "Villa con accesso diretto alla spiaggia in Calabria | Villa Paola Caposuvero",
+      "description": "Villa con accesso diretto alla spiaggia in Calabria: Villa Paola Caposuvero a Gizzeria, mare a pochi passi senza attraversare strade. Ideale per famiglie.",
+      "eyebrow": "Accesso diretto alla spiaggia",
+      "h1": "Villa con accesso diretto alla spiaggia in Calabria",
+      "intro": "A Villa Paola Caposuvero non devi attraversare strade trafficate per raggiungere il mare: esci dalla villa e sei già sulla costa, in totale sicurezza anche con i bambini.",
+      "body": [
+        "L'accesso diretto alla spiaggia è ciò che fa davvero la differenza in una vacanza al mare. A Villa Paola Caposuvero il Mediterraneo è la prima cosa che vedi al mattino e l'ultima al tramonto.",
+        "La spiaggia di Gizzeria è ampia, sabbiosa e ideale per famiglie: bambini e ospiti meno mobili possono raggiungerla in pochi passi, senza doversi spostare in auto.",
+        "La villa combina privacy, spazi per famiglie e prossimità al mare, offrendo un mix raro sulla costa tirrenica calabrese."
+      ]
+    },
+    "gizzeria": {
+      "title": "Casa vacanze a Gizzeria (Calabria) | Villa Paola Caposuvero",
+      "description": "Casa vacanze a Gizzeria in Calabria: Villa Paola Caposuvero, 3 camere, 120 m², accesso diretto alla spiaggia, vicino all'aeroporto di Lamezia Terme.",
+      "eyebrow": "Casa vacanze · Gizzeria",
+      "h1": "Casa vacanze a Gizzeria, sul mare della Calabria",
+      "intro": "Villa Paola Caposuvero è la casa vacanze ideale a Gizzeria per chi cerca una vacanza autentica sulla costa tirrenica calabrese: spazi ampi, privacy, mare a pochi passi.",
+      "body": [
+        "Gizzeria Lido è una delle località più amate della costa tirrenica calabrese: mare pulito, spiagge sabbiose, tramonti spettacolari e una posizione strategica vicino a Lamezia Terme.",
+        "La villa dispone di soggiorno, cucina attrezzata, 3 camere da letto, 2 bagni, terrazza e spazi esterni. Perfetta come casa vacanze per famiglie e piccoli gruppi.",
+        "A pochi minuti dalla villa trovi ristoranti, servizi, kite spot rinomati e la strada per raggiungere in breve tempo l'aeroporto internazionale di Lamezia Terme."
+      ]
+    },
+    "airport": {
+      "title": "Villa vicino aeroporto Lamezia Terme | Villa Paola Caposuvero",
+      "description": "Villa vicino all'aeroporto di Lamezia Terme: Villa Paola Caposuvero a Gizzeria, sul mare, comoda anche per soggiorni brevi e trasferte in Calabria.",
+      "eyebrow": "Vicino a Lamezia Terme",
+      "h1": "Villa vicino all'aeroporto di Lamezia Terme, direttamente sul mare",
+      "intro": "Atterri a Lamezia Terme e in pochi minuti sei in villa, con il mare davanti. Villa Paola Caposuvero è la scelta ideale per chi vuole ottimizzare i tempi senza rinunciare alla vacanza.",
+      "body": [
+        "La posizione a Gizzeria rende Villa Paola Caposuvero particolarmente comoda per chi arriva in aereo: nessun lungo trasferimento, solo pochi chilometri e sei già davanti al mare.",
+        "Perfetta anche per soggiorni brevi, weekend lunghi o vacanze estive di più settimane. Il mix di comodità aeroportuale e mare a pochi passi è raro da trovare.",
+        "Contattaci per verificare la disponibilità nelle date che ti interessano e ricevere un preventivo personalizzato."
+      ]
+    },
+    "family": {
+      "title": "Villa per famiglie in Calabria | Villa Paola Caposuvero, Gizzeria",
+      "description": "Villa per famiglie in Calabria: Villa Paola Caposuvero, 3 camere, accesso diretto alla spiaggia, spazi sicuri e comodi per genitori e bambini.",
+      "eyebrow": "Ideale per famiglie",
+      "h1": "Villa per famiglie in Calabria, con il mare a pochi passi",
+      "intro": "Villa Paola Caposuvero è pensata per le famiglie: spazi ampi, camere indipendenti, privacy, accesso diretto al mare e la tranquillità di una posizione riservata.",
+      "body": [
+        "Viaggiare con bambini richiede spazi comodi, sicurezza e semplicità. A Villa Paola Caposuvero trovi tutto questo: nessuna strada da attraversare per raggiungere il mare, ambienti luminosi e la possibilità di preparare i pasti in casa.",
+        "Le 3 camere da letto permettono a genitori, bambini e nonni di avere ognuno il proprio spazio, senza rinunciare a condividere le giornate di vacanza.",
+        "Anche i vostri amici a quattro zampe sono benvenuti: gli animali sono ammessi in villa."
+      ]
+    },
+    "pet": {
+      "title": "Villa pet friendly in Calabria | Villa Paola Caposuvero, Gizzeria",
+      "description": "Villa pet friendly in Calabria: a Villa Paola Caposuvero gli animali sono benvenuti. Vacanza al mare a Gizzeria con il tuo cane, spazi e accesso diretto alla spiaggia.",
+      "eyebrow": "Pet friendly",
+      "h1": "Villa pet friendly in Calabria, dove il tuo cane è il benvenuto",
+      "intro": "A Villa Paola Caposuvero gli animali sono ammessi: puoi goderti la vacanza sul mare della Calabria portando con te il tuo amico a quattro zampe.",
+      "body": [
+        "Trovare una villa pet friendly sul mare non è sempre facile. Villa Paola Caposuvero accoglie con piacere le famiglie che viaggiano con animali domestici, senza compromessi sul comfort.",
+        "Gli spazi esterni, la posizione riservata e la vicinanza al mare rendono la villa perfetta anche per lunghe passeggiate con il tuo cane sulla spiaggia di Gizzeria.",
+        "Segnalaci la presenza dell'animale al momento della richiesta di disponibilità: cercheremo di preparare tutto al meglio per il tuo soggiorno."
+      ]
+    },
+    "september": {
+      "title": "Vacanze a settembre in Calabria | Villa Paola Caposuvero, Gizzeria",
+      "description": "Vacanze a settembre in Calabria: mare caldo, meno folla e prezzi più dolci. Villa Paola Caposuvero a Gizzeria, sul mare con accesso diretto alla spiaggia.",
+      "eyebrow": "Settembre in Calabria",
+      "h1": "Vacanze a settembre in Calabria: la stagione più bella dell'anno",
+      "intro": "Settembre in Calabria è mare caldo, giornate ancora lunghe, spiagge meno affollate e prezzi più dolci. Villa Paola Caposuvero è il posto giusto per goderselo davvero.",
+      "body": [
+        "Settembre è forse il mese migliore per una vacanza sul mare in Calabria: il Mediterraneo resta caldo, il clima è perfetto per lunghe passeggiate e la costa tirrenica si svuota della folla estiva.",
+        "A Villa Paola Caposuvero puoi goderti tramonti spettacolari, cene sulla terrazza e giornate in spiaggia in totale tranquillità, con l'accesso diretto al mare che fa la differenza.",
+        "Se stai pensando alle date, contattaci per verificare la disponibilità: settembre è molto richiesto proprio per la sua unicità."
+      ]
+    }
+  },
+  "seoLanding": {
+    "backHome": "Torna alla home",
+    "ctaAvailability": "Verifica la disponibilità",
+    "ctaWhatsapp": "Scrivici su WhatsApp",
+    "backHomeInline": "Torna alla home di Villa Paola Caposuvero",
+    "wantMore": "Vuoi vedere la villa nel dettaglio?"
+  }
+}

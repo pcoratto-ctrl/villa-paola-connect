@@ -1,30 +1,16 @@
 import { motion } from "framer-motion";
 import { Waves, ShieldCheck, Users, MapPin } from "lucide-react";
-
-const cards = [
-  {
-    icon: Waves,
-    title: "Mare senza pensieri",
-    text: "Esci di casa e sei già vicino al mare, senza stress e senza lunghi spostamenti.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Privacy e tranquillità",
-    text: "Una villa pensata per chi vuole staccare davvero, lontano dal rumore e dalla confusione.",
-  },
-  {
-    icon: Users,
-    title: "Perfetta per famiglie e gruppi",
-    text: "Spazi comodi, camere indipendenti e ambienti pensati per condividere la vacanza senza rinunciare alla privacy.",
-  },
-  {
-    icon: MapPin,
-    title: "Posizione strategica",
-    text: "A Gizzeria, vicino a Lamezia Terme, alla costa tirrenica calabrese e ai principali punti di interesse della zona.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const PerchéSection = () => {
+  const { t } = useTranslation();
+  const cards = [
+    { icon: Waves, title: t("why.cards.sea.title"), text: t("why.cards.sea.text") },
+    { icon: ShieldCheck, title: t("why.cards.privacy.title"), text: t("why.cards.privacy.text") },
+    { icon: Users, title: t("why.cards.family.title"), text: t("why.cards.family.text") },
+    { icon: MapPin, title: t("why.cards.location.title"), text: t("why.cards.location.text") },
+  ];
+
   return (
     <section id="perche" className="villa-section py-24 md:py-32">
       <div className="villa-container">
@@ -36,10 +22,10 @@ const PerchéSection = () => {
           className="max-w-2xl mb-14"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            Perché scegliere Villa Paola
+            {t("why.eyebrow")}
           </p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground">
-            Perché qui la vacanza <span className="italic">è più semplice.</span>
+            {t("why.titleStart")} <span className="italic">{t("why.titleEmph")}</span>
           </h2>
         </motion.div>
 

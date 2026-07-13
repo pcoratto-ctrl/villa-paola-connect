@@ -1,14 +1,16 @@
 import { motion } from "framer-motion";
 import { MapPin, Plane, UtensilsCrossed, Waves, Navigation } from "lucide-react";
-
-const nearbyPlaces = [
-  { icon: Waves, label: "Spiaggia", distance: "A pochi passi" },
-  { icon: Plane, label: "Aeroporto di Lamezia Terme", distance: "~15 minuti" },
-  { icon: UtensilsCrossed, label: "Lido Mediterraneo", distance: "Nelle vicinanze" },
-  { icon: Navigation, label: "Centro di Gizzeria", distance: "Breve distanza" },
-];
+import { Trans, useTranslation } from "react-i18next";
 
 const PosizioneSection = () => {
+  const { t } = useTranslation();
+  const nearbyPlaces = [
+    { icon: Waves, label: t("position.nearby.beach"), distance: t("position.nearby.beachDist") },
+    { icon: Plane, label: t("position.nearby.airport"), distance: t("position.nearby.airportDist") },
+    { icon: UtensilsCrossed, label: t("position.nearby.lido"), distance: t("position.nearby.lidoDist") },
+    { icon: Navigation, label: t("position.nearby.center"), distance: t("position.nearby.centerDist") },
+  ];
+
   return (
     <section id="posizione" className="villa-section py-24 md:py-32 bg-villa-warm-white">
       <div className="villa-container">
@@ -20,20 +22,17 @@ const PosizioneSection = () => {
           className="max-w-2xl mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            Posizione
+            {t("position.eyebrow")}
           </p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
-            Nel cuore della <span className="italic">costa calabrese</span>
+            {t("position.titleStart")} <span className="italic">{t("position.titleEmph")}</span>
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Villa Paola Caposuvero si trova a Gizzeria Lido, nella splendida Contrada Caposuvero, 
-            in una posizione privilegiata tra il mare cristallino della Calabria e l'entroterra verde. 
-            L'aeroporto internazionale di Lamezia Terme è raggiungibile in soli 15 minuti.
+            {t("position.body")}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Map */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -50,13 +49,12 @@ const PosizioneSection = () => {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Posizione Villa Paola Caposuvero"
+                title={t("position.mapTitle")}
                 className="w-full h-[350px] md:h-[450px]"
               />
             </div>
           </motion.div>
 
-          {/* Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -64,23 +62,20 @@ const PosizioneSection = () => {
             transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
             className="flex flex-col gap-6"
           >
-            {/* Address Card */}
             <div className="p-6 md:p-8 rounded-villa bg-card shadow-soft border border-border">
               <div className="flex items-start gap-4">
                 <MapPin className="w-6 h-6 text-primary flex-shrink-0 mt-1" strokeWidth={1.5} />
                 <div>
-                  <p className="font-medium text-foreground mb-1">Indirizzo</p>
-                  <p className="text-muted-foreground">
-                    SS18, Contrada Caposuvero 31<br />
-                    Gizzeria Lido, Calabria, Italia
+                  <p className="font-medium text-foreground mb-1">{t("position.addressTitle")}</p>
+                  <p className="text-muted-foreground whitespace-pre-line">
+                    {t("position.addressLine")}
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Nearby Places */}
             <div className="p-6 md:p-8 rounded-villa bg-card shadow-soft border border-border">
-              <h3 className="font-display text-2xl text-foreground mb-6">Nei dintorni</h3>
+              <h3 className="font-display text-2xl text-foreground mb-6">{t("position.nearbyTitle")}</h3>
               <div className="flex flex-col gap-5">
                 {nearbyPlaces.map((place) => (
                   <div key={place.label} className="flex items-center gap-4">
@@ -94,12 +89,10 @@ const PosizioneSection = () => {
               </div>
             </div>
 
-            {/* Local Tip */}
             <div className="p-6 md:p-8 rounded-villa bg-villa-sea-light border border-primary/10">
-              <p className="text-sm font-medium text-primary mb-2">Consiglio locale</p>
+              <p className="text-sm font-medium text-primary mb-2">{t("position.tipLabel")}</p>
               <p className="text-foreground text-sm leading-relaxed">
-                Per una cena memorabile, vi consigliamo il <strong>Lido Mediterraneo</strong>, 
-                a breve distanza dalla villa. Pesce freschissimo e tramonti indimenticabili.
+                <Trans i18nKey="position.tipText" components={{ strong: <strong /> }} />
               </p>
             </div>
           </motion.div>

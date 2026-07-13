@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import RecensioniHighlight from "@/components/RecensioniHighlight";
@@ -15,16 +16,17 @@ import Footer from "@/components/Footer";
 import MobileCta from "@/components/MobileCta";
 
 const Index = () => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <Helmet>
-        <title>Villa Paola Caposuvero | Villa sul mare a Gizzeria, Calabria</title>
-        <meta
-          name="description"
-          content="Villa sul mare a Gizzeria con accesso diretto alla spiaggia: 3 camere, terrazza vista mare, ideale per famiglie e piccoli gruppi. Verifica subito la disponibilità."
-        />
+        <html lang={i18n.language} />
+        <title>{t("index.title")}</title>
+        <meta name="description" content={t("index.description")} />
         <link rel="canonical" href="https://villapaolacaposuvero.it/" />
         <meta property="og:url" content="https://villapaolacaposuvero.it/" />
+        <meta property="og:title" content={t("index.title")} />
+        <meta property="og:description" content={t("index.description")} />
       </Helmet>
       <Navbar />
       <main>
