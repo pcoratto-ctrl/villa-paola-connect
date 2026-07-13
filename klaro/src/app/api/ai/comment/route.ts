@@ -134,17 +134,19 @@ ${confrontoBlock}
 STRUTTURA OBBLIGATORIA — il commento deve avere ESATTAMENTE queste 5 sezioni, in quest'ordine, ognuna introdotta dal suo titolo su una riga a sé (numerato, senza grassetti o markdown):
 ${titoli}
 
+CHI LEGGE: il destinatario è il CLIENTE FINALE, cioè il titolare dell'attività (${client.nome}). Spesso NON è esperto di social né di marketing. Scrivi per lui, non per un addetto ai lavori: ogni volta che citi un numero o un risultato, spiega in modo concreto cosa significa per la sua attività (più persone che scoprono il locale, più potenziali clienti, più occasioni di vendita…).
+
 Contenuto delle sezioni:
-1. Sintesi del mese: 3-4 frasi che un cliente non tecnico capisce al volo; il quadro generale del mese.
-2. Cosa è andato bene: parti dai punti indicati nel contesto (se presenti) e dai contenuti migliori.
-3. Cosa migliorare: onesto ma costruttivo; se il contesto indica cosa non ha funzionato, parti da lì.
-4. Lettura dei numeri principali: reach, impression, follower, engagement spiegati in modo semplice${body.prev ? ", con i confronti percentuali sul mese precedente" : ", senza confronti con altri mesi"}.
+1. Sintesi del mese: 3-4 frasi che il titolare capisce al volo, senza tecnicismi; il quadro generale del mese e cosa se ne porta a casa.
+2. Cosa è andato bene: parti dai punti indicati nel contesto (se presenti) e dai contenuti migliori, spiegando perché sono un buon segnale per l'attività.
+3. Cosa migliorare: onesto ma costruttivo; se il contesto indica cosa non ha funzionato, parti da lì. Niente colpe, solo margini di crescita.
+4. Lettura dei numeri principali: reach, impression, follower, engagement spiegati con parole semplici e con un esempio di cosa vogliono dire nella pratica${body.prev ? ", includendo i confronti percentuali sul mese precedente" : ", senza confronti con altri mesi"}. La prima volta che usi un termine tecnico, spiegalo in poche parole.
 5. Priorità consigliate per il prossimo mese: 2-3 priorità concrete e realizzabili, collegate agli obiettivi del cliente${body.contesto?.priorita_prossimo ? " e coerenti con le priorità già individuate nel contesto" : ""}.
 
 REGOLE VINCOLANTI:
 - NON inventare numeri, metriche, attività o risultati non forniti sopra. Se un'informazione manca, non c'è: scrivilo o ometti.
-- Tono: consulente pratico che parla a un imprenditore; italiano naturale, frasi brevi, niente gergo tecnico non spiegato, niente inglesismi inutili, niente frasi vuote di riempimento, niente emoji, niente elenchi puntati (le priorità possono essere numerate nel testo: "1) … 2) …").
-- Dai del "noi" al team che gestisce i social.
+- Tono: consulente pratico che spiega le cose al titolare dell'attività; italiano naturale e caldo, frasi brevi, niente gergo tecnico non spiegato, niente inglesismi inutili, niente frasi vuote di riempimento, niente emoji, niente elenchi puntati (le priorità possono essere numerate nel testo: "1) … 2) …").
+- Dai del "noi" al team che gestisce i social e rivolgiti al cliente con naturalezza (puoi usare la seconda persona, es. "il tuo profilo").
 - Numeri formattati all'italiana (es. 24.900; percentuali con la virgola: 3,8%).
 - Non aggiungere saluti, firme o altre sezioni oltre alle 5 richieste.
 
