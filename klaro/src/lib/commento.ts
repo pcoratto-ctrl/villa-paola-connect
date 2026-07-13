@@ -63,22 +63,23 @@ export function parseCommento(text: string): SezioniCommento {
   return out;
 }
 
-// Blocchi della sezione "In sintesi" del PDF: preferisce le note dell'utente
-// (contesto del mese), altrimenti ricava il testo dalle sezioni del commento.
+// Blocchi della sezione "In sintesi" del PDF. Preferisce la prosa scritta
+// dall'AI (sezioni del commento), che è discorsiva e pronta per il cliente;
+// usa il contesto dell'utente solo come fallback se il commento manca.
 export function sintesiBlocks(
   contesto: ContestoMese | undefined,
   commento: string | null
 ): { bene: string; migliorare: string; priorita: string } {
   const sezioni = commento ? parseCommento(commento) : null;
-  const pick = (dal_contesto: string | undefined, dal_commento: string | undefined) => {
-    const c = dal_contesto?.trim();
+  const pick = (dal_commento: string | undefined, dal_contesto: string | undefined) => {
+    const c = dal_commento?.trim();
     if (c) return c;
-    return (dal_commento ?? "").trim();
+    return (dal_contesto ?? "").trim();
   };
   return {
-    bene: pick(contesto?.andato_bene, sezioni?.andato_bene),
-    migliorare: pick(contesto?.non_funzionato, sezioni?.migliorare),
-    priorita: pick(contesto?.priorita_prossimo, sezioni?.priorita),
+    bene: pick(sezioni?.andato_bene, contesto?.andato_bene),
+    migliorare: pick(sezioni?.migliorare, contesto?.non_funzionato),
+    priorita: pick(sezioni?.priorita, contesto?.priorita_prossimo),
   };
 }
 

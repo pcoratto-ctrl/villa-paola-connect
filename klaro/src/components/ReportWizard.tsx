@@ -11,6 +11,45 @@ import { prevMonth } from "@/lib/utils";
 
 const DRAFT_KEY = "klaro-report-draft";
 
+// Suggerimenti da toccare per il "Contesto del mese": zero scrittura, l'AI
+// trasforma questi segnali in prosa. Ogni gruppo alimenta una parte del commento.
+const CHIP_FATTO = [
+  "Più Reel del solito",
+  "Più caroselli",
+  "Più storie",
+  "Nuova rubrica fissa",
+  "Collaborazione con altri profili/influencer",
+  "Promo o offerta",
+  "Evento o lancio",
+  "Concorso / giveaway",
+  "Maggiore costanza",
+  "Pubblicato meno del solito",
+];
+const CHIP_BENE = [
+  "I Reel / video",
+  "I caroselli",
+  "I contenuti dietro le quinte",
+  "Le storie interattive (sondaggi, domande)",
+  "I contenuti con le persone del team",
+  "Le collaborazioni",
+  "I contenuti su prodotti/servizi",
+];
+const CHIP_MALE = [
+  "Le foto statiche di prodotto",
+  "I post troppo promozionali",
+  "Le storie senza interazione",
+  "La poca costanza",
+  "Niente in particolare",
+];
+const CHIP_PRIORITA = [
+  "Aumentare i Reel",
+  "Più costanza di pubblicazione",
+  "Promuovere un evento/offerta",
+  "Far crescere le interazioni",
+  "Avviare una collaborazione",
+  "Testare nuovi formati",
+];
+
 type FormState = {
   clientId: string;
   canale: Canale;
@@ -24,11 +63,11 @@ type FormState = {
   numero_post: string;
   top_post: { testo: string; metrica: string }[];
   risultati_note: string;
-  // Contesto del mese (tutto opzionale)
-  ctx_cosa_fatto: string;
-  ctx_andato_bene: string;
-  ctx_non_funzionato: string;
-  ctx_priorita: string;
+  // Contesto del mese: suggerimenti da toccare (tutto opzionale, zero scrittura)
+  tags_fatto: string[];
+  tags_bene: string[];
+  tags_male: string[];
+  tags_priorita: string[];
   commento: string;
   valutazione_obiettivi: string;
 };
@@ -53,10 +92,10 @@ function defaultForm(clientId: string): FormState {
       { testo: "", metrica: "" },
     ],
     risultati_note: "",
-    ctx_cosa_fatto: "",
-    ctx_andato_bene: "",
-    ctx_non_funzionato: "",
-    ctx_priorita: "",
+    tags_fatto: [],
+    tags_bene: [],
+    tags_male: [],
+    tags_priorita: [],
     commento: "",
     valutazione_obiettivi: "",
   };
@@ -110,10 +149,8 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
             anno: next.anno,
             // Il follower di partenza del nuovo mese è quello di chiusura del precedente
             follower_inizio: String(src.dati_json.follower_fine ?? ""),
-            ctx_cosa_fatto: src.dati_json.contesto?.cosa_fatto ?? "",
-            ctx_andato_bene: src.dati_json.contesto?.andato_bene ?? "",
-            ctx_non_funzionato: src.dati_json.contesto?.non_funzionato ?? "",
-            ctx_priorita: src.dati_json.contesto?.priorita_prossimo ?? "",
+            // I tag sono selezioni rapide: si ri-toccano nel nuovo mese (pochi tap).
+            // Le eventuali note libere del mese precedente restano in risultati_note.
             clientId: src.client_id,
             top_post: f.top_post,
           }));
@@ -185,11 +222,18 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
 
   function buildContesto(): ContestoMese | undefined {
     const c: ContestoMese = {};
-    if (form.ctx_cosa_fatto.trim()) c.cosa_fatto = form.ctx_cosa_fatto.trim();
-    if (form.ctx_andato_bene.trim()) c.andato_bene = form.ctx_andato_bene.trim();
-    if (form.ctx_non_funzionato.trim()) c.non_funzionato = form.ctx_non_funzionato.trim();
-    if (form.ctx_priorita.trim()) c.priorita_prossimo = form.ctx_priorita.trim();
+    if (form.tags_fatto.length) c.cosa_fatto = form.tags_fatto.join(", ");
+    if (form.tags_bene.length) c.andato_bene = form.tags_bene.join(", ");
+    if (form.tags_male.length) c.non_funzionato = form.tags_male.join(", ");
+    if (form.tags_priorita.length) c.priorita_prossimo = form.tags_priorita.join(", ");
     return Object.keys(c).length > 0 ? c : undefined;
+  }
+
+  function toggleTag(key: "tags_fatto" | "tags_bene" | "tags_male" | "tags_priorita", value: string) {
+    setForm((f) => {
+      const arr = f[key];
+      return { ...f, [key]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value] };
+    });
   }
 
   function buildData(): ReportData {
@@ -531,46 +575,51 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
           <div className="card space-y-1">
             <h2 className="font-semibold text-slate-900">Contesto del mese</h2>
             <p className="text-sm text-slate-500">
-              Due righe per campo bastano. Sono tutte facoltative, ma più contesto dai,
-              più il commento sembrerà scritto da te e non da un robot. Quello che scrivi
-              qui finisce anche nella sezione &quot;In sintesi&quot; del PDF.
+              Niente da scrivere: tocca le voci che descrivono il mese. Bastano pochi tap,
+              al testo del commento pensa l&apos;AI. È tutto facoltativo — se salti, l&apos;AI
+              analizza comunque i numeri — ma bastano 3-4 tocchi per un commento molto più
+              su misura.
             </p>
           </div>
 
           {(
             [
-              [
-                "ctx_cosa_fatto",
-                "Cosa è stato fatto questo mese",
-                "es. 8 reel, 4 caroselli, 2 collaborazioni con micro influencer, avviata la rubrica del venerdì…",
-              ],
-              [
-                "ctx_andato_bene",
-                "Cosa è andato bene",
-                "es. i reel col barman hanno superato ogni aspettativa, la rubrica ha portato commenti nuovi…",
-              ],
-              [
-                "ctx_non_funzionato",
-                "Cosa non ha funzionato",
-                "es. i post statici di prodotto quasi ignorati, poca risposta alle stories con sondaggio…",
-              ],
-              [
-                "ctx_priorita",
-                "Priorità per il prossimo mese",
-                "es. spingere il formato video, promuovere l'evento di apertura, testare 2 orari di pubblicazione…",
-              ],
-            ] as [keyof FormState, string, string][]
-          ).map(([key, label, ph]) => (
+              ["tags_fatto", "Cosa hai fatto questo mese", CHIP_FATTO],
+              ["tags_bene", "Cosa ha funzionato meglio", CHIP_BENE],
+              ["tags_male", "Cosa ha reso meno", CHIP_MALE],
+              ["tags_priorita", "Su cosa puntare il prossimo mese", CHIP_PRIORITA],
+            ] as ["tags_fatto" | "tags_bene" | "tags_male" | "tags_priorita", string, string[]][]
+          ).map(([key, label, chips]) => (
             <div key={key} className="card">
               <label className="label">{label}</label>
-              <textarea
-                className="input min-h-24"
-                value={form[key] as string}
-                onChange={(e) => set(key, e.target.value as FormState[typeof key])}
-                placeholder={ph}
-              />
+              <div className="flex flex-wrap gap-2">
+                {chips.map((chip) => {
+                  const active = form[key].includes(chip);
+                  return (
+                    <button
+                      key={chip}
+                      type="button"
+                      onClick={() => toggleTag(key, chip)}
+                      aria-pressed={active}
+                      className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
+                        active
+                          ? "border-brand-600 bg-brand-600 text-white"
+                          : "border-slate-300 bg-white text-slate-600 hover:border-brand-300 hover:text-slate-900"
+                      }`}
+                    >
+                      {active ? "✓ " : ""}
+                      {chip}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           ))}
+
+          <p className="text-xs text-slate-400">
+            Vuoi aggiungere un dettaglio specifico a parole? Usa il campo &quot;Note sui
+            risultati&quot; nello step precedente: è facoltativo e lo passiamo all&apos;AI.
+          </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <button className="btn-secondary" onClick={() => setStep(2)}>

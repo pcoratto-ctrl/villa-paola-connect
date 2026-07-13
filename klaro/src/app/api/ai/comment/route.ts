@@ -110,7 +110,7 @@ Nella sezione "Lettura dei numeri principali" confronta i due mesi indicando le 
 
   const contestoText = contestoToText(body.contesto);
   const contestoBlock = contestoText
-    ? `CONTESTO DEL MESE (scritto da chi gestisce i social — usalo come fonte principale per le sezioni qualitative):
+    ? `CONTESTO DEL MESE (indicazioni rapide selezionate da chi gestisce i social: sono spunti sintetici, non frasi già pronte — espandili tu in prosa naturale e usali come fonte principale per le sezioni qualitative):
 ${contestoText}`
     : `CONTESTO DEL MESE: non fornito. REGOLA VINCOLANTE: non inventare attività, iniziative o valutazioni qualitative non deducibili dai numeri e dalle note. Basati solo sui dati forniti.`;
 
