@@ -5,12 +5,22 @@ import { useState } from "react";
 export default function BillingButtons({
   piano,
   hasCustomer,
+  stripeConfigured,
 }: {
   piano: string;
   hasCustomer: boolean;
+  stripeConfigured: boolean;
 }) {
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  if (!stripeConfigured) {
+    return (
+      <p className="mt-5 rounded-xl bg-slate-100 p-4 text-sm text-slate-600">
+        Pagamenti non configurati in questo ambiente.
+      </p>
+    );
+  }
 
   async function go(endpoint: string, body?: object, key?: string) {
     setLoading(key ?? endpoint);

@@ -9,6 +9,12 @@ export const maxDuration = 60;
 
 const SEPARATORE_OBIETTIVI = "===VALUTAZIONE OBIETTIVI===";
 
+// Fallback dimostrativo locale: attivo in sviluppo, oppure altrove solo se
+// esplicitamente abilitato. Non genera testo con un'AI, serve solo a non
+// bloccare il flusso quando ANTHROPIC_API_KEY manca o non è valida.
+const AI_DEMO_FALLBACK_ENABLED =
+  process.env.NODE_ENV === "development" || process.env.ENABLE_AI_DEMO_FALLBACK === "true";
+
 const topPostSchema = z.object({ testo: z.string(), metrica: z.string() });
 
 const datiSchema = z.object({
@@ -55,6 +61,52 @@ function datiToText(d: z.infer<typeof datiSchema>): string {
   }
   if (d.risultati_note) lines.push(`- Note del social media manager: ${d.risultati_note}`);
   return lines.join("\n");
+}
+
+// Testo dimostrativo locale, costruito dai numeri inseriti dall'utente. Va
+// dichiarato esplicitamente come bozza automatica non generata da un'AI.
+function buildDemoComment(params: {
+  periodo: string;
+  dati: z.infer<typeof datiSchema>;
+  contesto: z.infer<typeof contestoSchema> | null | undefined;
+  prev: z.infer<typeof datiSchema> | null;
+}): { commento: string; valutazione_obiettivi: string } {
+  const { periodo, dati, contesto, prev } = params;
+  const fmt = (n: number) => n.toLocaleString("it-IT");
+  const topPost = dati.top_post[0]?.testo;
+  const confrontoTesto = prev
+    ? `rispetto al mese precedente (reach ${fmt(prev.reach)} → ${fmt(dati.reach)}).`
+    : "senza un mese precedente da confrontare.";
+
+  const commento = [
+    `${SEZIONI_COMMENTO[0]}`,
+    `[Bozza automatica locale — testo non generato da un'AI, chiave ANTHROPIC_API_KEY non configurata] In ${periodo} il canale ha registrato ${fmt(dati.reach)} di reach e un engagement rate del ${fmt(dati.engagement_rate)}%. Rivedi e completa questo paragrafo prima di inviarlo al cliente.`,
+    "",
+    `${SEZIONI_COMMENTO[1]}`,
+    contesto?.andato_bene?.trim()
+      ? contesto.andato_bene.trim()
+      : topPost
+        ? `Il contenuto "${topPost}" è quello segnalato come più performante del mese.`
+        : "Aggiungi qui cosa ha funzionato meglio questo mese.",
+    "",
+    `${SEZIONI_COMMENTO[2]}`,
+    contesto?.non_funzionato?.trim()
+      ? contesto.non_funzionato.trim()
+      : "Aggiungi qui cosa migliorare il prossimo mese.",
+    "",
+    `${SEZIONI_COMMENTO[3]}`,
+    `Il canale ha raggiunto ${fmt(dati.reach)} persone con ${fmt(dati.impression)} impression e un engagement rate del ${fmt(dati.engagement_rate)}%, ${confrontoTesto}`,
+    "",
+    `${SEZIONI_COMMENTO[4]}`,
+    contesto?.priorita_prossimo?.trim()
+      ? contesto.priorita_prossimo.trim()
+      : "Aggiungi qui 2-3 priorità concrete per il prossimo mese.",
+  ].join("\n");
+
+  const valutazione_obiettivi =
+    "[Bozza automatica locale] I dati non sono stati valutati da un'AI: scrivi qui una valutazione prudente rispetto agli obiettivi del cliente, oppure indica che servono più dati per valutarli.";
+
+  return { commento, valutazione_obiettivi };
 }
 
 function contestoToText(c: z.infer<typeof contestoSchema> | null | undefined): string {
@@ -152,7 +204,24 @@ DOPO le 5 sezioni, aggiungi una riga contenente esattamente:
 ${SEPARATORE_OBIETTIVI}
 e sotto scrivi 2-4 frasi di valutazione PRUDENTE dell'andamento rispetto agli obiettivi del cliente. Regole per questa parte: nessun numero o percentuale inventati; se gli obiettivi non sono specificati o i dati forniti non bastano per valutarli, scrivi esplicitamente che i dati disponibili non sono sufficienti per una valutazione e cosa servirebbe per misurarli. Questa parte comparirà nel PDF nella sezione "Obiettivi del cliente".`;
 
-  const anthropic = new Anthropic({ maxRetries: 3 });
+  function fallbackOrError(message: string, status: number) {
+    if (AI_DEMO_FALLBACK_ENABLED) {
+      return NextResponse.json(
+        buildDemoComment({ periodo, dati: body.dati, contesto: body.contesto, prev: body.prev })
+      );
+    }
+    return NextResponse.json({ error: message }, { status });
+  }
+
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    return fallbackOrError(
+      "Chiave API Anthropic non configurata: imposta ANTHROPIC_API_KEY per generare il commento AI.",
+      500
+    );
+  }
+
+  const anthropic = new Anthropic({ apiKey, maxRetries: 3 });
 
   try {
     const response = await anthropic.messages.create({
@@ -202,10 +271,7 @@ e sotto scrivi 2-4 frasi di valutazione PRUDENTE dell'andamento rispetto agli ob
       );
     }
     if (err instanceof Anthropic.AuthenticationError) {
-      return NextResponse.json(
-        { error: "Chiave API Anthropic non valida: controlla ANTHROPIC_API_KEY." },
-        { status: 500 }
-      );
+      return fallbackOrError("Chiave API Anthropic non valida: controlla ANTHROPIC_API_KEY.", 500);
     }
     if (err instanceof Anthropic.APIError) {
       return NextResponse.json(
