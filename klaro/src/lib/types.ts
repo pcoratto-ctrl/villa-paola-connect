@@ -27,6 +27,10 @@ export type ReportData = {
   // Valutazione prudente dell'andamento rispetto agli obiettivi del cliente
   // (generata dall'AI, modificabile). Compare nel PDF.
   valutazione_obiettivi?: string;
+  // Metriche opzionali: vivono dentro dati_json (jsonb), nessuna migrazione
+  // DB necessaria. I report esistenti senza questi campi restano validi.
+  visite_profilo?: number;
+  click_link?: number;
 };
 
 export type Profile = {

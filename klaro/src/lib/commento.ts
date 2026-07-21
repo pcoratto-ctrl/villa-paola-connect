@@ -91,6 +91,38 @@ export function primeFrasi(text: string, n: number): string {
   return frasi.slice(0, n).join(" ").trim();
 }
 
+// Marcatori del testo segnaposto prodotto dal fallback AI locale (vedi
+// /api/ai/comment). Se compaiono ancora in un testo, l'utente non lo ha
+// rivisto: non va scaricato/stampato senza un avviso esplicito.
+const SEGNAPOSTO_MARKERS = [
+  "[bozza automatica locale",
+  "aggiungi qui",
+  "scrivi qui",
+  "testo non generato da un'ai",
+];
+
+export type SegnaposteTrovato = { sezione: string };
+
+// Controlla il commento e la valutazione obiettivi: restituisce l'elenco
+// delle sezioni che contengono ancora testo segnaposto non rivisto.
+export function trovaSegnaposto(
+  commento: string | null | undefined,
+  valutazioneObiettivi: string | null | undefined
+): SegnaposteTrovato[] {
+  const trovati: SegnaposteTrovato[] = [];
+  const contiene = (testo: string) => {
+    const lower = testo.toLowerCase();
+    return SEGNAPOSTO_MARKERS.some((m) => lower.includes(m));
+  };
+  if (commento && contiene(commento)) {
+    trovati.push({ sezione: "Commento del consulente" });
+  }
+  if (valutazioneObiettivi && contiene(valutazioneObiettivi)) {
+    trovati.push({ sezione: "Valutazione rispetto agli obiettivi" });
+  }
+  return trovati;
+}
+
 // Email pronta da inviare al cliente insieme al PDF (nessun invio reale).
 export function buildEmailCliente({
   nomeCliente,

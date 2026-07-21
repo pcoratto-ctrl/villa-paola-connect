@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import ClientForm from "@/components/ClientForm";
 import DeleteClientButton from "@/components/DeleteClientButton";
+import DeleteReportButton from "@/components/DeleteReportButton";
+import TransformDemoClientButton from "@/components/TransformDemoClientButton";
+import { isDemoClientName } from "@/lib/demoContent";
 import { meseLabel, CANALI } from "@/lib/types";
 import type { Client, Report } from "@/lib/types";
 
@@ -35,6 +38,12 @@ export default async function ClientPage({ params }: { params: Promise<{ id: str
           Nuovo report per {c.nome.split(" ")[0]}
         </Link>
       </div>
+
+      {isDemoClientName(c.nome) && (
+        <div className="mt-6">
+          <TransformDemoClientButton clientId={c.id} />
+        </div>
+      )}
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         {/* Brand */}
@@ -97,6 +106,12 @@ export default async function ClientPage({ params }: { params: Promise<{ id: str
                     >
                       Apri →
                     </Link>
+                    <DeleteReportButton
+                      reportId={r.id}
+                      periodo={meseLabel(r.mese, r.anno)}
+                      clientName={c.nome}
+                      compact
+                    />
                   </div>
                 </div>
               ))}
