@@ -78,6 +78,10 @@ function buildDemoComment(params: {
 }): { commento: string; valutazione_obiettivi: string } {
   const { periodo, dati, contesto, prev } = params;
   const fmt = formatNumber;
+  // formatNumber arrotonda all'intero (pensata per conteggi come reach o
+  // follower): l'engagement rate e' un decimale, va preservato cosi' come
+  // viene mostrato nel resto dell'app (virgola italiana, nessun arrotondamento).
+  const fmtPct = (n: number) => n.toString().replace(".", ",");
   const topPost = dati.top_post[0]?.testo;
   const confrontoTesto = prev
     ? `rispetto al mese precedente (reach ${fmt(prev.reach)} -> ${fmt(dati.reach)}).`
@@ -85,7 +89,7 @@ function buildDemoComment(params: {
 
   const commento = [
     `${SEZIONI_COMMENTO[0]}`,
-    `[Bozza automatica locale — testo non generato da un'AI, chiave ANTHROPIC_API_KEY non configurata] In ${periodo} il canale ha registrato ${fmt(dati.reach)} di reach e un engagement rate del ${fmt(dati.engagement_rate)}%. Rivedi e completa questo paragrafo prima di inviarlo al cliente.`,
+    `[Bozza automatica locale — testo non generato da un'AI, chiave ANTHROPIC_API_KEY non configurata] In ${periodo} il canale ha registrato ${fmt(dati.reach)} di reach e un engagement rate del ${fmtPct(dati.engagement_rate)}%. Rivedi e completa questo paragrafo prima di inviarlo al cliente.`,
     "",
     `${SEZIONI_COMMENTO[1]}`,
     contesto?.andato_bene?.trim()
@@ -100,7 +104,7 @@ function buildDemoComment(params: {
       : "Aggiungi qui cosa migliorare il prossimo mese.",
     "",
     `${SEZIONI_COMMENTO[3]}`,
-    `Il canale ha raggiunto ${fmt(dati.reach)} persone con ${fmt(dati.impression)} impression e un engagement rate del ${fmt(dati.engagement_rate)}%, ${confrontoTesto}`,
+    `Il canale ha raggiunto ${fmt(dati.reach)} persone con ${fmt(dati.impression)} impression e un engagement rate del ${fmtPct(dati.engagement_rate)}%, ${confrontoTesto}`,
     "",
     `${SEZIONI_COMMENTO[4]}`,
     contesto?.priorita_prossimo?.trim()
