@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { PLAN_LABELS, PLAN_LIMITS } from "@/lib/plans";
+import { isStripeConfigured } from "@/lib/stripe";
 import BillingButtons from "@/components/BillingButtons";
 import type { Profile } from "@/lib/types";
 
@@ -60,7 +61,11 @@ export default async function SettingsPage({
             ? "Il PDF include il marchio Klaro; con i piani a pagamento è white-label."
             : "PDF white-label attivo: nessun marchio Klaro nei report."}
         </p>
-        <BillingButtons piano={piano} hasCustomer={Boolean(p?.stripe_customer_id)} />
+        <BillingButtons
+          piano={piano}
+          hasCustomer={Boolean(p?.stripe_customer_id)}
+          stripeConfigured={isStripeConfigured()}
+        />
       </section>
     </div>
   );

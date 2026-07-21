@@ -1,12 +1,19 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
-import { getStripe, planForPriceId } from "@/lib/stripe";
+import { getStripe, isStripeConfigured, planForPriceId } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/server";
 
 // Webhook Stripe: aggiorna il piano dell'utente su Supabase.
 // Eventi gestiti: checkout.session.completed, customer.subscription.updated/deleted
 
 export async function POST(request: Request) {
+  if (!isStripeConfigured()) {
+    return NextResponse.json(
+      { error: "Pagamenti non configurati in questo ambiente." },
+      { status: 400 }
+    );
+  }
+
   const stripe = getStripe();
   const signature = request.headers.get("stripe-signature");
   const body = await request.text();
