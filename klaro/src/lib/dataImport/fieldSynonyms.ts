@@ -91,7 +91,15 @@ const SYNONYMS: Record<FieldKey, string[]> = {
     "tasso engagement",
   ],
   visite_profilo: ["visite_profilo", "visite profilo", "profile visits", "profile views"],
-  click_link: ["click_link", "click link", "link clicks", "website clicks", "clic sul link"],
+  click_link: [
+    "click_link",
+    "click link",
+    "click al link",
+    "clic al link",
+    "link clicks",
+    "website clicks",
+    "clic sul link",
+  ],
   numero_post: [
     "contenuti_pubblicati",
     "contenuti pubblicati",
