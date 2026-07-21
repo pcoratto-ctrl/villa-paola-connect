@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import ReportCharts from "@/components/ReportCharts";
+import DataImportPanel from "@/components/DataImportPanel";
 import { CANALI, MESI, meseLabel } from "@/lib/types";
 import type { Canale, Client, ContestoMese, Report, ReportData } from "@/lib/types";
 import { prevMonth } from "@/lib/utils";
+import type { ImportedValues } from "@/lib/dataImport/mapping";
 
 const DRAFT_KEY = "klaro-report-draft";
 
@@ -87,6 +89,8 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [duplicated, setDuplicated] = useState(false);
+  const [highlightedFields, setHighlightedFields] = useState<Set<string>>(new Set());
+  const [importMessage, setImportMessage] = useState<string | null>(null);
 
   const client = useMemo(
     () => clients.find((c) => c.id === form.clientId) ?? clients[0],
@@ -164,6 +168,79 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
       const top = f.top_post.map((p, idx) => (idx === i ? { ...p, [field]: value } : p));
       return { ...f, top_post: top };
     });
+  }
+
+  // Classi CSS per evidenziare per qualche secondo i campi appena importati.
+  function hClass(key: string): string {
+    return highlightedFields.has(key) ? " ring-2 ring-emerald-400 bg-emerald-50" : "";
+  }
+
+  function hasExistingValue(key: keyof ImportedValues): boolean {
+    switch (key) {
+      case "follower_inizio": return form.follower_inizio.trim() !== "";
+      case "follower_fine": return form.follower_fine.trim() !== "";
+      case "reach": return form.reach.trim() !== "";
+      case "impression": return form.impression.trim() !== "";
+      case "visite_profilo": return form.visite_profilo.trim() !== "";
+      case "click_link": return form.click_link.trim() !== "";
+      case "numero_post": return form.numero_post.trim() !== "";
+      case "engagement_rate": return form.engagement_rate.trim() !== "" || form.interazioni_totali.trim() !== "";
+      case "top_contenuto_1": return form.top_post[0].testo.trim() !== "";
+      case "top_contenuto_2": return form.top_post[1].testo.trim() !== "";
+      case "top_contenuto_3": return form.top_post[2].testo.trim() !== "";
+      case "note": return form.risultati_note.trim() !== "";
+      default: return false;
+    }
+  }
+
+  // Applica i dati importati (CSV o incolla) ai campi normali del wizard:
+  // restano sempre modificabili prima di continuare, come per l'inserimento
+  // manuale. Se sovrascrive dati gia' inseriti a mano, chiede conferma.
+  function applyImportedValues(values: ImportedValues) {
+    const incomingKeys = Object.keys(values) as (keyof ImportedValues)[];
+    if (incomingKeys.length === 0) return;
+    const hasCollision = incomingKeys.some(hasExistingValue);
+    if (hasCollision) {
+      const proceed = window.confirm(
+        "Alcuni campi contengono già dati inseriti: verranno sovrascritti con i valori importati. Continuare?"
+      );
+      if (!proceed) return;
+    }
+
+    const highlighted = new Set<string>();
+    setForm((f) => {
+      const next = { ...f, top_post: f.top_post.map((p) => ({ ...p })) };
+      if (values.follower_inizio !== undefined) { next.follower_inizio = String(values.follower_inizio); highlighted.add("follower_inizio"); }
+      if (values.follower_fine !== undefined) { next.follower_fine = String(values.follower_fine); highlighted.add("follower_fine"); }
+      if (values.reach !== undefined) { next.reach = String(values.reach); highlighted.add("reach"); }
+      if (values.impression !== undefined) { next.impression = String(values.impression); highlighted.add("impression"); }
+      if (values.visite_profilo !== undefined) { next.visite_profilo = String(values.visite_profilo); highlighted.add("visite_profilo"); }
+      if (values.click_link !== undefined) { next.click_link = String(values.click_link); highlighted.add("click_link"); }
+      if (values.numero_post !== undefined) { next.numero_post = String(values.numero_post); highlighted.add("numero_post"); }
+
+      // Engagement: se il file ha gia' un tasso esplicito lo usiamo senza
+      // sovrascriverlo con nient'altro; altrimenti, se ci sono interazioni,
+      // passiamo alla modalita' "calcolato" gia' esistente nel wizard.
+      if (values.engagement_rate !== undefined) {
+        next.engagementMode = "manual";
+        next.engagement_rate = values.engagement_rate.toString().replace(".", ",");
+        highlighted.add("engagement_rate");
+      } else if (values.interazioni !== undefined) {
+        next.engagementMode = "calcolato";
+        next.interazioni_totali = String(values.interazioni);
+        highlighted.add("engagement_rate");
+      }
+
+      if (values.top_contenuto_1 !== undefined) { next.top_post[0].testo = values.top_contenuto_1; highlighted.add("top_contenuto_1"); }
+      if (values.top_contenuto_2 !== undefined) { next.top_post[1].testo = values.top_contenuto_2; highlighted.add("top_contenuto_2"); }
+      if (values.top_contenuto_3 !== undefined) { next.top_post[2].testo = values.top_contenuto_3; highlighted.add("top_contenuto_3"); }
+      if (values.note !== undefined) { next.risultati_note = values.note; highlighted.add("note"); }
+
+      return next;
+    });
+    setHighlightedFields(highlighted);
+    setImportMessage("Dati importati. Controllali prima di continuare.");
+    setTimeout(() => setHighlightedFields(new Set()), 4000);
   }
 
   function validateNumbers(): string[] {
@@ -475,6 +552,19 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
             </div>
           </div>
 
+          <DataImportPanel
+            currentCanale={form.canale}
+            currentMese={form.mese}
+            currentAnno={form.anno}
+            onApply={applyImportedValues}
+          />
+
+          {importMessage && (
+            <p className="rounded-xl bg-emerald-50 p-4 text-sm font-medium text-emerald-700">
+              ✓ {importMessage}
+            </p>
+          )}
+
           <div className="card space-y-4">
             <h2 className="font-semibold text-slate-900">I numeri del mese</h2>
             <p className="text-sm text-slate-500">
@@ -494,7 +584,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                 <div key={key}>
                   <label className="label">{label} *</label>
                   <input
-                    className="input"
+                    className={`input${hClass(key)}`}
                     inputMode="numeric"
                     value={form[key] as string}
                     onChange={(e) => set(key, e.target.value as FormState[typeof key])}
@@ -545,7 +635,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                 </div>
                 {form.engagementMode === "manual" ? (
                   <input
-                    className="input"
+                    className={`input${hClass("engagement_rate")}`}
                     inputMode="decimal"
                     value={form.engagement_rate}
                     onChange={(e) => set("engagement_rate", e.target.value)}
@@ -554,7 +644,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                 ) : (
                   <>
                     <input
-                      className="input"
+                      className={`input${hClass("engagement_rate")}`}
                       inputMode="numeric"
                       value={form.interazioni_totali}
                       onChange={(e) => set("interazioni_totali", e.target.value)}
@@ -575,7 +665,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
               <div>
                 <label className="label">Visite al profilo (facoltativo)</label>
                 <input
-                  className="input"
+                  className={`input${hClass("visite_profilo")}`}
                   inputMode="numeric"
                   value={form.visite_profilo}
                   onChange={(e) => set("visite_profilo", e.target.value)}
@@ -585,7 +675,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
               <div>
                 <label className="label">Click al link (facoltativo)</label>
                 <input
-                  className="input"
+                  className={`input${hClass("click_link")}`}
                   inputMode="numeric"
                   value={form.click_link}
                   onChange={(e) => set("click_link", e.target.value)}
@@ -602,7 +692,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                 <div>
                   <label className="label">Post #{i + 1}{i === 0 ? " *" : ""}</label>
                   <input
-                    className="input"
+                    className={`input${hClass(`top_contenuto_${i + 1}`)}`}
                     value={p.testo}
                     onChange={(e) => setTopPost(i, "testo", e.target.value)}
                     placeholder="es. Reel: aperitivo al tramonto in terrazza"
@@ -624,7 +714,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
           <div className="card">
             <label className="label">Note sui risultati (facoltative)</label>
             <textarea
-              className="input min-h-24"
+              className={`input min-h-24${hClass("note")}`}
               value={form.risultati_note}
               onChange={(e) => set("risultati_note", e.target.value)}
               placeholder="es. Raddoppiata la frequenza dei reel, avviata collaborazione con 2 micro influencer…"
