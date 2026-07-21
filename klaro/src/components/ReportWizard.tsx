@@ -21,7 +21,11 @@ type FormState = {
   follower_inizio: string;
   follower_fine: string;
   engagement_rate: string;
+  engagementMode: "manual" | "calcolato";
+  interazioni_totali: string;
   numero_post: string;
+  visite_profilo: string;
+  click_link: string;
   top_post: { testo: string; metrica: string }[];
   risultati_note: string;
   // Contesto del mese (tutto opzionale)
@@ -46,7 +50,11 @@ function defaultForm(clientId: string): FormState {
     follower_inizio: "",
     follower_fine: "",
     engagement_rate: "",
+    engagementMode: "manual",
+    interazioni_totali: "",
     numero_post: "",
+    visite_profilo: "",
+    click_link: "",
     top_post: [
       { testo: "", metrica: "" },
       { testo: "", metrica: "" },
@@ -173,14 +181,60 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
         errs.push(`${label}: serve un numero intero, senza punti né lettere (es. 24900).`);
       }
     }
-    const er = Number(form.engagement_rate.replace(",", "."));
-    if (form.engagement_rate.trim() === "" || isNaN(er) || er < 0 || er > 100) {
-      errs.push("Engagement rate: un valore tra 0 e 100, la virgola va bene (es. 3,5).");
+
+    // Campi facoltativi: validi solo se compilati
+    const optionalIntFields: [keyof FormState, string][] = [
+      ["visite_profilo", "Visite al profilo"],
+      ["click_link", "Click al link"],
+    ];
+    for (const [key, label] of optionalIntFields) {
+      const v = (form[key] as string).trim();
+      if (v !== "" && (isNaN(Number(v)) || Number(v) < 0 || !Number.isInteger(Number(v)))) {
+        errs.push(`${label}: se lo compili, serve un numero intero valido.`);
+      }
     }
+
+    if (form.engagementMode === "manual") {
+      const er = Number(form.engagement_rate.replace(",", "."));
+      if (form.engagement_rate.trim() === "" || isNaN(er) || er < 0 || er > 100) {
+        errs.push("Engagement rate: un valore tra 0 e 100, la virgola va bene (es. 3,5).");
+      }
+    } else {
+      const interazioni = Number(form.interazioni_totali);
+      const reach = Number(form.reach);
+      if (
+        form.interazioni_totali.trim() === "" ||
+        isNaN(interazioni) ||
+        interazioni < 0 ||
+        !Number.isInteger(interazioni)
+      ) {
+        errs.push("Interazioni totali: serve un numero intero valido per calcolare l'engagement.");
+      } else if (!reach || reach <= 0) {
+        errs.push(
+          "Per calcolare l'engagement dalle interazioni serve prima un Reach valido, maggiore di zero."
+        );
+      }
+    }
+
     if (!form.top_post.some((p) => p.testo.trim())) {
       errs.push("Racconta almeno uno dei 3 contenuti migliori del mese: serve all'AI per il commento.");
     }
     return errs;
+  }
+
+  // Calcola l'engagement rate dalle interazioni totali (arrotondato a 1
+  // decimale). Non inventa nulla: se manca il denominatore, restituisce 0.
+  function engagementRateCalcolato(): number {
+    const interazioni = Number(form.interazioni_totali);
+    const reach = Number(form.reach);
+    if (!reach || reach <= 0 || isNaN(interazioni)) return 0;
+    return Math.round((interazioni / reach) * 1000) / 10;
+  }
+
+  function engagementRateFinale(): number {
+    return form.engagementMode === "calcolato"
+      ? engagementRateCalcolato()
+      : Number(form.engagement_rate.replace(",", "."));
   }
 
   function buildContesto(): ContestoMese | undefined {
@@ -198,12 +252,14 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
       impression: Number(form.impression),
       follower_inizio: Number(form.follower_inizio),
       follower_fine: Number(form.follower_fine),
-      engagement_rate: Number(form.engagement_rate.replace(",", ".")),
+      engagement_rate: engagementRateFinale(),
       numero_post: Number(form.numero_post),
       top_post: form.top_post.filter((p) => p.testo.trim()),
       risultati_note: form.risultati_note.trim(),
       contesto: buildContesto(),
       valutazione_obiettivi: form.valutazione_obiettivi.trim() || undefined,
+      visite_profilo: form.visite_profilo.trim() !== "" ? Number(form.visite_profilo) : undefined,
+      click_link: form.click_link.trim() !== "" ? Number(form.click_link) : undefined,
     };
   }
 
@@ -446,14 +502,94 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                   />
                 </div>
               ))}
-              <div>
+              <div className="sm:col-span-2">
                 <label className="label">Engagement rate (%) *</label>
+                <div className="mb-2 flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      // Passa a manuale partendo dal valore calcolato finora,
+                      // cosi' l'utente puo' correggerlo invece di ripartire da zero.
+                      if (form.engagementMode === "calcolato") {
+                        const calcolato = engagementRateCalcolato();
+                        if (calcolato > 0) {
+                          setForm((f) => ({
+                            ...f,
+                            engagementMode: "manual",
+                            engagement_rate: calcolato.toString().replace(".", ","),
+                          }));
+                          return;
+                        }
+                      }
+                      set("engagementMode", "manual");
+                    }}
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                      form.engagementMode === "manual"
+                        ? "bg-brand-600 text-white"
+                        : "bg-slate-100 text-slate-600"
+                    }`}
+                  >
+                    Inserisci il tasso
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => set("engagementMode", "calcolato")}
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                      form.engagementMode === "calcolato"
+                        ? "bg-brand-600 text-white"
+                        : "bg-slate-100 text-slate-600"
+                    }`}
+                  >
+                    Calcola da interazioni
+                  </button>
+                </div>
+                {form.engagementMode === "manual" ? (
+                  <input
+                    className="input"
+                    inputMode="decimal"
+                    value={form.engagement_rate}
+                    onChange={(e) => set("engagement_rate", e.target.value)}
+                    placeholder="es. 3,8"
+                  />
+                ) : (
+                  <>
+                    <input
+                      className="input"
+                      inputMode="numeric"
+                      value={form.interazioni_totali}
+                      onChange={(e) => set("interazioni_totali", e.target.value)}
+                      placeholder="es. 1845 (mi piace + commenti + salvataggi + condivisioni)"
+                    />
+                    <p className="mt-2 text-xs text-slate-500">
+                      Formula: interazioni totali ÷ copertura (reach) × 100
+                      {form.interazioni_totali.trim() && Number(form.reach) > 0
+                        ? ` = ${engagementRateCalcolato().toString().replace(".", ",")}%`
+                        : ""}
+                      {form.interazioni_totali.trim() && !(Number(form.reach) > 0)
+                        ? " (serve prima un Reach valido, sopra)"
+                        : ""}
+                    </p>
+                  </>
+                )}
+              </div>
+              <div>
+                <label className="label">Visite al profilo (facoltativo)</label>
                 <input
                   className="input"
-                  inputMode="decimal"
-                  value={form.engagement_rate}
-                  onChange={(e) => set("engagement_rate", e.target.value)}
-                  placeholder="es. 3,8"
+                  inputMode="numeric"
+                  value={form.visite_profilo}
+                  onChange={(e) => set("visite_profilo", e.target.value)}
+                  placeholder="es. 2180"
+                />
+              </div>
+              <div>
+                <label className="label">Click al link (facoltativo)</label>
+                <input
+                  className="input"
+                  inputMode="numeric"
+                  value={form.click_link}
+                  onChange={(e) => set("click_link", e.target.value)}
+                  placeholder="es. 390"
                 />
               </div>
             </div>

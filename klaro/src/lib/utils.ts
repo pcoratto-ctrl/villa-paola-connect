@@ -1,5 +1,25 @@
+// Formattazione italiana (punto come separatore delle migliaia) implementata
+// a mano: Intl.NumberFormat dipende dai dati ICU disponibili nel runtime e in
+// alcuni ambienti Node (ICU ridotto) formatta in modo incoerente in base alla
+// grandezza del numero. Questa versione e' deterministica in ogni ambiente.
 export function formatNumber(n: number): string {
-  return new Intl.NumberFormat("it-IT").format(n);
+  const sign = n < 0 ? "-" : "";
+  const abs = Math.round(Math.abs(n));
+  return sign + String(abs).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+// Caratteri Unicode non supportati dai font standard di @react-pdf/renderer
+// (Helvetica/WinAnsi): li normalizziamo in equivalenti testuali sicuri prima
+// di inserirli in un PDF, per evitare glifi corrotti nel documento finale.
+const PDF_UNSAFE_CHARS: [RegExp, string][] = [
+  [/→/g, "->"],
+  [/←/g, "<-"],
+  [/↔/g, "<->"],
+];
+
+export function sanitizeForPdf(text: string | null | undefined): string {
+  if (!text) return "";
+  return PDF_UNSAFE_CHARS.reduce((acc, [pattern, replacement]) => acc.replace(pattern, replacement), text);
 }
 
 export function pctChange(current: number, previous: number): number | null {

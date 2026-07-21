@@ -4,6 +4,7 @@ import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { meseLabel } from "@/lib/types";
 import { SEZIONI_COMMENTO } from "@/lib/commento";
+import { formatNumber } from "@/lib/utils";
 
 export const maxDuration = 60;
 
@@ -26,6 +27,8 @@ const datiSchema = z.object({
   numero_post: z.number().nonnegative(),
   top_post: z.array(topPostSchema).max(3),
   risultati_note: z.string(),
+  visite_profilo: z.number().nonnegative().optional(),
+  click_link: z.number().nonnegative().optional(),
 });
 
 const contestoSchema = z.object({
@@ -54,6 +57,8 @@ function datiToText(d: z.infer<typeof datiSchema>): string {
     `- Engagement rate: ${d.engagement_rate}%`,
     `- Post pubblicati: ${d.numero_post}`,
   ];
+  if (d.visite_profilo !== undefined) lines.push(`- Visite al profilo: ${d.visite_profilo}`);
+  if (d.click_link !== undefined) lines.push(`- Click al link: ${d.click_link}`);
   if (d.top_post.length > 0) {
     lines.push(
       `- Contenuti migliori: ${d.top_post.map((p) => `"${p.testo}" (${p.metrica})`).join("; ")}`
@@ -72,10 +77,10 @@ function buildDemoComment(params: {
   prev: z.infer<typeof datiSchema> | null;
 }): { commento: string; valutazione_obiettivi: string } {
   const { periodo, dati, contesto, prev } = params;
-  const fmt = (n: number) => n.toLocaleString("it-IT");
+  const fmt = formatNumber;
   const topPost = dati.top_post[0]?.testo;
   const confrontoTesto = prev
-    ? `rispetto al mese precedente (reach ${fmt(prev.reach)} → ${fmt(dati.reach)}).`
+    ? `rispetto al mese precedente (reach ${fmt(prev.reach)} -> ${fmt(dati.reach)}).`
     : "senza un mese precedente da confrontare.";
 
   const commento = [

@@ -7,7 +7,8 @@ import { createClient } from "@/lib/supabase/client";
 import ReportCharts from "@/components/ReportCharts";
 import { CANALI, meseLabel } from "@/lib/types";
 import type { Client, Report } from "@/lib/types";
-import { buildEmailCliente, matchTitoloSezione } from "@/lib/commento";
+import { buildEmailCliente, matchTitoloSezione, trovaSegnaposto } from "@/lib/commento";
+import DeleteReportButton from "@/components/DeleteReportButton";
 
 // Rende il commento con i titoli delle 5 sezioni evidenziati
 function CommentoFormattato({ testo, color }: { testo: string; color: string }) {
@@ -62,6 +63,8 @@ export default function ReportView({
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [placeholderSezioni, setPlaceholderSezioni] = useState<string[] | null>(null);
+  const [pendingAction, setPendingAction] = useState<"pdf" | "print" | null>(null);
 
   const periodo = meseLabel(report.mese, report.anno);
 
@@ -114,6 +117,42 @@ export default function ReportView({
     router.refresh();
   }
 
+  // Vero se si può procedere subito (nessun segnaposto); se trova segnaposto,
+  // blocca l'azione e mostra un avviso invece di procedere.
+  function puoProcedere(azione: "pdf" | "print"): boolean {
+    const trovati = trovaSegnaposto(commento, valutazione);
+    if (trovati.length > 0) {
+      setPlaceholderSezioni(trovati.map((t) => t.sezione));
+      setPendingAction(azione);
+      return false;
+    }
+    return true;
+  }
+
+  function handleDownloadClick() {
+    if (!puoProcedere("pdf")) return;
+    void downloadPdf();
+  }
+
+  function handlePrintClick() {
+    if (!puoProcedere("print")) return;
+    window.print();
+  }
+
+  function procediComunque() {
+    const azione = pendingAction;
+    setPlaceholderSezioni(null);
+    setPendingAction(null);
+    if (azione === "pdf") void downloadPdf();
+    if (azione === "print") window.print();
+  }
+
+  function modificaOra() {
+    setPlaceholderSezioni(null);
+    setPendingAction(null);
+    setEditing(true);
+  }
+
   async function downloadPdf() {
     setPdfLoading(true);
     setPdfError(null);
@@ -148,15 +187,49 @@ export default function ReportView({
         <Link href={`/clients/${client.id}`} className="text-sm text-slate-500 hover:text-slate-900">
           ← {client.nome}
         </Link>
-        <div className="flex gap-2">
-          <button className="btn-secondary !py-2.5" onClick={() => window.print()}>
+        <div className="flex items-center gap-2">
+          <button className="btn-secondary !py-2.5" onClick={handlePrintClick}>
             Stampa questa pagina
           </button>
-          <button className="btn-primary !py-2.5" onClick={downloadPdf} disabled={pdfLoading}>
+          <button className="btn-primary !py-2.5" onClick={handleDownloadClick} disabled={pdfLoading}>
             {pdfLoading ? "Generazione PDF…" : "⬇ Scarica PDF"}
           </button>
+          <DeleteReportButton
+            reportId={report.id}
+            periodo={periodo}
+            clientName={client.nome}
+            redirectTo={`/clients/${client.id}`}
+          />
         </div>
       </div>
+
+      {placeholderSezioni && (
+        <div className="mt-4 rounded-xl border-2 border-amber-400 bg-amber-50 p-5 print:hidden">
+          <p className="font-semibold text-amber-900">
+            ⚠ Questo report contiene ancora testo segnaposto non rivisto
+          </p>
+          <p className="mt-2 text-sm text-amber-800">
+            Le seguenti sezioni contengono istruzioni interne (bozza automatica) invece del testo
+            definitivo per il cliente:
+          </p>
+          <ul className="mt-2 list-disc pl-5 text-sm font-medium text-amber-900">
+            {placeholderSezioni.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button className="btn-primary !py-2" onClick={modificaOra}>
+              Modifica il testo
+            </button>
+            <button
+              className="rounded-lg border border-amber-400 px-4 py-2 text-sm font-semibold text-amber-800 hover:bg-amber-100"
+              onClick={procediComunque}
+            >
+              Scarica comunque
+            </button>
+          </div>
+        </div>
+      )}
 
       {pdfError && (
         <p className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-800 print:hidden">

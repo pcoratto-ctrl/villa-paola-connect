@@ -10,7 +10,7 @@ import {
 } from "@react-pdf/renderer";
 import type { Client, Report, ReportData } from "@/lib/types";
 import { meseLabel } from "@/lib/types";
-import { formatNumber, formatPct, pctChange, shadeColor } from "@/lib/utils";
+import { formatNumber, formatPct, pctChange, sanitizeForPdf, shadeColor } from "@/lib/utils";
 import { parseCommento, sintesiBlocks, SEZIONI_COMMENTO } from "@/lib/commento";
 
 const styles = StyleSheet.create({
@@ -141,7 +141,20 @@ type PdfProps = {
 };
 
 function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, whiteLabel }: PdfProps) {
-  const d = report.dati_json;
+  const dRaw = report.dati_json;
+  // Sanitizza tutti i testi dinamici (bozza AI, contesto, obiettivi) prima di
+  // inserirli nel PDF: i font standard non supportano alcuni caratteri Unicode.
+  const d = {
+    ...dRaw,
+    risultati_note: sanitizeForPdf(dRaw.risultati_note),
+    valutazione_obiettivi: sanitizeForPdf(dRaw.valutazione_obiettivi),
+    top_post: dRaw.top_post.map((p) => ({
+      testo: sanitizeForPdf(p.testo),
+      metrica: sanitizeForPdf(p.metrica),
+    })),
+  };
+  const commentoAiSanitizzato = sanitizeForPdf(report.commento_ai);
+  const obiettiviTestoSanitizzato = sanitizeForPdf(client.obiettivi_testo);
   const color = client.colore_primario;
   const light = shadeColor(color, 55);
   const bgSoft = shadeColor(color, 92);
@@ -153,12 +166,12 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
   const footerText = whiteLabel ? `Report ${canale} · ${periodo}` : "Creato con Klaro · klaro.app";
 
   // Sezione "In sintesi": dal contesto del mese, con fallback sul commento AI
-  const sintesi = sintesiBlocks(d.contesto, report.commento_ai);
+  const sintesi = sintesiBlocks(d.contesto, commentoAiSanitizzato || null);
   const hasSintesi = Boolean(sintesi.bene || sintesi.migliorare || sintesi.priorita);
-  const hasObiettivi = Boolean(client.obiettivi_testo || d.valutazione_obiettivi);
+  const hasObiettivi = Boolean(obiettiviTestoSanitizzato || d.valutazione_obiettivi);
 
   // Commento: se segue la struttura a 5 sezioni, ogni sezione ha il suo titolo
-  const sezioni = report.commento_ai ? parseCommento(report.commento_ai) : null;
+  const sezioni = commentoAiSanitizzato ? parseCommento(commentoAiSanitizzato) : null;
   const strutturato = Boolean(
     sezioni && (sezioni.andato_bene || sezioni.migliorare || sezioni.numeri || sezioni.priorita)
   );
@@ -191,13 +204,13 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
         </View>
         <View style={{ padding: 52, flex: 1, justifyContent: "space-between" }}>
           <View>
-            {client.obiettivi_testo ? (
+            {obiettiviTestoSanitizzato ? (
               <>
                 <Text style={{ fontSize: 9, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>
                   Obiettivi
                 </Text>
                 <Text style={{ fontSize: 11, lineHeight: 1.7, color: "#334155" }}>
-                  {client.obiettivi_testo}
+                  {obiettiviTestoSanitizzato}
                 </Text>
               </>
             ) : null}
@@ -231,9 +244,9 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
             <View style={{ marginTop: hasSintesi ? 14 : 0 }}>
               <Text style={[styles.h2, { color }]}>Obiettivi del cliente</Text>
               <Text style={styles.h2Sub}>Come sta andando rispetto a ciò che conta davvero.</Text>
-              {client.obiettivi_testo ? (
+              {obiettiviTestoSanitizzato ? (
                 <Text style={[styles.paragraph, { fontFamily: "Helvetica-Oblique" }]}>
-                  “{client.obiettivi_testo}”
+                  “{obiettiviTestoSanitizzato}”
                 </Text>
               ) : null}
               <Text style={styles.paragraph}>
@@ -269,6 +282,25 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
             delta={prev ? pctChange(d.engagement_rate, prev.engagement_rate) : null}
           />
         </View>
+
+        {(d.visite_profilo !== undefined || d.click_link !== undefined) && (
+          <View style={styles.kpiRow}>
+            {d.visite_profilo !== undefined && (
+              <Kpi
+                label="Visite profilo"
+                value={formatNumber(d.visite_profilo)}
+                delta={prev?.visite_profilo !== undefined ? pctChange(d.visite_profilo, prev.visite_profilo) : null}
+              />
+            )}
+            {d.click_link !== undefined && (
+              <Kpi
+                label="Click al link"
+                value={formatNumber(d.click_link)}
+                delta={prev?.click_link !== undefined ? pctChange(d.click_link, prev.click_link) : null}
+              />
+            )}
+          </View>
+        )}
 
         <View style={styles.section}>
           <Text style={styles.h3}>
@@ -321,7 +353,9 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
 
         {d.top_post.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.h3}>Top {d.top_post.length} contenuti</Text>
+            <Text style={styles.h3}>
+              Top {d.top_post.length} {d.top_post.length === 1 ? "contenuto" : "contenuti"}
+            </Text>
             {d.top_post.map((p, i) => (
               <View key={i} style={{ flexDirection: "row", marginBottom: 9, alignItems: "flex-start" }}>
                 <View
@@ -382,7 +416,7 @@ function ReportPdfDocument({ report, client, prev, prevLabel, logoDataUri, white
               </View>
             ))
         ) : (
-          (report.commento_ai ?? "Commento non disponibile.").split(/\n\n+/).map((par, i) => (
+          (commentoAiSanitizzato || "Commento non disponibile.").split(/\n\n+/).map((par, i) => (
             <Text key={i} style={styles.paragraph}>
               {par.trim()}
             </Text>

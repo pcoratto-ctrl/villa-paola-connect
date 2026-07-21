@@ -108,6 +108,27 @@ export default function ReportCharts({
         />
       </div>
 
+      {(data.visite_profilo !== undefined || data.click_link !== undefined) && (
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {data.visite_profilo !== undefined && (
+            <KpiTile
+              label="Visite profilo"
+              value={formatNumber(data.visite_profilo)}
+              delta={prev?.visite_profilo !== undefined ? pctChange(data.visite_profilo, prev.visite_profilo) : null}
+              color={color}
+            />
+          )}
+          {data.click_link !== undefined && (
+            <KpiTile
+              label="Click al link"
+              value={formatNumber(data.click_link)}
+              delta={prev?.click_link !== undefined ? pctChange(data.click_link, prev.click_link) : null}
+              color={color}
+            />
+          )}
+        </div>
+      )}
+
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Reach & impression */}
         <div className="card">
@@ -176,7 +197,9 @@ export default function ReportCharts({
 
       {/* Top post */}
       <div className="card">
-        <h3 className="mb-4 text-sm font-semibold text-slate-900">Top 3 contenuti del mese</h3>
+        <h3 className="mb-4 text-sm font-semibold text-slate-900">
+          Top {data.top_post.length} {data.top_post.length === 1 ? "contenuto" : "contenuti"} del mese
+        </h3>
         <ol className="space-y-3">
           {data.top_post.map((p, i) => (
             <li key={i} className="flex items-start gap-3">
