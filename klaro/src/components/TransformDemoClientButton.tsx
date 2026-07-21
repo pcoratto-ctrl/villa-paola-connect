@@ -9,6 +9,7 @@ export default function TransformDemoClientButton({ clientId }: { clientId: stri
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState("");
+  const [obiettivi, setObiettivi] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -55,7 +56,7 @@ export default function TransformDemoClientButton({ clientId }: { clientId: stri
 
     const { error: updErr } = await supabase
       .from("clients")
-      .update({ nome: nomeTrim })
+      .update({ nome: nomeTrim, obiettivi_testo: obiettivi.trim() || null })
       .eq("id", clientId);
     if (updErr) {
       setError(`Errore nel rinominare il cliente: ${updErr.message}`);
@@ -97,9 +98,21 @@ export default function TransformDemoClientButton({ clientId }: { clientId: stri
         placeholder="Es. Ristorante da Mario"
         autoFocus
       />
+
+      <label className="label mt-4" htmlFor="obiettivi-cliente-reale">
+        Obiettivi del cliente reale (facoltativo)
+      </label>
+      <textarea
+        id="obiettivi-cliente-reale"
+        className="input min-h-24"
+        value={obiettivi}
+        onChange={(e) => setObiettivi(e.target.value)}
+        placeholder="Es. Aumentare le prenotazioni online, far conoscere il nuovo menu…"
+      />
       <p className="mt-2 text-xs text-brand-800">
-        Verranno eliminati solo i report demo di esempio collegati a questo cliente. Potrai poi
-        modificare colore e obiettivi qui sotto.
+        Verranno eliminati sia i report demo di esempio sia gli obiettivi di esempio collegati a
+        questo cliente: se lasci il campo vuoto, gli obiettivi resteranno vuoti. Potrai
+        aggiungerli o modificarli in qualsiasi momento più avanti, insieme al colore, qui sotto.
       </p>
       {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
       <div className="mt-3 flex gap-2">

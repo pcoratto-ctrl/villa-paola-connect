@@ -9,6 +9,9 @@ import { CANALI, MESI, type Canale } from "@/lib/types";
 
 type Mode = "manuale" | "csv" | "incolla";
 
+const FILE_UNREADABLE_MESSAGE =
+  "Il file risulta vuoto o non è stato possibile leggerlo. Controlla il contenuto e, se il file si trova dentro molte cartelle o in OneDrive/Dropbox, prova a copiarlo sul Desktop e caricarlo di nuovo.";
+
 function riepilogoRiga(fields: RecognizedField[]): string {
   const { periodo, values } = buildImportedValues(fields);
   const parti: string[] = [];
@@ -176,7 +179,7 @@ export default function DataImportPanel({
       return;
     }
     if (file.size === 0) {
-      setCsvError("Il file è vuoto.");
+      setCsvError(FILE_UNREADABLE_MESSAGE);
       return;
     }
     if (file.size > MAX_CSV_SIZE_BYTES) {
@@ -187,16 +190,16 @@ export default function DataImportPanel({
     try {
       text = await file.text();
     } catch {
-      setCsvError("Impossibile leggere il file. Riprova.");
+      setCsvError(FILE_UNREADABLE_MESSAGE);
       return;
     }
     if (!text.trim()) {
-      setCsvError("Il file è vuoto.");
+      setCsvError(FILE_UNREADABLE_MESSAGE);
       return;
     }
     const parsed = parseCsvText(text);
     if (!parsed) {
-      setCsvError("Il file è vuoto.");
+      setCsvError(FILE_UNREADABLE_MESSAGE);
       return;
     }
     if (parsed.headers.length <= 1) {
