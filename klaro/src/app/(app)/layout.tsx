@@ -12,6 +12,17 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   if (!user) redirect("/login");
 
+  // Rete di sicurezza: se per qualunque motivo l'utente arriva qui prima di
+  // aver visto /benvenuto (es. onboarding_completed_at non ancora
+  // impostato), lo mando lì. Il percorso normale (callback di conferma)
+  // reindirizza già direttamente, questo copre solo i casi limite.
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("onboarding_completed_at")
+    .eq("id", user.id)
+    .single();
+  if (profile && !profile.onboarding_completed_at) redirect("/benvenuto");
+
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">

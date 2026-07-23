@@ -4,6 +4,7 @@ import ReportWizard from "@/components/ReportWizard";
 import type { Client } from "@/lib/types";
 import { isDemoClientName } from "@/lib/demoContent";
 import { BETA_REPORT_LIMIT } from "@/lib/plans";
+import { FEEDBACK_URL, mailtoFounder } from "@/lib/founderConfig";
 import Link from "next/link";
 
 export default async function NewReportPage() {
@@ -46,12 +47,15 @@ export default async function NewReportPage() {
   }
 
   if (numeroReportBeta >= BETA_REPORT_LIMIT) {
+    const feedbackHref = FEEDBACK_URL ?? mailtoFounder("Klaro: limite report raggiunto");
     return (
       <div className="card mx-auto max-w-xl text-center">
         <p className="text-slate-600">
-          Hai raggiunto il limite di {BETA_REPORT_LIMIT} report della beta privata (il cliente
-          demo non viene conteggiato). Scrivi al team Klaro se ti serve continuare a testare
-          l&apos;app.
+          Hai raggiunto il limite di {BETA_REPORT_LIMIT} report previsto per questa beta.{" "}
+          <a href={feedbackHref} target={FEEDBACK_URL ? "_blank" : undefined} rel="noopener noreferrer" className="font-semibold text-brand-600 hover:underline">
+            Scrivi a Pierpaolo
+          </a>{" "}
+          se vuoi continuare la prova.
         </p>
       </div>
     );

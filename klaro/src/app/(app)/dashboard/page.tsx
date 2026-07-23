@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { maxClients, PLAN_LABELS } from "@/lib/plans";
+import { isDemoClientName } from "@/lib/demoContent";
+import FeedbackButton from "@/components/FeedbackButton";
+import { FEEDBACK_URL, mailtoFounder } from "@/lib/founderConfig";
 import type { Client, Profile } from "@/lib/types";
 
 export default async function DashboardPage() {
@@ -23,9 +26,32 @@ export default async function DashboardPage() {
   const limit = maxClients(p?.piano ?? "free");
   const atLimit = list.length >= limit;
 
+  // Solo due voci hanno un segnale affidabile nei dati già presenti; le
+  // altre restano semplici passaggi, senza fingere di sapere se sono stati
+  // davvero completati (non possiamo saperlo, es. se un PDF è stato aperto
+  // o inviato davvero).
+  const clientiReali = list.filter((c) => !isDemoClientName(c.nome));
+  const haPersonalizzatoDemo = clientiReali.length > 0;
+  const haCreatoReport = clientiReali.some((c) => (c.reports?.[0]?.count ?? 0) > 0);
+
+  const checklist: { label: string; done: boolean | null }[] = [
+    { label: "Personalizza il cliente demo", done: haPersonalizzatoDemo },
+    { label: "Crea il primo report", done: haCreatoReport },
+    { label: "Controlla il commento AI", done: null },
+    { label: "Scarica il PDF", done: null },
+    { label: "Racconta a Pierpaolo com'è andata", done: null },
+  ];
+
+  const feedbackHref = FEEDBACK_URL ?? mailtoFounder("Klaro: limite clienti raggiunto");
+
   return (
     <div>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <p className="text-sm text-slate-600">
+        Ciao{p?.nome ? ` ${p.nome}` : ""}, grazie per essere tra le prime persone che stanno
+        costruendo Klaro insieme a Pierpaolo.
+      </p>
+
+      <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">I tuoi clienti</h1>
           <p className="mt-1 text-sm text-slate-500">
@@ -49,22 +75,36 @@ export default async function DashboardPage() {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
           Prima volta su Klaro? Prova questi passaggi
         </h2>
-        <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm text-slate-700">
-          <li>Personalizza il cliente demo</li>
-          <li>Importa o inserisci i dati</li>
-          <li>Genera e controlla il commento</li>
-          <li>Scarica il PDF</li>
-          <li>Invia il tuo feedback</li>
-        </ol>
+        <ul className="mt-3 space-y-1.5 text-sm text-slate-700">
+          {checklist.map((item) => (
+            <li key={item.label} className="flex items-center gap-2">
+              <span
+                className={
+                  item.done === true
+                    ? "flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-[10px] text-white"
+                    : "h-4 w-4 shrink-0 rounded-full border border-slate-300"
+                }
+              >
+                {item.done === true ? "✓" : ""}
+              </span>
+              <span className={item.done === true ? "text-slate-400 line-through" : ""}>
+                {item.label}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-4">
+          <FeedbackButton />
+        </div>
       </div>
 
       {atLimit && (
         <p className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-800">
-          Hai raggiunto il limite di clienti del tuo piano.{" "}
-          <Link href="/settings" className="font-semibold underline">
-            Passa a un piano superiore
-          </Link>{" "}
-          per aggiungerne altri.
+          Hai raggiunto il limite di {limit} clienti reali previsto per questa beta.{" "}
+          <a href={feedbackHref} target={FEEDBACK_URL ? "_blank" : undefined} rel="noopener noreferrer" className="font-semibold underline">
+            Scrivi a Pierpaolo
+          </a>{" "}
+          se ti serve più spazio.
         </p>
       )}
 

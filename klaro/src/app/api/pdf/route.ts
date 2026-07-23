@@ -91,7 +91,7 @@ export async function GET(request: Request) {
   } catch (err) {
     console.error("Errore generazione PDF:", err);
     return NextResponse.json(
-      { error: "Generazione PDF non riuscita. Usa l'anteprima HTML come alternativa." },
+      { error: "Il PDF non si è generato. Riprova; se il problema continua, scrivi a Pierpaolo." },
       { status: 500 }
     );
   }

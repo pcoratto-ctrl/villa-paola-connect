@@ -25,4 +25,4 @@ export function isBetaAllowed(email: string | null | undefined): boolean {
 }
 
 export const BETA_NOT_AUTHORIZED_MESSAGE =
-  "Il tuo account non è ancora abilitato per la beta privata di Klaro. Se pensi sia un errore, contatta chi ti ha invitato.";
+  "Questa beta privata è disponibile solo su invito. Pierpaolo sta seguendo personalmente un primo gruppo di 10 professionisti.";

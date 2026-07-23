@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { humanizeLoginError } from "@/lib/authErrors";
 
 function LoginForm() {
   const router = useRouter();
@@ -20,11 +21,7 @@ function LoginForm() {
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
-      setError(
-        error.message === "Invalid login credentials"
-          ? "Email o password non corretti."
-          : error.message
-      );
+      setError(humanizeLoginError(error.message));
       setLoading(false);
       return;
     }
@@ -57,6 +54,11 @@ function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="••••••••"
         />
+        <p className="mt-1.5 text-right text-xs">
+          <Link href="/recupera-password" className="text-slate-500 hover:text-brand-600 hover:underline">
+            Password dimenticata?
+          </Link>
+        </p>
       </div>
       {error && <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
       <button type="submit" disabled={loading} className="btn-primary w-full">

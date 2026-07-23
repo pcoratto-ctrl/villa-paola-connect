@@ -251,13 +251,15 @@ e sotto scrivi 2-4 frasi di valutazione PRUDENTE dell'andamento rispetto agli ob
   }
 
   const MODEL = "claude-sonnet-5";
-  // maxRetries basso e timeout esplicito per attempt: la funzione serverless
-  // (maxDuration sopra) ha un tetto di 60s su Vercel, e per l'SDK Anthropic
-  // il timeout è per-tentativo (i retry si sommano) — con 1 retry e 25s a
-  // tentativo il caso peggiore resta sotto i 60s, lasciando margine per la
-  // nostra risposta. Non impostare retry più alti senza rivedere insieme i
-  // due limiti.
-  const anthropic = new Anthropic({ apiKey, maxRetries: 1, timeout: 25_000 });
+  // Un solo tentativo (no retry) con un tetto di pazienza generoso: con
+  // 1 retry e 25s a tentativo (versione precedente) generazioni realmente
+  // riuscite ma un po' lente (30s+) triggeravano comunque un retry che
+  // portava il totale a 50-56s — percepito come "bloccato" da un utente
+  // reale nonostante il testo prometta 15-30s. Un tentativo singolo da 45s
+  // resta sotto il tetto di 60s della funzione serverless (maxDuration
+  // sopra) lasciando margine per la nostra risposta, senza raddoppiare
+  // l'attesa quando la generazione è solo un po' più lenta del solito.
+  const anthropic = new Anthropic({ apiKey, maxRetries: 0, timeout: 45_000 });
 
   const startedAt = Date.now();
   try {
@@ -342,13 +344,13 @@ e sotto scrivi 2-4 frasi di valutazione PRUDENTE dell'andamento rispetto agli ob
     if (err instanceof Anthropic.APIError) {
       logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: `api_error_${err.status}` });
       return NextResponse.json(
-        { error: `Servizio AI temporaneamente non disponibile (${err.status}). Riprova tra poco; i dati del report restano salvati.` },
+        { error: "Non siamo riusciti a generare il commento adesso. I tuoi dati sono al sicuro: riprova tra poco." },
         { status: 502 }
       );
     }
     logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: "network_error" });
     return NextResponse.json(
-      { error: "Errore di rete verso il servizio AI. Riprova; i dati del report restano salvati." },
+      { error: "Non siamo riusciti a generare il commento adesso. I tuoi dati sono al sicuro: riprova tra poco." },
       { status: 502 }
     );
   }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import LogoutButton from "@/components/LogoutButton";
 import { BETA_NOT_AUTHORIZED_MESSAGE } from "@/lib/betaAccess";
+import { SUPPORT_EMAIL, mailtoFounder } from "@/lib/founderConfig";
 
 export default function BetaNonAutorizzatoPage() {
   return (
@@ -11,6 +12,17 @@ export default function BetaNonAutorizzatoPage() {
       <div className="card text-center">
         <h1 className="text-xl font-bold text-slate-900">Beta privata</h1>
         <p className="mt-3 text-sm text-slate-600">{BETA_NOT_AUTHORIZED_MESSAGE}</p>
+        <p className="mt-3 text-sm text-slate-500">
+          Vuoi essere considerato per i prossimi posti?{" "}
+          {SUPPORT_EMAIL ? (
+            <a href={mailtoFounder("Richiesta accesso alla beta di Klaro")} className="font-semibold text-brand-600 hover:underline">
+              Scrivi a Pierpaolo
+            </a>
+          ) : (
+            "Scrivi a Pierpaolo"
+          )}
+          .
+        </p>
         <div className="mt-6">
           <LogoutButton />
         </div>

@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { isBetaAllowed } from "@/lib/betaAccess";
 
-const PROTECTED_PREFIXES = ["/dashboard", "/clients", "/reports", "/settings"];
+const PROTECTED_PREFIXES = ["/dashboard", "/clients", "/reports", "/settings", "/benvenuto"];
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });

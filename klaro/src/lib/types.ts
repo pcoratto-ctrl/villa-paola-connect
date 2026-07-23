@@ -36,9 +36,11 @@ export type ReportData = {
 export type Profile = {
   id: string;
   email: string;
+  nome: string | null;
   piano: "free" | "starter" | "pro";
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
+  onboarding_completed_at: string | null;
 };
 
 export type Client = {
