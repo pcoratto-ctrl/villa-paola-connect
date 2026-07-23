@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { isBetaAllowed } from "@/lib/betaAccess";
 
 const PROTECTED_PREFIXES = ["/dashboard", "/clients", "/reports", "/settings"];
 
@@ -36,6 +37,13 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("next", path);
+    return NextResponse.redirect(url);
+  }
+
+  if (isProtected && user && !isBetaAllowed(user.email)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/beta-non-autorizzato";
+    url.search = "";
     return NextResponse.redirect(url);
   }
 

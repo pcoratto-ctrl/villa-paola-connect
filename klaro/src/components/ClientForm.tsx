@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { Client } from "@/lib/types";
 import { containsDemoObiettivi } from "@/lib/demoContent";
+import { NOME_CLIENTE_MAX, OBIETTIVI_MAX } from "@/lib/textLimits";
 
 const PRESET_COLORS = [
   "#2563eb", "#b45309", "#047857", "#be123c", "#7c3aed", "#0f766e", "#1e293b",
@@ -34,6 +35,21 @@ export default function ClientForm({ existing }: { existing?: Client }) {
   const [logoPreview, setLogoPreview] = useState<string | null>(existing?.logo_url ?? null);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+
+  // `existing` arriva da un Server Component: dopo un router.refresh() (es.
+  // subito dopo la trasformazione del cliente demo) React NON rimonta questo
+  // form, quindi lo stato locale sopra (inizializzato una sola volta al mount)
+  // resterebbe con i vecchi valori demo finché non risincronizzato qui. Senza
+  // questo effetto, salvare il form subito dopo la trasformazione sovrascrive
+  // silenziosamente nome/obiettivi/colore/logo appena aggiornati.
+  useEffect(() => {
+    setNome(existing?.nome ?? "");
+    setColoreState(existing?.colore_primario ?? "#2563eb");
+    setHexInput(existing?.colore_primario ?? "#2563eb");
+    setObiettivi(existing?.obiettivi_testo ?? "");
+    setLogoPreview(existing?.logo_url ?? null);
+    setLogoFile(null);
+  }, [existing?.nome, existing?.colore_primario, existing?.obiettivi_testo, existing?.logo_url]);
 
   function onLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] ?? null;
@@ -117,6 +133,7 @@ export default function ClientForm({ existing }: { existing?: Client }) {
           value={nome}
           onChange={(e) => setNome(e.target.value)}
           placeholder="Es. Bar Centrale"
+          maxLength={NOME_CLIENTE_MAX}
           required
         />
       </div>
@@ -195,6 +212,7 @@ export default function ClientForm({ existing }: { existing?: Client }) {
           value={obiettivi}
           onChange={(e) => setObiettivi(e.target.value)}
           placeholder="Es. Aumentare la notorietà del locale, portare più clienti agli eventi del weekend…"
+          maxLength={OBIETTIVI_MAX}
         />
         <p className="mt-1 text-xs text-slate-400">
           L&apos;AI usa gli obiettivi per scrivere un commento più pertinente.

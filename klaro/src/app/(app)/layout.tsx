@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import LogoutButton from "@/components/LogoutButton";
+import FeedbackButton from "@/components/FeedbackButton";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -25,10 +26,15 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             <Link href="/settings" className="rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900">
               Impostazioni
             </Link>
+            <FeedbackButton />
             <LogoutButton />
           </nav>
         </div>
       </header>
+      <div className="border-b border-amber-200 bg-amber-50 px-5 py-2 text-center text-xs font-medium text-amber-800">
+        Klaro è in beta privata. Controlla sempre dati e commento prima di inviare il report al
+        cliente.
+      </div>
       <main className="mx-auto max-w-5xl px-5 py-8">{children}</main>
     </div>
   );

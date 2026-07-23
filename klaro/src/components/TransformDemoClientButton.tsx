@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { isDemoCommento } from "@/lib/demoContent";
+import { NOME_CLIENTE_MAX, OBIETTIVI_MAX } from "@/lib/textLimits";
 
 export default function TransformDemoClientButton({ clientId }: { clientId: string }) {
   const router = useRouter();
@@ -96,6 +97,7 @@ export default function TransformDemoClientButton({ clientId }: { clientId: stri
         value={nome}
         onChange={(e) => setNome(e.target.value)}
         placeholder="Es. Ristorante da Mario"
+        maxLength={NOME_CLIENTE_MAX}
         autoFocus
       />
 
@@ -108,6 +110,7 @@ export default function TransformDemoClientButton({ clientId }: { clientId: stri
         value={obiettivi}
         onChange={(e) => setObiettivi(e.target.value)}
         placeholder="Es. Aumentare le prenotazioni online, far conoscere il nuovo menu…"
+        maxLength={OBIETTIVI_MAX}
       />
       <p className="mt-2 text-xs text-brand-800">
         Verranno eliminati sia i report demo di esempio sia gli obiettivi di esempio collegati a

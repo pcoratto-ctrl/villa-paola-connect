@@ -5,6 +5,7 @@ import { isWhiteLabel } from "@/lib/plans";
 import { prevMonth } from "@/lib/utils";
 import { meseLabel } from "@/lib/types";
 import type { Client, Report } from "@/lib/types";
+import { isBetaAllowed, BETA_NOT_AUTHORIZED_MESSAGE } from "@/lib/betaAccess";
 
 export const maxDuration = 60;
 
@@ -31,6 +32,9 @@ export async function GET(request: Request) {
   } = await supabase.auth.getUser();
   if (!user) {
     return NextResponse.json({ error: "Non autenticato" }, { status: 401 });
+  }
+  if (!isBetaAllowed(user.email)) {
+    return NextResponse.json({ error: BETA_NOT_AUTHORIZED_MESSAGE }, { status: 403 });
   }
 
   const reportId = new URL(request.url).searchParams.get("report");

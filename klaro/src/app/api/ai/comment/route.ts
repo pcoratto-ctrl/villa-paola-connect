@@ -5,6 +5,9 @@ import { createClient } from "@/lib/supabase/server";
 import { meseLabel } from "@/lib/types";
 import { SEZIONI_COMMENTO } from "@/lib/commento";
 import { formatNumber } from "@/lib/utils";
+import { isBetaAllowed, BETA_NOT_AUTHORIZED_MESSAGE } from "@/lib/betaAccess";
+import { logAiCall } from "@/lib/aiLogger";
+import { TESTO_LIBERO_MAX, TITOLO_CONTENUTO_MAX } from "@/lib/textLimits";
 
 export const maxDuration = 60;
 
@@ -16,7 +19,13 @@ const SEPARATORE_OBIETTIVI = "===VALUTAZIONE OBIETTIVI===";
 const AI_DEMO_FALLBACK_ENABLED =
   process.env.NODE_ENV === "development" || process.env.ENABLE_AI_DEMO_FALLBACK === "true";
 
-const topPostSchema = z.object({ testo: z.string(), metrica: z.string() });
+// Limiti di lunghezza dei campi testo liberi (condivisi con l'UI via
+// src/lib/textLimits.ts): proteggono costo/affidabilità della chiamata AI e
+// sono applicati qui lato server, quindi non aggirabili modificando l'HTML.
+const topPostSchema = z.object({
+  testo: z.string().max(TITOLO_CONTENUTO_MAX),
+  metrica: z.string().max(TITOLO_CONTENUTO_MAX),
+});
 
 const datiSchema = z.object({
   reach: z.number().nonnegative(),
@@ -26,16 +35,16 @@ const datiSchema = z.object({
   engagement_rate: z.number().min(0).max(100),
   numero_post: z.number().nonnegative(),
   top_post: z.array(topPostSchema).max(3),
-  risultati_note: z.string(),
+  risultati_note: z.string().max(TESTO_LIBERO_MAX),
   visite_profilo: z.number().nonnegative().optional(),
   click_link: z.number().nonnegative().optional(),
 });
 
 const contestoSchema = z.object({
-  cosa_fatto: z.string().optional(),
-  andato_bene: z.string().optional(),
-  non_funzionato: z.string().optional(),
-  priorita_prossimo: z.string().optional(),
+  cosa_fatto: z.string().max(TESTO_LIBERO_MAX).optional(),
+  andato_bene: z.string().max(TESTO_LIBERO_MAX).optional(),
+  non_funzionato: z.string().max(TESTO_LIBERO_MAX).optional(),
+  priorita_prossimo: z.string().max(TESTO_LIBERO_MAX).optional(),
 });
 
 const bodySchema = z.object({
@@ -136,12 +145,23 @@ export async function POST(request: Request) {
   if (!user) {
     return NextResponse.json({ error: "Sessione scaduta: accedi di nuovo e riprova." }, { status: 401 });
   }
+  if (!isBetaAllowed(user.email)) {
+    return NextResponse.json({ error: BETA_NOT_AUTHORIZED_MESSAGE }, { status: 403 });
+  }
 
   let body: z.infer<typeof bodySchema>;
   try {
     body = bodySchema.parse(await request.json());
-  } catch {
-    return NextResponse.json({ error: "Dati non validi." }, { status: 400 });
+  } catch (err) {
+    const tooLong = err instanceof z.ZodError && err.issues.some((i) => i.code === "too_big");
+    return NextResponse.json(
+      {
+        error: tooLong
+          ? "Uno dei campi di testo è troppo lungo: accorcialo e riprova (i dati inseriti restano salvati sul tuo dispositivo)."
+          : "Dati non validi.",
+      },
+      { status: 400 }
+    );
   }
 
   // Verifica che il cliente appartenga all'utente (la RLS filtra già, ma diamo un errore chiaro)
@@ -230,16 +250,26 @@ e sotto scrivi 2-4 frasi di valutazione PRUDENTE dell'andamento rispetto agli ob
     );
   }
 
-  const anthropic = new Anthropic({ apiKey, maxRetries: 3 });
+  const MODEL = "claude-sonnet-5";
+  // maxRetries basso e timeout esplicito per attempt: la funzione serverless
+  // (maxDuration sopra) ha un tetto di 60s su Vercel, e per l'SDK Anthropic
+  // il timeout è per-tentativo (i retry si sommano) — con 1 retry e 25s a
+  // tentativo il caso peggiore resta sotto i 60s, lasciando margine per la
+  // nostra risposta. Non impostare retry più alti senza rivedere insieme i
+  // due limiti.
+  const anthropic = new Anthropic({ apiKey, maxRetries: 1, timeout: 25_000 });
 
+  const startedAt = Date.now();
   try {
     const response = await anthropic.messages.create({
-      model: "claude-sonnet-5",
+      model: MODEL,
       max_tokens: 2500,
       messages: [{ role: "user", content: prompt }],
     });
+    const durationMs = Date.now() - startedAt;
 
     if (response.stop_reason === "refusal") {
+      logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: "refusal" });
       return NextResponse.json(
         { error: "L'AI non ha potuto generare il commento. Riprova o scrivilo a mano." },
         { status: 502 }
@@ -253,6 +283,7 @@ e sotto scrivi 2-4 frasi di valutazione PRUDENTE dell'andamento rispetto agli ob
       .trim();
 
     if (!testo) {
+      logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: "empty_response" });
       return NextResponse.json(
         { error: "Risposta vuota dall'AI. Riprova tra qualche istante." },
         { status: 502 }
@@ -265,31 +296,59 @@ e sotto scrivi 2-4 frasi di valutazione PRUDENTE dell'andamento rispetto agli ob
     const valutazione_obiettivi = (valutazioneRaw ?? "").trim();
 
     if (!commento) {
+      logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: "unexpected_format" });
       return NextResponse.json(
         { error: "Risposta AI in un formato inatteso. Riprova." },
         { status: 502 }
       );
     }
 
+    logAiCall({
+      userId: user.id,
+      success: true,
+      model: MODEL,
+      durationMs,
+      inputTokens: response.usage?.input_tokens,
+      outputTokens: response.usage?.output_tokens,
+    });
     return NextResponse.json({ commento, valutazione_obiettivi });
   } catch (err) {
+    const durationMs = Date.now() - startedAt;
     if (err instanceof Anthropic.RateLimitError) {
+      logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: "rate_limit" });
       return NextResponse.json(
-        { error: "Troppe richieste all'AI in questo momento. Attendi un minuto e riprova." },
+        { error: "Troppe richieste all'AI in questo momento. Attendi un minuto e riprova. I dati del report restano salvati." },
         { status: 429 }
       );
     }
-    if (err instanceof Anthropic.AuthenticationError) {
-      return fallbackOrError("Chiave API Anthropic non valida: controlla ANTHROPIC_API_KEY.", 500);
-    }
-    if (err instanceof Anthropic.APIError) {
+    if (err instanceof Anthropic.APIConnectionTimeoutError) {
+      logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: "timeout" });
       return NextResponse.json(
-        { error: `Servizio AI temporaneamente non disponibile (${err.status}). Riprova tra poco.` },
+        { error: "La generazione ha impiegato troppo tempo. Riprova tra poco, oppure scrivi il commento a mano: i dati del report restano salvati." },
+        { status: 504 }
+      );
+    }
+    if (err instanceof Anthropic.PermissionDeniedError) {
+      logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: "permission_denied" });
+      return NextResponse.json(
+        { error: "Il servizio AI non è al momento disponibile per l'account configurato (permessi o credito insufficiente). Contatta chi gestisce Klaro; i dati del report restano salvati." },
         { status: 502 }
       );
     }
+    if (err instanceof Anthropic.AuthenticationError) {
+      logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: "authentication" });
+      return fallbackOrError("Chiave API Anthropic non valida: controlla ANTHROPIC_API_KEY.", 500);
+    }
+    if (err instanceof Anthropic.APIError) {
+      logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: `api_error_${err.status}` });
+      return NextResponse.json(
+        { error: `Servizio AI temporaneamente non disponibile (${err.status}). Riprova tra poco; i dati del report restano salvati.` },
+        { status: 502 }
+      );
+    }
+    logAiCall({ userId: user.id, success: false, model: MODEL, durationMs, errorCode: "network_error" });
     return NextResponse.json(
-      { error: "Errore di rete verso il servizio AI. Riprova." },
+      { error: "Errore di rete verso il servizio AI. Riprova; i dati del report restano salvati." },
       { status: 502 }
     );
   }

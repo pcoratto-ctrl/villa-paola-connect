@@ -45,6 +45,19 @@ export default async function DashboardPage() {
         </div>
       </div>
 
+      <div className="card mt-6">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+          Prima volta su Klaro? Prova questi passaggi
+        </h2>
+        <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm text-slate-700">
+          <li>Personalizza il cliente demo</li>
+          <li>Importa o inserisci i dati</li>
+          <li>Genera e controlla il commento</li>
+          <li>Scarica il PDF</li>
+          <li>Invia il tuo feedback</li>
+        </ol>
+      </div>
+
       {atLimit && (
         <p className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-800">
           Hai raggiunto il limite di clienti del tuo piano.{" "}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -10,6 +10,7 @@ import { CANALI, MESI, meseLabel } from "@/lib/types";
 import type { Canale, Client, ContestoMese, Report, ReportData } from "@/lib/types";
 import { prevMonth } from "@/lib/utils";
 import type { ImportedValues } from "@/lib/dataImport/mapping";
+import { TESTO_LIBERO_MAX, TITOLO_CONTENUTO_MAX, COMMENTO_MAX } from "@/lib/textLimits";
 
 const DRAFT_KEY = "klaro-report-draft";
 
@@ -85,6 +86,11 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
   const [prevReport, setPrevReport] = useState<Report | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [aiLoading, setAiLoading] = useState(false);
+  const [preparingPreview, setPreparingPreview] = useState(false);
+  // Guard sincrono anti-doppio-click: lo stato React è asincrono/batched, un
+  // secondo click prima del re-render potrebbe altrimenti superarlo e far
+  // partire due chiamate AI per lo stesso click.
+  const goingToPreviewRef = useRef(false);
   const [aiError, setAiError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
@@ -348,23 +354,31 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
   }
 
   async function goToPreview() {
-    // Cerca il report del mese precedente per il confronto
-    const supabase = createClient();
-    const p = prevMonth(form.mese, form.anno);
-    const { data } = await supabase
-      .from("reports")
-      .select("*")
-      .eq("client_id", form.clientId)
-      .eq("canale", form.canale)
-      .eq("mese", p.mese)
-      .eq("anno", p.anno)
-      .maybeSingle();
-    setPrevReport((data as Report) ?? null);
-    setStep(4);
+    if (goingToPreviewRef.current) return;
+    goingToPreviewRef.current = true;
+    setPreparingPreview(true);
+    try {
+      // Cerca il report del mese precedente per il confronto
+      const supabase = createClient();
+      const p = prevMonth(form.mese, form.anno);
+      const { data } = await supabase
+        .from("reports")
+        .select("*")
+        .eq("client_id", form.clientId)
+        .eq("canale", form.canale)
+        .eq("mese", p.mese)
+        .eq("anno", p.anno)
+        .maybeSingle();
+      setPrevReport((data as Report) ?? null);
+      setStep(4);
 
-    // Genera il commento AI se non c'è già
-    if (!form.commento.trim()) {
-      void generateComment(data as Report | null);
+      // Genera il commento AI se non c'è già
+      if (!form.commento.trim()) {
+        void generateComment(data as Report | null);
+      }
+    } finally {
+      setPreparingPreview(false);
+      goingToPreviewRef.current = false;
     }
   }
 
@@ -696,6 +710,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                     value={p.testo}
                     onChange={(e) => setTopPost(i, "testo", e.target.value)}
                     placeholder="es. Reel: aperitivo al tramonto in terrazza"
+                    maxLength={TITOLO_CONTENUTO_MAX}
                   />
                 </div>
                 <div>
@@ -705,6 +720,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                     value={p.metrica}
                     onChange={(e) => setTopPost(i, "metrica", e.target.value)}
                     placeholder="es. 9.800 reach"
+                    maxLength={TITOLO_CONTENUTO_MAX}
                   />
                 </div>
               </div>
@@ -718,6 +734,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
               value={form.risultati_note}
               onChange={(e) => set("risultati_note", e.target.value)}
               placeholder="es. Raddoppiata la frequenza dei reel, avviata collaborazione con 2 micro influencer…"
+              maxLength={TESTO_LIBERO_MAX}
             />
           </div>
 
@@ -783,16 +800,17 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                 value={form[key] as string}
                 onChange={(e) => set(key, e.target.value as FormState[typeof key])}
                 placeholder={ph}
+                maxLength={TESTO_LIBERO_MAX}
               />
             </div>
           ))}
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <button className="btn-secondary" onClick={() => setStep(2)}>
+            <button className="btn-secondary" onClick={() => setStep(2)} disabled={preparingPreview}>
               ← Indietro
             </button>
-            <button className="btn-primary flex-1" onClick={goToPreview}>
-              Vedi anteprima con commento AI →
+            <button className="btn-primary flex-1" onClick={goToPreview} disabled={preparingPreview}>
+              {preparingPreview ? "Preparazione…" : "Vedi anteprima con commento AI →"}
             </button>
           </div>
         </div>
@@ -864,6 +882,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                   value={form.commento}
                   onChange={(e) => set("commento", e.target.value)}
                   placeholder="Il commento AI apparirà qui, organizzato in 5 sezioni (sintesi, cosa è andato bene, cosa migliorare, lettura dei numeri, priorità). Puoi modificarlo liberamente prima di generare il PDF."
+                  maxLength={COMMENTO_MAX}
                 />
                 <p className="mt-2 text-xs text-slate-400">
                   Rivedi e modifica come preferisci: nel PDF andrà esattamente ciò che vedi qui.
@@ -886,6 +905,7 @@ export default function ReportWizard({ clients }: { clients: Client[] }) {
                 value={form.valutazione_obiettivi}
                 onChange={(e) => set("valutazione_obiettivi", e.target.value)}
                 placeholder="Valutazione prudente dell'andamento rispetto agli obiettivi. Se i dati non bastano, va bene scrivere che è presto per valutare."
+                maxLength={TESTO_LIBERO_MAX}
               />
             </div>
           )}
