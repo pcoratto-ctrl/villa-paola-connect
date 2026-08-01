@@ -73,6 +73,14 @@ const RecensioniHighlight = () => {
   const { t } = useTranslation();
   const cards: Card[] = [
     {
+      initials: "CT",
+      name: t("reviews.card3.name"),
+      country: t("reviews.card3.country"),
+      text: t("reviews.card3.text"),
+      source: t("reviews.card3.source"),
+      rating: 5,
+    },
+    {
       initials: "SM",
       name: t("reviews.card1.name"),
       country: t("reviews.card1.country"),
@@ -113,9 +121,10 @@ const RecensioniHighlight = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
           {cards.map((card, i) => (
-            <ReviewCard key={card.initials} review={card} index={i} />
+            <ReviewCard key={card.initials} review={card} index={i} featured={i === 0} />
           ))}
         </div>
+
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
