@@ -29,15 +29,25 @@ interface Card {
   rating: number;
 }
 
-const ReviewCard = ({ review, index }: { review: Card; index: number }) => (
+const ReviewCard = ({
+  review,
+  index,
+  featured = false,
+}: {
+  review: Card;
+  index: number;
+  featured?: boolean;
+}) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-60px" }}
     transition={{ duration: 0.5, delay: index * 0.1, ease: [0.4, 0, 0.2, 1] }}
-    className="p-8 md:p-10 rounded-villa bg-card shadow-card border border-border flex flex-col"
+    className={`p-8 md:p-10 rounded-villa bg-card shadow-card border border-border flex flex-col ${
+      featured ? "md:col-span-2" : ""
+    }`}
   >
-    <div className="flex items-start justify-between mb-6">
+    <div className="flex items-start justify-between gap-4 mb-6">
       <div className="flex items-center gap-4">
         <Avatar initials={review.initials} />
         <div>
@@ -47,16 +57,29 @@ const ReviewCard = ({ review, index }: { review: Card; index: number }) => (
       </div>
       <Stars n={review.rating} />
     </div>
-    <p className="text-foreground leading-relaxed italic text-[15px] flex-1">
+    <p
+      className={`text-foreground leading-relaxed italic flex-1 ${
+        featured ? "text-[15px] md:text-base" : "text-[15px]"
+      }`}
+    >
       “{review.text}”
     </p>
     <p className="mt-6 text-muted-foreground text-xs">{review.source}</p>
   </motion.div>
 );
 
+
 const RecensioniHighlight = () => {
   const { t } = useTranslation();
   const cards: Card[] = [
+    {
+      initials: "CT",
+      name: t("reviews.card3.name"),
+      country: t("reviews.card3.country"),
+      text: t("reviews.card3.text"),
+      source: t("reviews.card3.source"),
+      rating: 5,
+    },
     {
       initials: "SM",
       name: t("reviews.card1.name"),
@@ -98,9 +121,10 @@ const RecensioniHighlight = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
           {cards.map((card, i) => (
-            <ReviewCard key={card.initials} review={card} index={i} />
+            <ReviewCard key={card.initials} review={card} index={i} featured={i === 0} />
           ))}
         </div>
+
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -134,6 +134,12 @@
       "google": "Read reviews on Google",
       "facebook": "Read reviews on Facebook",
       "writeGoogle": "Leave a Google review"
+    },
+    "card3": {
+      "name": "Cristina Tassinari",
+      "country": "Italy · July 2026",
+      "text": "We stayed in this wonderful villa with our family in July 2026. It was a marvellous discovery: a little corner of paradise, surrounded by nature and overlooking a simply spectacular sea. We enjoyed a regenerating holiday made of peace, relaxation and beauty, with unforgettable sunsets every evening that we will always carry in our hearts. A special thank you goes to Roberto, the host, whose extraordinary hospitality made our stay even more enjoyable. Always discreetly present, helpful, friendly, attentive to every need and able to convey the same positive energy you breathe in this house. If you are looking for an authentic place to reconnect with the sea, nature and serenity, this villa is the perfect choice. We hope to come back soon.",
+      "source": "Original review on Facebook"
     }
   },
   "contact": {
@@ -192,12 +198,30 @@
     "titleStart": "Answers before",
     "titleEmph": "you leave.",
     "items": [
-      { "q": "How far is Villa Paola Caposuvero from the sea?", "a": "The villa is just steps from the sea with direct beach access: no busy roads to cross to reach the coast." },
-      { "q": "How many people can the villa host?", "a": "Villa Paola Caposuvero has 3 bedrooms and 2 bathrooms and comfortably hosts families and small groups up to 6+ people." },
-      { "q": "Is it suitable for families?", "a": "Yes. Spacious rooms, a private location and direct beach access make the villa perfect for families looking for peace, sea and privacy." },
-      { "q": "How far is Lamezia Terme airport?", "a": "The villa is very convenient for guests arriving at Lamezia Terme international airport, only a short drive away." },
-      { "q": "How can I check availability?", "a": "You can fill in the 'Request availability' form on this site, message us on WhatsApp or call us directly. We'll reply with availability and a personal quote." },
-      { "q": "Are pets allowed?", "a": "Yes, pets are welcome at Villa Paola Caposuvero. Please mention your pet when sending the request." }
+      {
+        "q": "How far is Villa Paola Caposuvero from the sea?",
+        "a": "The villa is just steps from the sea with direct beach access: no busy roads to cross to reach the coast."
+      },
+      {
+        "q": "How many people can the villa host?",
+        "a": "Villa Paola Caposuvero has 3 bedrooms and 2 bathrooms and comfortably hosts families and small groups up to 6+ people."
+      },
+      {
+        "q": "Is it suitable for families?",
+        "a": "Yes. Spacious rooms, a private location and direct beach access make the villa perfect for families looking for peace, sea and privacy."
+      },
+      {
+        "q": "How far is Lamezia Terme airport?",
+        "a": "The villa is very convenient for guests arriving at Lamezia Terme international airport, only a short drive away."
+      },
+      {
+        "q": "How can I check availability?",
+        "a": "You can fill in the 'Request availability' form on this site, message us on WhatsApp or call us directly. We'll reply with availability and a personal quote."
+      },
+      {
+        "q": "Are pets allowed?",
+        "a": "Yes, pets are welcome at Villa Paola Caposuvero. Please mention your pet when sending the request."
+      }
     ]
   },
   "cta": {

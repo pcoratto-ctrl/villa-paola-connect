@@ -134,6 +134,12 @@
       "google": "Leggi recensioni su Google",
       "facebook": "Leggi recensioni su Facebook",
       "writeGoogle": "Lascia una recensione su Google"
+    },
+    "card3": {
+      "name": "Cristina Tassinari",
+      "country": "Italia · Luglio 2026",
+      "text": "Abbiamo soggiornato in questa splendida villa con la nostra famiglia nel luglio 2026. È stata una meravigliosa scoperta: un piccolo angolo di paradiso, immerso nella natura e affacciato su un mare semplicemente spettacolare. Abbiamo vissuto una vacanza rigenerante, fatta di pace, relax e bellezza, accompagnata ogni sera da tramonti indimenticabili che porteremo sempre nel cuore. Un ringraziamento speciale va a Roberto, il padrone di casa, che con la sua straordinaria ospitalità ha reso il nostro soggiorno ancora più piacevole. Sempre presente con discrezione, disponibile, cordiale, attento a ogni esigenza e capace di trasmettere la stessa energia positiva che si respira in questa casa. Se cercate un luogo autentico dove ritrovare il contatto con il mare, la natura e la serenità, questa villa è la scelta perfetta. Noi ci auguriamo di poter tornare presto.",
+      "source": "Recensione originale su Facebook"
     }
   },
   "contact": {
@@ -192,12 +198,30 @@
     "titleStart": "Le risposte prima",
     "titleEmph": "di partire.",
     "items": [
-      { "q": "Quanto dista Villa Paola Caposuvero dal mare?", "a": "La villa si trova a pochi passi dal mare, con accesso diretto alla spiaggia: non devi attraversare strade trafficate per raggiungere la costa." },
-      { "q": "Quante persone può ospitare la villa?", "a": "Villa Paola Caposuvero dispone di 3 camere da letto, 2 bagni e può ospitare comodamente famiglie e piccoli gruppi fino a 6+ persone." },
-      { "q": "È adatta alle famiglie?", "a": "Sì. Gli spazi ampi, la posizione riservata e l'accesso diretto al mare rendono la villa perfetta per famiglie che cercano tranquillità, mare e privacy." },
-      { "q": "Quanto dista dall'aeroporto di Lamezia Terme?", "a": "La villa è in una posizione molto comoda per chi arriva dall'aeroporto internazionale di Lamezia Terme, a breve distanza in auto." },
-      { "q": "Come posso verificare la disponibilità?", "a": "Puoi compilare il modulo 'Richiedi disponibilità' su questo sito, scriverci su WhatsApp o chiamarci direttamente. Ti risponderemo con disponibilità e un preventivo personalizzato." },
-      { "q": "Gli animali sono ammessi?", "a": "Sì, gli animali domestici sono benvenuti a Villa Paola Caposuvero. Segnalaci la presenza del tuo animale al momento della richiesta." }
+      {
+        "q": "Quanto dista Villa Paola Caposuvero dal mare?",
+        "a": "La villa si trova a pochi passi dal mare, con accesso diretto alla spiaggia: non devi attraversare strade trafficate per raggiungere la costa."
+      },
+      {
+        "q": "Quante persone può ospitare la villa?",
+        "a": "Villa Paola Caposuvero dispone di 3 camere da letto, 2 bagni e può ospitare comodamente famiglie e piccoli gruppi fino a 6+ persone."
+      },
+      {
+        "q": "È adatta alle famiglie?",
+        "a": "Sì. Gli spazi ampi, la posizione riservata e l'accesso diretto al mare rendono la villa perfetta per famiglie che cercano tranquillità, mare e privacy."
+      },
+      {
+        "q": "Quanto dista dall'aeroporto di Lamezia Terme?",
+        "a": "La villa è in una posizione molto comoda per chi arriva dall'aeroporto internazionale di Lamezia Terme, a breve distanza in auto."
+      },
+      {
+        "q": "Come posso verificare la disponibilità?",
+        "a": "Puoi compilare il modulo 'Richiedi disponibilità' su questo sito, scriverci su WhatsApp o chiamarci direttamente. Ti risponderemo con disponibilità e un preventivo personalizzato."
+      },
+      {
+        "q": "Gli animali sono ammessi?",
+        "a": "Sì, gli animali domestici sono benvenuti a Villa Paola Caposuvero. Segnalaci la presenza del tuo animale al momento della richiesta."
+      }
     ]
   },
   "cta": {
