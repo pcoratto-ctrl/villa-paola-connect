@@ -11,6 +11,7 @@ import RecensioniHighlight from "@/components/RecensioniHighlight";
 import FaqSection, { type FaqItem } from "@/components/FaqSection";
 import DisponibilitaSection from "@/components/DisponibilitaSection";
 import heroAsset from "@/assets/villa/hero-terrazza-desktop.webp.asset.json";
+import { trackClick } from "@/lib/trackClick";
 
 const WHATSAPP_URL =
   "https://wa.me/393355384250?text=" +
@@ -71,7 +72,7 @@ const SeoLandingPage = ({ slug, title, description, h1, eyebrow, intro, body, fa
                   <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
                   {t("seoLanding.ctaAvailability")}
                 </a>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary-foreground/15 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/25">
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackClick("whatsapp", `seo-${slug}`)} className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary-foreground/15 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/25">
                   <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
                   {t("seoLanding.ctaWhatsapp")}
                 </a>

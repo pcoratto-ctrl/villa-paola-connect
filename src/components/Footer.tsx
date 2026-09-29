@@ -2,6 +2,7 @@ import { Phone, MapPin, Mail, MessageCircle, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logoAsset from "@/assets/villa-paola-logo-footer.png.asset.json";
+import { trackClick } from "@/lib/trackClick";
 
 const EMAIL = "info@villapaolacaposuvero.it";
 const PHONE_NUMBER = "+393355384250";
@@ -63,11 +64,11 @@ const Footer = () => {
           <div>
             <p className="font-medium text-white/90 text-sm mb-4">{t("footer.contactsTitle")}</p>
             <div className="flex flex-col gap-3">
-              <a href={`tel:${PHONE_NUMBER}`} className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
+              <a href={`tel:${PHONE_NUMBER}`} onClick={() => trackClick("call", "footer")} className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
                 <Phone className="w-4 h-4" strokeWidth={1.5} />
                 {t("footer.phone")}
               </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackClick("whatsapp", "footer")} className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
                 <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
                 {t("footer.whatsapp")}
               </a>
