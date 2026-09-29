@@ -3,7 +3,7 @@ import { Trans, useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const EMAIL = "R.falvo@agenzietripodi.com";
+const EMAIL = "info@villapaolacaposuvero.it";
 
 const PrivacyPolicy = () => {
   const { t, i18n } = useTranslation();
