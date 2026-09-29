@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logoAsset from "@/assets/villa-paola-logo-footer.png.asset.json";
 
-const EMAIL = "R.falvo@agenzietripodi.com";
+const EMAIL = "info@villapaolacaposuvero.it";
 const PHONE_NUMBER = "+393355384250";
 const WHATSAPP_URL = "https://wa.me/393355384250";
 const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61588044700058&sk=reviews";
