@@ -14,11 +14,9 @@ export interface LeadInput {
 export function useSubmitLead() {
   return useMutation({
     mutationFn: async (lead: LeadInput) => {
-      const { data, error } = await supabase
-        .from("leads")
-        .insert(lead)
-        .select()
-        .single();
+      const { data, error } = await supabase.functions.invoke("notify-lead", {
+        body: lead,
+      });
       if (error) throw error;
       return data;
     },
