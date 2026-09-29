@@ -56,7 +56,7 @@ create policy "profiles_select_own" on public.profiles
 
 drop policy if exists "profiles_update_own" on public.profiles;
 create policy "profiles_update_own" on public.profiles
-  for update using (auth.uid() = id);
+  for update using (auth.uid() = id) with check (auth.uid() = id);
 
 drop policy if exists "clients_all_own" on public.clients;
 create policy "clients_all_own" on public.clients
@@ -69,6 +69,76 @@ create policy "reports_all_own" on public.reports
   ) with check (
     exists (select 1 from public.clients c where c.id = client_id and c.user_id = auth.uid())
   );
+
+-- ---------- Protezione campi di fatturazione ----------
+-- Gli utenti possono aggiornare il proprio profilo, ma NON il piano o
+-- l'abbonamento: questi campi li modifica solo il webhook Stripe
+-- (service_role). stripe_customer_id si puo' impostare una sola volta.
+create or replace function public.protect_profile_billing()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  if coalesce(auth.role(), '') = 'service_role' or current_user in ('postgres', 'supabase_admin') then
+    return new;
+  end if;
+  if new.piano is distinct from old.piano
+     or new.stripe_subscription_id is distinct from old.stripe_subscription_id
+     or new.id is distinct from old.id
+     or new.created_at is distinct from old.created_at then
+    raise exception 'Campo non modificabile';
+  end if;
+  if old.stripe_customer_id is not null
+     and new.stripe_customer_id is distinct from old.stripe_customer_id then
+    raise exception 'Campo non modificabile';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists profiles_protect_billing on public.profiles;
+create trigger profiles_protect_billing
+  before update on public.profiles
+  for each row execute function public.protect_profile_billing();
+
+-- ---------- Limite clienti per piano (lato server) ----------
+-- Rispecchia resolvePlan() in src/lib/plans.ts:
+-- starter 5, pro 20, free in prova (14 giorni) 20, free 1.
+create or replace function public.enforce_client_limit()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+declare
+  p record;
+  max_clients int;
+  current_count int;
+begin
+  if coalesce(auth.role(), '') = 'service_role' then
+    return new;
+  end if;
+
+  select piano, created_at into p from public.profiles where id = new.user_id;
+  if p.piano = 'pro' then max_clients := 20;
+  elsif p.piano = 'starter' then max_clients := 5;
+  elsif p.created_at > now() - interval '14 days' then max_clients := 20;
+  else max_clients := 1;
+  end if;
+
+  perform pg_advisory_xact_lock(hashtext(new.user_id::text));
+  select count(*) into current_count from public.clients where user_id = new.user_id;
+  if current_count >= max_clients then
+    raise exception 'Limite clienti del piano raggiunto';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists clients_enforce_limit on public.clients;
+create trigger clients_enforce_limit
+  before insert on public.clients
+  for each row execute function public.enforce_client_limit();
 
 -- ---------- Storage: bucket per i loghi ----------
 
