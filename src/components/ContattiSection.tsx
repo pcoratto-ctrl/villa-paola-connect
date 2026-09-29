@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, Clock, MapPin, Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { trackClick } from "@/lib/trackClick";
 
 const PHONE_NUMBER = "+393355384250";
 const EMAIL = "info@villapaolacaposuvero.it";
@@ -41,6 +42,7 @@ const ContattiSection = () => {
             <p className="font-display text-2xl text-foreground mb-2">{t("contact.callUs")}</p>
             <a
               href={`tel:${PHONE_NUMBER}`}
+              onClick={() => trackClick("call", "contatti")}
               className="font-display text-3xl md:text-4xl text-primary hover:opacity-80 transition-opacity"
             >
               +39 335 538 4250
@@ -65,6 +67,7 @@ const ContattiSection = () => {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick("whatsapp", "contatti")}
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-accent text-accent-foreground text-base font-medium hover:opacity-90 transition-all duration-200 active:scale-95"
               >
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />

@@ -4,6 +4,7 @@ import { CalendarCheck, MessageCircle, CheckCircle, Send } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSubmitLead } from "@/hooks/useLeads";
 import { useToast } from "@/hooks/use-toast";
+import { trackClick } from "@/lib/trackClick";
 
 const WHATSAPP_URL =
   "https://wa.me/393355384250?text=" +
@@ -168,7 +169,7 @@ const DisponibilitaSection = () => {
                   <Send className="w-4 h-4" strokeWidth={1.5} />
                   {submit.isPending ? t("availability.form.submitting") : t("availability.form.submit")}
                 </button>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackClick("whatsapp", "disponibilita")}
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 transition-all duration-200">
                   <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
                   {t("availability.form.whatsapp")}

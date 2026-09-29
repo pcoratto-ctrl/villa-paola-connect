@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import ctaImg from "@/assets/villa/cta-tramonto-finale.webp.asset.json";
+import { trackClick } from "@/lib/trackClick";
 
 const WHATSAPP_URL =
   "https://wa.me/393355384250?text=" +
@@ -50,6 +51,7 @@ const CtaSection = () => {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick("whatsapp", "cta")}
                 className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-4 min-h-[52px] rounded-full bg-primary-foreground/20 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/30 hover:bg-primary-foreground/25 transition-all duration-200"
               >
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
