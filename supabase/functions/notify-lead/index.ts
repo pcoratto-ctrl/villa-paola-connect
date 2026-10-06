@@ -101,13 +101,15 @@ Deno.serve(async (req) => {
       }),
     })
 
+    const resendBody = await resendRes.text()
     if (!resendRes.ok) {
-      const body = await resendRes.text()
-      console.error(`Resend failed [${resendRes.status}]: ${body}`)
+      console.error(`Resend failed [${resendRes.status}]: ${resendBody}`)
       // Lead is saved — don't fail the request, just log the email failure
+    } else {
+      console.log(`Resend ok: ${resendBody}`)
     }
 
-    return new Response(JSON.stringify({ id: data.id, created_at: data.created_at }), {
+    return new Response(JSON.stringify({ id: data.id, created_at: data.created_at, email_sent: resendRes.ok }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
