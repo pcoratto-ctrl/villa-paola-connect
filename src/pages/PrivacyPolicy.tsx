@@ -14,6 +14,9 @@ const PrivacyPolicy = () => {
         <title>{t("privacy.metaTitle")}</title>
         <meta name="description" content={t("privacy.metaDesc")} />
         <link rel="canonical" href="https://villapaolacaposuvero.it/privacy-policy" />
+        <meta property="og:title" content={t("privacy.metaTitle")} />
+        <meta property="og:description" content={t("privacy.metaDesc")} />
+        <meta property="og:url" content="https://villapaolacaposuvero.it/privacy-policy" />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
       <Navbar />

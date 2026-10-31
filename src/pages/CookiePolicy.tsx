@@ -12,6 +12,9 @@ const CookiePolicy = () => {
         <title>{t("cookies.metaTitle")}</title>
         <meta name="description" content={t("cookies.metaDesc")} />
         <link rel="canonical" href="https://villapaolacaposuvero.it/cookie-policy" />
+        <meta property="og:title" content={t("cookies.metaTitle")} />
+        <meta property="og:description" content={t("cookies.metaDesc")} />
+        <meta property="og:url" content="https://villapaolacaposuvero.it/cookie-policy" />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
       <Navbar />
