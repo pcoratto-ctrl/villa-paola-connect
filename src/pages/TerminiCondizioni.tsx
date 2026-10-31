@@ -12,6 +12,9 @@ const TerminiCondizioni = () => {
         <title>{t("terms.metaTitle")}</title>
         <meta name="description" content={t("terms.metaDesc")} />
         <link rel="canonical" href="https://villapaolacaposuvero.it/termini-condizioni" />
+        <meta property="og:title" content={t("terms.metaTitle")} />
+        <meta property="og:description" content={t("terms.metaDesc")} />
+        <meta property="og:url" content="https://villapaolacaposuvero.it/termini-condizioni" />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
       <Navbar />
