@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Instrument Serif", "serif"],
-        body: ["Public Sans", "sans-serif"],
+        display: ["Cormorant Garamond", "serif"],
+        body: ["Manrope", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -78,7 +78,7 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        villa: "1.5rem",
+        villa: "var(--radius)",
       },
       boxShadow: {
         soft: "var(--shadow-soft)",

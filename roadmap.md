@@ -6,4 +6,5 @@
 - [x] Record completed favicon and existing FAQ corrections in SEO findings.
 - [ ] Resolve full non-JavaScript per-route metadata/social preview findings — browser metadata corrected; static HTML remains a sitewide fallback and requires a separately approved rendering change.
 - [ ] Connect and verify Search Console — blocked by declined connection.
-- [ ] Create proposed kitesurf page — requires specific approval of this content opportunity.
+- [ ] Create proposed kitesurf page — requires specific approval of this content opportunity.- [ ] Restyling editoriale con foto/video reali e alt del CSV (no publish)
+- [x] Qualità hospitality alta: hero, header, transizioni, mobile, percorso verso disponibilità

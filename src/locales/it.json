@@ -9,7 +9,9 @@
     "checkAvailability": "Verifica disponibilità",
     "menu": "Menu",
     "backHome": "Torna alla home",
-    "languageLabel": "Lingua"
+    "languageLabel": "Lingua",
+    "sea": "Il mare",
+    "experiences": "Esperienze"
   },
   "hero": {
     "eyebrow": "Villa Paola Caposuvero · Gizzeria · Calabria",
@@ -18,7 +20,7 @@
     "subtitle": "Una villa fronte mare dove svegliarsi con la luce del Mediterraneo, vivere la terrazza in piena privacy e ritrovare il tempo lento della vacanza.",
     "ctaPrimary": "Verifica la disponibilità",
     "ctaSecondary": "Guarda la villa",
-    "imageAlt": "Terrazza vista mare a Villa Paola Caposuvero, Gizzeria — Calabria"
+    "imageAlt": "Giardino di Villa Paola con sedute e mare sullo sfondo"
   },
   "villa": {
     "eyebrow": "La Villa",
@@ -230,7 +232,7 @@
     "subtitle": "Raccontaci quando vorresti partire e ti invieremo disponibilità, dettagli e un preventivo personalizzato per il tuo soggiorno a Villa Paola Caposuvero.",
     "primary": "Richiedi le date disponibili",
     "secondary": "Scrivici su WhatsApp",
-    "imageAlt": "Tramonto sul mare davanti a Villa Paola Caposuvero"
+    "imageAlt": "Giardino della villa al tramonto sul mare"
   },
   "mobileCta": {
     "label": "Verifica disponibilità"
@@ -421,5 +423,56 @@
     "ctaWhatsapp": "Scrivici su WhatsApp",
     "backHomeInline": "Torna alla home di Villa Paola Caposuvero",
     "wantMore": "Vuoi vedere la villa nel dettaglio?"
+  },
+  "villaPano": {
+    "alt": "Panoramica del vialetto, giardino e Villa Paola",
+    "caption": "Il vialetto, il prato e la casa: tutto su un unico livello, affacciato sul mare."
+  },
+  "rooms": {
+    "eyebrow": "Gli ambienti",
+    "title": "Interni semplici,",
+    "titleEmph": "luminosi e freschi",
+    "body": "Un soggiorno raccolto, una cucina attrezzata, tre camere e due bagni: lo spazio giusto per una famiglia o un piccolo gruppo di amici.",
+    "livingAlt": "Soggiorno",
+    "livingCap": "Soggiorno",
+    "bedAlt": "Camera da letto",
+    "bedCap": "Camera matrimoniale"
+  },
+  "sea": {
+    "eyebrow": "Il mare, a pochi passi",
+    "title": "Dal giardino",
+    "titleEmph": "alla sabbia",
+    "body": "Oltre il muretto bianco del giardino c'è il mare. Si scende con alcuni gradini e si passa un cancello: dall'altra parte c'è la spiaggia, senza strade da attraversare.",
+    "note": "Il percorso ha dei gradini: se hai esigenze particolari di accessibilità scrivici prima di prenotare.",
+    "imgAlt": "Mare azzurro oltre il muretto bianco della villa",
+    "videoLabel": "Guarda il percorso verso il mare",
+    "videoAlt": "Percorso reale con gradini e cancello verso la spiaggia"
+  },
+  "exp": {
+    "eyebrow": "Vivere Villa Paola",
+    "title": "Le giornate",
+    "titleEmph": "si allungano in terrazza",
+    "body": "Il pranzo all'ombra del pergolato, un libro sul divano bianco davanti al mare, la colazione con la brezza del mattino e un aperitivo in giardino quando il sole scende.",
+    "note": "I pasti non sono inclusi: la cucina e la terrazza sono tue, per vivere la casa con i tuoi tempi.",
+    "lunchAlt": "Tavola apparecchiata sulla terrazza fronte mare",
+    "sofaAlt": "Divano bianco all’ombra del pergolato di fronte al mare",
+    "breakfastAlt": "Colazione con cornetti e vista sul mare",
+    "aperitifAlt": "Aperitivo sul tavolo esterno con giardino e mare",
+    "capMorning": "Il mattino",
+    "capEvening": "La sera"
+  },
+  "calabria": {
+    "eyebrow": "Authentic Calabria",
+    "title": "La costa",
+    "titleEmph": "intorno alla villa",
+    "body": "Spiagge ampie, acqua limpida e il vento che rende questo tratto del Tirreno amato anche dagli sportivi. Un breve video per farti un'idea dell'atmosfera.",
+    "videoLabel": "Guarda il video",
+    "videoAlt": "Video editoriale della spiaggia con scritte e logo",
+    "beachAlt": "Spiaggia con il sole sul mare"
+  },
+  "galleryMore": {
+    "showAll": "Scopri tutte le foto",
+    "showLess": "Mostra meno",
+    "count": "{{n}} foto"
   }
 }

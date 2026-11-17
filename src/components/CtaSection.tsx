@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import ctaImg from "@/assets/villa/cta-tramonto-finale.webp.asset.json";
 import { trackClick } from "@/lib/trackClick";
 
 const WHATSAPP_URL =
@@ -23,7 +22,8 @@ const CtaSection = () => {
           className="relative rounded-villa overflow-hidden min-h-[520px] md:min-h-[540px]"
         >
           <img
-            src={ctaImg.url}
+            src="/images/villa-paola-restyle/giardino-tramonto-mare.webp"
+            decoding="async"
             alt={t("cta.imageAlt")}
             className="absolute inset-0 w-full h-full object-cover"
             loading="lazy"

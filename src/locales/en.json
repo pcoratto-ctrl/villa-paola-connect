@@ -9,7 +9,9 @@
     "checkAvailability": "Check availability",
     "menu": "Menu",
     "backHome": "Back to home",
-    "languageLabel": "Language"
+    "languageLabel": "Language",
+    "sea": "The sea",
+    "experiences": "Experiences"
   },
   "hero": {
     "eyebrow": "Villa Paola Caposuvero · Gizzeria · Calabria",
@@ -18,7 +20,7 @@
     "subtitle": "A beachfront villa where you wake up to the light of the Mediterranean, live the terrace in full privacy and rediscover the slow rhythm of a real holiday.",
     "ctaPrimary": "Check availability",
     "ctaSecondary": "See the villa",
-    "imageAlt": "Sea-view terrace at Villa Paola Caposuvero, Gizzeria — Calabria"
+    "imageAlt": "Villa Paola garden with seating and the sea beyond"
   },
   "villa": {
     "eyebrow": "The Villa",
@@ -230,7 +232,7 @@
     "subtitle": "Tell us when you'd like to travel and we'll send you availability, details and a personal quote for your stay at Villa Paola Caposuvero.",
     "primary": "Ask for available dates",
     "secondary": "Message us on WhatsApp",
-    "imageAlt": "Sunset over the sea in front of Villa Paola Caposuvero"
+    "imageAlt": "The villa garden at sunset over the sea"
   },
   "mobileCta": {
     "label": "Check availability"
@@ -421,5 +423,56 @@
     "ctaWhatsapp": "Message us on WhatsApp",
     "backHomeInline": "Back to the Villa Paola Caposuvero home",
     "wantMore": "Want to see the villa in detail?"
+  },
+  "villaPano": {
+    "alt": "Panoramic view of the path, garden and Villa Paola",
+    "caption": "The path, the lawn and the house: all on one level, overlooking the sea."
+  },
+  "rooms": {
+    "eyebrow": "The rooms",
+    "title": "Simple interiors,",
+    "titleEmph": "bright and cool",
+    "body": "A cosy living room, an equipped kitchen, three bedrooms and two bathrooms: the right space for a family or a small group of friends.",
+    "livingAlt": "Living room",
+    "livingCap": "Living room",
+    "bedAlt": "Bedroom",
+    "bedCap": "Double bedroom"
+  },
+  "sea": {
+    "eyebrow": "The sea, a few steps away",
+    "title": "From the garden",
+    "titleEmph": "to the sand",
+    "body": "Beyond the white garden wall lies the sea. A few steps down and through a gate, you reach the beach, with no roads to cross.",
+    "note": "The path has steps: if you have specific accessibility needs, write to us before booking.",
+    "imgAlt": "Blue sea beyond the villa’s white wall",
+    "videoLabel": "Watch the path to the sea",
+    "videoAlt": "Real path with steps and gate to the beach"
+  },
+  "exp": {
+    "eyebrow": "Living Villa Paola",
+    "title": "Days grow longer",
+    "titleEmph": "on the terrace",
+    "body": "Lunch in the shade of the pergola, a book on the white sofa facing the sea, breakfast in the morning breeze and an aperitif in the garden as the sun goes down.",
+    "note": "Meals are not included: the kitchen and terrace are yours, to enjoy the house at your own pace.",
+    "lunchAlt": "Table set on the seafront terrace",
+    "sofaAlt": "White sofa in the shade of the pergola facing the sea",
+    "breakfastAlt": "Breakfast with croissants and sea view",
+    "aperitifAlt": "Aperitif on the outdoor table with garden and sea",
+    "capMorning": "Morning",
+    "capEvening": "Evening"
+  },
+  "calabria": {
+    "eyebrow": "Authentic Calabria",
+    "title": "The coast",
+    "titleEmph": "around the villa",
+    "body": "Wide beaches, clear water and the wind that makes this stretch of the Tyrrhenian popular with sports lovers too. A short video to give you a feel for it.",
+    "videoLabel": "Watch the video",
+    "videoAlt": "Editorial beach video with text and logo",
+    "beachAlt": "Beach with the sun over the sea"
+  },
+  "galleryMore": {
+    "showAll": "See all photos",
+    "showLess": "Show less",
+    "count": "{{n}} photos"
   }
 }

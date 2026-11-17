@@ -12,6 +12,8 @@ const Navbar = () => {
   const navLinks = [
     { label: t("nav.reviews"), href: "/#recensioni" },
     { label: t("nav.villa"), href: "/#villa" },
+    { label: t("nav.sea"), href: "/#mare" },
+    { label: t("nav.experiences"), href: "/#esperienze" },
     { label: t("nav.services"), href: "/#servizi" },
     { label: t("nav.gallery"), href: "/#galleria" },
     { label: t("nav.location"), href: "/#posizione" },
@@ -23,10 +25,10 @@ const Navbar = () => {
       <nav
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          background: "rgba(255,255,255,0.88)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
-          borderBottom: "1px solid rgba(0,0,0,0.06)",
+          background: "hsl(var(--background) / 0.9)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          borderBottom: "1px solid hsl(var(--foreground) / 0.07)",
         }}
       >
         <div className="villa-section">
@@ -39,12 +41,12 @@ const Navbar = () => {
               />
             </a>
 
-            <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            <div className="hidden lg:flex items-center gap-5 xl:gap-7">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-foreground transition-colors duration-300 hover:opacity-70"
+                  className="text-[13px] font-medium tracking-wide text-foreground/85 transition-colors duration-300 hover:text-primary"
                 >
                   {link.label}
                 </a>
@@ -52,14 +54,14 @@ const Navbar = () => {
               <LanguageSwitcher />
               <a
                 href="/#disponibilita"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-villa bg-primary text-primary-foreground text-sm font-semibold shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
               >
                 <CalendarCheck className="w-4 h-4" strokeWidth={1.5} />
                 {t("nav.checkAvailability")}
               </a>
             </div>
 
-            <div className="md:hidden flex items-center gap-2">
+            <div className="lg:hidden flex items-center gap-2">
               <LanguageSwitcher />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}

@@ -4,6 +4,9 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import RecensioniHighlight from "@/components/RecensioniHighlight";
 import VillaSection from "@/components/VillaSection";
+import MareSection from "@/components/MareSection";
+import EsperienzeSection from "@/components/EsperienzeSection";
+import CalabriaSection from "@/components/CalabriaSection";
 import PerchéSection from "@/components/PerchéSection";
 import ServiziSection from "@/components/ServiziSection";
 import GalleriaSection from "@/components/GalleriaSection";
@@ -33,9 +36,12 @@ const Index = () => {
         <HeroSection />
         <RecensioniHighlight />
         <VillaSection />
+        <MareSection />
+        <EsperienzeSection />
         <PerchéSection />
         <ServiziSection />
         <GalleriaSection />
+        <CalabriaSection />
         <PosizioneSection />
         <DisponibilitaSection />
         <FaqSection />
