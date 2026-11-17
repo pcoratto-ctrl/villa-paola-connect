@@ -1,68 +1,48 @@
-## Obiettivo
-Restyle visivo verso la direzione Claude (cream/sand + teal profondo, serif italico, accenti terracotta + ottone, immagini a maschera arco, statistiche editoriali, divider sottili) sul sito attuale, **senza toccare** logica, dati, routing o backend.
+# Restyling Villa Paola: foto e video reali
 
-## 1. Palette definitiva (valori esatti mockup)
-Convertiti in HSL per i token di `src/index.css`:
+Tutti i 30 file (foto, video e copertine) sono già nella cartella del progetto. Manca solo la tabella CSV con i testi alternativi: li scriverò io a partire dal contenuto di ogni foto. Restano invariati il modulo, WhatsApp, i contatti, le recensioni, il backend, la SEO e il dominio. Non pubblico niente senza la tua approvazione.
 
-- **Background cream** `#F6F1E7` → `hsl(39 47% 94%)`
-- **Surface sand** `#EBD9C4` → `hsl(32 46% 84%)`
-- **Primary teal profondo** `#123E42` → `hsl(185 57% 17%)`
-- **Accent terracotta** `#C0674A` → `hsl(14 47% 52%)` (eyebrow, quote glifi, evidenze)
-- **Sage muted** `#5E645D` → `hsl(108 4% 38%)` (testi soft, icone lineari)
-- **Ottone** `#B0894F` → `hsl(38 40% 50%)` (linee, hover, numeri statistica, underline)
+## 1. Stile
+- Colori: bianco caldo #F8F5EF, blu mediterraneo #254C5C, sabbia #C5B49A. Restano il logo e gli angoli poco arrotondati.
+- Titoli in Cormorant Garamond, testi in Manrope.
+- Più spazio tra le sezioni e meno riquadri e bordi. Animazioni discrete, contrasto leggibile e bordo visibile su pulsanti e link quando si naviga da tastiera.
 
-Foreground testo forte resta un near-black leggermente caldo su cream, primary-foreground = cream.
-Aggiungo il token `--villa-brass` e `--villa-terracotta` in `index.css` e le voci corrispondenti in `tailwind.config.ts`.
+## 2. Foto iniziale
+- Computer: hero-giardino-mare-desktop, con la versione 1280 per i tablet. Inquadratura 50% / 55%.
+- Telefono: hero-terrazza-mare-mobile, inquadratura 50% / 50%.
+- Ombreggiatura solo sotto il testo. Titolo e pulsanti restano, spostati per non coprire il mare.
+- Nessuno scorrimento automatico di foto. Solo l'immagine visibile viene caricata per prima.
 
-## 2. Forma: NIENTE pillole
-- Tutti i bottoni e CTA passano da `rounded-full` a `rounded-[4px]` (mai 999px).
-- Label CTA in **UPPERCASE** con `tracking-[0.12em]` e peso medium.
-- I chip informativi ("Accesso diretto alla spiaggia", "Vista mare", "Ideale per famiglie", "Animali ammessi") sono **a spigolo** (`rounded-none` o `rounded-[2px]`) con **bordo 1px** sottile ottone/sage su fondo cream, testo teal. Nessun fondo colorato pieno.
+## 3. La Villa
+- Foto panoramica villa-esterno-panoramica subito dopo il testo introduttivo.
+- I numeri restano: 120 m², 3 camere, 2 bagni, 6+ ospiti.
+- Nuovo blocco ordinato "Gli ambienti" con le foto attuali di soggiorno e camera.
 
-## 3. File che TOCCHERÒ (solo presentazione)
-- `src/index.css` — nuovi valori HSL token + nuovi token `--villa-terracotta`, `--villa-brass`. Nessun rename.
-- `tailwind.config.ts` — aggiungo `villa.terracotta` e `villa.brass`.
-- `src/components/HeroSection.tsx` — micro-styling (eyebrow tracciato, italico sul secondo verso), bottoni a radius 4px + label uppercase tracciato. Stesso layout split, stessi asset, stessi link.
-- `src/components/RecensioniHighlight.tsx` — card grande sage muted, quote-glifo terracotta, eyebrow terracotta, rating in colonna destra. Zero cambi ai link Facebook/Google.
-- `src/components/VillaSection.tsx` — immagine con maschera arco, chip a spigolo con bordo, griglia 4 statistiche con numeri serif oversize in ottone.
-- `src/components/PerchéSection.tsx` — lista con divider 1px + icone lineari sage.
-- `src/components/ServiziSection.tsx` — stesso ritmo tipografico (eyebrow terracotta, italico sul frammento chiave, divider).
-- `src/components/GalleriaSection.tsx`, `PosizioneSection.tsx`, `FaqSection.tsx`, `ContattiSection.tsx`, `CtaSection.tsx`, `Footer.tsx`, `Navbar.tsx`, `MobileCta.tsx` — solo coerenza (colori, tipografia, radius bottoni, tracking).
-- `src/components/DisponibilitaSection.tsx` — **solo presentazione**: colori, spaziature, radius bottone 4px, stile campi (bordo 1px sage su cream, focus ring teal), tipografia. **Nessuna modifica** a validazione, honeypot, `useSubmitLead`, `onSubmit`, stato, messaggi, campi, ordine campi.
-- `src/i18n/translations.ts` — **solo** uniformo la label CTA primaria ("Verifica disponibilità" / "Check availability") ovunque venga usata dai componenti tradotti. Nessun'altra modifica alle stringhe.
+## 4. Nuove sezioni (dopo La Villa, prima dei Servizi)
+- **Il mare, a pochi passi**: foto mare-muretto-bianco e video verticale dell'accesso al mare, intero e senza tagli. Il video parte solo toccandolo, ha i comandi e funziona su iPhone e Android. Il testo descrive i gradini e il cancello che si vedono, senza promettere spiaggia privata né accesso per tutti.
+- **Vivere Villa Paola**: terrazza con pranzo vista mare, divano fronte mare, colazione e aperitivo come dettagli. Non presenta i pasti come inclusi.
+- **Fascia al tramonto** (giardino-tramonto-mare) prima del pulsante finale.
+- **Authentic Calabria**, vicino a Posizione: video che parte solo toccandolo, più la foto spiaggia-sole-sul-mare. Il video del giardino non lo inserisco, per non appesantire e non ripetere foto.
+- Nel menu aggiungo "Il mare" ed "Esperienze". Gli altri link restano.
 
-## 4. File che NON TOCCHERÒ
-- `src/hooks/useLeads.ts`, `useReviews.ts`, `useAuth.ts`.
-- `src/integrations/supabase/*` (auto-gen).
-- `supabase/**` (config, edge functions, mcp).
-- `src/contexts/LanguageContext.tsx` (logica i18n intatta).
-- `src/App.tsx` e tutte le rotte, `src/pages/Admin*`, pagine legali, `SeoPages` routing.
-- `.env`, `index.html`, `sitemap.xml`, `robots.txt`.
-- Tutti gli asset immagine esistenti.
-- Nessuna modifica alla logica del form disponibilità (solo skin visiva).
+## 5. Galleria
+- Sostituisco le foto secondo la tua tabella, aggiungo le 7 nuove e seguo il tuo ordine di 22 foto. Restano le foto attuali di soggiorno, cucina, camere e bagno.
+- Le foto alternative degli interni le valuto confrontandole. Se non sono migliori, non le uso.
+- In homepage mostro 9 foto con il pulsante "Scopri tutte le foto". Senza filtri.
+- Ingrandimento delle foto con frecce e contatore, tasti freccia ed Esc, scorrimento col dito su telefono. Alla chiusura il cursore torna dove eri.
 
-## 5. Approccio incrementale
-1. **Step 1 — Token colore**: aggiorno `index.css` (nuovi HSL esatti + `terracotta` + `brass`) e `tailwind.config.ts`. Verifica che le sezioni non ancora toccate restino leggibili.
-2. **Step 2 — Hero + Recensioni**: sopra la piega, massimo impatto. Hero resta split con micro-styling (full-bleed cinematografico rimandato a step futuro separato).
-3. **Step 3 — Villa + Perché + Servizi**: ritmo editoriale, chip a spigolo, statistiche ottone, divider.
-4. **Step 4 — Galleria + Posizione + FAQ + Contatti + CTA + Footer**: rifinitura coerente.
-5. **Step 5 — Navbar + MobileCta + skin del Form Disponibilità** (senza toccare logica).
-6. **QA finale**: screenshot Playwright desktop 1280 e mobile 390, controllo contrasto AA sulle label terracotta/ottone su cream, test manuale submit del form (deve funzionare identico a prima), check console e link.
+## 6. Velocità e controlli
+- Le foto più in basso si caricano solo quando ci si arriva, con dimensioni fisse perché la pagina non si sposti. I video si caricano solo al tocco.
+- Testi nuovi in italiano e inglese.
+- Controllo su computer e telefono: nessun errore, link e pulsanti funzionanti, video avviabili. Poi ti mostro l'anteprima e un riepilogo.
 
-Ogni step compila e resta pubblicabile da solo.
+## Da confermare prima di pubblicare
+- I diritti su musica e immagini dei due video, in particolare "Authentic Calabria", che ha scritte e logo.
 
-## 6. Rischi
-- **Form disponibilità**: rischio contenuto — tocco solo classi Tailwind di presentazione, non `<form>`, non `onSubmit`, non validazione, non honeypot, non hook. QA post-step 5 con submit reale di prova.
-- **Supabase / email**: nessuno, non tocco hook, client, edge functions né env.
-- **i18n**: rischio minimo — solo uniformazione di una label CTA in `translations.ts`. `LanguageContext` intatto.
-- **Contrasto/accessibilità**: teal `#123E42` su cream `#F6F1E7` = AAA. Terracotta `#C0674A` e ottone `#B0894F` su cream vanno usati solo per eyebrow/label maiuscoletto (large/decorative) o come accenti su testo grande — verifico AA large text; per body text uso sempre teal o near-black.
-- **Routing/SEO**: zero cambi.
-
-## 7. Conferma dei 5 punti richiesti
-1. Palette esatta con HSL derivati dai valori mockup + token `terracotta` + `brass`: **ok**.
-2. Niente pillole: radius 4px sui bottoni, chip a spigolo con bordo 1px, label CTA UPPERCASE + tracking: **ok**.
-3. Form disponibilità: solo skin visiva, logica/validation/honeypot/Supabase/hook intatti: **ok**.
-4. `translations.ts`: micro-modifica autorizzata SOLO per uniformare le label CTA primarie: **ok**.
-5. Hero: split con micro-styling ora, full-bleed cinematografico come step futuro separato: **ok**.
-
-Confermi e procedo con lo Step 1?
+## Dettagli tecnici
+- Hero: `<picture>` con source mobile/desktop e srcset 1280/2560, `fetchpriority="high"` solo sulla hero.
+- Nuovi componenti `MareSection.tsx`, `EsperienzeSection.tsx`, `CalabriaVideo.tsx`, ordinati in `Index.tsx`. Ancore `#mare` ed `#esperienze`, voci aggiunte a `navLinks`.
+- I video usano `<video controls playsInline preload="none" poster>`.
+- Token in `src/index.css` e `tailwind.config.ts`. Font da Google Fonts in `index.html`.
+- I vecchi asset `.asset.json` restano nel repository.
+- Nuove chiavi in `src/locales/it.json` ed `en.json`.
