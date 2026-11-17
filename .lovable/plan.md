@@ -1,6 +1,6 @@
 # Restyling Villa Paola: foto e video reali
 
-Tutti i 30 file (foto, video e copertine) sono già nella cartella del progetto. Manca solo la tabella CSV con i testi alternativi: li scriverò io a partire dal contenuto di ogni foto. Restano invariati il modulo, WhatsApp, i contatti, le recensioni, il backend, la SEO e il dominio. Non pubblico niente senza la tua approvazione.
+Tutti i 30 file (foto, video e copertine) sono già nella cartella del progetto. Il CSV caricato fornisce i testi alternativi e la mappatura. Restano invariati il modulo, WhatsApp, i contatti, le recensioni, il backend, la SEO e il dominio. Non pubblico niente senza la tua approvazione.
 
 ## 1. Stile
 - Colori: bianco caldo #F8F5EF, blu mediterraneo #254C5C, sabbia #C5B49A. Restano il logo e gli angoli poco arrotondati.
@@ -46,3 +46,9 @@ Tutti i 30 file (foto, video e copertine) sono già nella cartella del progetto.
 - Token in `src/index.css` e `tailwind.config.ts`. Font da Google Fonts in `index.html`.
 - I vecchi asset `.asset.json` restano nel repository.
 - Nuove chiavi in `src/locales/it.json` ed `en.json`.
+
+## Indicazioni aggiuntive (approvate)
+- Uso i testi alternativi e la mappatura del CSV MAPPATURA_ASSET.
+- Riprogetto la disposizione delle sezioni, non cambio solo le foto. Alterno foto panoramiche a tutta larghezza, composizioni asimmetriche e testo affiancato alle immagini.
+- Ogni foto compare una sola volta in homepage, fuori dalla galleria. Stesso stile in tutte le sezioni, per evitare l'effetto "template".
+- Particolare attenzione al telefono, sia per l'aspetto sia per la velocità. Il pulsante per chiedere disponibilità resta sempre visibile.
