@@ -433,10 +433,10 @@
     "title": "Simple interiors,",
     "titleEmph": "bright and cool",
     "body": "A cosy living room, an equipped kitchen, three bedrooms and two bathrooms: the right space for a family or a small group of friends.",
-    "livingAlt": "Living room",
-    "livingCap": "Living room",
-    "bedAlt": "Bedroom",
-    "bedCap": "Double bedroom"
+    "livingAlt": "Kitchen with decorated ceramic tiles",
+    "livingCap": "Kitchen",
+    "bedAlt": "Twin bedroom with sea-themed linens",
+    "bedCap": "Twin bedroom"
   },
   "sea": {
     "eyebrow": "The sea, a few steps away",

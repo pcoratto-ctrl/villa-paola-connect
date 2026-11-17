@@ -1,8 +1,8 @@
 import { Bed, Bath, Maximize, Users, Waves, Eye, PawPrint, Plane } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Reveal from "@/components/restyle/Reveal";
-import living from "@/assets/villa/gallery/10-soggiorno.webp.asset.json";
-import bedroom from "@/assets/villa/gallery/13-camera-matrimoniale.webp.asset.json";
+const living = { url: "/images/villa-paola-restyle/interni-cucina-dettaglio.webp" };
+const bedroom = { url: "/images/villa-paola-restyle/interni-camera-doppia.webp" };
 
 const VillaSection = () => {
   const { t } = useTranslation();
