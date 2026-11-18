@@ -56,16 +56,16 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Helmet><title>Dashboard Villa Paola · Admin</title><meta name="robots" content="noindex, nofollow" /></Helmet>
+      <Helmet><title>Dashboard partner commerciali di Villa Paola Caposuvero</title><meta name="robots" content="noindex, nofollow" /></Helmet>
       {/* Header */}
       <header className="border-b border-border px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="font-display text-2xl text-foreground">Dashboard Villa Paola</h1>
+        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <h1 className="font-display text-xl md:text-2xl text-foreground leading-tight break-words">Dashboard partner commerciali di Villa Paola Caposuvero</h1>
             <p className="text-muted-foreground text-sm">Gestisci operatori, accessi e recensioni</p>
             <p className="text-muted-foreground text-xs">{session.user.email}</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <a href="/admin/operatori" className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm text-foreground hover:bg-muted transition-colors">
               Operatori
             </a>
