@@ -74,3 +74,19 @@ export function buildIcs(ranges: Range[], now: Date = new Date()): string {
   ]
   return lines.join('\r\n') + '\r\n'
 }
+
+/** Normalize a stored secret: trim, drop wrapping quotes, drop any leading "Bearer " prefixes. */
+export function normalizeSecret(v: string | undefined | null): string {
+  let s = (v ?? '').trim().replace(/^["'`]+|["'`]+$/g, '').trim()
+  s = s.replace(/^(bearer\s+)+/i, '').trim()
+  return s
+}
+
+/** Upstream headers with exactly one "Bearer " prefix. */
+export function upstreamHeaders(bearer: string, pickup: string): Record<string, string> {
+  return {
+    'OAI-Sites-Authorization': `Bearer ${normalizeSecret(bearer)}`,
+    'X-VP-Pickup': normalizeSecret(pickup),
+    Accept: 'application/json',
+  }
+}

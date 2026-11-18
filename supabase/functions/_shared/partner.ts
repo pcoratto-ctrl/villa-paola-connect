@@ -1,5 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js@2'
-import { sanitize, type PartnerData } from './partnerCore.ts'
+import { normalizeSecret, sanitize, upstreamHeaders, type PartnerData } from './partnerCore.ts'
 export * from './partnerCore.ts'
 
 const UPSTREAM = 'https://villa-paola-centro-operativo.r-falvo.chatgpt.site/calendario/partner-data'
@@ -14,11 +14,11 @@ let cache: { at: number; data: PartnerData } | null = null
 /** Server-to-server fetch; credentials live only in backend secrets. Throws on any upstream problem. */
 export async function fetchPartnerData(): Promise<PartnerData> {
   if (cache && Date.now() - cache.at < 10_000) return cache.data
-  const bearer = Deno.env.get('VP_CENTRO_BEARER')
-  const pickup = Deno.env.get('VP_CENTRO_PICKUP')
+  const bearer = normalizeSecret(Deno.env.get('VP_CENTRO_BEARER'))
+  const pickup = normalizeSecret(Deno.env.get('VP_CENTRO_PICKUP'))
   if (!bearer || !pickup) throw new Error('upstream_not_configured')
   const res = await fetch(UPSTREAM, {
-    headers: { 'OAI-Sites-Authorization': `Bearer ${bearer}`, 'X-VP-Pickup': pickup, Accept: 'application/json' },
+    headers: upstreamHeaders(bearer, pickup),
     signal: AbortSignal.timeout(8000),
   })
   if (!res.ok) throw new Error(`upstream_${res.status}`)
