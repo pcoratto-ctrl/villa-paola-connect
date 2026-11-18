@@ -1,8 +1,6 @@
 import { Bed, Bath, Maximize, Users, Waves, Eye, PawPrint, Plane } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Reveal from "@/components/restyle/Reveal";
-const living = { url: "/images/villa-paola-restyle/interni-cucina-dettaglio.webp" };
-const bedroom = { url: "/images/villa-paola-restyle/interni-camera-doppia.webp" };
 
 const VillaSection = () => {
   const { t } = useTranslation();
@@ -27,7 +25,7 @@ const VillaSection = () => {
         <div className="villa-container grid md:grid-cols-12 gap-8 md:gap-12 items-end">
           <Reveal className="md:col-span-7">
             <p className="eyebrow mb-5">{t("villa.eyebrow")}</p>
-            <h2 className="font-display font-medium text-[2.4rem] sm:text-5xl lg:text-7xl leading-[1.02] text-foreground">
+            <h2 className="font-display font-medium text-[2.4rem] sm:text-5xl lg:text-6xl leading-[1.04] text-foreground">
               {t("villa.titleStart")} <span className="italic font-normal text-primary">{t("villa.titleEmph")}</span>
             </h2>
           </Reveal>
@@ -61,7 +59,6 @@ const VillaSection = () => {
           <Reveal className="grid grid-cols-2 md:grid-cols-4 border-y border-border mt-14 md:mt-20">
             {stats.map((s, i) => (
               <div key={s.label} className={`py-8 md:py-10 px-2 md:px-6 ${i % 2 ? "border-l" : ""} ${i > 0 ? "md:border-l" : ""} ${i > 1 ? "border-t md:border-t-0" : ""} border-border`}>
-                <s.icon className="w-5 h-5 text-primary/70 mb-4" strokeWidth={1.4} />
                 <p className="font-display text-4xl md:text-5xl text-foreground leading-none mb-2">{s.value}</p>
                 <p className="text-muted-foreground text-xs tracking-[0.15em] uppercase">{s.label}</p>
               </div>
@@ -71,7 +68,7 @@ const VillaSection = () => {
             <ul className="flex flex-wrap gap-x-8 gap-y-3 py-8">
               {features.map((f) => (
                 <li key={f.text} className="flex items-center gap-2.5 text-sm text-foreground">
-                  <f.icon className="w-4 h-4 text-primary flex-shrink-0" strokeWidth={1.5} />
+                  <span aria-hidden className="w-1 h-1 bg-accent rounded-full" />
                   {f.text}
                 </li>
               ))}
@@ -80,28 +77,27 @@ const VillaSection = () => {
         </div>
       </div>
 
-      {/* Gli ambienti: asymmetric interiors */}
-      <div className="villa-section py-16 md:py-28">
-        <div className="villa-container grid md:grid-cols-12 gap-6 md:gap-10 items-start">
-          <Reveal className="md:col-span-4 md:sticky md:top-28">
-            <p className="eyebrow mb-4">{t("rooms.eyebrow")}</p>
+      {/* Il giardino: vertical + wide, asymmetric, centered statement */}
+      <div className="villa-section py-20 md:py-32">
+        <div className="villa-container">
+          <Reveal className="max-w-2xl mx-auto text-center mb-12 md:mb-20">
+            <p className="eyebrow mb-4">{t("garden.eyebrow")}</p>
             <h3 className="font-display font-medium text-3xl md:text-5xl leading-tight mb-5">
-              {t("rooms.title")} <span className="italic font-normal text-primary">{t("rooms.titleEmph")}</span>
+              {t("garden.title")} <span className="italic font-normal text-primary">{t("garden.titleEmph")}</span>
             </h3>
-            <p className="text-muted-foreground leading-relaxed">{t("rooms.body")}</p>
+            <p className="text-muted-foreground leading-relaxed">{t("garden.body")}</p>
           </Reveal>
-          <Reveal className="md:col-span-5" delay={0.05}>
-            <figure>
-              <img src={living.url} alt={t("rooms.livingAlt")} loading="lazy" decoding="async" className="w-full aspect-[4/5] object-cover rounded-villa" />
-              <figcaption className="mt-3 text-xs tracking-[0.15em] uppercase text-muted-foreground">{t("rooms.livingCap")}</figcaption>
-            </figure>
-          </Reveal>
-          <Reveal className="md:col-span-3 md:mt-40" delay={0.15}>
-            <figure>
-              <img src={bedroom.url} alt={t("rooms.bedAlt")} loading="lazy" decoding="async" className="w-full aspect-[3/4] object-cover rounded-villa" />
-              <figcaption className="mt-3 text-xs tracking-[0.15em] uppercase text-muted-foreground">{t("rooms.bedCap")}</figcaption>
-            </figure>
-          </Reveal>
+          <div className="grid grid-cols-12 gap-3 md:gap-8 items-end">
+            <Reveal className="col-span-5 md:col-span-4">
+              <img src="/images/villa-paola-restyle/villa-vialetto-giardino.webp" alt={t("garden.pathAlt")} width={1200} height={1600} loading="lazy" decoding="async" className="w-full aspect-[3/4] object-cover rounded-villa" />
+            </Reveal>
+            <Reveal className="col-span-7 md:col-span-8" delay={0.08}>
+              <img src="/images/villa-paola-restyle/villa-esterno-giardino.webp" alt={t("garden.houseAlt")} width={1920} height={1389} loading="lazy" decoding="async" className="w-full aspect-[1920/1389] object-cover rounded-villa" />
+            </Reveal>
+            <Reveal className="col-span-12 md:col-span-6 md:col-start-5 mt-3 md:mt-8" delay={0.12}>
+              <img src="/images/villa-paola-restyle/giardino-mare-luce.webp" alt={t("garden.lightAlt")} width={1920} height={1440} loading="lazy" decoding="async" className="w-full aspect-[4/3] object-cover rounded-villa" />
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

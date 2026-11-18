@@ -11,7 +11,8 @@
     "backHome": "Back to home",
     "languageLabel": "Language",
     "sea": "The sea",
-    "experiences": "Experiences"
+    "experiences": "Experiences",
+    "rooms": "The interiors"
   },
   "hero": {
     "eyebrow": "Villa Paola Caposuvero · Gizzeria · Calabria",
@@ -429,14 +430,33 @@
     "caption": "The path, the lawn and the house: all on one level, overlooking the sea."
   },
   "rooms": {
-    "eyebrow": "The rooms",
-    "title": "Simple interiors,",
-    "titleEmph": "bright and cool",
-    "body": "A cosy living room, an equipped kitchen, three bedrooms and two bathrooms: the right space for a family or a small group of friends.",
-    "livingAlt": "Kitchen with decorated ceramic tiles",
-    "livingCap": "Kitchen",
-    "bedAlt": "Twin bedroom with sea-themed linens",
-    "bedCap": "Twin bedroom"
+    "eyebrow": "The interiors",
+    "title": "Inside,",
+    "titleEmph": "everything you need",
+    "body": "Three bedrooms, two bathrooms, a living area and an equipped kitchen: simple, cool spaces for a family or a small group.",
+    "more": "See all photos",
+    "items": {
+      "bedrooms": {
+        "title": "Bedrooms",
+        "text": "Three bright, cool bedrooms, double and twin.",
+        "alt": "Twin bedroom with sea-themed linens"
+      },
+      "living": {
+        "title": "Living area",
+        "text": "A cosy living room opening onto the terrace and garden.",
+        "alt": "Villa Paola living room"
+      },
+      "kitchen": {
+        "title": "Kitchen",
+        "text": "Equipped kitchen with oven, microwave and dishwasher.",
+        "alt": "Kitchen with decorated ceramic tiles"
+      },
+      "baths": {
+        "title": "Bathrooms",
+        "text": "Two bathrooms with sea-coloured ceramic tiles.",
+        "alt": "Bathroom tile detail"
+      }
+    }
   },
   "sea": {
     "eyebrow": "The sea, a few steps away",
@@ -474,5 +494,14 @@
     "showAll": "See all photos",
     "showLess": "Show less",
     "count": "{{n}} photos"
+  },
+  "garden": {
+    "eyebrow": "The garden",
+    "title": "A green lawn",
+    "titleEmph": "that ends in the blue",
+    "body": "A stone path, olive trees, loungers on the lawn. The garden leads from the house down to the low wall by the sea: this is where most of the day is spent.",
+    "pathAlt": "Stone path between the lawn and the house",
+    "houseAlt": "Villa façade with garden and pergola",
+    "lightAlt": "Sunny garden overlooking the sea"
   }
 }

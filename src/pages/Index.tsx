@@ -7,7 +7,7 @@ import VillaSection from "@/components/VillaSection";
 import MareSection from "@/components/MareSection";
 import EsperienzeSection from "@/components/EsperienzeSection";
 import CalabriaSection from "@/components/CalabriaSection";
-import PerchéSection from "@/components/PerchéSection";
+import AmbientiSection from "@/components/AmbientiSection";
 import ServiziSection from "@/components/ServiziSection";
 import GalleriaSection from "@/components/GalleriaSection";
 import PosizioneSection from "@/components/PosizioneSection";
@@ -34,15 +34,15 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <RecensioniHighlight />
         <VillaSection />
         <MareSection />
         <EsperienzeSection />
-        <PerchéSection />
+        <AmbientiSection />
         <ServiziSection />
         <GalleriaSection />
         <CalabriaSection />
         <PosizioneSection />
+        <RecensioniHighlight />
         <DisponibilitaSection />
         <FaqSection />
         <ContattiSection />

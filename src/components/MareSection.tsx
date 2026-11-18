@@ -20,7 +20,7 @@ const MareSection = () => {
             decoding="async"
             className="w-full aspect-[4/3] object-cover rounded-villa"
           />
-          <div className="hidden md:block absolute -bottom-16 -right-10 w-[38%] shadow-elevated">
+          <div className="hidden md:block absolute -bottom-16 -right-10 w-[38%]">
             <VideoOnDemand src={`${B}/video-accesso-mare.mp4`} poster={`${B}/video-accesso-mare-poster.webp`} label={t("sea.videoLabel")} alt={t("sea.videoAlt")} width={540} height={960} />
           </div>
         </Reveal>

@@ -17,11 +17,6 @@ const photos: Photo[] = [
   { src: B + "giardino-mare-luce.webp", it: "Giardino soleggiato affacciato sul mare", en: "Sunny garden overlooking the sea" },
   { src: B + "terrazza-pranzo-vista-mare.webp", it: "Tavola apparecchiata sulla terrazza fronte mare", en: "Table set on the seafront terrace" },
   { src: B + "terrazza-pergolato-panoramica.webp", it: "Pergolato della terrazza con divano e vista sul mare", en: "Terrace pergola with sofa and sea view" },
-  { src: g10.url, it: "Soggiorno", en: "Living room" },
-  { src: g13.url, it: "Camera matrimoniale", en: "Double bedroom" },
-  { src: g12.url, it: "Camera doppia", en: "Twin bedroom" },
-  { src: g11.url, it: "Cucina", en: "Kitchen" },
-  { src: g14.url, it: "Bagno", en: "Bathroom" },
   { src: B + "villa-esterno-giardino.webp", it: "Facciata della villa con giardino e pergolato", en: "Villa façade with garden and pergola" },
   { src: B + "hero-giardino-mare-desktop.webp", thumb: B + "hero-giardino-mare-1280.webp", it: "Giardino di Villa Paola con sedute e mare sullo sfondo", en: "Villa Paola garden with seating and the sea beyond" },
   { src: B + "giardino-sedie-sdraio.webp", it: "Sdraio sul prato della villa accanto al mare", en: "Sun loungers on the villa lawn by the sea" },
@@ -35,6 +30,11 @@ const photos: Photo[] = [
   { src: B + "villa-facciata-sera.webp", it: "Facciata illuminata di Villa Paola all’imbrunire", en: "Villa Paola façade lit up at dusk" },
   { src: B + "giardino-tramonto-mare.webp", it: "Giardino della villa al tramonto sul mare", en: "The villa garden at sunset over the sea" },
   { src: B + "tramonto-vista-dalla-villa.webp", it: "Tramonto sul mare visto dalla villa", en: "Sunset over the sea seen from the villa" },
+  { src: g10.url, it: "Soggiorno", en: "Living room" },
+  { src: g13.url, it: "Camera matrimoniale", en: "Double bedroom" },
+  { src: g12.url, it: "Camera doppia", en: "Twin bedroom" },
+  { src: g11.url, it: "Cucina", en: "Kitchen" },
+  { src: g14.url, it: "Bagno", en: "Bathroom" },
 ];
 
 const PREVIEW = 9;

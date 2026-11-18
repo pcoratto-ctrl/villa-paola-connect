@@ -10,14 +10,11 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
-    { label: t("nav.reviews"), href: "/#recensioni" },
-    { label: t("nav.villa"), href: "/#villa" },
+    { label: t("nav.villa"), href: "/#villa", sub: { label: t("nav.rooms"), href: "/#ambienti" } },
     { label: t("nav.sea"), href: "/#mare" },
     { label: t("nav.experiences"), href: "/#esperienze" },
-    { label: t("nav.services"), href: "/#servizi" },
     { label: t("nav.gallery"), href: "/#galleria" },
     { label: t("nav.location"), href: "/#posizione" },
-    { label: t("nav.contact"), href: "/#contatti" },
   ];
 
   return (
@@ -43,18 +40,26 @@ const Navbar = () => {
 
             <div className="hidden lg:flex items-center gap-5 xl:gap-7">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-[13px] font-medium tracking-wide text-foreground/85 transition-colors duration-300 hover:text-primary"
-                >
-                  {link.label}
-                </a>
+                <div key={link.href} className="relative group">
+                  <a
+                    href={link.href}
+                    className="text-[13px] font-medium tracking-wide text-foreground/85 transition-colors duration-300 hover:text-primary"
+                  >
+                    {link.label}
+                  </a>
+                  {link.sub && (
+                    <div className="absolute left-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-opacity">
+                      <a href={link.sub.href} className="block whitespace-nowrap px-4 py-2.5 bg-background border border-border rounded-villa text-[13px] text-foreground/85 hover:text-primary">
+                        {link.sub.label}
+                      </a>
+                    </div>
+                  )}
+                </div>
               ))}
               <LanguageSwitcher />
               <a
                 href="/#disponibilita"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-villa bg-primary text-primary-foreground text-sm font-semibold shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-villa bg-primary text-primary-foreground text-sm font-semibold transition-colors hover:bg-primary/90"
               >
                 <CalendarCheck className="w-4 h-4" strokeWidth={1.5} />
                 {t("nav.checkAvailability")}
@@ -85,14 +90,20 @@ const Navbar = () => {
           >
             <div className="villa-section flex flex-col gap-6 pt-8">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="font-display text-3xl text-foreground hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
+                <div key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="font-display text-3xl text-foreground hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                  {link.sub && (
+                    <a href={link.sub.href} onClick={() => setMobileOpen(false)} className="block mt-2 text-sm text-muted-foreground hover:text-primary">
+                      {link.sub.label}
+                    </a>
+                  )}
+                </div>
               ))}
               <div className="pt-2">
                 <LanguageSwitcher />
@@ -100,7 +111,7 @@ const Navbar = () => {
               <a
                 href="/#disponibilita"
                 onClick={() => setMobileOpen(false)}
-                className="mt-4 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta"
+                className="mt-4 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-villa bg-primary text-primary-foreground text-base font-medium"
               >
                 <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
                 {t("nav.checkAvailability")}

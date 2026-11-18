@@ -11,7 +11,8 @@
     "backHome": "Torna alla home",
     "languageLabel": "Lingua",
     "sea": "Il mare",
-    "experiences": "Esperienze"
+    "experiences": "Esperienze",
+    "rooms": "Gli ambienti"
   },
   "hero": {
     "eyebrow": "Villa Paola Caposuvero · Gizzeria · Calabria",
@@ -430,13 +431,32 @@
   },
   "rooms": {
     "eyebrow": "Gli ambienti",
-    "title": "Interni semplici,",
-    "titleEmph": "luminosi e freschi",
-    "body": "Un soggiorno raccolto, una cucina attrezzata, tre camere e due bagni: lo spazio giusto per una famiglia o un piccolo gruppo di amici.",
-    "livingAlt": "Cucina con piastrelle in ceramica decorata",
-    "livingCap": "Cucina",
-    "bedAlt": "Camera doppia con lenzuola a motivi marini",
-    "bedCap": "Camera doppia"
+    "title": "Dentro casa,",
+    "titleEmph": "tutto il necessario",
+    "body": "Tre camere, due bagni, una zona giorno e una cucina attrezzata: spazi semplici e freschi per una famiglia o un piccolo gruppo.",
+    "more": "Vedi tutte le foto",
+    "items": {
+      "bedrooms": {
+        "title": "Le camere",
+        "text": "Tre camere da letto, matrimoniale e doppie, luminose e fresche.",
+        "alt": "Camera doppia con lenzuola a motivi marini"
+      },
+      "living": {
+        "title": "La zona giorno",
+        "text": "Un soggiorno raccolto che si apre verso la terrazza e il giardino.",
+        "alt": "Soggiorno di Villa Paola"
+      },
+      "kitchen": {
+        "title": "La cucina",
+        "text": "Cucina attrezzata con forno, microonde e lavastoviglie.",
+        "alt": "Cucina con piastrelle in ceramica decorata"
+      },
+      "baths": {
+        "title": "I bagni",
+        "text": "Due bagni con rivestimenti in ceramica dai colori del mare.",
+        "alt": "Dettaglio delle ceramiche del bagno"
+      }
+    }
   },
   "sea": {
     "eyebrow": "Il mare, a pochi passi",
@@ -474,5 +494,14 @@
     "showAll": "Scopri tutte le foto",
     "showLess": "Mostra meno",
     "count": "{{n}} foto"
+  },
+  "garden": {
+    "eyebrow": "Il giardino",
+    "title": "Un prato verde",
+    "titleEmph": "che finisce nel blu",
+    "body": "Il vialetto in pietra, gli ulivi, le sdraio sul prato. Il giardino accompagna dalla casa fino al muretto sul mare: è qui che si passa la maggior parte della giornata.",
+    "pathAlt": "Vialetto in pietra tra il prato e la casa",
+    "houseAlt": "Facciata della villa con giardino e pergolato",
+    "lightAlt": "Giardino soleggiato affacciato sul mare"
   }
 }
