@@ -47,7 +47,7 @@ export function unavailable(d: PartnerData): Range[] {
   return out
 }
 
-const ymd = (d: string) => d.replaceAll('-', '')
+const ymd = (d: string) => d.replace(/-/g, '')
 
 /** RFC 5545 calendar: all-day events, DTEND exclusive (departure day), stable UIDs, CRLF line endings. */
 export function buildIcs(ranges: Range[], now: Date = new Date()): string {
