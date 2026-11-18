@@ -1,32 +1,37 @@
-# Homepage Villa Paola: nuova gerarchia visiva
+# Calendario operatori: analisi (nessuna modifica)
 
-Obiettivo: far innamorare il visitatore partendo da esterni, giardino, mare e terrazza. Gli interni vanno in una sezione secondaria, da consultare con calma. Cambia solo l'aspetto: modulo, contatti, WhatsApp, recensioni, SEO, area tour operator e pagina /calendario restano come sono. Niente pubblicazione.
+## Cosa esiste già
+- **Pubblicazione:** il dominio villapaolacaposuvero.it (anche www) punta all'hosting Lovable, non a un hosting Aruba. Aruba gestisce solo le email del dominio, perché i server di posta (MX) sono suoi. Per questo il proxy in PHP su Aruba non serve e oggi non sarebbe raggiungibile.
+- **Accesso:** c'è un solo accesso con email e password, usato dall'area admin (`/admin`). La registrazione pubblica è chiusa.
+- **Ruoli:** sono salvati in una tabella `user_roles` separata, con tre valori possibili: admin, moderator, user. Solo `admin` è usato; dà accesso a leads e recensioni.
+- **Area operatori:** non esiste ancora. Non c'è nessuna pagina `/calendario` e nessun ruolo dedicato agli operatori.
+- **Funzioni del backend:** ci sono `notify-lead` e `mcp`, ma nessun proxy verso il Centro operativo.
+- **Centro operativo:** l'indirizzo `/calendario/partner-data` risponde 401 se lo si chiama senza header, quindi la protezione è attiva.
 
-## Nuovo ordine della homepage
+## Soluzione proposta (proxy sul backend del sito)
+1. **Nuovo ruolo:** aggiungere `partner` ai ruoli esistenti. Gli operatori approvati ricevono solo `partner` e non vedono leads né recensioni, che restano riservati ad `admin`.
+2. **Funzione `partner-calendar`:**
+   - controlla che chi chiama abbia effettuato l'accesso e abbia il ruolo partner;
+   - chiama il Centro operativo dal server, aggiungendo `OAI-Sites-Authorization: Bearer …` e `X-VP-Pickup`;
+   - restituisce solo i campi ammessi: lastNight, cleaningCents, electricityIncluded, linenIncluded, bookings (solo date di arrivo e partenza) e periods. Qualsiasi altro campo viene scartato;
+   - tiene in memoria la risposta per circa 10 secondi, così molti operatori collegati insieme non sovraccaricano il Centro operativo.
+3. **Pagine `/calendario/login` e `/calendario`:**
+   - non indicizzate dai motori di ricerca ed escluse dalla sitemap;
+   - aggiornamento ogni 15 secondi, sospeso quando la scheda non è in primo piano;
+   - il giorno di "oggi" calcolato sul fuso Europe/Rome;
+   - notti calcolate con la partenza esclusa, quindi la notte della partenza resta libera;
+   - mezze caselle nel giorno di arrivo (dalle 15:00) e in quello di partenza (fino alle 10:00);
+   - giorni passati oscurati e nessuna data oltre lastNight;
+   - colori distinti per prezzo, blocco, opzione e prenotato.
+4. **Credenziali:** solo come segreti del backend, mai nel codice del sito.
 
-1. **Hero**: foto giardino e mare a tutto schermo, titolo breve e pulsante per le date.
-2. **Introduzione**: un testo breve su molto spazio bianco, con una sola foto verticale degli esterni. Niente card e niente icone.
-3. **La proprietà e il giardino**: una foto panoramica a tutta larghezza (villa-esterno-panoramica), poi due foto in composizione asimmetrica (villa-esterno-giardino, giardino-mare-luce). I dati chiave (ospiti, camere, metri dal mare) stanno su una riga di solo testo.
-4. **Il mare**: una grande immagine (vista mare o muretto bianco), il testo sull'accesso alla spiaggia e il video che parte solo se lo tocchi.
-5. **Vivere Villa Paola**: la terrazza, con terrazza-pergolato-panoramica come foto principale e terrazza-pranzo-vista-mare e terrazza-divano-fronte-mare affiancate al testo. La chiude villa-facciata-sera o giardino-tramonto-mare, come passaggio verso la sera.
-6. **Gli ambienti**: sezione secondaria con sfondo leggermente diverso e foto piccole (proporzione 4:3, circa un terzo della larghezza). Ha quattro parti apribili: Le camere, La zona giorno, La cucina, I bagni. Ognuna ha 1 o 2 foto, poche righe di testo e solo dati reali già presenti sul sito.
-7. **Servizi e dotazioni**: un elenco tipografico su due colonne, senza card e con poche icone o nessuna.
-8. **Galleria**: l'anteprima mostra prima esterni, terrazza e mare. Gli interni compaiono solo nella galleria completa.
-9. **Calabria e posizione**: unisco la sezione Calabria e la mappa in un solo blocco.
-10. **Recensioni**: le spostiamo qui, dopo la galleria. Oggi stanno subito sotto la hero.
-11. **Disponibilità e contatti**: modulo, domande frequenti, contatti e richiamo finale, come oggi.
-
-La sezione "Perché sceglierci" e quella delle esperienze ripetono concetti già presenti. Le unisco alle sezioni 2 e 5 per evitare doppioni. Il menu in alto segue il nuovo ordine, con poche voci: Villa, Mare, Terrazza, Ambienti, Galleria, Posizione, Contatti.
-
-## Pulizia grafica
-- Un solo colore di sfondo principale (bianco caldo). Il sabbia chiaro solo per "Gli ambienti" e per il modulo.
-- Margini e spazi verticali uguali per tutte le sezioni. Titoli in Cormorant, testi brevi, una linea sottile solo dove serve.
-- Niente ombre, bordi o card superflue. Le animazioni restano: una dissolvenza leggera e una sola volta.
-- Ogni foto grande compare una sola volta in homepage. Le proporzioni sono fisse per evitare ritagli brutti, anche su mobile.
+## Configurazioni mancanti, da fornire
+- **Valori dei due segreti:** il token Bearer e X-VP-Pickup. Li inserisce il proprietario nei Segreti del progetto.
+- **Elenco degli operatori approvati:** l'admin crea gli account. Va deciso anche come vengono approvati: inviti manuali oppure richiesta con approvazione.
+- **Conferme sui dati:** che `bookings` non contenga mai nomi o altri dati personali (il proxy li filtra comunque) e che i prezzi siano in centesimi e per notte.
+- **Pagina /calendario:** va confermato che deve stare su questo sito. Nella cronologia è indicata come "in sviluppo".
 
 ## Note tecniche
-- Ricomporre `Index.tsx` e le sezioni Villa, Mare, Esperienze (diventa "Vivere Villa Paola"), Calabria e Posizione. Creare `AmbientiSection.tsx` con accordion shadcn e foto prese dalla gallery e dalla cartella restyle.
-- Togliere `PerchéSection` dalla homepage senza cancellare il file. Riordinare l'array dell'anteprima in `GalleriaSection`.
-- Nuovi testi IT/EN in `it.json` e `en.json`. Le ancore del menu vanno aggiornate, mantenendo quelle vecchie usate dai link esterni (#disponibilita, #contatti).
-- Nessuna modifica a backend, `notify-lead`, tracciamento dei clic, route `/calendario` e area riservata.
-- Verifica con Playwright su desktop e mobile: immagini caricate, nessuno sfondamento orizzontale, funzionamento dei pulsanti per le date.
+- Il proxy in PHP non è necessario e diventerebbe possibile solo spostando l'hosting su Aruba, cosa che sconsiglio.
+- Per aggiungere `partner` serve una modifica al database. Le regole di accesso ai dati esistenti restano invariate.
+- Questa analisi non ha modificato file, dati o permessi e non ha pubblicato nulla.
