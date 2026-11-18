@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useAuth } from "@/hooks/useAuth";
 import { useAllReviews, useUpdateReviewStatus, useDeleteReview } from "@/hooks/useReviews";
 import { useToast } from "@/hooks/use-toast";
@@ -55,12 +56,14 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet><title>Dashboard Villa Paola · Admin</title><meta name="robots" content="noindex, nofollow" /></Helmet>
       {/* Header */}
       <header className="border-b border-border px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="font-display text-2xl text-foreground">Dashboard Recensioni</h1>
-            <p className="text-muted-foreground text-sm">{session.user.email}</p>
+            <h1 className="font-display text-2xl text-foreground">Dashboard Villa Paola</h1>
+            <p className="text-muted-foreground text-sm">Gestisci operatori, accessi e recensioni</p>
+            <p className="text-muted-foreground text-xs">{session.user.email}</p>
           </div>
           <div className="flex items-center gap-3">
             <a href="/admin/operatori" className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm text-foreground hover:bg-muted transition-colors">
