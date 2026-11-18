@@ -22,6 +22,13 @@
       "when": 1795039153248,
       "tag": "0002_partner_ical_only_minimal_logs",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795043975572,
+      "tag": "0003_restore_has_role_for_authenticated",
+      "breakpoints": true
     }
   ]
 }
