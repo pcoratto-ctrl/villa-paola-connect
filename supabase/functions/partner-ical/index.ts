@@ -10,7 +10,8 @@ Deno.serve(async (req) => {
   let ics: string
   try {
     ics = buildIcs(unavailable(await fetchPartnerData()))
-  } catch {
+  } catch (e) {
+    console.error('partner-ical upstream error:', (e as Error).message)
     // never serve an empty 200 calendar: receivers would wipe all unavailability
     return new Response('Upstream unavailable', { status: 503, headers: { 'Retry-After': '300' } })
   }

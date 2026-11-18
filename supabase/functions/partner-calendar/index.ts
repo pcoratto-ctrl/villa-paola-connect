@@ -28,6 +28,7 @@ Deno.serve(async (req) => {
     return json({ company: op.company, data: await fetchPartnerData() })
   } catch (e) {
     const msg = (e as Error).message
+    console.error('partner-calendar upstream error:', msg)
     return json({ error: msg === 'upstream_not_configured' ? 'not_configured' : 'upstream_unavailable' }, 503)
   }
 })
