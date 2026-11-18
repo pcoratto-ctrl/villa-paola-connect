@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import Reveal from "@/components/restyle/Reveal";
 import living from "@/assets/villa/gallery/10-soggiorno.webp.asset.json";
+import { Button } from "@/components/ui/button";
+import type { RoomCategory } from "@/lib/galleryCatalog";
 
 const B = "/images/villa-paola-restyle";
 const items = [
@@ -33,7 +35,9 @@ const AmbientiSection = () => {
           {items.map((it, i) => (
             <li key={it.key} className="snap-start shrink-0 w-[72%] sm:w-[45%] md:w-auto">
               <Reveal delay={i * 0.05}>
-                <img src={it.src} alt={t(`rooms.items.${it.key}.alt`)} loading="lazy" decoding="async" className="w-full aspect-[4/3] object-cover rounded-villa" />
+                <Button variant="ghost" className="block w-full h-auto p-0 rounded-villa overflow-hidden" aria-label={t(`rooms.items.${it.key}.title`)} onClick={e => window.dispatchEvent(new CustomEvent("villa-gallery-open", { detail: { room: it.key as RoomCategory, trigger: e.currentTarget } }))}>
+                  <img src={it.src} alt={t(`rooms.items.${it.key}.alt`)} width={1200} height={900} loading="lazy" decoding="async" className="w-full aspect-[4/3] object-cover rounded-villa" />
+                </Button>
                 <h3 className="font-display text-xl md:text-2xl mt-4 mb-1.5">{t(`rooms.items.${it.key}.title`)}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{t(`rooms.items.${it.key}.text`)}</p>
               </Reveal>
@@ -43,9 +47,9 @@ const AmbientiSection = () => {
       </div>
       <div className="villa-section">
         <div className="villa-container mt-8">
-          <a href="#galleria" className="text-sm font-medium text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary">
+          <Button variant="link" className="px-0" onClick={e => window.dispatchEvent(new CustomEvent("villa-gallery-open", { detail: { trigger: e.currentTarget } }))}>
             {t("rooms.more")}
-          </a>
+          </Button>
         </div>
       </div>
     </section>

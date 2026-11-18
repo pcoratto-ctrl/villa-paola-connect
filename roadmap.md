@@ -1,4 +1,5 @@
 # SEO corrections
+- [x] Aggiornare galleria V2: 50 foto, anteprima di 9, categorie e accesso dagli ambienti; verificato desktop/mobile senza pubblicare.
 - [x] Review failing findings against current source and fresh foundation scan.
 - [x] Link existing brand favicon and remove duplicate static canonical.
 - [x] Complete per-page social metadata on legal pages.

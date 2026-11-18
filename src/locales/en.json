@@ -93,7 +93,16 @@
     "subtitle": "The sea, the terrace, the interiors: a visual tour of your next holiday.",
     "close": "Close",
     "prev": "Previous photo",
-    "next": "Next photo"
+    "next": "Next photo",
+    "all": "All",
+    "categories": {
+      "villa": "Villa and garden",
+      "terrace": "Terrace and everyday moments",
+      "sea": "Sea and coast",
+      "sunset": "Sunsets and atmosphere",
+      "interiors": "The interiors"
+    },
+    "roomAll": "All interiors"
   },
   "position": {
     "eyebrow": "Location",

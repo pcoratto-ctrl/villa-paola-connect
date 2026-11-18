@@ -93,7 +93,16 @@
     "subtitle": "Il mare, la terrazza, gli spazi interni: un percorso visivo della tua prossima vacanza.",
     "close": "Chiudi",
     "prev": "Foto precedente",
-    "next": "Foto successiva"
+    "next": "Foto successiva",
+    "all": "Tutte",
+    "categories": {
+      "villa": "Villa e giardino",
+      "terrace": "Terrazza e momenti di vita",
+      "sea": "Mare e costa",
+      "sunset": "Tramonti e atmosfera",
+      "interiors": "Gli ambienti"
+    },
+    "roomAll": "Tutti gli ambienti"
   },
   "position": {
     "eyebrow": "Posizione",
