@@ -77,6 +77,124 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_access_log: {
+        Row: {
+          created_at: string
+          id: string
+          ip_prefix: string | null
+          kind: string
+          operator_id: string | null
+          outcome: string
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip_prefix?: string | null
+          kind: string
+          operator_id?: string | null
+          outcome: string
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip_prefix?: string | null
+          kind?: string
+          operator_id?: string | null
+          outcome?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_access_log_operator_id_fkey"
+            columns: ["operator_id"]
+            isOneToOne: false
+            referencedRelation: "partner_operators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_feed_tokens: {
+        Row: {
+          allowed_origins: string[]
+          created_at: string
+          id: string
+          kind: string
+          operator_id: string
+          revoked_at: string | null
+          token_hash: string
+        }
+        Insert: {
+          allowed_origins?: string[]
+          created_at?: string
+          id?: string
+          kind: string
+          operator_id: string
+          revoked_at?: string | null
+          token_hash: string
+        }
+        Update: {
+          allowed_origins?: string[]
+          created_at?: string
+          id?: string
+          kind?: string
+          operator_id?: string
+          revoked_at?: string | null
+          token_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_feed_tokens_operator_id_fkey"
+            columns: ["operator_id"]
+            isOneToOne: false
+            referencedRelation: "partner_operators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_operators: {
+        Row: {
+          company: string
+          contact_name: string | null
+          created_at: string
+          email: string
+          id: string
+          last_access_at: string | null
+          notes: string | null
+          phone: string | null
+          status: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          company: string
+          contact_name?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          last_access_at?: string | null
+          notes?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          company?: string
+          contact_name?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          last_access_at?: string | null
+          notes?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       reviews: {
         Row: {
           comment: string
@@ -142,7 +260,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "moderator" | "user"
+      app_role: "admin" | "moderator" | "user" | "partner"
       review_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
@@ -271,7 +389,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "moderator", "user"],
+      app_role: ["admin", "moderator", "user", "partner"],
       review_status: ["pending", "approved", "rejected"],
     },
   },

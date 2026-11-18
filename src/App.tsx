@@ -7,6 +7,9 @@ import Index from "./pages/Index.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import PartnerLogin from "./pages/PartnerLogin.tsx";
+import PartnerCalendar from "./pages/PartnerCalendar.tsx";
+import AdminOperators from "./pages/AdminOperators.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import CookiePolicy from "./pages/CookiePolicy.tsx";
 import TerminiCondizioni from "./pages/TerminiCondizioni.tsx";
@@ -42,6 +45,9 @@ const App = () => (
           <Route path="/termini-condizioni" element={<TerminiCondizioni />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/operatori" element={<AdminOperators />} />
+          <Route path="/calendario/login" element={<PartnerLogin />} />
+          <Route path="/calendario" element={<PartnerCalendar />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -63,6 +63,9 @@ const AdminDashboard = () => {
             <p className="text-muted-foreground text-sm">{session.user.email}</p>
           </div>
           <div className="flex items-center gap-3">
+            <a href="/admin/operatori" className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm text-foreground hover:bg-muted transition-colors">
+              Operatori
+            </a>
             <a href="/" className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm text-foreground hover:bg-muted transition-colors">
               <Home className="w-4 h-4" strokeWidth={1.5} />
               Sito
