@@ -15,6 +15,13 @@
       "when": 1795038628169,
       "tag": "0001_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795039153248,
+      "tag": "0002_partner_ical_only_minimal_logs",
+      "breakpoints": true
     }
   ]
 }

@@ -29,7 +29,6 @@ const AdminOperators = () => {
   const [form, setForm] = useState({ company: "", contact_name: "", email: "", phone: "", notes: "" });
   const [secret, setSecret] = useState<{ title: string; value: string } | null>(null);
   const [open, setOpen] = useState<string | null>(null);
-  const [origins, setOrigins] = useState("");
 
   const ops = useQuery({
     queryKey: ["partner-operators"],
@@ -43,7 +42,7 @@ const AdminOperators = () => {
   const tokens = useQuery({
     queryKey: ["partner-tokens"],
     enabled: !!session,
-    queryFn: async () => (await supabase.from("partner_feed_tokens").select("id, operator_id, kind, allowed_origins, created_at, revoked_at").is("revoked_at", null)).data ?? [],
+    queryFn: async () => (await supabase.from("partner_feed_tokens").select("id, operator_id, kind, created_at, revoked_at").is("revoked_at", null)).data ?? [],
   });
   const log = useQuery({
     queryKey: ["partner-log", open],
@@ -118,8 +117,7 @@ const AdminOperators = () => {
             {ops.data?.map((o) => {
               const toks = tokens.data?.filter((t) => t.operator_id === o.id) ?? [];
               const ical = toks.find((t) => t.kind === "ical");
-              const widget = toks.find((t) => t.kind === "widget");
-              return (
+                            return (
                 <li key={o.id} className="py-4">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
@@ -129,7 +127,7 @@ const AdminOperators = () => {
                     <div className="flex flex-wrap gap-2">
                       {o.status !== "enabled" && o.status !== "revoked" && <button className={btn} onClick={() => run({ action: "set_status", operator_id: o.id, status: "enabled" }, "Abilitato")}>Abilita</button>}
                       {o.status === "enabled" && <button className={btn} onClick={() => run({ action: "set_status", operator_id: o.id, status: "suspended" }, "Sospeso")}>Sospendi</button>}
-                      {o.status !== "revoked" && <button className={btn} onClick={() => confirm(`Revocare definitivamente ${o.company}? Link iCal e widget verranno disattivati.`) && run({ action: "set_status", operator_id: o.id, status: "revoked" }, "Revocato")}>Revoca</button>}
+                      {o.status !== "revoked" && <button className={btn} onClick={() => confirm(`Revocare definitivamente ${o.company}? Il link iCal verrà disattivato.`) && run({ action: "set_status", operator_id: o.id, status: "revoked" }, "Revocato")}>Revoca</button>}
                       <button className={btn} onClick={() => setOpen(open === o.id ? null : o.id)}>{open === o.id ? "Chiudi" : "Dettagli"}</button>
                     </div>
                   </div>
@@ -138,25 +136,19 @@ const AdminOperators = () => {
                       <div className="space-y-3">
                         <p className="font-medium">Accesso</p>
                         <button className={btn} disabled={o.status !== "enabled"} onClick={async () => { const r = await run({ action: "reset_password", operator_id: o.id }, "Password reimpostata"); if (r?.temporary_password) setSecret({ title: `Nuova password per ${o.email}`, value: r.temporary_password }); }}>Reimposta password</button>
-                        <p className="font-medium pt-2">Export iCal (solo indisponibilità anonime)</p>
+                        <p className="font-medium pt-2">Link iCal personale (solo indisponibilità anonime)</p>
+                        <p className="text-xs text-muted-foreground">Il sistema dell’operatore decide ogni quanto rileggerlo: non è in tempo reale.</p>
                         <p className="text-muted-foreground">{ical ? `Attivo dal ${fmt(ical.created_at)}` : "Nessun link attivo"}</p>
                         <div className="flex gap-2">
-                          <button className={btn} disabled={o.status !== "enabled"} onClick={async () => { const r = await run({ action: "issue_token", operator_id: o.id, kind: "ical" }, "Link iCal creato"); if (r?.token) setSecret({ title: `Link iCal per ${o.company}`, value: `${FN}/partner-ical?token=${r.token}` }); }}>{ical ? "Rigenera" : "Crea link"}</button>
+                          <button className={btn} disabled={o.status !== "enabled"} onClick={async () => { const r = await run({ action: "issue_token", operator_id: o.id }, "Link iCal creato"); if (r?.token) setSecret({ title: `Link iCal per ${o.company}`, value: `${FN}/partner-ical?token=${r.token}` }); }}>{ical ? "Rigenera" : "Crea link"}</button>
                           {ical && <button className={btn} onClick={() => run({ action: "revoke_token", token_id: ical.id }, "Link revocato")}>Revoca</button>}
-                        </div>
-                        <p className="font-medium pt-2">Widget (facoltativo)</p>
-                        <p className="text-muted-foreground">{widget ? `Domini: ${widget.allowed_origins.join(", ")}` : "Disattivato"}</p>
-                        <input className={input} placeholder="https://sito-operatore.it, https://www.sito-operatore.it" value={origins} onChange={(e) => setOrigins(e.target.value)} />
-                        <div className="flex gap-2">
-                          <button className={btn} disabled={o.status !== "enabled" || !origins.trim()} onClick={async () => { const r = await run({ action: "issue_token", operator_id: o.id, kind: "widget", allowed_origins: origins.split(",").map((s) => s.trim()).filter(Boolean) }, "Widget abilitato"); if (r?.token) { setSecret({ title: `Indirizzo dati widget per ${o.company}`, value: `${FN}/partner-widget?token=${r.token}` }); setOrigins(""); } }}>Abilita per questi domini</button>
-                          {widget && <button className={btn} onClick={() => run({ action: "revoke_token", token_id: widget.id }, "Widget disattivato")}>Disattiva</button>}
                         </div>
                       </div>
                       <div>
                         <p className="font-medium mb-2">Ultimi accessi</p>
                         <ul className="space-y-1 text-muted-foreground">
                           {log.data?.length === 0 && <li>Nessun accesso registrato.</li>}
-                          {log.data?.map((l) => <li key={l.id}>{fmt(l.created_at)} · {l.kind} · {l.outcome === "ok" ? "ok" : "negato"} · {l.ip_prefix ?? ""}</li>)}
+                          {log.data?.map((l) => <li key={l.id}>{fmt(l.created_at)} · {l.kind} · {l.outcome === "ok" ? "ok" : "negato"}</li>)}
                         </ul>
                       </div>
                     </div>

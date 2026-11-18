@@ -20,12 +20,7 @@ const Body = z.discriminatedUnion('action', [
   }),
   z.object({ action: z.literal('set_status'), operator_id: z.string().uuid(), status: z.enum(['enabled', 'suspended', 'revoked']) }),
   z.object({ action: z.literal('reset_password'), operator_id: z.string().uuid() }),
-  z.object({
-    action: z.literal('issue_token'),
-    operator_id: z.string().uuid(),
-    kind: z.enum(['ical', 'widget']),
-    allowed_origins: z.array(z.string().url().max(200).transform((u) => new URL(u).origin)).max(10).default([]),
-  }),
+  z.object({ action: z.literal('issue_token'), operator_id: z.string().uuid() }),
   z.object({ action: z.literal('revoke_token'), token_id: z.string().uuid() }),
 ])
 
@@ -76,11 +71,13 @@ Deno.serve(async (req) => {
   }
 
   if (b.action === 'issue_token') {
-    if (b.kind === 'widget' && b.allowed_origins.length === 0) return json({ error: 'origins_required' }, 400)
-    // one active token per kind: rotating revokes the previous one
-    await db.from('partner_feed_tokens').update({ revoked_at: new Date().toISOString() }).eq('operator_id', b.operator_id).eq('kind', b.kind).is('revoked_at', null)
+    const { data: op } = await db.from('partner_operators').select('status').eq('id', b.operator_id).single()
+    if (op?.status !== 'enabled') return json({ error: 'operator_not_enabled' }, 400)
+    // one active iCal link per operator: regenerating revokes the previous one
+    await db.from('partner_feed_tokens').update({ revoked_at: new Date().toISOString() }).eq('operator_id', b.operator_id).is('revoked_at', null)
     const token = randomToken(32)
-    await db.from('partner_feed_tokens').insert({ operator_id: b.operator_id, kind: b.kind, token_hash: await sha256(token), allowed_origins: b.allowed_origins })
+    // only the SHA-256 hash is stored; the raw token is returned once
+    await db.from('partner_feed_tokens').insert({ operator_id: b.operator_id, kind: 'ical', token_hash: await sha256(token) })
     return json({ token })
   }
 

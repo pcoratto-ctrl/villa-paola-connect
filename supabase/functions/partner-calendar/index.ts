@@ -17,12 +17,12 @@ Deno.serve(async (req) => {
 
   const { data: op } = await admin().from('partner_operators').select('id, company, status').eq('user_id', user.id).maybeSingle()
   if (!op || op.status !== 'enabled') {
-    await logAccess(req, op?.id ?? null, 'dashboard', 'denied')
+    await logAccess(op?.id ?? null, 'dashboard', 'denied')
     return json({ error: op ? 'suspended' : 'forbidden' }, 403)
   }
   // log at most once per 10 minutes per operator to keep history essential
   const { data: last } = await admin().from('partner_access_log').select('created_at').eq('operator_id', op.id).eq('kind', 'dashboard').order('created_at', { ascending: false }).limit(1).maybeSingle()
-  if (!last || Date.now() - new Date(last.created_at).getTime() > 600_000) await logAccess(req, op.id, 'dashboard', 'ok')
+  if (!last || Date.now() - new Date(last.created_at).getTime() > 600_000) await logAccess(op.id, 'dashboard', 'ok')
 
   try {
     return json({ company: op.company, data: await fetchPartnerData() })

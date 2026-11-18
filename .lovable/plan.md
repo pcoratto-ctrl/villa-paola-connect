@@ -16,9 +16,9 @@
 
 ### 2. Pannello del titolare (dentro /admin, sezione "Operatori")
 - Anagrafica di ogni operatore: ragione sociale, referente, email, telefono facoltativo, note.
-- Stato: abilitato, sospeso oppure revocato. La revoca annulla anche i link iCal e i widget di quell'operatore.
-- Ultimo accesso e uno storico essenziale degli accessi: data e ora, esito, tipo di accesso (dashboard, iCal o widget). Vengono salvati l'indirizzo IP abbreviato e il browser, conservati per 12 mesi.
-- Per ogni operatore: creare, rigenerare o revocare il link iCal; abilitare il widget per singoli domini.
+- Stato: abilitato, sospeso oppure revocato. La revoca annulla anche il link iCal.
+- Ultimo accesso e uno storico essenziale degli accessi: data e ora, esito, tipo di accesso (dashboard o iCal). Nessun IP o browser; conservazione 12 mesi.
+- Per ogni operatore: creare, rigenerare o revocare il link iCal.
 
 ### 3. Dashboard partner (sola lettura)
 - Pagina `/calendario` con il calendario mensile:
@@ -36,10 +36,6 @@
 - I dati vengono sempre letti in quel momento dal Centro operativo. Non c'è import da altri calendari, né sincronizzazione in entrambi i sensi, né copie delle tariffe.
 - Ogni quanto il calendario viene riletto lo decide il sito dell'operatore, di solito tra 15 minuti e alcune ore. I 15 secondi non sono garantiti: va scritto chiaramente nella dashboard.
 
-### 5. Widget da incorporare (facoltativo, separato)
-- È spento di default. Il titolare lo abilita per un singolo operatore e per uno o più domini autorizzati.
-- Mostra solo disponibilità e indisponibilità, mai le tariffe riservate.
-- Usa un link pubblico legato all'operatore e ai suoi domini. Non contiene credenziali e si può revocare.
 
 ## Sicurezza e dati
 - Le credenziali del Centro operativo (il token Bearer e X-VP-Pickup) restano solo tra i segreti del backend e non arrivano mai al browser.
@@ -56,7 +52,6 @@
 3. **Primo account titolare:** confermare che è l'admin attuale a gestire gli operatori.
 4. **Email di invito agli operatori:** per mandare inviti dal sito con un mittente @villapaolacaposuvero.it serve verificare il dominio per l'invio email. In alternativa il titolare può condividere manualmente una password temporanea.
 5. **Testi legali:** aggiungere all'informativa privacy il trattamento dei dati degli operatori (accessi e log).
-6. **Widget:** l'elenco dei domini autorizzati per ogni operatore, solo quando servirà.
 
 ## Fuori da questo lavoro
 - Nessuna pubblicazione.
@@ -68,12 +63,14 @@
 - **Tabelle:**
   - `partner_operators`: dati aziendali, stato, user_id e ultimo accesso;
   - `partner_access_log`: storico degli accessi;
-  - `partner_feed_tokens`: hash del token, tipo ical/widget, domini consentiti, data di revoca.
+  - `partner_feed_tokens`: hash del token iCal e data di revoca.
   - Le regole di accesso permettono la lettura e la scrittura solo all'admin. Il partner legge solo la propria riga.
 - **Ruoli:** `partner` si aggiunge ai ruoli esistenti con una modifica al database.
 - **Funzioni del backend:**
   - `partner-calendar`, per la dashboard: controlla l'accesso, il ruolo partner e lo stato abilitato;
   - `partner-ical`, a cui si accede con il token;
-  - `partner-widget`, a cui si accede con il token più il controllo del dominio di provenienza, e che restituisce solo la disponibilità.
 - **Calcolo del calendario:** una sola funzione condivisa per le notti con partenza esclusa e per le mezze giornate, con test per arrivo, partenza, "oggi" sul fuso di Roma e lastNight.
 - Le pagine `/calendario` sono escluse dalla sitemap e marcate come non indicizzabili.
+
+## Fuori ambito
+- Widget, prenotazione diretta, pagamenti, notifiche di prenotazione, import bidirezionale.
