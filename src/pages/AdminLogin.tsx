@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Lock, Mail } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const AdminLogin = () => {
   const { signIn } = useAuth();
@@ -10,6 +11,16 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState("");
+
+  const handleReset = async () => {
+    setError("");
+    setInfo("");
+    if (!email) return setError("Inserisci prima la tua email");
+    await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` });
+    // Same message whether or not the account exists (no account enumeration)
+    setInfo("Se l'email è registrata, riceverai un link per impostare la password.");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,6 +72,7 @@ const AdminLogin = () => {
             </div>
           </div>
           {error && <p className="text-destructive text-sm text-center">{error}</p>}
+          {info && <p className="text-muted-foreground text-sm text-center">{info}</p>}
           <button
             type="submit"
             disabled={loading}
@@ -69,6 +81,12 @@ const AdminLogin = () => {
             {loading ? "Accesso..." : "Accedi"}
           </button>
         </form>
+
+        <div className="text-center mt-4">
+          <button type="button" onClick={handleReset} className="text-muted-foreground text-sm underline hover:text-foreground">
+            Password dimenticata o primo accesso?
+          </button>
+        </div>
 
         <div className="text-center mt-6">
           <a href="/" className="text-muted-foreground text-sm hover:text-foreground transition-colors">

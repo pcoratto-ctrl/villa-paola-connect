@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
+import ResetPassword from "./pages/ResetPassword.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PartnerLogin from "./pages/PartnerLogin.tsx";
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/termini-condizioni" element={<TerminiCondizioni />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/operatori" element={<AdminOperators />} />
           <Route path="/calendario/login" element={<PartnerLogin />} />

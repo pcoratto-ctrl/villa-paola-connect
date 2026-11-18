@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /calendario
+Disallow: /reset-password
 Disallow: /it/
 Disallow: /sample-page/
 Disallow: /hello-world/
