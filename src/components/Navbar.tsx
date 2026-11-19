@@ -38,7 +38,7 @@ const Navbar = () => {
               />
             </a>
 
-            <div className="hidden lg:flex items-center gap-5 xl:gap-7">
+            <div className="hidden xl:flex items-center gap-3 2xl:gap-7">
               {navLinks.map((link) => (
                 <div key={link.href} className="relative group">
                   <a
@@ -56,17 +56,20 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
+              <a href="/calendario/login" className="max-w-36 text-center text-[13px] leading-snug font-medium text-muted-foreground hover:text-primary transition-colors">
+                {t("nav.partnerArea")}
+              </a>
               <LanguageSwitcher />
               <a
                 href="/#disponibilita"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-villa bg-primary text-primary-foreground text-sm font-semibold transition-colors hover:bg-primary/90"
+                className="inline-flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-villa bg-primary text-primary-foreground text-sm font-semibold transition-colors hover:bg-primary/90"
               >
                 <CalendarCheck className="w-4 h-4" strokeWidth={1.5} />
                 {t("nav.checkAvailability")}
               </a>
             </div>
 
-            <div className="lg:hidden flex items-center gap-2">
+            <div className="xl:hidden flex items-center gap-2">
               <LanguageSwitcher />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
@@ -86,7 +89,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl pt-20"
+            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl pt-20 pb-8 overflow-y-auto"
           >
             <div className="villa-section flex flex-col gap-6 pt-8">
               {navLinks.map((link) => (
@@ -105,6 +108,9 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
+              <a href="/calendario/login" onClick={() => setMobileOpen(false)} className="text-base text-muted-foreground hover:text-primary transition-colors">
+                {t("nav.partnerArea")}
+              </a>
               <div className="pt-2">
                 <LanguageSwitcher />
               </div>

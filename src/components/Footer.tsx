@@ -30,6 +30,7 @@ const Footer = () => {
     { l: t("footer.links.reviews"), h: "/#recensioni" },
     { l: t("footer.links.availability"), h: "/#disponibilita" },
     { l: t("footer.links.faq"), h: "/#faq" },
+    { l: t("nav.partnerArea"), h: "/calendario/login" },
   ];
 
   return (
