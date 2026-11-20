@@ -4,6 +4,7 @@ import { englishVillaTopics, englishTopicImages, type EnglishVillaTopic } from "
 import gardenPathAsset from "../assets/villa-garden-path-sea.webp.asset.json";
 import novemberGardenAsset from "../assets/villa-paola-november-observed.webp.asset.json";
 import EnglishHeroBookingLink from "./EnglishHeroBookingLink";
+import seafrontVerandaAsset from "../assets/villa-paola-seafront-veranda.webp.asset.json";
 
 export function PublicLanguageLinks({ locale }: { locale?: PublicLocale }) {
   return <nav aria-label="Language / Lingua" className="flex flex-wrap items-center gap-5 text-sm">
@@ -58,7 +59,7 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
             <p className="text-lg leading-relaxed text-foreground">{index === 3 ? c.arrival.text : section.text}</p>
             {index === 0 && (topic === "beach" ? <figure className="mt-8 mx-auto w-full max-w-md">
               <img src={gardenPathAsset.url} alt="A paved path through Villa Paola's garden, with the sea alongside on the right" width={1152} height={2048} loading="lazy" className="block w-full h-auto rounded-villa" />
-            </figure> : <img src={"/images/villa-paola-restyle/" + (images?.detail ?? "gallery-pergolato-teli-vista-mare.webp")} alt={images?.alt ?? (locale === "en" ? "Covered veranda at Villa Paola with a sea view" : "Veranda coperta di Villa Paola con vista sul mare")} width={1600} height={1200} loading="lazy" className="mt-8 w-full aspect-[4/3] md:aspect-[16/9] object-cover rounded-villa" />)}
+            </figure> : locale === "en" && !topic ? <img src={seafrontVerandaAsset.url} alt="A table set for a meal on Villa Paola's covered seafront veranda, overlooking the blue sea" width={1077} height={1077} loading="lazy" className="mt-8 block w-full h-auto rounded-villa" /> : <img src={"/images/villa-paola-restyle/" + (images?.detail ?? "gallery-pergolato-teli-vista-mare.webp")} alt={images?.alt ?? (locale === "en" ? "Covered veranda at Villa Paola with a sea view" : "Veranda coperta di Villa Paola con vista sul mare")} width={1600} height={1200} loading="lazy" className="mt-8 w-full aspect-[4/3] md:aspect-[16/9] object-cover rounded-villa" />)}
             {index === 3 && <div className="mt-5">
               <p className="text-muted-foreground leading-relaxed mb-5">{c.arrival.flights}</p>
               <div className="flex flex-wrap gap-x-6 gap-y-3"><a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-primary">{c.arrival.directions}</a><a href={AIRPORT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-primary">{c.arrival.airport}</a></div>
