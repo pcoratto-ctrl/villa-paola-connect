@@ -21,7 +21,20 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
       </div>
     </header>
     <main>
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
+      {topic === "seasons" ? <section className="bg-background text-foreground">
+        <figure className="m-0">
+          <img src={novemberGardenAsset.url} alt="Villa Paola's seafront garden and sea, with a dated weather overlay showing 19 November 2026 and 24°C" width={1448} height={1086} fetchPriority="high" className="block w-full h-auto aspect-[1448/1086] object-contain" />
+          <figcaption className="villa-container mt-3 text-sm leading-relaxed text-muted-foreground">Villa Paola’s seafront garden on 19 November 2026 · 24°C</figcaption>
+        </figure>
+        <div className="villa-section pt-10 pb-4 md:pt-14 md:pb-6">
+          <div className="villa-container">
+            <p className="uppercase text-sm mb-4 text-muted-foreground">{c.eyebrow}</p>
+            <h1 className="font-display text-4xl md:text-6xl max-w-3xl leading-tight mb-6 text-primary">{c.h1}</h1>
+            <p className="max-w-2xl text-lg leading-relaxed mb-8">{c.intro}</p>
+            <a href="#disponibilita" className="inline-flex items-center justify-center rounded-villa px-6 py-4 min-h-[52px] bg-primary text-primary-foreground font-semibold">{c.cta}</a>
+          </div>
+        </div>
+      </section> : <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <img src={"/images/villa-paola-restyle/" + (images?.hero ?? "hero-giardino-mare-desktop.webp")} alt={c.imageAlt} width={2560} height={1920} fetchPriority="high" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/40 to-transparent" />
         <div className="relative villa-section pt-36 pb-14 md:pt-52 md:pb-20">
@@ -32,13 +45,9 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
             <a href="#disponibilita" className="inline-flex items-center justify-center rounded-villa px-6 py-4 min-h-[52px] bg-primary-foreground text-primary font-semibold">{c.cta}</a>
           </div>
         </div>
-      </section>
+      </section>}
       <div className="villa-section py-14 md:py-20">
         <div className="villa-container max-w-4xl">
-          {topic === "seasons" && <figure className="mb-12 md:mb-16">
-            <img src={novemberGardenAsset.url} alt="Villa Paola's seafront garden and sea, with a dated weather overlay showing 19 November 2026 and 24°C" width={1448} height={1086} loading="lazy" className="block w-full h-auto rounded-villa" />
-            <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">Villa Paola’s seafront garden on 19 November 2026 · 24°C</figcaption>
-          </figure>}
           {c.sections.map((section, index) => <section id={index === 3 ? "getting-here" : undefined} key={section.title} className="mb-12 md:mb-16">
             <h2 className="font-display text-3xl md:text-4xl mb-5 text-primary">{index === 3 ? c.arrival.title : section.title}</h2>
             <p className="text-lg leading-relaxed text-foreground">{index === 3 ? c.arrival.text : section.text}</p>
