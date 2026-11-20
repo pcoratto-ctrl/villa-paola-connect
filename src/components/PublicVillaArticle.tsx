@@ -2,6 +2,7 @@ import type { PublicLocale } from "../lib/publicVillaContent";
 import { publicVillaContent, AIRPORT_URL, DIRECTIONS_URL } from "../lib/publicVillaContent";
 import { englishVillaTopics, englishTopicImages, type EnglishVillaTopic } from "../lib/englishVillaTopics";
 import gardenPathAsset from "../assets/villa-garden-path-sea.webp.asset.json";
+import novemberGardenAsset from "../assets/villa-paola-november-observed.webp.asset.json";
 
 export function PublicLanguageLinks({ locale }: { locale?: PublicLocale }) {
   return <nav aria-label="Language / Lingua" className="flex flex-wrap items-center gap-5 text-sm">
@@ -34,6 +35,10 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
       </section>
       <div className="villa-section py-14 md:py-20">
         <div className="villa-container max-w-4xl">
+          {topic === "seasons" && <figure className="mb-12 md:mb-16">
+            <img src={novemberGardenAsset.url} alt="Villa Paola's seafront garden and sea, with a dated weather overlay showing 19 November 2026 and 24°C" width={1448} height={1086} loading="lazy" className="block w-full h-auto rounded-villa" />
+            <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">Villa Paola’s seafront garden on 19 November 2026 · 24°C</figcaption>
+          </figure>}
           {c.sections.map((section, index) => <section id={index === 3 ? "getting-here" : undefined} key={section.title} className="mb-12 md:mb-16">
             <h2 className="font-display text-3xl md:text-4xl mb-5 text-primary">{index === 3 ? c.arrival.title : section.title}</h2>
             <p className="text-lg leading-relaxed text-foreground">{index === 3 ? c.arrival.text : section.text}</p>
