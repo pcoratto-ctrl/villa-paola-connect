@@ -2,15 +2,11 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import it from "@/locales/it.json";
 import en from "@/locales/en.json";
-import de from "@/locales/de.json";
-import fr from "@/locales/fr.json";
 
 const STORAGE_KEY = "villa-language";
 
-function getInitialLang(): "it" | "en" | "de" | "fr" {
+function getInitialLang(): "it" | "en" {
   if (typeof window !== "undefined") {
-    if (window.location.pathname.startsWith("/fr/")) return "fr";
-    if (window.location.pathname.startsWith("/de/")) return "de";
     if (window.location.pathname.startsWith("/en/")) return "en";
     if (window.location.pathname === "/" || window.location.pathname === "/villa-sul-mare-calabria") return "it";
     if (new URLSearchParams(window.location.search).get("lang") === "en") return "en";
@@ -31,12 +27,10 @@ if (!i18n.isInitialized) {
       resources: {
         it: { translation: it },
         en: { translation: en },
-        de: { translation: de },
-        fr: { translation: fr },
       },
       lng: getInitialLang(),
       fallbackLng: "it",
-      supportedLngs: ["it", "en", "de", "fr"],
+      supportedLngs: ["it", "en"],
       interpolation: { escapeValue: false },
       returnObjects: true,
     });

@@ -2,7 +2,7 @@ export const SITE_ORIGIN = "https://villapaolacaposuvero.it";
 export const villaFacts = { bedrooms: 3, maxGuests: 6, airportDriveMinutes: 15, airportCode: "SUF" } as const;
 export const AIRPORT_URL = "https://sacal.it/it/lamezia-terme/";
 export const DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent("Villa Paola Caposuvero, SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria, Italy");
-export type PublicLocale = "it" | "de" | "en" | "fr";
+export type PublicLocale = "it" | "en";
 
 export const publicVillaContent = {
   it: {
@@ -23,24 +23,6 @@ export const publicVillaContent = {
       { title: "Un preventivo per le tue date", text: "Indica arrivo, partenza e numero di ospiti nel modulo. Il titolare risponderà con disponibilità e un preventivo personalizzato. L’invio non è una prenotazione: date, condizioni e prezzo devono essere confermati direttamente. Per una domanda iniziale puoi anche scriverci su WhatsApp." },
     ],
   },
-  de: {
-    path: "/de/ferienvilla-am-meer-kalabrien", language: "Deutsch",
-    title: "Ferienvilla direkt am Meer in Kalabrien | Villa Paola",
-    description: "Ferienhaus mit direktem Strandzugang in Kalabrien, zur alleinigen Nutzung. Vom Flughafen Lamezia Terme (SUF) je nach Verkehr ca. 15 Minuten mit dem Auto.",
-    h1: "Ferienvilla direkt am Meer in Kalabrien",
-    eyebrow: "Villa Paola Caposuvero · Gizzeria",
-    intro: "Ihre Villa zur alleinigen Nutzung, direkt am Meer und mit direktem Strandzugang: In Gizzeria bietet Villa Paola drei Schlafzimmer für bis zu sechs Gäste, einen Garten mit Meerblick und eine überdachte Veranda. Vom Flughafen Lamezia Terme (SUF) erreichen Sie das Haus je nach Verkehr in etwa 15 Minuten mit dem Auto.",
-    cta: "Verfügbarkeit anfragen", whatsapp: "Auf WhatsApp schreiben", home: "Villa Paola entdecken", privacy: "Datenschutz (Englisch)", cookies: "Cookies (Englisch)", terms: "Bedingungen (Englisch)",
-    imageAlt: "Der Garten der Villa Paola Caposuvero mit Blick auf das Meer bei Gizzeria",
-    arrival: { title: "Vom Flughafen Lamezia Terme ans Meer", text: "Die Fahrt vom Flughafen Lamezia Terme (SUF) zur Villa Paola dauert je nach Verkehr etwa 15 Minuten. Die Adresse lautet SS18, Contrada Caposuvero 31, Gizzeria Lido. Nutzen Sie die Wegbeschreibung für Ihre Anreise und klären Sie Fragen zur Ankunft vorab direkt mit dem Eigentümer.", flights: "Direktflüge und Flugfrequenzen ändern sich je nach Saison. Informieren Sie sich auf der offiziellen SACAL-Flughafenseite und prüfen Sie bei der Fluggesellschaft, welche Verbindungen für Ihre konkreten Reisedaten angeboten werden.", directions: "Wegbeschreibung zur Villa Paola", airport: "Flughafen Lamezia Terme · SACAL" },
-    sections: [
-      { title: "Ein Ferienhaus mit direktem Strandzugang", text: "Von der Villa aus gelangen Sie direkt zum Strand, ohne eine Straße überqueren zu müssen. Der Garten und die überdachte Veranda erweitern den Wohnraum nach draußen: für ein Frühstück mit Meerblick, eine Lesepause im Schatten oder einen gemeinsamen Abend. Sie buchen kein einzelnes Zimmer, sondern wohnen als Familie oder kleine Gruppe im ganzen Haus." },
-      { title: "Platz für gemeinsame Tage – und Rückzug", text: "Auf rund 120 m² bietet die Villa drei Schlafzimmer, zwei Badezimmer und eine ausgestattete Küche. Bis zu sechs Gäste finden hier Platz. Das passt zu Familien ebenso wie zu Paaren, die gemeinsam reisen und trotzdem getrennte Schlafzimmer schätzen. Die Bilder auf dieser Seite zeigen die tatsächliche Villa und ihre Außenbereiche." },
-      { title: "Kalabrien im Frühling und Herbst erleben", text: "Auch abseits des Hochsommers lässt sich ein Aufenthalt am Meer nach den eigenen Vorstellungen gestalten: mit Spaziergängen an der Küste, Mahlzeiten auf der Veranda und Ausflügen ins Hinterland. Wetter und Meer können wechselhaft sein; Badewetter ist nicht garantiert. Fragen Sie für Ihren Reisezeitraum auch nach der saisonalen Öffnung von Angeboten in der Umgebung." },
-      { title: "Gizzeria als Ausgangspunkt", text: "Die Villa liegt in Caposuvero bei Gizzeria Lido an Kalabriens Westküste. Vom Flughafen Lamezia Terme sind es je nach Verkehr ungefähr 15 Minuten mit dem Auto. So können Sie ruhige Tage im Haus mit Erkundungen entlang der Küste und im Landesinneren verbinden. Fragen zur Anreise und zu den Bedürfnissen Ihrer Reisegruppe klären Sie direkt mit dem Eigentümer." },
-      { title: "Ihr Aufenthalt beginnt mit einer Anfrage", text: "Teilen Sie uns Anreise, Abreise und die Zahl der Gäste mit. Sie erhalten eine persönliche Antwort zur Verfügbarkeit und ein Angebot für Ihre Reisedaten. Das Formular löst keine verbindliche Buchung aus; Preis, Termine und Bedingungen werden direkt bestätigt. Für erste Fragen erreichen Sie uns auch über WhatsApp." },
-    ],
-  },
   en: {
     path: "/en/beachfront-villa-calabria", language: "English",
     title: "Beachfront villa in Calabria with direct beach access | Villa Paola",
@@ -57,24 +39,6 @@ export const publicVillaContent = {
       { title: "Spring and autumn at a gentler pace", text: "A coastal stay does not have to be all about swimming. In spring and autumn, you can plan walks along the shore, lunches on the veranda and days exploring Calabria’s towns and countryside. Weather and sea conditions vary, and swimming weather is not guaranteed. Ask about your dates and the seasonal opening of nearby services before making plans." },
       { title: "Gizzeria, within reach of Lamezia Terme", text: "Villa Paola is in Caposuvero, Gizzeria Lido, on Calabria’s west coast. Lamezia Terme Airport is approximately a 15-minute drive away, depending on traffic. The location lets you combine days at the villa with trips along the coast and inland. You can discuss arrival arrangements and your group’s needs directly with the owner." },
       { title: "A personal quote for your stay", text: "Send your arrival and departure dates and the number of guests using the enquiry form. The owner will reply with availability and a personalised quote. Submitting the form does not book the villa: dates, price and conditions must be confirmed directly. You can also message us on WhatsApp with an initial question." },
-    ],
-  },
-  fr: {
-    path: "/fr/villa-bord-de-mer-calabre", language: "Français",
-    title: "Villa en bord de mer en Calabre, accès direct à la plage | Villa Paola",
-    description: "Villa entière à usage exclusif en Calabre, avec accès direct à la plage. À environ 15 minutes en voiture de Lamezia Terme (SUF), selon la circulation.",
-    h1: "Votre villa en bord de mer en Calabre",
-    eyebrow: "Villa Paola Caposuvero · Gizzeria",
-    intro: "Une villa entière à usage exclusif, en bord de mer en Calabre, avec accès direct à la plage. À Gizzeria, Villa Paola accueille jusqu’à six personnes dans trois chambres, avec un jardin face à la mer et une véranda couverte. L’aéroport de Lamezia Terme (SUF) est à environ 15 minutes en voiture, selon la circulation.",
-    cta: "Demander les disponibilités", whatsapp: "Nous écrire sur WhatsApp", home: "Découvrir Villa Paola", privacy: "Confidentialité (en anglais)", cookies: "Cookies (en anglais)", terms: "Conditions (en anglais)",
-    imageAlt: "Le jardin de Villa Paola Caposuvero face à la mer à Gizzeria",
-    arrival: { title: "De l’aéroport de Lamezia Terme à votre villa", text: "Comptez environ 15 minutes en voiture entre l’aéroport de Lamezia Terme (SUF) et Villa Paola, selon la circulation. L’adresse est SS18, Contrada Caposuvero 31, Gizzeria Lido. Consultez l’itinéraire pour préparer votre trajet et échangez avec le propriétaire avant le départ si vous avez des questions sur votre arrivée.", flights: "Les vols directs et leur fréquence varient selon la saison. Consultez le site officiel de l’aéroport, géré par SACAL, puis vérifiez auprès de la compagnie les liaisons proposées à vos dates de voyage avant d’organiser votre séjour.", directions: "Itinéraire vers Villa Paola", airport: "Aéroport de Lamezia Terme · SACAL" },
-    sections: [
-      { title: "Une villa avec accès direct à la plage", text: "Depuis la propriété, vous rejoignez directement la plage. Le jardin et la véranda couverte prolongent la maison à l’extérieur : un petit-déjeuner face à la mer, une pause lecture à l’ombre ou un dîner à partager. Vous séjournez dans la villa entière, et non dans une chambre au sein d’un hébergement partagé." },
-      { title: "Trois chambres pour se retrouver", text: "La maison offre environ 120 m², trois chambres, deux salles de bains et une cuisine équipée. Elle accueille jusqu’à six personnes : familles, couples d’amis ou petits groupes qui souhaitent vivre ensemble tout en gardant des espaces pour chacun. Les photographies présentent la villa et ses extérieurs réels." },
-      { title: "La Calabre au printemps et en automne", text: "Un séjour au bord de la mer ne se résume pas à la baignade. Au printemps ou en automne, prenez le temps de marcher le long de la côte, de déjeuner sous la véranda et de découvrir les villages et l’arrière-pays calabrais. La météo et l’état de la mer varient ; le beau temps et la baignade ne sont pas garantis. Renseignez-vous sur l’ouverture saisonnière des services à proximité." },
-      { title: "Gizzeria, entre mer et découvertes", text: "Villa Paola se trouve à Caposuvero, à Gizzeria Lido, sur la côte tyrrhénienne de la Calabre. L’aéroport de Lamezia Terme (SUF) est à environ 15 minutes en voiture, selon la circulation. Alternez les journées dans la villa et les excursions sur la côte ou dans les terres, en préparant votre arrivée directement avec le propriétaire." },
-      { title: "Un devis pour vos dates", text: "Indiquez vos dates d’arrivée et de départ ainsi que le nombre de personnes dans le formulaire. Le propriétaire vous répondra avec les disponibilités et un devis personnalisé. L’envoi ne constitue pas une réservation : les dates, le prix et les conditions doivent être confirmés directement. Pour une première question, vous pouvez aussi nous écrire sur WhatsApp." },
     ],
   },
 } satisfies Record<PublicLocale, { path: string; language: string; title: string; description: string; h1: string; eyebrow: string; intro: string; cta: string; whatsapp: string; home: string; privacy: string; cookies: string; terms: string; imageAlt: string; arrival: { title: string; text: string; flights: string; directions: string; airport: string }; sections: { title: string; text: string }[] }>;

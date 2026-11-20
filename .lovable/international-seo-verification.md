@@ -1,5 +1,14 @@
 # International public SEO — 20 November 2026
 
+## Current scope: Italian and English only
+This owner revision supersedes the earlier DE/FR implementation notes below.
+- Retained all existing Italian pages and /en/beachfront-villa-calabria. Removed the unpublished German/French routes, resource files, form-only language branches, public language items, sitemap entries and hreflang. Commercial counterparts now have reciprocal it/en/x-default (Italian default).
+- Preserved commercial intent, whole-villa exclusive use, direct beach access, spring/autumn content, three bedrooms/up to six guests, garden/veranda and the approximate 15-minute airport drive with traffic qualification and SACAL directions.
+- Build/typecheck harness: build OK. All 36 focused SEO/calendar/iCal/header/gallery tests passed. Actual static generator emitted 18 route documents; all nine indexable sitemap URLs have meaningful HTML, one H1/title and self-canonical. Both commercial documents expose exactly it/en/x-default and one getting-here section. Fresh staging contains no DE/FR output.
+- Browser verified both retained localized routes, two language links and availability form reached through the CTA. Removed routes use the existing 404/noindex view. No runtime exceptions, test submissions, emails or database changes. Partner code/access controls untouched.
+- Saved only: no frontend publication, edge deployment, external setting change or ad activation. Actual production HTTP verification remains pending owner deployment. Earlier fetchPriority warning remains non-fatal.
+- Changed source: src/lib/publicVillaContent.ts, src/components/PublicVillaArticle.tsx, src/components/DisponibilitaSection.tsx, src/App.tsx, src/contexts/LanguageContext.tsx, src/i18n/i18n.ts, public/sitemap.xml and src/test/publicSeo.test.ts; removed src/locales/de.json and src/locales/fr.json. LanguageSwitcher derives its public items from the shared catalog and required no styling change.
+
 ## Final owner keyword hierarchy
 - IT/DE/EN/FR titles, H1s, introductions and relevant section headings prioritize beachfront/seaside location, direct beach access and exclusive whole-villa use. Airport proximity remains in descriptions, introductions and the single localized getting-here section as a secondary conversion benefit.
 - No private-beach claim, unverified detached-villa wording, flight schedule guarantees, keyword city pages or new analytics provider introduced. German uses “Villa zur alleinigen Nutzung”.
