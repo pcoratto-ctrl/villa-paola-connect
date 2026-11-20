@@ -1,6 +1,7 @@
 import type { PublicLocale } from "../lib/publicVillaContent";
 import { publicVillaContent, AIRPORT_URL, DIRECTIONS_URL } from "../lib/publicVillaContent";
 import { englishVillaTopics, englishTopicImages, type EnglishVillaTopic } from "../lib/englishVillaTopics";
+import gardenPathAsset from "../assets/villa-garden-path-sea.webp.asset.json";
 
 export function PublicLanguageLinks({ locale }: { locale?: PublicLocale }) {
   return <nav aria-label="Language / Lingua" className="flex flex-wrap items-center gap-5 text-sm">
@@ -36,7 +37,9 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
           {c.sections.map((section, index) => <section id={index === 3 ? "getting-here" : undefined} key={section.title} className="mb-12 md:mb-16">
             <h2 className="font-display text-3xl md:text-4xl mb-5 text-primary">{index === 3 ? c.arrival.title : section.title}</h2>
             <p className="text-lg leading-relaxed text-foreground">{index === 3 ? c.arrival.text : section.text}</p>
-            {index === 0 && <img src={"/images/villa-paola-restyle/" + (images?.detail ?? "gallery-pergolato-teli-vista-mare.webp")} alt={images?.alt ?? (locale === "en" ? "Covered veranda at Villa Paola with a sea view" : "Veranda coperta di Villa Paola con vista sul mare")} width={1600} height={1200} loading="lazy" className="mt-8 w-full aspect-[4/3] md:aspect-[16/9] object-cover rounded-villa" />}
+            {index === 0 && (topic === "beach" ? <figure className="mt-8 mx-auto w-full max-w-md">
+              <img src={gardenPathAsset.url} alt="A paved path through Villa Paola's garden, with the sea alongside on the right" width={1152} height={2048} loading="lazy" className="block w-full h-auto rounded-villa" />
+            </figure> : <img src={"/images/villa-paola-restyle/" + (images?.detail ?? "gallery-pergolato-teli-vista-mare.webp")} alt={images?.alt ?? (locale === "en" ? "Covered veranda at Villa Paola with a sea view" : "Veranda coperta di Villa Paola con vista sul mare")} width={1600} height={1200} loading="lazy" className="mt-8 w-full aspect-[4/3] md:aspect-[16/9] object-cover rounded-villa" />)}
             {index === 3 && <div className="mt-5">
               <p className="text-muted-foreground leading-relaxed mb-5">{c.arrival.flights}</p>
               <div className="flex flex-wrap gap-x-6 gap-y-3"><a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-primary">{c.arrival.directions}</a><a href={AIRPORT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-primary">{c.arrival.airport}</a></div>
