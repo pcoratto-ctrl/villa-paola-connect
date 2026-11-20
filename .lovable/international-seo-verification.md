@@ -1,8 +1,16 @@
 # International public SEO — 20 November 2026
 
+## Final owner keyword hierarchy
+- IT/DE/EN/FR titles, H1s, introductions and relevant section headings prioritize beachfront/seaside location, direct beach access and exclusive whole-villa use. Airport proximity remains in descriptions, introductions and the single localized getting-here section as a secondary conversion benefit.
+- No private-beach claim, unverified detached-villa wording, flight schedule guarantees, keyword city pages or new analytics provider introduced. German uses “Villa zur alleinigen Nutzung”.
+- Changed files for final steering: src/lib/publicVillaContent.ts, roadmap.md and this verification record; project positioning memory updated.
+- Reverification: harness build/typecheck reported build OK; all 33 focused regression tests passed. Actual static generator emitted 20 HTML documents. All four commercial documents contain one title, canonical and getting-here section, five language alternates and airport metadata. Playwright verified all four localized routes, airport links and same-page availability CTA; French success state used a browser-only response stub, with no email or data writes. French mobile overflow/runtime checks passed.
+- Routes remain unchanged: https://villapaolacaposuvero.it/villa-sul-mare-calabria, https://villapaolacaposuvero.it/de/ferienvilla-am-meer-kalabrien, https://villapaolacaposuvero.it/en/beachfront-villa-calabria and https://villapaolacaposuvero.it/fr/villa-bord-de-mer-calabre.
+- No frontend publication, ads, external settings, database, partner permissions or synchronization changes. Live production HTTP verification remains pending owner deployment; React 18 emits a non-fatal server-render fetchPriority warning.
+
 ## Airport and French follow-up
 - French counterpart: https://villapaolacaposuvero.it/fr/villa-bord-de-mer-calabre. All four pages expose reciprocal it/de/en/fr plus x-default.
-- Airport access now appears in each commercial title, description, hero introduction and one dedicated getting-here section: about 15 minutes by car from Lamezia Terme Airport (SUF), traffic permitting.
+- Airport access appears in each commercial description, hero introduction and one dedicated getting-here section: about 15 minutes by car from Lamezia Terme Airport (SUF), traffic permitting. Final steering reserves titles for primary villa intents.
 - Directions use the existing SS18, Contrada Caposuvero 31 address; all four pages link to https://sacal.it/it/lamezia-terme/. Official SACAL page fetched successfully on 20 November 2026. Flights are explicitly seasonal and must be checked with the carrier for travel dates; no unverified city examples or fixed schedules added.
 - French article, image alt, form labels, success/error states and WhatsApp message localized. Legal pages remain explicitly linked in English. No amenities or reviews invented.
 - Harness build/typecheck OK; 33 focused and regression tests passed. Actual static generator emitted 20 route documents to temporary staging. Four commercial raw documents checked for airport metadata/content, exactly one getting-here section, one canonical and five language alternates; sitemap verified at 11 indexable public URLs.
@@ -14,7 +22,8 @@
 - Italian: https://villapaolacaposuvero.it/villa-sul-mare-calabria
 - German: https://villapaolacaposuvero.it/de/ferienvilla-am-meer-kalabrien
 - English: https://villapaolacaposuvero.it/en/beachfront-villa-calabria
-- Reciprocal it/de/en alternates and x-default to Italian; all self-canonical.
+- French: https://villapaolacaposuvero.it/fr/villa-bord-de-mer-calabre
+- Reciprocal it/de/en/fr alternates and x-default to Italian; all self-canonical.
 - Homepage and six other existing commercial Italian URLs preserved. No redirects, external settings, database or partner synchronization changes.
 
 ## Implementation
