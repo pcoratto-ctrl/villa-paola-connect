@@ -2,8 +2,23 @@ import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { publicAlternates, publicVillaContent, SITE_ORIGIN, villaStructuredData, villaFacts, AIRPORT_URL, DIRECTIONS_URL } from "../lib/publicVillaContent";
 import { renderStaticPage, staticPaths } from "../lib/staticPublicDocument";
+import { englishVillaTopics } from "../lib/englishVillaTopics";
 
 describe("Public localized SEO rules", () => {
+  it("includes the requested direct beach access preview route", () => {
+    expect(englishVillaTopics.beach.path).toBe("/en/villa-direct-beach-access-calabria");
+    expect(staticPaths).toContain(englishVillaTopics.beach.path);
+  });
+  it("includes the requested spring and autumn preview route", () => {
+    expect(englishVillaTopics.seasons.path).toBe("/en/calabria-spring-autumn-holidays");
+    expect(staticPaths).toContain(englishVillaTopics.seasons.path);
+  });
+  it("does not assign unrelated Italian language equivalents to English topics", () => {
+    for (const c of Object.values(englishVillaTopics)) {
+      expect(renderStaticPage(c.path).head).not.toContain('hreflang=');
+      expect(renderStaticPage(c.path).lang).toBe("en");
+    }
+  });
   it("keeps the existing Italian villa URL", () => {
     expect(publicVillaContent.it.path).toBe("/villa-sul-mare-calabria");
   });

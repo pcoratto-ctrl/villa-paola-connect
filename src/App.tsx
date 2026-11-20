@@ -36,6 +36,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/villa-sul-mare-calabria" element={<InternationalVilla locale="it" />} />
           <Route path="/en/beachfront-villa-calabria" element={<InternationalVilla locale="en" />} />
+          <Route path="/en/villa-direct-beach-access-calabria" element={<InternationalVilla locale="en" topic="beach" />} />
+          <Route path="/en/calabria-spring-autumn-holidays" element={<InternationalVilla locale="en" topic="seasons" />} />
           <Route path="/villa-accesso-diretto-spiaggia-calabria" element={<VillaAccessoDirettoSpiaggia />} />
           <Route path="/casa-vacanze-gizzeria" element={<CasaVacanzeGizzeria />} />
           <Route path="/villa-vicino-aeroporto-lamezia" element={<VillaVicinoAeroportoLamezia />} />

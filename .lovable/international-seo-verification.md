@@ -1,5 +1,11 @@
 # International public SEO — 20 November 2026
 
+## Three connected English previews
+- Added /en/villa-direct-beach-access-calabria and /en/calabria-spring-autumn-holidays alongside the existing beachfront page. Shared topic catalog supplies distinct native English copy and existing property images, contextual links, self-canonicals and build-time HTML. No hreflang added to the topics because no genuinely equivalent translated page was established.
+- Beach page explains direct versus private access and suggests checking mobility needs and seasonal services. Seasonal page gives practical flexible-day/self-catering/packing advice without promising weather, swimming, flights or unverified heating/cooling. Both retain verified occupancy and shared qualified airport directions.
+- All 39 SEO/calendar/iCal/header/gallery tests passed; harness build OK. Static generator emitted 20 documents. Three English documents checked for unique metadata/H1, canonical, image paths and correct alternates. Staging sitemap has 11 public production URLs and no lastmod; no date-generation fallback exists.
+- Desktop 1280×1800 and mobile 390×844 checks passed on all three routes: photos loaded, no overflow/runtime errors, contextual navigation and existing same-page form CTA. Mobile hero screenshots inspected. No real form submission, email, backend/partner changes, external settings or deployment. Production HTML remains unverified until an authorized publication.
+
 ## Current scope: Italian and English only
 This owner revision supersedes the earlier DE/FR implementation notes below.
 - Retained all existing Italian pages and /en/beachfront-villa-calabria. Removed the unpublished German/French routes, resource files, form-only language branches, public language items, sitemap entries and hreflang. Commercial counterparts now have reciprocal it/en/x-default (Italian default).

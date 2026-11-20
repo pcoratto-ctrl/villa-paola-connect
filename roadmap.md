@@ -1,4 +1,5 @@
 # SEO corrections
+- [x] Three connected English previews: useful beach/season content, static metadata, sitemap and desktop/mobile/CTA verification; 39 tests passed; no deployment.
 - [x] Reduce unpublished international SEO to IT/EN only; 36 tests, nine sitemap documents, static HTML and localized CTA checked; saved without deployment.
 - [x] Final commercial keyword hierarchy across IT/DE/EN/FR; 33 tests, static HTML and existing CTA browser checks passed; no publication.
 - [x] Airport-focused IT/DE/EN copy, French page/form, shared directions and SACAL links; static output and browser checks; no publication or ads.

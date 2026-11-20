@@ -1,4 +1,5 @@
 # Project conventions
+- English topic pages share the public article and static renderer through a topic catalog; only genuinely equivalent localized pages receive hreflang, preventing unrelated pages from being paired.
 - Public routes own their canonical URL and localized metadata through react-helmet-async; index.html retains sitewide social fallbacks but no static canonical, preventing duplicate route canonicals.
 - Public SEO HTML is emitted at build time by the Vite static-public plugin using shared localized content; private shells get noindex and no backend data is rendered, preserving the client-side access controls.
 - Stable commercial language URLs own their language independently of stored preferences; translated counterparts share reciprocal hreflang, while legacy Italian routes retain their URLs.
