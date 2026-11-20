@@ -1,5 +1,10 @@
 # International public SEO — 20 November 2026
 
+## Owner address correction
+- Corrected SS18, Contrada Caposuvero 6 in IT/EN location/contact/footer/copyright/privacy copy, commercial arrival text, encoded directions, structured data and the existing map's encoded address label. Existing coordinates retained, not independently verified; no partner address literals required changes.
+- All 17 SEO tests passed; build OK. Regenerated 20 static documents and checked decoded content for old Caposuvero/Capo Sperone 31 address variants: none remain. Seven public browser routes (homepage, IT/EN privacy and four commercial pages) show the corrected address. Latest uploaded garden-path photo remains in the beach page and generated HTML.
+- Preview only; no publication, deployment, backend or permission change.
+
 ## Three connected English previews
 - Added /en/villa-direct-beach-access-calabria and /en/calabria-spring-autumn-holidays alongside the existing beachfront page. Shared topic catalog supplies distinct native English copy and existing property images, contextual links, self-canonicals and build-time HTML. No hreflang added to the topics because no genuinely equivalent translated page was established.
 - Beach page explains direct versus private access and suggests checking mobility needs and seasonal services. Seasonal page gives practical flexible-day/self-catering/packing advice without promising weather, swimming, flights or unverified heating/cooling. Both retain verified occupancy and shared qualified airport directions.
@@ -26,7 +31,7 @@ This owner revision supersedes the earlier DE/FR implementation notes below.
 ## Airport and French follow-up
 - French counterpart: https://villapaolacaposuvero.it/fr/villa-bord-de-mer-calabre. All four pages expose reciprocal it/de/en/fr plus x-default.
 - Airport access appears in each commercial description, hero introduction and one dedicated getting-here section: about 15 minutes by car from Lamezia Terme Airport (SUF), traffic permitting. Final steering reserves titles for primary villa intents.
-- Directions use the existing SS18, Contrada Caposuvero 31 address; all four pages link to https://sacal.it/it/lamezia-terme/. Official SACAL page fetched successfully on 20 November 2026. Flights are explicitly seasonal and must be checked with the carrier for travel dates; no unverified city examples or fixed schedules added.
+- Directions use the existing SS18, Contrada Caposuvero 6 address; all four pages link to https://sacal.it/it/lamezia-terme/. Official SACAL page fetched successfully on 20 November 2026. Flights are explicitly seasonal and must be checked with the carrier for travel dates; no unverified city examples or fixed schedules added.
 - French article, image alt, form labels, success/error states and WhatsApp message localized. Legal pages remain explicitly linked in English. No amenities or reviews invented.
 - Harness build/typecheck OK; 33 focused and regression tests passed. Actual static generator emitted 20 route documents to temporary staging. Four commercial raw documents checked for airport metadata/content, exactly one getting-here section, one canonical and five language alternates; sitemap verified at 11 indexable public URLs.
 - Four routes verified in Playwright, with same-page CTA, airport links and language metadata. French mobile hero, arrival section and desktop success screenshots inspected; no horizontal overflow or runtime exceptions. French submission verified using a browser-only response stub, not a real email or database write.

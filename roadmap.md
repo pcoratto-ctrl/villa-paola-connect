@@ -1,4 +1,5 @@
 # SEO corrections
+- [x] Correct property address to Caposuvero 6 in IT/EN, maps and generated HTML; 17 SEO tests and seven browser routes passed; photo preserved; no publication.
 - [x] Three connected English previews: useful beach/season content, static metadata, sitemap and desktop/mobile/CTA verification; 39 tests passed; no deployment.
 - [x] Reduce unpublished international SEO to IT/EN only; 36 tests, nine sitemap documents, static HTML and localized CTA checked; saved without deployment.
 - [x] Final commercial keyword hierarchy across IT/DE/EN/FR; 33 tests, static HTML and existing CTA browser checks passed; no publication.

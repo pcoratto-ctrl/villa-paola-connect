@@ -5,6 +5,10 @@ import { renderStaticPage, staticPaths } from "../lib/staticPublicDocument";
 import { englishVillaTopics } from "../lib/englishVillaTopics";
 
 describe("Public localized SEO rules", () => {
+  it("uses the owner's corrected street number in structured data", () => {
+    expect(villaStructuredData("it").address.streetAddress).toBe("SS18, Contrada Caposuvero 6");
+    expect(villaStructuredData("en").address.streetAddress).toBe("SS18, Contrada Caposuvero 6");
+  });
   it("includes the requested direct beach access preview route", () => {
     expect(englishVillaTopics.beach.path).toBe("/en/villa-direct-beach-access-calabria");
     expect(staticPaths).toContain(englishVillaTopics.beach.path);
@@ -62,6 +66,6 @@ describe("Public localized SEO rules", () => {
     expect(AIRPORT_URL).toBe("https://sacal.it/it/lamezia-terme/");
   });
   it("uses the existing property address for map directions", () => {
-    expect(new URL(DIRECTIONS_URL).searchParams.get("destination")).toBe("Villa Paola Caposuvero, SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria, Italy");
+    expect(new URL(DIRECTIONS_URL).searchParams.get("destination")).toBe("Villa Paola Caposuvero, SS18, Contrada Caposuvero 6, Gizzeria Lido, Calabria, Italy");
   });
 });
