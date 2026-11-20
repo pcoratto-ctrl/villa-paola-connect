@@ -1,4 +1,4 @@
-import type { Plugin } from "vite";
+import type { Plugin, ResolvedConfig } from "vite";
 import { createServer } from "vite";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
@@ -6,12 +6,18 @@ import { resolve, dirname } from "node:path";
 // Build-time only: no runtime server, accounts, or backend data are involved.
 export function staticPublicPlugin(): Plugin {
   let output = "dist";
+  let root = process.cwd();
+  let aliases: ResolvedConfig["resolve"]["alias"] = [];
   return {
     name: "villa-static-public-html",
     apply: "build",
-    configResolved(config) { output = resolve(config.root, config.build.outDir); },
+    configResolved(config) {
+      root = config.root;
+      aliases = config.resolve.alias;
+      output = resolve(root, config.build.outDir);
+    },
     async closeBundle() {
-      const server = await createServer({ configFile: false, cacheDir: "node_modules/.vite-static-public", optimizeDeps: { noDiscovery: true, include: [] }, esbuild: { jsx: "automatic" }, server: { middlewareMode: true }, appType: "custom" });
+      const server = await createServer({ root, resolve: { alias: aliases }, configFile: false, cacheDir: "node_modules/.vite-static-public", optimizeDeps: { noDiscovery: true, include: [] }, esbuild: { jsx: "automatic" }, server: { middlewareMode: true }, appType: "custom" });
       try {
         const { staticPaths, renderStaticPage } = await server.ssrLoadModule("/src/lib/staticPublicDocument.tsx");
         const template = await readFile(resolve(output, "index.html"), "utf8");

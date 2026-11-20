@@ -3,6 +3,7 @@
 - English opening-photo availability links use a shared SSR-safe component so React and static public HTML keep the same accessible request action.
 - Public routes own their canonical URL and localized metadata through react-helmet-async; index.html retains sitewide social fallbacks but no static canonical, preventing duplicate route canonicals.
 - Public SEO HTML is emitted at build time by the Vite static-public plugin using shared localized content; private shells get noindex and no backend data is rendered, preserving the client-side access controls.
+- The static-public renderer inherits the resolved app root and import aliases so shared design-system dependencies resolve identically during prerendering.
 - Stable commercial language URLs own their language independently of stored preferences; translated counterparts share reciprocal hreflang, while legacy Italian routes retain their URLs.
 - Keep localized airport directions in the shared commercial article using the existing property address and official airport source; avoid duplicated city landing pages or hardcoded flight schedules that become stale.
 - Keep the existing static sitemap mechanism and exclude admin routes; update its entries whenever public indexable routes change.- Restyle media lives in public/images/villa-paola-restyle and is referenced by path; videos load only on tap via VideoOnDemand to keep mobile fast.
