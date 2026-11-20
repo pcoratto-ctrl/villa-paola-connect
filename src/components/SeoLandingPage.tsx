@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CalendarCheck, MessageCircle, ArrowLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -32,11 +33,12 @@ export interface SeoLandingPageProps {
 
 const SeoLandingPage = ({ slug, title, description, h1, eyebrow, intro, body, faqs }: SeoLandingPageProps) => {
   const { t, i18n } = useTranslation();
+  useEffect(() => { if (i18n.language !== "it") void i18n.changeLanguage("it"); }, [i18n]);
   const canonical = `https://villapaolacaposuvero.it/${slug}`;
   return (
     <>
       <Helmet>
-        <html lang={i18n.language} />
+        <html lang="it" />
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonical} />

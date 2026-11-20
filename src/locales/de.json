@@ -1,0 +1,17 @@
+{
+  "availability": {
+    "eyebrow": "Verfügbarkeit anfragen",
+    "titleStart": "Ihre gewünschten",
+    "titleEmph": "Reisedaten",
+    "subtitle": "Teilen Sie uns Ihre Wunschdaten mit. Wir antworten persönlich mit Informationen zur Verfügbarkeit und einem Angebot.",
+    "form": {
+      "name": "Vor- und Nachname *", "namePh": "Ihr Name", "email": "E-Mail *", "emailPh": "Ihre E-Mail-Adresse", "phone": "Telefon", "phonePh": "+49 …", "guests": "Anzahl der Gäste", "guestsPh": "4", "arrival": "Anreise", "departure": "Abreise", "message": "Nachricht / besondere Wünsche", "messagePh": "Was möchten Sie uns zu Ihrem Aufenthalt mitteilen?",
+      "privacyPrefix": "Ich habe die ", "privacyLink": "Datenschutzerklärung (Englisch)", "privacySuffix": " gelesen. *", "submit": "Persönliches Angebot anfragen", "submitting": "Wird gesendet …", "whatsapp": "WhatsApp",
+      "whatsappMessage": "Guten Tag, ich möchte die Verfügbarkeit der Villa Paola Caposuvero für folgende Reisedaten anfragen:",
+      "notice1": "Diese Anfrage ist keine verbindliche Buchung. Die Verfügbarkeit wird direkt vom Eigentümer bestätigt.",
+      "notice2": "Mit dem Absenden bestätigen Sie, die Datenschutzerklärung gelesen zu haben. Ihre Angaben werden nur zur Beantwortung Ihrer Anfrage verwendet."
+    },
+    "errors": { "privacy": "Bitte bestätigen Sie, dass Sie die Datenschutzerklärung gelesen haben.", "required": "Name und E-Mail-Adresse sind erforderlich.", "tooLong": "Der eingegebene Text ist zu lang.", "submit": "Die Anfrage konnte nicht gesendet werden.", "submitDesc": "Bitte versuchen Sie es erneut oder schreiben Sie uns auf WhatsApp." },
+    "success": { "title": "Vielen Dank!", "text": "Ihre Anfrage ist eingegangen. Wir antworten Ihnen mit Informationen zur Verfügbarkeit und weiteren Details." }
+  }
+}

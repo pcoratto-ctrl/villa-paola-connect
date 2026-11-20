@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "events": {
+    "project.availability_request_succeeded": {
+      "event_schema_version": 1,
+      "description": "The existing availability request has been accepted successfully; not a booking or guaranteed email delivery.",
+      "privacy": {
+        "contains_pii": false,
+        "purpose": "product_analytics"
+      },
+      "properties_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      }
+    },
+    "project.whatsapp_clicked": {
+      "event_schema_version": 1,
+      "description": "A visitor clicks WhatsApp in the availability request section; not a sent message or booking.",
+      "privacy": {
+        "contains_pii": false,
+        "purpose": "product_analytics"
+      },
+      "properties_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      }
+    }
+  }
+}

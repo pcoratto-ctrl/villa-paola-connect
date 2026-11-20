@@ -4,7 +4,7 @@ import SeoLandingPage from "@/components/SeoLandingPage";
 type Key = "seaVilla" | "beach" | "gizzeria" | "airport" | "family" | "pet" | "september";
 
 function usePageContent(key: Key) {
-  const { t } = useTranslation();
+  const { t } = useTranslation(undefined, { lng: "it" });
   return {
     title: t(`seoPages.${key}.title`),
     description: t(`seoPages.${key}.description`),

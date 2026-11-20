@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { PublicLanguageLinks } from "./PublicVillaArticle";
 
 interface Props {
   className?: string;
@@ -8,6 +9,7 @@ interface Props {
 const LanguageSwitcher = ({ className = "", variant = "default" }: Props) => {
   const { i18n, t } = useTranslation();
   const current = i18n.language.startsWith("en") ? "en" : "it";
+  if (typeof window !== "undefined" && (window.location.pathname === "/" || window.location.pathname === "/villa-sul-mare-calabria")) return <div className={className}><PublicLanguageLinks /></div>;
 
   const change = (lng: "it" | "en") => {
     if (lng !== current) i18n.changeLanguage(lng);

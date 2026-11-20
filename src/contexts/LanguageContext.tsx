@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-export type Language = "it" | "en";
+export type Language = "it" | "en" | "de";
 
 interface LanguageContextValue {
   lang: Language;
@@ -15,7 +15,7 @@ const LanguageContext = createContext<LanguageContextValue>({
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const { i18n } = useTranslation();
-  const lang: Language = i18n.language.startsWith("en") ? "en" : "it";
+  const lang: Language = i18n.language.startsWith("de") ? "de" : i18n.language.startsWith("en") ? "en" : "it";
 
   const setLang = (next: Language) => {
     if (next !== lang) i18n.changeLanguage(next);

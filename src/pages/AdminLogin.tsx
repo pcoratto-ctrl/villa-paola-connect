@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Lock, Mail } from "lucide-react";
@@ -37,6 +38,7 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
+      <Helmet><title>Admin · Villa Paola Caposuvero</title><meta name="robots" content="noindex,nofollow" /></Helmet>
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <Lock className="w-10 h-10 text-primary mx-auto mb-4" strokeWidth={1.5} />

@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -20,6 +21,7 @@ import MobileCta from "@/components/MobileCta";
 
 const Index = () => {
   const { t, i18n } = useTranslation();
+  useEffect(() => { if (i18n.language !== "it") void i18n.changeLanguage("it"); }, [i18n]);
   return (
     <>
       <Helmet>

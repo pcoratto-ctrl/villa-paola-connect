@@ -1,11 +1,12 @@
 # SEO corrections
+- [x] International public SEO: shared IT/DE/EN content, static build HTML, localized request CTA, metadata, sitemap, and verification; no publishing or backend changes.
 - [x] Aggiornare galleria V2: 50 foto, anteprima di 9, categorie e accesso dagli ambienti; verificato desktop/mobile senza pubblicare.
 - [x] Review failing findings against current source and fresh foundation scan.
 - [x] Link existing brand favicon and remove duplicate static canonical.
 - [x] Complete per-page social metadata on legal pages.
 - [x] Verify current route metadata and existing FAQ structured data in the browser (11 public routes).
 - [x] Record completed favicon and existing FAQ corrections in SEO findings.
-- [ ] Resolve full non-JavaScript per-route metadata/social preview findings — browser metadata corrected; static HTML remains a sitewide fallback and requires a separately approved rendering change.
-- [ ] Connect and verify Search Console — blocked by declined connection.
+- [x] Public homepage and commercial routes now emit build-time HTML and per-route metadata; deployment HTTP verification awaits owner publication.
+- [ ] Connect and verify Search Console — blocked by workspace connection permissions.
 - [ ] Create proposed kitesurf page — requires specific approval of this content opportunity.- [ ] Restyling editoriale con foto/video reali e alt del CSV (no publish)
 - [x] Qualità hospitality alta: hero, header, transizioni, mobile, percorso verso disponibilità

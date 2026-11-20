@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
+import InternationalVilla from "./pages/InternationalVilla";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
@@ -15,7 +16,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import CookiePolicy from "./pages/CookiePolicy.tsx";
 import TerminiCondizioni from "./pages/TerminiCondizioni.tsx";
 import {
-  VillaSulMareCalabria,
   VillaAccessoDirettoSpiaggia,
   CasaVacanzeGizzeria,
   VillaVicinoAeroportoLamezia,
@@ -34,7 +34,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/villa-sul-mare-calabria" element={<VillaSulMareCalabria />} />
+          <Route path="/villa-sul-mare-calabria" element={<InternationalVilla locale="it" />} />
+          <Route path="/de/ferienvilla-am-meer-kalabrien" element={<InternationalVilla locale="de" />} />
+          <Route path="/en/beachfront-villa-calabria" element={<InternationalVilla locale="en" />} />
           <Route path="/villa-accesso-diretto-spiaggia-calabria" element={<VillaAccessoDirettoSpiaggia />} />
           <Route path="/casa-vacanze-gizzeria" element={<CasaVacanzeGizzeria />} />
           <Route path="/villa-vicino-aeroporto-lamezia" element={<VillaVicinoAeroportoLamezia />} />

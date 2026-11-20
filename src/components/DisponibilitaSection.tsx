@@ -6,14 +6,9 @@ import { useSubmitLead } from "@/hooks/useLeads";
 import { useToast } from "@/hooks/use-toast";
 import { trackClick } from "@/lib/trackClick";
 
-const WHATSAPP_URL =
-  "https://wa.me/393355384250?text=" +
-  encodeURIComponent(
-    "Buongiorno, vorrei verificare la disponibilità di Villa Paola Caposuvero per queste date:"
-  );
-
 const DisponibilitaSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const WHATSAPP_URL = "https://wa.me/393355384250?text=" + encodeURIComponent(i18n.language === "de" ? t("availability.form.whatsappMessage") : i18n.language === "en" ? "Hello, I would like to enquire about Villa Paola Caposuvero for these dates:" : "Buongiorno, vorrei verificare la disponibilità di Villa Paola Caposuvero per queste date:");
   const submit = useSubmitLead();
   const { toast } = useToast();
   const [sent, setSent] = useState(false);
@@ -62,6 +57,7 @@ const DisponibilitaSection = () => {
         message: form.message.trim() || undefined,
       });
       setSent(true);
+      window.__lovableEvents?.track?.("project.availability_request_succeeded", {});
     } catch {
       toast({ title: t("availability.errors.submit"), description: t("availability.errors.submitDesc"), variant: "destructive" });
     }
@@ -156,7 +152,7 @@ const DisponibilitaSection = () => {
                   className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-ring" />
                 <span>
                   {t("availability.form.privacyPrefix")}
-                  <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                  <a href={i18n.language === "it" ? "/privacy-policy" : "/privacy-policy?lang=en"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                     {t("availability.form.privacyLink")}
                   </a>
                   {t("availability.form.privacySuffix")}
@@ -170,6 +166,7 @@ const DisponibilitaSection = () => {
                   {submit.isPending ? t("availability.form.submitting") : t("availability.form.submit")}
                 </button>
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackClick("whatsapp", "disponibilita")}
+                  onClickCapture={() => window.__lovableEvents?.track?.("project.whatsapp_clicked", {})}
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 transition-all duration-200">
                   <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
                   {t("availability.form.whatsapp")}
