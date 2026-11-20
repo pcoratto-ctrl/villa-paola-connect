@@ -8,7 +8,7 @@ import { trackClick } from "@/lib/trackClick";
 
 const DisponibilitaSection = () => {
   const { t, i18n } = useTranslation();
-  const WHATSAPP_URL = "https://wa.me/393355384250?text=" + encodeURIComponent(i18n.language === "de" ? t("availability.form.whatsappMessage") : i18n.language === "en" ? "Hello, I would like to enquire about Villa Paola Caposuvero for these dates:" : "Buongiorno, vorrei verificare la disponibilità di Villa Paola Caposuvero per queste date:");
+  const WHATSAPP_URL = "https://wa.me/393355384250?text=" + encodeURIComponent(i18n.language === "de" || i18n.language === "fr" ? t("availability.form.whatsappMessage") : i18n.language === "en" ? "Hello, I would like to enquire about Villa Paola Caposuvero for these dates:" : "Buongiorno, vorrei verificare la disponibilità di Villa Paola Caposuvero per queste date:");
   const submit = useSubmitLead();
   const { toast } = useToast();
   const [sent, setSent] = useState(false);

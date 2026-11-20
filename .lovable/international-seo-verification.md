@@ -1,5 +1,15 @@
 # International public SEO — 20 November 2026
 
+## Airport and French follow-up
+- French counterpart: https://villapaolacaposuvero.it/fr/villa-bord-de-mer-calabre. All four pages expose reciprocal it/de/en/fr plus x-default.
+- Airport access now appears in each commercial title, description, hero introduction and one dedicated getting-here section: about 15 minutes by car from Lamezia Terme Airport (SUF), traffic permitting.
+- Directions use the existing SS18, Contrada Caposuvero 31 address; all four pages link to https://sacal.it/it/lamezia-terme/. Official SACAL page fetched successfully on 20 November 2026. Flights are explicitly seasonal and must be checked with the carrier for travel dates; no unverified city examples or fixed schedules added.
+- French article, image alt, form labels, success/error states and WhatsApp message localized. Legal pages remain explicitly linked in English. No amenities or reviews invented.
+- Harness build/typecheck OK; 33 focused and regression tests passed. Actual static generator emitted 20 route documents to temporary staging. Four commercial raw documents checked for airport metadata/content, exactly one getting-here section, one canonical and five language alternates; sitemap verified at 11 indexable public URLs.
+- Four routes verified in Playwright, with same-page CTA, airport links and language metadata. French mobile hero, arrival section and desktop success screenshots inspected; no horizontal overflow or runtime exceptions. French submission verified using a browser-only response stub, not a real email or database write.
+- No publication, ad activation, database change, permission change or partner-function deployment. Live production HTTP confirmation still requires the owner's deployment with nested static files intact.
+- Files changed for this follow-up: shared content/article, French JSON, i18n/context, App route, existing request WhatsApp wording, sitemap, public SEO tests and project documentation.
+
 ## Public language group
 - Italian: https://villapaolacaposuvero.it/villa-sul-mare-calabria
 - German: https://villapaolacaposuvero.it/de/ferienvilla-am-meer-kalabrien

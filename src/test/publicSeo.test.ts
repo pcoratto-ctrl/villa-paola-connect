@@ -1,14 +1,14 @@
 import { describe, it, expect } from "vitest";
-import { publicAlternates, publicVillaContent, SITE_ORIGIN, villaStructuredData } from "../lib/publicVillaContent";
+import { publicAlternates, publicVillaContent, SITE_ORIGIN, villaStructuredData, villaFacts, AIRPORT_URL, DIRECTIONS_URL } from "../lib/publicVillaContent";
 import { renderStaticPage, staticPaths } from "../lib/staticPublicDocument";
 
 describe("Public localized SEO rules", () => {
   it("keeps the existing Italian villa URL", () => {
     expect(publicVillaContent.it.path).toBe("/villa-sul-mare-calabria");
   });
-  it("covers Italian, German and English on the canonical production origin", () => {
-    expect(publicAlternates.map(a => a.lang)).toEqual(["it", "de", "en"]);
-    expect(publicAlternates.map(a => new URL(a.href).origin)).toEqual([SITE_ORIGIN, SITE_ORIGIN, SITE_ORIGIN]);
+  it("covers Italian, German, English and French on the canonical production origin", () => {
+    expect(publicAlternates.map(a => a.lang)).toEqual(["it", "de", "en", "fr"]);
+    expect(publicAlternates.map(a => new URL(a.href).origin)).toEqual([SITE_ORIGIN, SITE_ORIGIN, SITE_ORIGIN, SITE_ORIGIN]);
   });
   it("exposes three bedrooms as verified accommodation data", () => {
     expect(villaStructuredData("de").containsPlace.numberOfBedrooms).toBe(3);
@@ -23,5 +23,18 @@ describe("Public localized SEO rules", () => {
     expect(renderStaticPage(publicVillaContent.de.path).lang).toBe("de");
     expect(renderStaticPage(publicVillaContent.en.path).lang).toBe("en");
     expect(renderStaticPage(publicVillaContent.it.path).lang).toBe("it");
+    expect(renderStaticPage(publicVillaContent.fr.path).lang).toBe("fr");
+  });
+  it("uses the owner's approximate airport drive time", () => {
+    expect(villaFacts.airportDriveMinutes).toBe(15);
+  });
+  it("identifies Lamezia Terme airport by SUF", () => {
+    expect(villaFacts.airportCode).toBe("SUF");
+  });
+  it("uses the official SACAL source supplied by the owner", () => {
+    expect(AIRPORT_URL).toBe("https://sacal.it/it/lamezia-terme/");
+  });
+  it("uses the existing property address for map directions", () => {
+    expect(new URL(DIRECTIONS_URL).searchParams.get("destination")).toBe("Villa Paola Caposuvero, SS18, Contrada Caposuvero 31, Gizzeria Lido, Calabria, Italy");
   });
 });

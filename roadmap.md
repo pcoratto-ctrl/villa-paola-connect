@@ -1,4 +1,5 @@
 # SEO corrections
+- [x] Airport-focused IT/DE/EN copy, French page/form, shared directions and SACAL links; static output and browser checks; no publication or ads.
 - [x] International public SEO: shared IT/DE/EN content, static build HTML, localized request CTA, metadata, sitemap, and verification; no publishing or backend changes.
 - [x] Aggiornare galleria V2: 50 foto, anteprima di 9, categorie e accesso dagli ambienti; verificato desktop/mobile senza pubblicare.
 - [x] Review failing findings against current source and fresh foundation scan.
