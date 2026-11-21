@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronLeft, ChevronRight, LogOut } from "lucide-react";
+import { ChevronLeft, ChevronRight, LogOut, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { CHECKIN, CHECKOUT, dayHalves, isPast, todayRome, type NightState, type PartnerData } from "@/lib/partnerCalendar";
@@ -82,6 +82,21 @@ const PartnerCalendar = () => {
     },
   });
 
+  // Same trusted role source as the admin area: RLS on user_roles lets only admins read rows.
+  const adminRole = useQuery({
+    queryKey: ["is-admin", session?.user.id],
+    enabled: !!session,
+    staleTime: 60_000,
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", session!.user.id)
+        .eq("role", "admin");
+      return (data?.length ?? 0) > 0;
+    },
+  });
+
   const months = useMemo(() => {
     const a = { y: cursor.y, m: cursor.m };
     const b = cursor.m === 11 ? { y: cursor.y + 1, m: 0 } : { y: cursor.y, m: cursor.m + 1 };
@@ -104,9 +119,16 @@ const PartnerCalendar = () => {
             <p className="eyebrow">Area operatori</p>
             <h1 className="font-display text-2xl">{q.data?.company ?? "Villa Paola Caposuvero"}</h1>
           </div>
-          <button onClick={signOut} className="inline-flex items-center gap-2 px-4 py-2 rounded-villa border border-border text-sm hover:bg-muted">
-            <LogOut className="w-4 h-4" strokeWidth={1.5} /> Esci
-          </button>
+          <div className="flex items-center gap-2">
+            {adminRole.data === true && (
+              <Link to="/admin/operatori" className="inline-flex items-center gap-2 px-4 py-2 rounded-villa border border-border text-sm hover:bg-muted">
+                <Users className="w-4 h-4" strokeWidth={1.5} /> Operatori autorizzati
+              </Link>
+            )}
+            <button onClick={signOut} className="inline-flex items-center gap-2 px-4 py-2 rounded-villa border border-border text-sm hover:bg-muted">
+              <LogOut className="w-4 h-4" strokeWidth={1.5} /> Esci
+            </button>
+          </div>
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-5 py-8">
