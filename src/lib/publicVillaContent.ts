@@ -3,6 +3,15 @@ export const villaFacts = { bedrooms: 3, maxGuests: 6, airportDriveMinutes: 15, 
 export const AIRPORT_URL = "https://sacal.it/it/lamezia-terme/";
 export const DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent("Villa Paola Caposuvero, SS18, Contrada Caposuvero 6, Gizzeria Lido, Calabria, Italy");
 export type PublicLocale = "it" | "en";
+export interface PublicFaqItem { question: string; answer: string }
+export interface PublicVillaPageContent {
+  path: string; language: string; title: string; description: string; h1: string; eyebrow: string; intro: string;
+  cta: string; whatsapp: string; home: string; privacy: string; cookies: string; terms: string; imageAlt: string;
+  arrival: { title: string; text: string; flights: string; directions: string; airport: string };
+  sections: { title: string; text: string }[];
+  faqTitle?: string;
+  faqs?: readonly PublicFaqItem[];
+}
 
 export const publicVillaContent = {
   it: {
@@ -30,7 +39,7 @@ export const publicVillaContent = {
     h1: "Your own beachfront villa in Calabria",
     eyebrow: "Villa Paola Caposuvero · Gizzeria",
     intro: "Discover a beachfront villa rental in Gizzeria, Calabria, with the entire home for your exclusive use. Villa Paola has three bedrooms for up to six guests, a private garden by the sea, a covered seafront veranda and direct beach access. Lamezia Terme Airport (SUF) is about 15 minutes away by car, traffic permitting.",
-    cta: "Enquire about availability", whatsapp: "Message us on WhatsApp", home: "Explore Villa Paola", privacy: "Privacy", cookies: "Cookies", terms: "Terms",
+    cta: "Check availability & request a quote", whatsapp: "Message us on WhatsApp", home: "Explore Villa Paola", privacy: "Privacy", cookies: "Cookies", terms: "Terms",
     imageAlt: "The garden of Villa Paola Caposuvero overlooking the sea in Gizzeria",
     arrival: { title: "From Lamezia Terme Airport to the coast", text: "Villa Paola is about 15 minutes by car from Lamezia Terme Airport (SUF), traffic permitting. Your destination is SS18, Contrada Caposuvero 6, Gizzeria Lido. Open the directions to plan your drive, and contact the owner before travelling if you need to clarify arrival arrangements.", flights: "Direct flights and frequencies vary by season. Use the official SACAL airport website as a starting point, then check with the airline for your exact travel dates before planning your stay.", directions: "Directions to Villa Paola", airport: "Lamezia Terme Airport · SACAL" },
     sections: [
@@ -40,8 +49,15 @@ export const publicVillaContent = {
       { title: "Gizzeria, within reach of Lamezia Terme", text: "Villa Paola is in Caposuvero, Gizzeria Lido, on Calabria’s west coast. Lamezia Terme Airport is approximately a 15-minute drive away, depending on traffic. The location lets you combine days at the villa with trips along the coast and inland. You can discuss arrival arrangements and your group’s needs directly with the owner." },
       { title: "A personal quote for your stay", text: "Share your arrival and departure dates and the number of guests using the enquiry form. The owner will reply with availability and a personalised quote, then confirm dates, price and conditions with you directly. Your enquiry is the first step, not an instant booking. You can also message us on WhatsApp." },
     ],
+    faqTitle: "Frequently asked questions",
+    faqs: [
+      { question: "Is Villa Paola rented as a whole villa for exclusive use?", answer: "Yes. The entire beachfront villa and its private garden are for your group alone, with three bedrooms, two bathrooms and an equipped kitchen for up to six guests." },
+      { question: "Does the villa have direct beach access or a private beach?", answer: "Villa Paola has direct beach access from the garden without crossing a road. The shoreline itself is not a private beach." },
+      { question: "How far is Villa Paola from Lamezia Terme Airport (SUF)?", answer: "The villa is approximately a 15-minute drive from Lamezia Terme Airport (SUF), traffic permitting." },
+      { question: "What is the minimum stay and how does booking work?", answer: "The minimum stay is 7 nights unless explicitly agreed with the owner. Submitting the form sends an availability enquiry for a personalised quote rather than an instant booking; dates, price and conditions are confirmed directly." },
+    ],
   },
-} satisfies Record<PublicLocale, { path: string; language: string; title: string; description: string; h1: string; eyebrow: string; intro: string; cta: string; whatsapp: string; home: string; privacy: string; cookies: string; terms: string; imageAlt: string; arrival: { title: string; text: string; flights: string; directions: string; airport: string }; sections: { title: string; text: string }[] }>;
+} satisfies Record<PublicLocale, PublicVillaPageContent>;
 
 export const publicAlternates = Object.entries(publicVillaContent).map(([lang, content]) => ({ lang, href: SITE_ORIGIN + content.path }));
 export function villaStructuredData(locale: PublicLocale) {

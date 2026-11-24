@@ -2,6 +2,7 @@ import { Phone, MapPin, Mail, MessageCircle, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logoAsset from "@/assets/villa-paola-logo-footer.png.asset.json";
+import { englishDiscoveryLinks } from "@/lib/englishVillaTopics";
 import { trackClick } from "@/lib/trackClick";
 
 const EMAIL = "info@villapaolacaposuvero.it";
@@ -10,26 +11,30 @@ const WHATSAPP_URL = "https://wa.me/393355384250";
 const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61588044700058&sk=reviews";
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEnglish = i18n.language.startsWith("en");
 
-  const seoLinks = [
-    { to: "/villa-sul-mare-calabria", label: t("footer.seo.seaVilla") },
-    { to: "/villa-accesso-diretto-spiaggia-calabria", label: t("footer.seo.beach") },
-    { to: "/casa-vacanze-gizzeria", label: t("footer.seo.gizzeria") },
-    { to: "/villa-vicino-aeroporto-lamezia", label: t("footer.seo.airport") },
-    { to: "/villa-per-famiglie-calabria", label: t("footer.seo.family") },
-    { to: "/villa-pet-friendly-calabria", label: t("footer.seo.pet") },
-    { to: "/vacanze-settembre-calabria", label: t("footer.seo.september") },
-  ];
+  const seoLinks = isEnglish
+    ? englishDiscoveryLinks
+    : [
+        { to: "/villa-sul-mare-calabria", label: t("footer.seo.seaVilla") },
+        { to: "/villa-accesso-diretto-spiaggia-calabria", label: t("footer.seo.beach") },
+        { to: "/casa-vacanze-gizzeria", label: t("footer.seo.gizzeria") },
+        { to: "/villa-vicino-aeroporto-lamezia", label: t("footer.seo.airport") },
+        { to: "/villa-per-famiglie-calabria", label: t("footer.seo.family") },
+        { to: "/villa-pet-friendly-calabria", label: t("footer.seo.pet") },
+        { to: "/vacanze-settembre-calabria", label: t("footer.seo.september") },
+      ];
 
+  const homeHash = (hash: string) => (isEnglish ? `/?lang=en#${hash}` : `/#${hash}`);
   const exploreLinks = [
-    { l: t("footer.links.villa"), h: "/#villa" },
-    { l: t("footer.links.why"), h: "/#perche" },
-    { l: t("footer.links.services"), h: "/#servizi" },
-    { l: t("footer.links.gallery"), h: "/#galleria" },
-    { l: t("footer.links.reviews"), h: "/#recensioni" },
-    { l: t("footer.links.availability"), h: "/#disponibilita" },
-    { l: t("footer.links.faq"), h: "/#faq" },
+    { l: t("footer.links.villa"), h: homeHash("villa") },
+    { l: t("footer.links.why"), h: homeHash("perche") },
+    { l: t("footer.links.services"), h: homeHash("servizi") },
+    { l: t("footer.links.gallery"), h: homeHash("galleria") },
+    { l: t("footer.links.reviews"), h: homeHash("recensioni") },
+    { l: t("footer.links.availability"), h: homeHash("disponibilita") },
+    { l: t("footer.links.faq"), h: homeHash("faq") },
     { l: t("nav.partnerArea"), h: "/calendario/login" },
   ];
 

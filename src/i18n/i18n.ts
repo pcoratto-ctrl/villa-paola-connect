@@ -8,8 +8,8 @@ const STORAGE_KEY = "villa-language";
 function getInitialLang(): "it" | "en" {
   if (typeof window !== "undefined") {
     if (window.location.pathname.startsWith("/en/")) return "en";
-    if (window.location.pathname === "/" || window.location.pathname === "/villa-sul-mare-calabria") return "it";
     if (new URLSearchParams(window.location.search).get("lang") === "en") return "en";
+    if (window.location.pathname === "/" || window.location.pathname === "/villa-sul-mare-calabria") return "it";
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
       if (stored === "it" || stored === "en") return stored;

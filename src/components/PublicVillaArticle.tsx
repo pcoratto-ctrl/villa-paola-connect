@@ -1,4 +1,4 @@
-import type { PublicLocale } from "../lib/publicVillaContent";
+import type { PublicLocale, PublicVillaPageContent } from "../lib/publicVillaContent";
 import { publicVillaContent, AIRPORT_URL, DIRECTIONS_URL } from "../lib/publicVillaContent";
 import { englishVillaTopics, englishTopicImages, type EnglishVillaTopic } from "../lib/englishVillaTopics";
 import gardenPathAsset from "../assets/villa-garden-path-sea.webp.asset.json";
@@ -13,7 +13,7 @@ export function PublicLanguageLinks({ locale }: { locale?: PublicLocale }) {
 }
 
 export default function PublicVillaArticle({ locale, topic }: { locale: PublicLocale; topic?: EnglishVillaTopic }) {
-  const c = topic ? englishVillaTopics[topic] : publicVillaContent[locale];
+  const c: PublicVillaPageContent = topic ? englishVillaTopics[topic] : publicVillaContent[locale];
   const images = topic ? englishTopicImages[topic] : undefined;
   return <>
     <header className="villa-section py-5 border-b border-border bg-background">
@@ -68,6 +68,15 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
               <div className="flex flex-wrap gap-x-6 gap-y-3"><a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-primary">{c.arrival.directions}</a><a href={AIRPORT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-primary">{c.arrival.airport}</a></div>
             </div>}
           </section>)}
+          {c.faqs && c.faqs.length > 0 && <section aria-labelledby="villa-faq-heading" className="mb-12 md:mb-16 border-t border-border pt-10">
+            <h2 id="villa-faq-heading" className="font-display text-3xl md:text-4xl mb-8 text-primary">{c.faqTitle ?? "Frequently asked questions"}</h2>
+            <dl className="space-y-6">
+              {c.faqs.map(item => <div key={item.question} className="border-b border-border/70 pb-6 last:border-b-0 last:pb-0">
+                <dt className="font-medium text-lg text-foreground mb-2">{item.question}</dt>
+                <dd className="text-muted-foreground leading-relaxed m-0">{item.answer}</dd>
+              </div>)}
+            </dl>
+          </section>}
           <a href="#disponibilita" className="inline-flex rounded-villa bg-primary text-primary-foreground px-6 py-4 font-semibold">{c.cta}</a>
           {locale === "en" && <nav aria-label="Explore your stay" className="mt-12 border-t border-border pt-8 space-y-4">
             {topic && <p>For the rooms, garden and whole-villa overview, <a className="underline underline-offset-4 text-primary" href={publicVillaContent.en.path}>explore the beachfront villa</a>.</p>}

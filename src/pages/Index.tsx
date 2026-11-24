@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -21,7 +22,9 @@ import MobileCta from "@/components/MobileCta";
 
 const Index = () => {
   const { t, i18n } = useTranslation();
-  useEffect(() => { if (i18n.language !== "it") void i18n.changeLanguage("it"); }, [i18n]);
+  const { search } = useLocation();
+  const routeLang = new URLSearchParams(search).get("lang") === "en" ? "en" : "it";
+  useEffect(() => { if (i18n.language !== routeLang) void i18n.changeLanguage(routeLang); }, [i18n, routeLang]);
   return (
     <>
       <Helmet>

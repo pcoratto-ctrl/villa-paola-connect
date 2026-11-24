@@ -16,6 +16,13 @@ export const englishVillaTopics = {
       { title: "Arriving in Gizzeria", text: "Plan your arrival with the owner." },
       { title: "Plan your stay by the shore", text: "Send your preferred dates and the number of guests for a personal availability reply. Include any questions about the beach route or your group's needs. The owner will discuss the details with you and confirm your stay directly; the form starts an enquiry." },
     ],
+    faqTitle: "Questions about beach access",
+    faqs: [
+      { question: "Is the beach private or public with direct access?", answer: "Villa Paola offers direct beach access from the private garden without crossing a road. The shoreline itself is not a private beach." },
+      { question: "What if someone in our group has mobility requirements?", answer: "Please ask the owner about the access route and any specific mobility requirements before arranging your stay, so you can decide whether the path suits your group." },
+      { question: "How many guests can stay and what is the minimum stay?", answer: "The whole villa is for your exclusive use, with three bedrooms and two bathrooms for up to six guests. The minimum stay is 7 nights unless explicitly agreed." },
+      { question: "Is submitting the form an instant booking?", answer: "No. Sending your dates requests availability and a personalised quote; dates, price and stay conditions are confirmed directly with the owner." },
+    ],
   },
   seasons: {
     ...publicVillaContent.en,
@@ -32,9 +39,20 @@ export const englishVillaTopics = {
       { title: "Getting here outside high summer", text: "Check travel options for your dates." },
       { title: "A stay planned around your priorities", text: "Tell the owner whether you are looking for quiet days at the villa, coastal walks or a base for exploring. Share your dates and group size, along with questions about local services or arrival arrangements. You will receive a personal availability reply and quote before confirming your stay directly." },
     ],
+    faqTitle: "Questions about spring & autumn stays",
+    faqs: [
+      { question: "Is swimming or warm weather guaranteed in spring or autumn?", answer: "No. Weather and sea conditions vary in spring and autumn, so plan a flexible itinerary mixing coastal walks, time on the veranda and inland outings rather than expecting guaranteed swimming weather." },
+      { question: "Should we check seasonal opening hours and weather in advance?", answer: "Yes. Outside peak summer, opening hours for restaurants, attractions and local services can vary, so check forecasts and confirm schedules directly before heading out." },
+      { question: "What is the minimum stay for a spring or autumn holiday?", answer: "The minimum stay is 7 nights unless explicitly agreed with the owner. Send your preferred dates and group size to check availability and request a personalised quote." },
+    ],
   },
 };
 export type EnglishVillaTopic = keyof typeof englishVillaTopics;
+export const englishDiscoveryLinks = [
+  { to: publicVillaContent.en.path, label: "Beachfront villa in Calabria" },
+  { to: englishVillaTopics.beach.path, label: "Villa with direct beach access" },
+  { to: englishVillaTopics.seasons.path, label: "Spring & autumn holidays in Calabria" },
+] as const;
 export const englishTopicImages = {
   beach: { hero: "gallery-spiaggia-e-isola-allorizzonte.webp", detail: "gallery-passaggio-laterale-vista-mare.webp", alt: "The sea-facing side passage at Villa Paola" },
   seasons: { hero: "giardino-tramonto-mare.webp", detail: "terrazza-pranzo-vista-mare.webp", alt: "The outdoor dining space at Villa Paola overlooking the sea" },
