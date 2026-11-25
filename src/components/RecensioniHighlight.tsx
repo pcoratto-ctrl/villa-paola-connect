@@ -26,7 +26,7 @@ interface Card {
   country: string;
   text: string;
   source: string;
-  rating: number;
+  rating?: number;
 }
 
 const ReviewCard = ({
@@ -55,7 +55,7 @@ const ReviewCard = ({
           <p className="text-muted-foreground text-xs mt-0.5">{review.country}</p>
         </div>
       </div>
-      <Stars n={review.rating} />
+      {review.rating ? <Stars n={review.rating} /> : null}
     </div>
     <p
       className={`text-foreground leading-relaxed italic flex-1 ${
@@ -96,6 +96,13 @@ const RecensioniHighlight = () => {
       source: t("reviews.card2.source"),
       rating: 5,
     },
+    {
+      initials: "HW",
+      name: t("reviews.card4.name"),
+      country: t("reviews.card4.country"),
+      text: t("reviews.card4.text"),
+      source: t("reviews.card4.source"),
+    },
   ];
 
   return (
@@ -121,7 +128,7 @@ const RecensioniHighlight = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
           {cards.map((card, i) => (
-            <ReviewCard key={card.initials} review={card} index={i} featured={i === 0} />
+            <ReviewCard key={card.initials} review={card} index={i} featured={i === 0 || i === cards.length - 1} />
           ))}
         </div>
 

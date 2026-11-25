@@ -16,3 +16,4 @@
 - [ ] Create proposed kitesurf page — requires specific approval of this content opportunity.- [ ] Restyling editoriale con foto/video reali e alt del CSV (no publish)
 - [x] Qualità hospitality alta: hero, header, transizioni, mobile, percorso verso disponibilità
 - [x] Focused IT/EN SEO + direct enquiry improvement: English footer/homepage discovery, visible intent-specific English FAQs, quote CTA clarity, metadata audit, 45 Vitest tests, build OK & Playwright mobile/anchor QA (preview only, no publish).
+- [x] Aggiungere recensione Heike Weidenhiller (Facebook) nella sezione recensioni
