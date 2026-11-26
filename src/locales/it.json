@@ -1,4 +1,15 @@
 {
+  "consent": {
+    "title": "Preferenze privacy",
+    "description": "Contiamo le visite senza identificarti. Se accetti, misuriamo anche clic e altre azioni.",
+    "settings": "Impostazioni cookie",
+    "accept": "Accetta tutto",
+    "reject": "Rifiuta tutto",
+    "save": "Salva preferenze",
+    "necessary": "Necessari — sempre attivi per hosting e preferenze privacy.",
+    "analytics": "Statistiche, fornite da Lovable",
+    "gpc": "Si applica il segnale privacy del browser; le statistiche facoltative sono disattivate."
+},
   "nav": {
     "reviews": "Recensioni",
     "villa": "La Villa",
@@ -72,11 +83,11 @@
     "eyebrow": "Servizi",
     "titleStart": "Tutto ciò che serve per un",
     "titleEmph": "soggiorno perfetto",
-    "subtitle": "Ogni dettaglio è pensato per il vostro comfort. Dalla cucina attrezzata alla spiaggia privata, Villa Paola offre tutto il necessario per una vacanza senza pensieri.",
+    "subtitle": "Ogni dettaglio è pensato per il vostro comfort. Dalla cucina attrezzata alla accesso diretto alla spiaggia, Villa Paola offre tutto il necessario per una vacanza senza pensieri.",
     "extra": "E inoltre: frigorifero · forno · microonde · lavastoviglie · utensili da cucina · zona pranzo esterna · patio · guardaroba · soggiorno",
     "amenities": {
       "wifi": "Wi-Fi gratuito",
-      "beach": "Spiaggia privata",
+      "beach": "Accesso diretto alla spiaggia",
       "ac": "Aria condizionata",
       "kitchen": "Cucina attrezzata",
       "kids": "Adatto ai bambini",
@@ -174,6 +185,7 @@
     "address": "SS18, Contrada Caposuvero 6, Gizzeria Lido, Calabria"
   },
   "availability": {
+    "measurementConsent": "Facoltativo: acconsento alla misurazione delle richieste e a informazioni limitate sulla provenienza dopo il consenso, senza nomi, contatti o messaggi. Deseleziona per interrompere. La richiesta funziona anche senza consenso.",
     "eyebrow": "Richiedi disponibilità",
     "titleStart": "Richiedi le date",
     "titleEmph": "disponibili",
@@ -223,7 +235,7 @@
       },
       {
         "q": "Quante persone può ospitare la villa?",
-        "a": "Villa Paola Caposuvero dispone di 3 camere da letto, 2 bagni e può ospitare comodamente famiglie e piccoli gruppi fino a 6+ persone."
+        "a": "Villa Paola Caposuvero dispone di 3 camere da letto, 2 bagni e può ospitare comodamente famiglie e piccoli gruppi fino a 6 ospiti."
       },
       {
         "q": "È adatta alle famiglie?",
@@ -310,7 +322,7 @@
     "retentionH": "Conservazione",
     "retention": "I dati sono conservati per il tempo necessario a evadere la richiesta e comunque non oltre 24 mesi, salvo diverso obbligo di legge.",
     "vendorsH": "Fornitori e responsabili esterni",
-    "vendors": "Per l'erogazione del servizio utilizziamo i seguenti fornitori, nominati responsabili del trattamento ai sensi dell'art. 28 GDPR: Supabase Inc. (infrastruttura database e backend, server in Unione Europea) tramite la piattaforma Lovable Cloud; Resend Inc. (invio delle notifiche email al titolare, server negli Stati Uniti — trasferimento basato su Clausole Contrattuali Standard UE); Lovable AB (hosting del sito, server in Unione Europea). Non è attivo alcun servizio di analytics o profilazione di terze parti.",
+    "vendors": "Per l'erogazione del servizio utilizziamo i seguenti fornitori, nominati responsabili del trattamento ai sensi dell'art. 28 GDPR: Supabase Inc. (infrastruttura database e backend, server in Unione Europea) tramite la piattaforma Lovable Cloud; Resend Inc. (invio delle notifiche email al titolare, server negli Stati Uniti — trasferimento basato su Clausole Contrattuali Standard UE); Lovable AB (hosting del sito, server in Unione Europea). La misurazione facoltativa e non personale delle richieste usa le statistiche esistenti del sito con consenso separato; non vengono aggiunti tag pubblicitari o di profilazione.",
     "rightsH": "Diritti dell'interessato",
     "rights": "Puoi in ogni momento richiedere l'accesso, la rettifica, la cancellazione o la limitazione del trattamento dei tuoi dati, oppure opporti al trattamento, scrivendo a <1>{{email}}</1>. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali (www.gpdp.it).",
     "updated": "Ultimo aggiornamento: luglio 2026."
@@ -323,7 +335,7 @@
     "techH": "Cookie tecnici",
     "tech": "Sono cookie indispensabili per la navigazione e non richiedono il consenso preventivo dell'utente (art. 122 Codice Privacy).",
     "thirdH": "Cookie di terze parti",
-    "third": "Il sito non integra strumenti di analisi o tracciamento di terze parti. In caso di future integrazioni (es. Google Analytics), la presente policy verrà aggiornata e verrà mostrato un banner per la raccolta del consenso.",
+    "third": "La misurazione facoltativa delle richieste usa le statistiche esistenti del sito solo dopo il consenso accanto al modulo disponibilità. Registra clic sulla disponibilità, avvio del modulo, richieste salvate e clic WhatsApp, mai nomi, contatti, date o messaggi. Include soltanto percorsi pubblici, domini di provenienza e valori di campagna autorizzati. La preferenza per le statistiche resta nel local storage fino a 365 giorni (183 per il rifiuto), senza cookie analitici aggiuntivi. Si revoca nelle Impostazioni cookie o dalla casella del modulo; Global Privacy Control blocca gli eventi facoltativi. L’hosting usa un cookie tecnico per la versione del sito. Gli eventi delle richieste precedenti al consenso non vengono recuperati; continua il conteggio di base di visite, prestazioni ed errori senza identificarti. Non vengono aggiunti Google Analytics o tag pubblicitari.",
     "manageH": "Gestione dei cookie",
     "manage": "Puoi disabilitare i cookie in qualsiasi momento agendo sulle impostazioni del tuo browser. La disabilitazione dei cookie tecnici potrebbe compromettere il funzionamento del sito.",
     "updated": "Ultimo aggiornamento: luglio 2026."
@@ -357,7 +369,7 @@
       "intro": "Villa Paola Caposuvero è una villa sul mare a Gizzeria, sulla costa tirrenica calabrese: spazi ampi, terrazza vista mare e accesso diretto alla spiaggia, in una posizione riservata e facile da raggiungere.",
       "body": [
         "Cercare una villa sul mare in Calabria significa cercare qualcosa di semplice: uscire di casa e trovarsi davanti al Mediterraneo. Villa Paola Caposuvero è pensata esattamente per questo: niente strade da attraversare, niente stress, solo il rumore delle onde.",
-        "La villa può ospitare famiglie e piccoli gruppi fino a 6+ persone, con 3 camere da letto, 2 bagni e 120 m² di superficie. Gli spazi interni sono luminosi, curati e pronti per essere vissuti sia in coppia che con i bambini.",
+        "La villa può ospitare famiglie e piccoli gruppi fino a 6 ospiti, con 3 camere da letto, 2 bagni e 120 m² di superficie. Gli spazi interni sono luminosi, curati e pronti per essere vissuti sia in coppia che con i bambini.",
         "La posizione a Gizzeria, in provincia di Catanzaro, permette di raggiungere in poco tempo l'aeroporto internazionale di Lamezia Terme e i borghi più belli della costa tirrenica calabrese."
       ]
     },
@@ -423,14 +435,14 @@
     },
     "september": {
       "title": "Vacanze a settembre in Calabria | Villa Paola Caposuvero, Gizzeria",
-      "description": "Vacanze a settembre in Calabria: mare caldo, meno folla e prezzi più dolci. Villa Paola Caposuvero a Gizzeria, sul mare con accesso diretto alla spiaggia.",
+      "description": "Vacanze a settembre in Calabria a Villa Paola Caposuvero: intera villa a Gizzeria con giardino e accesso diretto alla spiaggia. Richiedi disponibilità e preventivo.",
       "eyebrow": "Settembre in Calabria",
       "h1": "Vacanze a settembre in Calabria: la stagione più bella dell'anno",
-      "intro": "Settembre in Calabria è mare caldo, giornate ancora lunghe, spiagge meno affollate e prezzi più dolci. Villa Paola Caposuvero è il posto giusto per goderselo davvero.",
+      "intro": "Un soggiorno a settembre in Calabria può alternare passeggiate sulla costa, giornate in villa e pranzi in veranda. Villa Paola Caposuvero offre una base fronte mare a Gizzeria, con accesso diretto alla spiaggia.",
       "body": [
-        "Settembre è forse il mese migliore per una vacanza sul mare in Calabria: il Mediterraneo resta caldo, il clima è perfetto per lunghe passeggiate e la costa tirrenica si svuota della folla estiva.",
+        "Organizza le giornate in base al meteo e alle condizioni del mare e verifica gli orari dei servizi stagionali. Temperature, possibilità di fare il bagno e affluenza variano: non sono garantite.",
         "A Villa Paola Caposuvero puoi goderti tramonti spettacolari, cene sulla terrazza e giornate in spiaggia in totale tranquillità, con l'accesso diretto al mare che fa la differenza.",
-        "Se stai pensando alle date, contattaci per verificare la disponibilità: settembre è molto richiesto proprio per la sua unicità."
+        "Se stai pensando alle date, contattaci per verificare la disponibilità e ricevere un preventivo personalizzato. Prezzo e condizioni vengono confermati direttamente, senza sconti stagionali garantiti."
       ]
     }
   },

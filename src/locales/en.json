@@ -1,4 +1,15 @@
 {
+  "consent": {
+    "title": "Privacy choices",
+    "description": "We count visits without identifying you. If you accept, we also measure clicks and other actions.",
+    "settings": "Cookie settings",
+    "accept": "Accept all",
+    "reject": "Reject all",
+    "save": "Save choices",
+    "necessary": "Necessary — always active for hosting and your privacy choice.",
+    "analytics": "Analytics, provided by Lovable",
+    "gpc": "Your browser privacy signal applies; optional analytics is disabled."
+},
   "nav": {
     "reviews": "Reviews",
     "villa": "The Villa",
@@ -72,11 +83,11 @@
     "eyebrow": "Amenities",
     "titleStart": "Everything you need for a",
     "titleEmph": "perfect stay",
-    "subtitle": "Every detail is designed for your comfort. From the fully equipped kitchen to the private beach, Villa Paola offers everything you need for a carefree holiday.",
+    "subtitle": "Every detail is designed for your comfort. From the fully equipped kitchen to the direct beach access, Villa Paola offers everything you need for a carefree holiday.",
     "extra": "Also included: fridge · oven · microwave · dishwasher · kitchenware · outdoor dining area · patio · wardrobes · living room",
     "amenities": {
       "wifi": "Free Wi-Fi",
-      "beach": "Private beach",
+      "beach": "Direct beach access",
       "ac": "Air conditioning",
       "kitchen": "Equipped kitchen",
       "kids": "Kid-friendly",
@@ -174,6 +185,7 @@
     "address": "SS18, Contrada Caposuvero 6, Gizzeria Lido, Calabria"
   },
   "availability": {
+    "measurementConsent": "Optional: allow non-personal enquiry measurement and limited campaign source information after acceptance. No names, contact details or message text; untick to stop. Your enquiry works without this consent.",
     "eyebrow": "Request availability",
     "titleStart": "Ask for the available",
     "titleEmph": "dates",
@@ -223,7 +235,7 @@
       },
       {
         "q": "How many people can the villa host?",
-        "a": "Villa Paola Caposuvero has 3 bedrooms and 2 bathrooms and comfortably hosts families and small groups up to 6+ people."
+        "a": "Villa Paola Caposuvero has 3 bedrooms and 2 bathrooms and comfortably hosts families and small groups up to 6 guests."
       },
       {
         "q": "Is it suitable for families?",
@@ -310,7 +322,7 @@
     "retentionH": "Retention",
     "retention": "Data is kept for the time needed to reply to the request and in any case no longer than 24 months, unless otherwise required by law.",
     "vendorsH": "Vendors and processors",
-    "vendors": "The following providers are appointed as data processors pursuant to art. 28 GDPR: Supabase Inc. (database and backend infrastructure, servers in the European Union) via the Lovable Cloud platform; Resend Inc. (email notifications to the owner, servers in the United States — transfer based on EU Standard Contractual Clauses); Lovable AB (website hosting, servers in the European Union). No third-party analytics or profiling service is active.",
+    "vendors": "The following providers are appointed as data processors pursuant to art. 28 GDPR: Supabase Inc. (database and backend infrastructure, servers in the European Union) via the Lovable Cloud platform; Resend Inc. (email notifications to the owner, servers in the United States — transfer based on EU Standard Contractual Clauses); Lovable AB (website hosting, servers in the European Union). Optional, non-personal enquiry measurement uses the existing website analytics with separate consent; no advertising or profiling tag is added.",
     "rightsH": "Your rights",
     "rights": "You may at any time request access, correction, deletion or restriction of the processing of your data, or object to processing, by writing to <1>{{email}}</1>. You also have the right to file a complaint with the Italian Data Protection Authority (www.gpdp.it).",
     "updated": "Last updated: July 2026."
@@ -323,7 +335,7 @@
     "techH": "Technical cookies",
     "tech": "These are cookies essential for browsing and do not require prior user consent (art. 122 Italian Privacy Code).",
     "thirdH": "Third-party cookies",
-    "third": "The site does not integrate third-party analytics or tracking tools. If integrations are added in the future (e.g. Google Analytics), this policy will be updated and a consent banner will be shown.",
+    "third": "Optional enquiry measurement uses the existing website analytics only after you opt in beside the availability form. It records availability-button clicks, form starts, saved requests and WhatsApp clicks, never names, contact details, dates or message text. Only public landing paths, approved referral hosts and allowlisted campaign values are included. Your analytics choice is saved in local storage for up to 365 days (183 days for refusal), without an additional analytics cookie. You can withdraw it in Cookie settings or using the form checkbox; Global Privacy Control blocks optional events. The hosting service uses a necessary deployment cookie. Custom enquiry events are not replayed from before consent; basic visit, performance and error counting continues without identifying you. No Google Analytics or advertising tag is added.",
     "manageH": "Managing cookies",
     "manage": "You can disable cookies at any time via your browser settings. Disabling technical cookies may affect the site's functionality.",
     "updated": "Last updated: July 2026."
@@ -357,7 +369,7 @@
       "intro": "Villa Paola Caposuvero is a seaside villa in Gizzeria, on the Tyrrhenian coast of Calabria: spacious rooms, sea-view terrace and direct beach access, in a private and easy-to-reach location.",
       "body": [
         "Looking for a seaside villa in Calabria means looking for something simple: stepping out of the house and finding the Mediterranean right there. Villa Paola Caposuvero is designed for exactly that: no roads to cross, no stress, only the sound of the waves.",
-        "The villa hosts families and small groups up to 6+ people, with 3 bedrooms, 2 bathrooms and 120 sqm of space. The interiors are bright, well kept and ready to be enjoyed as a couple or with kids.",
+        "The villa hosts families and small groups up to 6 guests, with 3 bedrooms, 2 bathrooms and 120 sqm of space. The interiors are bright, well kept and ready to be enjoyed as a couple or with kids.",
         "The location in Gizzeria, in the province of Catanzaro, lets you quickly reach Lamezia Terme international airport and the most beautiful villages on the Tyrrhenian coast of Calabria."
       ]
     },
@@ -423,14 +435,14 @@
     },
     "september": {
       "title": "September holidays in Calabria | Villa Paola Caposuvero, Gizzeria",
-      "description": "September holidays in Calabria: warm sea, fewer crowds and softer prices. Villa Paola Caposuvero in Gizzeria, on the sea with direct beach access.",
+      "description": "September holidays in Calabria at Villa Paola Caposuvero: a whole villa in Gizzeria with a garden and direct beach access. Request availability and a quote.",
       "eyebrow": "September in Calabria",
       "h1": "September holidays in Calabria: the best season of the year",
-      "intro": "September in Calabria means warm sea, still-long days, less crowded beaches and softer prices. Villa Paola Caposuvero is the right place to enjoy all of it.",
+      "intro": "A September stay in Calabria can combine coastal walks, days at the villa and lunches on the veranda. Villa Paola Caposuvero is a beachfront base in Gizzeria with direct beach access.",
       "body": [
-        "September may be the best month for a seaside holiday in Calabria: the Mediterranean stays warm, the weather is perfect for long walks and the Tyrrhenian coast empties out from the summer crowds.",
+        "Plan around the forecast and sea conditions, and check seasonal service hours. Temperatures, swimming conditions and visitor numbers vary rather than being guaranteed.",
         "At Villa Paola Caposuvero you can enjoy spectacular sunsets, dinners on the terrace and days on the beach in complete calm, with direct beach access making all the difference.",
-        "If you're considering dates, contact us to check availability: September is in high demand precisely because of its uniqueness."
+        "If you're considering dates, contact us for availability and a personalised quote. Prices and conditions are confirmed directly, without guaranteed seasonal discounts."
       ]
     }
   },

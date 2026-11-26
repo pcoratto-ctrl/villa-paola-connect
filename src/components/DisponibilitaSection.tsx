@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle, CheckCircle, Send } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useSubmitLead } from "@/hooks/useLeads";
 import { useToast } from "@/hooks/use-toast";
+import { measurementAllowed, enquiryMeasurementProperties, setEnquiryMeasurementConsent, useEnquiryMeasurementConsent } from "@/lib/enquiryConsent";
+import { Button } from "@/components/ui/button";
 import { trackClick } from "@/lib/trackClick";
 
 const DisponibilitaSection = () => {
@@ -12,6 +14,10 @@ const DisponibilitaSection = () => {
   const submit = useSubmitLead();
   const { toast } = useToast();
   const [sent, setSent] = useState(false);
+  const measurementConsent = useEnquiryMeasurementConsent();
+  const started = useRef(false);
+  const submitting = useRef(false);
+  const measuredIds = useRef(new Set<string>());
 
   const [form, setForm] = useState({
     guest_name: "",
@@ -30,6 +36,7 @@ const DisponibilitaSection = () => {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting.current || sent) return;
     if (form.website) {
       setSent(true);
       return;
@@ -46,8 +53,9 @@ const DisponibilitaSection = () => {
       toast({ title: t("availability.errors.tooLong"), variant: "destructive" });
       return;
     }
+    submitting.current = true;
     try {
-      await submit.mutateAsync({
+      const acknowledgement = await submit.mutateAsync({
         guest_name: form.guest_name.trim(),
         email: form.email.trim(),
         phone: form.phone.trim() || undefined,
@@ -57,9 +65,14 @@ const DisponibilitaSection = () => {
         message: form.message.trim() || undefined,
       });
       setSent(true);
-      window.__lovableEvents?.track?.("project.availability_request_succeeded", {});
+      if (await measurementAllowed() && !measuredIds.current.has(acknowledgement.id)) {
+        measuredIds.current.add(acknowledgement.id);
+        window.__lovableEvents?.track?.("project.generate_lead", enquiryMeasurementProperties(i18n.language));
+      }
     } catch {
       toast({ title: t("availability.errors.submit"), description: t("availability.errors.submitDesc"), variant: "destructive" });
+    } finally {
+      submitting.current = false;
     }
   };
 
@@ -85,6 +98,10 @@ const DisponibilitaSection = () => {
         </motion.div>
 
         <div className="max-w-2xl mx-auto">
+          <label className="flex items-start gap-3 text-sm text-muted-foreground mb-6 cursor-pointer">
+            <input type="checkbox" checked={measurementConsent} onChange={e => setEnquiryMeasurementConsent(e.target.checked)} className="mt-1 h-4 w-4 shrink-0" />
+            <span>{t("availability.measurementConsent")} <a className="underline underline-offset-4" href={i18n.language.startsWith("en") ? "/cookie-policy?lang=en" : "/cookie-policy"}>{t("footer.cookies")}</a></span>
+          </label>
           {sent ? (
             <div className="text-center p-10 rounded-villa bg-card shadow-card border border-border">
               <CheckCircle className="w-14 h-14 text-accent mx-auto mb-5" strokeWidth={1.5} />
@@ -92,7 +109,14 @@ const DisponibilitaSection = () => {
               <p className="text-muted-foreground">{t("availability.success.text")}</p>
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="p-6 md:p-10 rounded-villa bg-card shadow-card border border-border space-y-5">
+            <form onSubmit={onSubmit} onChangeCapture={async e => {
+              const target = e.target;
+              if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) || target.type === "checkbox" || target.name === "website" || !target.value) return;
+              if (await measurementAllowed() && !started.current) {
+                started.current = true;
+                window.__lovableEvents?.track?.("project.availability_form_started", enquiryMeasurementProperties(i18n.language));
+              }
+            }} className="p-6 md:p-10 rounded-villa bg-card shadow-card border border-border space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">{t("availability.form.name")}</label>
@@ -160,13 +184,13 @@ const DisponibilitaSection = () => {
               </label>
 
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <button type="submit" disabled={submit.isPending}
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-primary text-primary-foreground font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95 disabled:opacity-60">
+                <Button type="submit" disabled={submit.isPending}
+                  className="flex-1 h-auto min-h-[52px] whitespace-normal inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-primary text-primary-foreground font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95 disabled:opacity-60">
                   <Send className="w-4 h-4" strokeWidth={1.5} />
                   {submit.isPending ? t("availability.form.submitting") : t("availability.form.submit")}
-                </button>
+                </Button>
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackClick("whatsapp", "disponibilita")}
-                  onClickCapture={() => window.__lovableEvents?.track?.("project.whatsapp_clicked", {})}
+                  onClickCapture={async () => { if (await measurementAllowed()) window.__lovableEvents?.track?.("project.whatsapp_clicked", enquiryMeasurementProperties(i18n.language)); }}
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-accent text-accent-foreground font-medium hover:opacity-90 transition-all duration-200">
                   <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
                   {t("availability.form.whatsapp")}

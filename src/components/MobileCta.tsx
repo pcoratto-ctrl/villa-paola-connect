@@ -1,10 +1,11 @@
+import { measurementAllowed, enquiryMeasurementProperties } from "@/lib/enquiryConsent";
 import { useState, useEffect } from "react";
 import { CalendarCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 const MobileCta = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [visible, setVisible] = useState(false);
   const [hidden, setHidden] = useState(false);
 
@@ -45,7 +46,7 @@ const MobileCta = () => {
           className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-background/92 backdrop-blur-xl border-t border-border px-3 pt-3 safe-bottom"
         >
           <a
-            href="#disponibilita"
+            href="#disponibilita" onClick={async () => { if (await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(i18n.language)); }}
             className="w-full inline-flex items-center justify-center gap-2 px-6 min-h-[52px] py-3.5 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta active:scale-95 transition-transform"
           >
             <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />

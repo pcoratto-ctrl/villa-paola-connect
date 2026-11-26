@@ -1,3 +1,4 @@
+import { measurementAllowed, enquiryMeasurementProperties } from "@/lib/enquiryConsent";
 import { motion } from "framer-motion";
 import { CalendarCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -5,7 +6,7 @@ import { useTranslation } from "react-i18next";
 const BASE = "/images/villa-paola-restyle";
 
 const HeroSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <section className="relative min-h-[100svh] md:min-h-[92vh] overflow-hidden bg-primary">
       <picture>
@@ -50,7 +51,7 @@ const HeroSection = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="#disponibilita"
+                href="#disponibilita" onClick={async () => { if (await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(i18n.language)); }}
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-4 min-h-[52px] rounded-villa bg-primary-foreground text-primary text-base font-semibold shadow-cta hover:bg-secondary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-foreground"
               >
                 <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />

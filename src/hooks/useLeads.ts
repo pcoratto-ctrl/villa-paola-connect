@@ -1,3 +1,4 @@
+import { isLeadAcknowledgement } from "@/lib/leadAcknowledgement";
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -18,6 +19,7 @@ export function useSubmitLead() {
         body: lead,
       });
       if (error) throw error;
+      if (!isLeadAcknowledgement(data)) throw new Error("Lead was not acknowledged by the server");
       return data;
     },
   });

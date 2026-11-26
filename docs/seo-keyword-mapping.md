@@ -11,7 +11,7 @@
 | --- | --- | --- | --- |
 | `/` | IT (supports `?lang=en` hydrated view) | Brand & main overview (`Villa Paola Caposuvero`, Gizzeria beachfront villa) | Self canonical `https://villapaolacaposuvero.it/` |
 | `/villa-sul-mare-calabria` | IT | Main Italian commercial page (`villa sul mare Calabria`, direct beach access, 15 min SUF) | Self canonical; reciprocal hreflang `it`/`en`/`x-default` with `/en/beachfront-villa-calabria` |
-| `/en/beachfront-villa-calabria` | EN | Main English commercial page (`beachfront villa Calabria`, whole villa exclusive use, 3 bedrooms / 2 bathrooms / up to 6, 15 min Lamezia Terme Airport SUF) | Self canonical; reciprocal hreflang `it`/`en`/`x-default` with `/villa-sul-mare-calabria` |
+| `/en/beachfront-villa-calabria` | EN | Main English rental enquiry page (`beachfront villa rental Calabria`, whole private villa rental, 3 bedrooms / 2 bathrooms / up to 6, garden/veranda; airport proximity secondary) | Self canonical; reciprocal hreflang `it`/`en`/`x-default` with `/villa-sul-mare-calabria` |
 | `/en/villa-direct-beach-access-calabria` | EN | Direct beach access intent (`villa with direct beach access Calabria`, garden-to-shore route, clarifies direct access vs private beach, mobility enquiry) | Self canonical; no hreflang (distinct topic page) |
 | `/en/calabria-spring-autumn-holidays` | EN | Shoulder-season intent (`spring and autumn villa holidays Calabria`, May/October flexible coast & inland stays, no guaranteed weather/swimming) | Self canonical; no hreflang (distinct topic page) |
 | `/villa-accesso-diretto-spiaggia-calabria` | IT | Legacy Italian direct beach access page | Self canonical; `it` |
@@ -33,3 +33,8 @@
 - Vitest regression suite: 7 test files, 45 tests passed (`publicSeo.test.ts` covers English/Italian footer discovery links, static homepage English discovery, distinct visible English FAQs, quote CTA clarity, no-JS `#disponibilita` fallback, canonical/hreflang rules, and absence of `FAQPage`/`AggregateRating` schema; `staticRenderer.test.ts` passed).
 - Harness build & typecheck: `build OK` in `/tmp/observability/build-errors.log`.
 - Playwright mobile (390×844) & desktop (1280×900) verification on `/`, `/?lang=en`, `/en/beachfront-villa-calabria`, `/en/villa-direct-beach-access-calabria`, and `/en/calabria-spring-autumn-holidays`: zero horizontal overflow, zero page errors, `#disponibilita` anchors scroll to the existing enquiry section (no real form submission or email triggered), English home footer links only to the 3 English routes, and all 3 English pages render their distinct visible FAQ headings and items.
+
+## Rental and enquiry update (2026-11-26)
+- Main English title: `Beachfront Villa Rental in Calabria | Villa Paola Caposuvero`. Distinct H1 and factual whole-villa copy retain garden, veranda, real photographs and a request-for-availability/quote CTA, not an instant booking.
+- Contextual links separate the rental decision from the garden-to-beach route and May/October planning. Only the main IT/EN translation pair has reciprocal hreflang; sitemap remains 11 existing URLs.
+- Full current checks, file list, consent behaviour, event semantics and the unsupported Sender/CRM attribution contract are recorded in [Enquiry SEO verification](enquiry-seo-verification.md).

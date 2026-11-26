@@ -1,3 +1,4 @@
+import { measurementAllowed, enquiryMeasurementProperties } from "@/lib/enquiryConsent";
 import { useState } from "react";
 import { CalendarCheck, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,7 +7,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import logoAsset from "@/assets/villa-paola-logo-menu.png.asset.json";
 
 const Navbar = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
@@ -61,7 +62,7 @@ const Navbar = () => {
               </a>
               <LanguageSwitcher />
               <a
-                href="/#disponibilita"
+                href="/#disponibilita" onClick={async () => { if (await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(i18n.language)); }}
                 className="inline-flex shrink-0 items-center gap-2 px-4 py-2.5 rounded-villa bg-primary text-primary-foreground text-sm font-semibold transition-colors hover:bg-primary/90"
               >
                 <CalendarCheck className="w-4 h-4" strokeWidth={1.5} />
@@ -116,7 +117,7 @@ const Navbar = () => {
               </div>
               <a
                 href="/#disponibilita"
-                onClick={() => setMobileOpen(false)}
+                onClick={async () => { setMobileOpen(false); if (await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(i18n.language)); }}
                 className="mt-4 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-villa bg-primary text-primary-foreground text-base font-medium"
               >
                 <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />

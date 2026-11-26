@@ -1,3 +1,4 @@
+import { measurementAllowed, enquiryMeasurementProperties } from "@/lib/enquiryConsent";
 import { motion } from "framer-motion";
 import { CalendarCheck, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -10,7 +11,7 @@ const WHATSAPP_URL =
   );
 
 const CtaSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <section className="villa-section py-24 md:py-32">
       <div className="villa-container">
@@ -41,7 +42,7 @@ const CtaSection = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <a
-                href="#disponibilita"
+                href="#disponibilita" onClick={async () => { if (await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(i18n.language)); }}
                 className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-4 min-h-[52px] rounded-villa bg-primary text-primary-foreground text-base font-medium transition-all duration-200 active:scale-95"
               >
                 <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
@@ -51,7 +52,7 @@ const CtaSection = () => {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackClick("whatsapp", "cta")}
+                onClick={async () => { trackClick("whatsapp", "cta"); if (await measurementAllowed()) window.__lovableEvents?.track?.("project.whatsapp_clicked", enquiryMeasurementProperties(i18n.language)); }}
                 className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-4 min-h-[52px] rounded-villa bg-primary-foreground/20 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/30 hover:bg-primary-foreground/25 transition-all duration-200"
               >
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />

@@ -1,5 +1,5 @@
 export const SITE_ORIGIN = "https://villapaolacaposuvero.it";
-export const villaFacts = { bedrooms: 3, maxGuests: 6, airportDriveMinutes: 15, airportCode: "SUF" } as const;
+export const villaFacts = { bedrooms: 3, maxGuests: 6, bathrooms: 2, airportDriveMinutes: 15, airportCode: "SUF" } as const;
 export const AIRPORT_URL = "https://sacal.it/it/lamezia-terme/";
 export const DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent("Villa Paola Caposuvero, SS18, Contrada Caposuvero 6, Gizzeria Lido, Calabria, Italy");
 export type PublicLocale = "it" | "en";
@@ -34,11 +34,11 @@ export const publicVillaContent = {
   },
   en: {
     path: "/en/beachfront-villa-calabria", language: "English",
-    title: "Beachfront Villa in Calabria with Direct Beach Access | Villa Paola",
-    description: "An entire beachfront villa in Gizzeria, Calabria, with a private garden, covered seafront veranda and direct beach access. Sleeps six, about 15 minutes by car from Lamezia Terme Airport.",
-    h1: "Your own beachfront villa in Calabria",
+    title: "Beachfront Villa Rental in Calabria | Villa Paola Caposuvero",
+    description: "Rent the whole beachfront Villa Paola in Calabria: 3 bedrooms, 2 bathrooms, up to 6 guests, garden, veranda and direct beach access. Request availability and a quote.",
+    h1: "A beachfront villa in Calabria, all to yourselves",
     eyebrow: "Villa Paola Caposuvero · Gizzeria",
-    intro: "Discover a beachfront villa rental in Gizzeria, Calabria, with the entire home for your exclusive use. Villa Paola has three bedrooms for up to six guests, a private garden by the sea, a covered seafront veranda and direct beach access. Lamezia Terme Airport (SUF) is about 15 minutes away by car, traffic permitting.",
+    intro: "Discover a beachfront villa rental in Gizzeria, Calabria, with the entire home for your exclusive use. Villa Paola has three bedrooms and two bathrooms for up to six guests, a private garden by the sea, a covered seafront veranda and direct beach access. Lamezia Terme Airport (SUF) is about 15 minutes away by car, traffic permitting.",
     cta: "Check availability & request a quote", whatsapp: "Message us on WhatsApp", home: "Explore Villa Paola", privacy: "Privacy", cookies: "Cookies", terms: "Terms",
     imageAlt: "The garden of Villa Paola Caposuvero overlooking the sea in Gizzeria",
     arrival: { title: "From Lamezia Terme Airport to the coast", text: "Villa Paola is about 15 minutes by car from Lamezia Terme Airport (SUF), traffic permitting. Your destination is SS18, Contrada Caposuvero 6, Gizzeria Lido. Open the directions to plan your drive, and contact the owner before travelling if you need to clarify arrival arrangements.", flights: "Direct flights and frequencies vary by season. Use the official SACAL airport website as a starting point, then check with the airline for your exact travel dates before planning your stay.", directions: "Directions to Villa Paola", airport: "Lamezia Terme Airport · SACAL" },
@@ -62,5 +62,5 @@ export const publicVillaContent = {
 export const publicAlternates = Object.entries(publicVillaContent).map(([lang, content]) => ({ lang, href: SITE_ORIGIN + content.path }));
 export function villaStructuredData(locale: PublicLocale) {
   const content = publicVillaContent[locale];
-  return { "@context": "https://schema.org", "@type": "LodgingBusiness", "@id": SITE_ORIGIN + "/#villa", name: "Villa Paola Caposuvero", url: SITE_ORIGIN + content.path, description: content.description, image: SITE_ORIGIN + "/images/villa-paola-restyle/hero-giardino-mare-desktop.webp", telephone: "+393355384250", containsPlace: { "@type": "Accommodation", name: "Villa Paola Caposuvero", numberOfBedrooms: villaFacts.bedrooms, occupancy: { "@type": "QuantitativeValue", maxValue: villaFacts.maxGuests } }, address: { "@type": "PostalAddress", streetAddress: "SS18, Contrada Caposuvero 6", addressLocality: "Gizzeria Lido", addressRegion: "Calabria", addressCountry: "IT" } };
+  return { "@context": "https://schema.org", "@type": "LodgingBusiness", "@id": SITE_ORIGIN + "/#villa", name: "Villa Paola Caposuvero", url: SITE_ORIGIN + content.path, description: content.description, image: SITE_ORIGIN + "/images/villa-paola-restyle/hero-giardino-mare-desktop.webp", telephone: "+393355384250", containsPlace: { "@type": "Accommodation", name: "Villa Paola Caposuvero", numberOfBedrooms: villaFacts.bedrooms, numberOfBathroomsTotal: villaFacts.bathrooms, occupancy: { "@type": "QuantitativeValue", maxValue: villaFacts.maxGuests } }, address: { "@type": "PostalAddress", streetAddress: "SS18, Contrada Caposuvero 6", addressLocality: "Gizzeria Lido", addressRegion: "Calabria", addressCountry: "IT" } };
 }

@@ -10,3 +10,5 @@
 
 - Partner calendar data comes only from the external Centro operativo via backend functions (partner-*) that whitelist fields; never store rates/availability locally or expose upstream credentials to the browser.
 - Keep gallery selection, categories and intrinsic image dimensions in a shared catalog; the homepage preview and interior links open the same accessible gallery without extending the homepage.
+- Enquiry measurement uses one analytics-purpose consent module with early worldwide Consent Mode defaults, GPC and sanitized in-memory attribution; call native events at existing handlers, never replay pre-consent custom actions or add attribution to an unsupported lead/export schema.
+- Require a valid saved-lead acknowledgement before displaying success or measuring conversion, and synchronously guard duplicate submissions; a resolved transport or email status alone does not prove a saved request.

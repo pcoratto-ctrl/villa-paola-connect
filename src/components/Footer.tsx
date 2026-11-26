@@ -1,3 +1,4 @@
+import { measurementAllowed, enquiryMeasurementProperties } from "@/lib/enquiryConsent";
 import { Phone, MapPin, Mail, MessageCircle, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -53,7 +54,7 @@ const Footer = () => {
             <p className="font-medium text-white/90 text-sm mb-4">{t("footer.explore")}</p>
             <nav className="flex flex-col gap-2">
               {exploreLinks.map((i) => (
-                <a key={i.h} href={i.h} className="text-white/60 text-sm hover:text-white transition-colors">{i.l}</a>
+                <a key={i.h} href={i.h} onClick={async () => { if (i.h.endsWith("#disponibilita") && await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(i18n.language)); }} className="text-white/60 text-sm hover:text-white transition-colors">{i.l}</a>
               ))}
             </nav>
           </div>
@@ -74,7 +75,7 @@ const Footer = () => {
                 <Phone className="w-4 h-4" strokeWidth={1.5} />
                 {t("footer.phone")}
               </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackClick("whatsapp", "footer")} className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={async () => { trackClick("whatsapp", "footer"); if (await measurementAllowed()) window.__lovableEvents?.track?.("project.whatsapp_clicked", enquiryMeasurementProperties(i18n.language)); }} className="flex items-center gap-3 text-white/60 text-sm hover:text-white transition-colors">
                 <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
                 {t("footer.whatsapp")}
               </a>

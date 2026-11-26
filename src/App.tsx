@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import ConsentChoices from "@/components/ConsentChoices";
 import Index from "./pages/Index.tsx";
 import InternationalVilla from "./pages/InternationalVilla";
 import AdminLogin from "./pages/AdminLogin.tsx";
@@ -56,6 +57,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <ConsentChoices />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -1,4 +1,5 @@
 # SEO corrections
+- [x] Focused rental SEO and shared consent-aware enquiry measurement; 69 tests, build OK and ten desktop/mobile checks; unsupported Sender/CRM attribution documented; no live leads, email or publication.
 - [x] Correct property address to Caposuvero 6 in IT/EN, maps and generated HTML; 17 SEO tests and seven browser routes passed; photo preserved; no publication.
 - [x] Three connected English previews: useful beach/season content, static metadata, sitemap and desktop/mobile/CTA verification; 39 tests passed; no deployment.
 - [x] Reduce unpublished international SEO to IT/EN only; 36 tests, nine sitemap documents, static HTML and localized CTA checked; saved without deployment.
@@ -12,8 +13,9 @@
 - [x] Verify current route metadata and existing FAQ structured data in the browser (11 public routes).
 - [x] Record completed favicon and existing FAQ corrections in SEO findings.
 - [x] Public homepage and commercial routes now emit build-time HTML and per-route metadata; deployment HTTP verification awaits owner publication.
-- [ ] Connect and verify Search Console — blocked by workspace connection permissions.
-- [ ] Create proposed kitesurf page — requires specific approval of this content opportunity.- [ ] Restyling editoriale con foto/video reali e alt del CSV (no publish)
+- [x] Search Console domain and 11-URL sitemap verified by owner; actual indexing remains pending (see SEO documentation).
+- [ ] Create proposed kitesurf page — requires specific approval of this content opportunity.
+- [x] Restyling editoriale con foto/video reali e alt del CSV (no publish).
 - [x] Qualità hospitality alta: hero, header, transizioni, mobile, percorso verso disponibilità
 - [x] Focused IT/EN SEO + direct enquiry improvement: English footer/homepage discovery, visible intent-specific English FAQs, quote CTA clarity, metadata audit, 45 Vitest tests, build OK & Playwright mobile/anchor QA (preview only, no publish).
 - [x] Aggiungere recensione Heike Weidenhiller (Facebook) nella sezione recensioni

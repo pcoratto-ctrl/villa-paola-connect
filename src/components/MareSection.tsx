@@ -1,3 +1,4 @@
+import { measurementAllowed, enquiryMeasurementProperties } from "@/lib/enquiryConsent";
 import { useTranslation } from "react-i18next";
 import { CalendarCheck } from "lucide-react";
 import Reveal from "@/components/restyle/Reveal";
@@ -6,7 +7,7 @@ import VideoOnDemand from "@/components/restyle/VideoOnDemand";
 const B = "/images/villa-paola-restyle";
 
 const MareSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <section id="mare" className="bg-primary text-primary-foreground py-20 md:pt-32 md:pb-44 villa-section overflow-hidden">
       <div className="villa-container grid md:grid-cols-12 gap-10 md:gap-14 items-center">
@@ -34,7 +35,7 @@ const MareSection = () => {
           <div className="md:hidden max-w-[300px] mx-auto mb-8">
             <VideoOnDemand src={`${B}/video-accesso-mare.mp4`} poster={`${B}/video-accesso-mare-poster.webp`} label={t("sea.videoLabel")} alt={t("sea.videoAlt")} width={540} height={960} />
           </div>
-          <a href="#disponibilita" className="inline-flex items-center gap-2.5 px-6 py-3.5 min-h-[50px] rounded-villa bg-primary-foreground text-primary font-semibold hover:bg-secondary transition-colors">
+          <a href="#disponibilita" onClick={async () => { if (await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(i18n.language)); }} className="inline-flex items-center gap-2.5 px-6 py-3.5 min-h-[50px] rounded-villa bg-primary-foreground text-primary font-semibold hover:bg-secondary transition-colors">
             <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
             {t("hero.ctaPrimary")}
           </a>

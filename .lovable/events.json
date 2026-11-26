@@ -1,6 +1,128 @@
 {
   "schema_version": 1,
   "events": {
+    "project.availability_cta_clicked": {
+      "event_schema_version": 1,
+      "description": "An existing availability or quote anchor is clicked after measurement opt-in; not an enquiry or booking.",
+      "privacy": {
+        "contains_pii": false,
+        "purpose": "product_analytics"
+      },
+      "properties_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "landing_path": {
+            "type": "string"
+          },
+          "page_language": {
+            "enum": [
+              "it",
+              "en"
+            ],
+            "type": "string"
+          },
+          "referrer_host": {
+            "type": "string"
+          },
+          "utm_campaign": {
+            "enum": [
+              "villa_paola",
+              "villa-paola",
+              "spring",
+              "autumn",
+              "summer"
+            ],
+            "type": "string"
+          },
+          "utm_medium": {
+            "enum": [
+              "social",
+              "organic",
+              "referral",
+              "email",
+              "cpc",
+              "paid_social"
+            ],
+            "type": "string"
+          },
+          "utm_source": {
+            "enum": [
+              "facebook",
+              "instagram",
+              "google",
+              "bing",
+              "newsletter"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_language"
+        ],
+        "type": "object"
+      }
+    },
+    "project.availability_form_started": {
+      "event_schema_version": 1,
+      "description": "First non-empty edit in the existing enquiry form after measurement opt-in; once per mounted form, no field values included.",
+      "privacy": {
+        "contains_pii": false,
+        "purpose": "product_analytics"
+      },
+      "properties_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "landing_path": {
+            "type": "string"
+          },
+          "page_language": {
+            "enum": [
+              "it",
+              "en"
+            ],
+            "type": "string"
+          },
+          "referrer_host": {
+            "type": "string"
+          },
+          "utm_campaign": {
+            "enum": [
+              "villa_paola",
+              "villa-paola",
+              "spring",
+              "autumn",
+              "summer"
+            ],
+            "type": "string"
+          },
+          "utm_medium": {
+            "enum": [
+              "social",
+              "organic",
+              "referral",
+              "email",
+              "cpc",
+              "paid_social"
+            ],
+            "type": "string"
+          },
+          "utm_source": {
+            "enum": [
+              "facebook",
+              "instagram",
+              "google",
+              "bing",
+              "newsletter"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_language"
+        ],
+        "type": "object"
+      }
+    },
     "project.availability_request_succeeded": {
       "event_schema_version": 1,
       "description": "The existing availability request has been accepted successfully; not a booking or guaranteed email delivery.",
@@ -14,17 +136,123 @@
         "properties": {}
       }
     },
-    "project.whatsapp_clicked": {
+    "project.generate_lead": {
       "event_schema_version": 1,
-      "description": "A visitor clicks WhatsApp in the availability request section; not a sent message or booking.",
+      "description": "The existing server acknowledges a saved availability enquiry; not a booking or email-delivery confirmation. Emitted once per acknowledged request after opt-in.",
       "privacy": {
         "contains_pii": false,
         "purpose": "product_analytics"
       },
       "properties_schema": {
-        "type": "object",
         "additionalProperties": false,
-        "properties": {}
+        "properties": {
+          "landing_path": {
+            "type": "string"
+          },
+          "page_language": {
+            "enum": [
+              "it",
+              "en"
+            ],
+            "type": "string"
+          },
+          "referrer_host": {
+            "type": "string"
+          },
+          "utm_campaign": {
+            "enum": [
+              "villa_paola",
+              "villa-paola",
+              "spring",
+              "autumn",
+              "summer"
+            ],
+            "type": "string"
+          },
+          "utm_medium": {
+            "enum": [
+              "social",
+              "organic",
+              "referral",
+              "email",
+              "cpc",
+              "paid_social"
+            ],
+            "type": "string"
+          },
+          "utm_source": {
+            "enum": [
+              "facebook",
+              "instagram",
+              "google",
+              "bing",
+              "newsletter"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_language"
+        ],
+        "type": "object"
+      }
+    },
+    "project.whatsapp_clicked": {
+      "event_schema_version": 2,
+      "description": "An existing WhatsApp contact link is clicked after opt-in; not evidence of a sent message or booking.",
+      "privacy": {
+        "contains_pii": false,
+        "purpose": "product_analytics"
+      },
+      "properties_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "landing_path": {
+            "type": "string"
+          },
+          "page_language": {
+            "enum": [
+              "it",
+              "en"
+            ],
+            "type": "string"
+          },
+          "referrer_host": {
+            "type": "string"
+          },
+          "utm_campaign": {
+            "enum": [
+              "villa_paola",
+              "villa-paola",
+              "spring",
+              "autumn",
+              "summer"
+            ],
+            "type": "string"
+          },
+          "utm_medium": {
+            "enum": [
+              "social",
+              "organic",
+              "referral",
+              "email",
+              "cpc",
+              "paid_social"
+            ],
+            "type": "string"
+          },
+          "utm_source": {
+            "enum": [
+              "facebook",
+              "instagram",
+              "google",
+              "bing",
+              "newsletter"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
       }
     }
   }

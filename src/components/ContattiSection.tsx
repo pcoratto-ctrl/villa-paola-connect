@@ -1,3 +1,4 @@
+import { measurementAllowed, enquiryMeasurementProperties } from "@/lib/enquiryConsent";
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, Clock, MapPin, Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +9,7 @@ const EMAIL = "info@villapaolacaposuvero.it";
 const WHATSAPP_URL = `https://wa.me/393355384250?text=Buongiorno%2C%20vorrei%20informazioni%20su%20Villa%20Paola%20Caposuvero`;
 
 const ContattiSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <section id="contatti" className="villa-section py-24 md:py-32">
       <div className="villa-container">
@@ -57,7 +58,7 @@ const ContattiSection = () => {
 
             <div className="flex flex-col gap-3">
               <a
-                href="#disponibilita"
+                href="#disponibilita" onClick={async () => { if (await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(i18n.language)); }}
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all duration-200 active:scale-95"
               >
                 <Phone className="w-5 h-5" strokeWidth={1.5} />
@@ -67,7 +68,7 @@ const ContattiSection = () => {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackClick("whatsapp", "contatti")}
+                onClick={async () => { trackClick("whatsapp", "contatti"); if (await measurementAllowed()) window.__lovableEvents?.track?.("project.whatsapp_clicked", enquiryMeasurementProperties(i18n.language)); }}
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-accent text-accent-foreground text-base font-medium hover:opacity-90 transition-all duration-200 active:scale-95"
               >
                 <MessageCircle className="w-5 h-5" strokeWidth={1.5} />

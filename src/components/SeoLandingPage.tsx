@@ -1,3 +1,4 @@
+import { measurementAllowed, enquiryMeasurementProperties } from "@/lib/enquiryConsent";
 import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -70,11 +71,11 @@ const SeoLandingPage = ({ slug, title, description, h1, eyebrow, intro, body, fa
                 {intro}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="#disponibilita" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all">
+                <a href="#disponibilita" onClick={async () => { if (await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(i18n.language)); }} className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground text-base font-medium shadow-cta hover:shadow-elevated transition-all">
                   <CalendarCheck className="w-5 h-5" strokeWidth={1.5} />
                   {t("seoLanding.ctaAvailability")}
                 </a>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={() => trackClick("whatsapp", `seo-${slug}`)} className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary-foreground/15 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/25">
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={async () => { trackClick("whatsapp", `seo-${slug}`); if (await measurementAllowed()) window.__lovableEvents?.track?.("project.whatsapp_clicked", enquiryMeasurementProperties(i18n.language)); }} className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary-foreground/15 backdrop-blur-md text-primary-foreground text-base font-medium border border-primary-foreground/25">
                   <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
                   {t("seoLanding.ctaWhatsapp")}
                 </a>
