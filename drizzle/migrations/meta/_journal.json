@@ -29,6 +29,13 @@
       "when": 1795043975572,
       "tag": "0003_restore_has_role_for_authenticated",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795730841061,
+      "tag": "0004_tighten_click_events_insert_rls",
+      "breakpoints": true
     }
   ]
 }
