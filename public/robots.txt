@@ -3,7 +3,6 @@ Allow: /
 Disallow: /admin
 Disallow: /calendario
 Disallow: /reset-password
-Disallow: /it/home/
 Disallow: /sample-page/
 Disallow: /hello-world/
 Disallow: /blog/

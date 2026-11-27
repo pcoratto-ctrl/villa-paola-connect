@@ -11,10 +11,19 @@ const legacyPages = {
 } as const;
 const internalPaths = ["/admin", "/admin/login", "/admin/operatori", "/calendario", "/calendario/login", "/reset-password"];
 const legalPaths = ["/privacy-policy", "/cookie-policy", "/termini-condizioni"];
-export const staticPaths = ["/", ...Object.values(publicVillaContent).map(c => c.path), ...Object.values(englishVillaTopics).map(c => c.path), ...Object.keys(legacyPages), ...internalPaths, ...legalPaths];
+const legacyHomeRedirects = ["/it/home"];
+export const staticPaths = ["/", ...legacyHomeRedirects, ...Object.values(publicVillaContent).map(c => c.path), ...Object.values(englishVillaTopics).map(c => c.path), ...Object.keys(legacyPages), ...internalPaths, ...legalPaths];
 const escape = (value: string) => value.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] ?? c));
 
 export function renderStaticPage(path: string) {
+  if (legacyHomeRedirects.includes(path)) {
+    const target = `${SITE_ORIGIN}/`;
+    const title: string = it.index.title;
+    const description: string = it.index.description;
+    const head = `<title>${escape(title)}</title><meta data-rh="true" name="description" content="${escape(description)}"><meta data-rh="true" name="robots" content="index,follow"><link data-rh="true" rel="canonical" href="${target}"><meta http-equiv="refresh" content="0; url=${target}"><meta data-rh="true" property="og:title" content="${escape(title)}"><meta data-rh="true" property="og:description" content="${escape(description)}"><meta data-rh="true" property="og:url" content="${target}"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escape(title)}"><meta name="twitter:description" content="${escape(description)}">`;
+    const body = renderToStaticMarkup(<main className="villa-section py-20"><div className="villa-container"><p>Questa pagina si trova ora all&apos;indirizzo principale: <a href={target}>Villa Paola Caposuvero</a>.</p></div></main>);
+    return { head, body, lang: "it" };
+  }
   const topic = (Object.keys(englishVillaTopics) as EnglishVillaTopic[]).find(t => englishVillaTopics[t].path === path);
   const locale = topic ? "en" : (Object.keys(publicVillaContent) as PublicLocale[]).find(l => publicVillaContent[l].path === path);
   let title: string = it.index.title;

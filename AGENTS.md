@@ -12,3 +12,4 @@
 - Keep gallery selection, categories and intrinsic image dimensions in a shared catalog; the homepage preview and interior links open the same accessible gallery without extending the homepage.
 - Enquiry measurement uses one analytics-purpose consent module with early worldwide Consent Mode defaults, GPC and sanitized in-memory attribution; call native events at existing handlers, never replay pre-consent custom actions or add attribution to an unsupported lead/export schema.
 - Require a valid saved-lead acknowledgement before displaying success or measuring conversion, and synchronously guard duplicate submissions; a resolved transport or email status alone does not prove a saved request.
+- Lovable hosting has no path-level HTTP 301/308 config; consolidate legacy URLs like `/it/home` via crawlable static HTML with canonical `/` and instant meta refresh plus React `<Navigate to="/" replace />`, never `robots.txt` Disallow or `noindex`.
