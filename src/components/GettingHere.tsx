@@ -60,7 +60,7 @@ export default function GettingHere({ locale, heading = true }: { locale: Public
     setPlaying(true);
   }
 
-  return <div id="come-raggiungerci" className="w-full min-w-0">
+  return <div id="getting-here" className="w-full min-w-0">
     {heading && <h3 className="font-display text-3xl md:text-4xl text-primary mb-6 tracking-normal">{c.title}</h3>}
     <div role="group" aria-label={c.from} className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
       {(["airport", "station"] as const).map(key => {

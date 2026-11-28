@@ -1,4 +1,5 @@
 # SEO corrections
+- [x] Uniformare #getting-here: home IT, /?lang=en e tre landing EN senza duplicati; 28 test, dieci verifiche browser e quattro screenshot IT/EN desktop/mobile; nessun deploy.
 - [x] Come raggiungerci IT/EN: illustrazione SVG, selettori, animazione di 6 secondi, pausa/replay; 67 test e verifiche desktop/mobile/reduced-motion, build OK; solo anteprima.
 - [x] Focused rental SEO and shared consent-aware enquiry measurement; 69 tests, build OK and ten desktop/mobile checks; unsupported Sender/CRM attribution documented; no live leads, email or publication.
 - [x] Correct property address to Caposuvero 6 in IT/EN, maps and generated HTML; 17 SEO tests and seven browser routes passed; photo preserved; no publication.

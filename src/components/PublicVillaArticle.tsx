@@ -57,7 +57,7 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
       </section>}
       <div className="villa-section py-14 md:py-20">
         <div className="villa-container max-w-4xl">
-          {c.sections.map((section, index) => <section id={index === 3 ? "getting-here" : undefined} key={section.title} className="mb-12 md:mb-16">
+          {c.sections.map((section, index) => <section key={section.title} className="mb-12 md:mb-16">
             {index === 0 && locale === "en" && !topic && <figure className="m-0 mb-8">
               <img src={seafrontVerandaAsset.url} alt="A table set for a meal on Villa Paola's covered seafront veranda, overlooking the blue sea" width={1077} height={1077} loading="eager" className="block w-full h-auto rounded-villa" />
             </figure>}

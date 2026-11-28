@@ -80,7 +80,7 @@ describe("arrival controls", () => {
 it("prerenders one arrival diagram per homepage/commercial page without changing canonicals", () => {
   for (const path of ["/", "/villa-sul-mare-calabria", "/en/beachfront-villa-calabria", "/en/villa-direct-beach-access-calabria", "/en/calabria-spring-autumn-holidays"]) {
     const page = renderStaticPage(path);
-    expect(page.body.match(/id="come-raggiungerci"/g)).toHaveLength(1);
+    expect(page.body.match(/id="getting-here"/g)).toHaveLength(1);
     expect(page.body).toContain(path.startsWith("/en/") ? "Illustrative map" : "Mappa illustrativa");
     expect(page.head).toContain(`rel="canonical" href="https://villapaolacaposuvero.it${path}"`);
   }
