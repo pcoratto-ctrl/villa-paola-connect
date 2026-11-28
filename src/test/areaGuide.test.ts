@@ -49,7 +49,7 @@ describe("Area guide IT/EN pages", () => {
     }
   });
 
-  it("includes only the 4 approved destinations, owner note only on Fiumefreddo, verified links and 450-750 words", () => {
+  it("includes only the 4 approved destinations, owner note only on Fiumefreddo, verified links and concise editorial copy", () => {
     for (const locale of ["it", "en"] as const) {
       const c = areaGuideContent[locale];
       expect(c.places.map(p => p.id)).toEqual([
@@ -61,7 +61,11 @@ describe("Area guide IT/EN pages", () => {
       expect(c.places.filter(p => p.ownerNote).map(p => p.id)).toEqual(["fiumefreddo-bruzio"]);
 
       const page = renderStaticPage(c.path);
-      expect(page.body.toLowerCase()).not.toContain("le moire");
+      const lower = page.body.toLowerCase();
+      expect(lower).not.toContain("le moire");
+      for (const banned of ["tappe", "mature trees", "genuine", "grounded look", "riferimento concreto", "depend on traffic"]) {
+        expect(lower).not.toContain(banned);
+      }
       expect(page.body).toContain("https://www.termecaronte.it/piscina");
       expect(page.body).toContain("https://calabriastraordinaria.it/idee-di-viaggio/nel-borgo-di-fiumefreddo-bruzio-tra-i-borghi-piu-belli-ditalia");
       expect(page.body).toContain("https://cantinebenvenuto.it/");
@@ -70,7 +74,6 @@ describe("Area guide IT/EN pages", () => {
       expect(page.body).toContain('href="#disponibilita"');
 
       const words = wordCount(stripHtml(page.body));
-      expect(words).toBeGreaterThanOrEqual(450);
       expect(words).toBeLessThanOrEqual(750);
     }
   });

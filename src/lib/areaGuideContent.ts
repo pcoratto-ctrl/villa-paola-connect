@@ -62,13 +62,13 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
     description: "Quattro idee nei dintorni di Gizzeria e Villa Paola Caposuvero: Terme Caronte, Fiumefreddo Bruzio, Cantine Benvenuto e kitesurf a Gizzeria, con mappe e fonti ufficiali.",
     eyebrow: "Villa Paola Caposuvero · Dintorni di Gizzeria",
     h1: "Cosa vedere vicino a Gizzeria",
-    intro: "Soggiornare a Villa Paola Caposuvero permette di alternare le giornate in giardino e davanti al mare con brevi uscite tra costa tirrenica ed entroterra calabrese. Qui trovi quattro tappe reali nei dintorni di Gizzeria — tra terme, borghi, vino e sport d’acqua — con collegamenti ai siti ufficiali per verificare aperture e dettagli prima di partire.",
+    intro: "Soggiornare a Villa Paola Caposuvero permette di alternare le giornate in giardino e davanti al mare con brevi uscite tra costa tirrenica ed entroterra calabrese. Qui trovi quattro luoghi nei dintorni di Gizzeria — tra tradizione termale, borghi, vino e sport sul litorale — con i collegamenti ai siti ufficiali.",
     breadcrumbHome: "Home",
     breadcrumbCurrent: "Esperienze nei dintorni",
     mapSection: {
       title: "Orientarsi tra costa ed entroterra",
       caption: "Mappa illustrativa dell’area · non in scala",
-      note: "Distanze stradali indicative da SS18, Contrada Caposuvero 6, Gizzeria Lido; i percorsi dipendono dalla viabilità. Usa i link Mappa per la navigazione.",
+      note: "Distanze stradali indicative da SS18, Contrada Caposuvero 6, Gizzeria Lido; la lunghezza effettiva dipende dal percorso scelto. Usa i link Mappa per la navigazione.",
       villaLabel: "Villa Paola · Gizzeria",
       seaLabel: "Mar Tirreno",
     },
@@ -81,7 +81,7 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
         roadDistance: "circa 14 km",
         paragraphs: [
           "Nell’entroterra di Lamezia Terme, le Terme Caronte custodiscono una lunga tradizione termale. La piscina termale all’aperto, immersa nel verde, offre una pausa tranquilla lontana dal ritmo della costa.",
-          "È una tappa semplice da abbinare al soggiorno in villa per qualche ora di relax. Periodi di apertura e modalità di accesso cambiano durante l’anno: verificali sempre sul sito ufficiale.",
+          "Un luogo quieto lontano dal mare, pensato per chi desidera dedicare qualche ora al relax in un contesto naturale.",
         ],
         officialUrl: "https://www.termecaronte.it/piscina",
         officialLabel: "Scopri il luogo",
@@ -96,7 +96,7 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
         roadDistance: "circa 36 km",
         paragraphs: [
           "Risalendo la costa verso nord si incontra Fiumefreddo Bruzio, tra I Borghi più Belli d’Italia. Il centro storico sorge su un’altura, con vicoli raccolti e affacci aperti sul Mar Tirreno.",
-          "Si presta a una passeggiata senza fretta nel tardo pomeriggio, per godersi l’atmosfera del borgo e fermarsi a cena prima di rientrare verso Gizzeria.",
+          "Passeggiare tra le sue strade in pietra permette di cogliere l’atmosfera raccolta del borgo e i punti panoramici affacciati sulla costa.",
         ],
         ownerNote: {
           label: "Nota del proprietario · Roberto",
@@ -115,7 +115,7 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
         roadDistance: "circa 38 km",
         paragraphs: [
           "Sulle colline di Francavilla Angitola, Cantine Benvenuto nasce dal ritorno di Giovanni Benvenuto alle terre del nonno, con un lavoro dedicato al vitigno Zibibbo e ai vini calabresi.",
-          "È un riferimento concreto per scoprire la Calabria attraverso la sua tradizione vitivinicola. Eventuali visite vanno verificate direttamente con la cantina tramite i canali ufficiali.",
+          "Una realtà legata alla viticoltura dell’entroterra, dove il territorio si racconta attraverso un vitigno storico e il lavoro in vigna.",
         ],
         officialUrl: "https://cantinebenvenuto.it/",
         officialLabel: "Scopri il luogo",
@@ -130,7 +130,7 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
         roadDistance: "circa 5 km",
         paragraphs: [
           "Il litorale di Gizzeria è uno spot noto per il kitesurf, con Hang Loose Beach come punto di riferimento dedicato. Le condizioni dipendono dal vento termico e restano variabili di giorno in giorno.",
-          "Anche da spettatori, le vele sul mare raccontano la vocazione sportiva della costa. La pratica si svolge negli spazi dello spot — non dalla spiaggia di Villa Paola — e ogni dettaglio va verificato con la struttura.",
+          "Anche da spettatori, le vele sul mare raccontano la vocazione sportiva della costa. La pratica si svolge negli spazi dedicati lungo il litorale e non dalla spiaggia di Villa Paola.",
         ],
         officialUrl: "https://hangloosebeach.it/kitesurf/",
         officialLabel: "Scopri il luogo",
@@ -147,7 +147,7 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
       { to: "/", label: "Torna alla home di Villa Paola" },
     ],
     ctaTitle: "Verifica la disponibilità della villa",
-    ctaText: "Le visite nei dintorni si organizzano direttamente con i rispettivi gestori. Per soggiornare a Villa Paola Caposuvero, invia le tue date: il titolare risponderà con disponibilità e preventivo.",
+    ctaText: "Per il tuo soggiorno a Villa Paola Caposuvero, invia le date nel modulo: il titolare ti risponderà con disponibilità e preventivo personalizzato.",
     ctaButton: "Richiedi disponibilità per la villa",
     homeHref: "/",
     homeLabel: "Scopri Villa Paola",
@@ -163,13 +163,13 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
     description: "Four places to explore near Gizzeria and Villa Paola Caposuvero: Terme Caronte, Fiumefreddo Bruzio, Cantine Benvenuto and kitesurfing in Gizzeria, with maps and official links.",
     eyebrow: "Villa Paola Caposuvero · Around Gizzeria",
     h1: "Things to do near Gizzeria, Calabria",
-    intro: "Staying at Villa Paola Caposuvero makes it easy to balance quiet days in the garden and by the sea with short outings along Calabria’s Tyrrhenian coast and inland hills. Below are four genuine places to explore near Gizzeria — covering thermal baths, a hilltop village, local wine and kitesurfing — with official links so you can check seasonal details before heading out.",
+    intro: "Staying at Villa Paola Caposuvero makes it easy to balance quiet days in the garden and by the sea with short outings along Calabria’s Tyrrhenian coast and inland hills. Below are four places near Gizzeria — spanning thermal tradition, a hilltop village, local wine and kitesurfing — with links to their official pages.",
     breadcrumbHome: "Home",
     breadcrumbCurrent: "Things to do near Gizzeria",
     mapSection: {
       title: "Between coast and hills",
       caption: "Illustrative area map · not to scale",
-      note: "Indicative road distances from SS18, Contrada Caposuvero 6, Gizzeria Lido; actual routes depend on traffic and road choice. Use the Map links for navigation.",
+      note: "Indicative road distances from SS18, Contrada Caposuvero 6, Gizzeria Lido; actual distance depends on the chosen route. Use the Map links for navigation.",
       villaLabel: "Villa Paola · Gizzeria",
       seaLabel: "Tyrrhenian Sea",
     },
@@ -181,8 +181,8 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
         category: "Thermal tradition & relaxation",
         roadDistance: "approx. 14 km",
         paragraphs: [
-          "Set inland near Lamezia Terme, Terme Caronte is rooted in a long local thermal tradition. Its outdoor thermal pool sits amid mature trees, offering a calm setting for a few unhurried hours away from the shoreline.",
-          "It pairs well with a stay at the villa whenever you feel like a slower afternoon surrounded by greenery. Because seasonal opening periods and access rules can vary across the year, check the official website before planning a visit.",
+          "Set inland near Lamezia Terme, Terme Caronte is rooted in a long local thermal tradition. Its outdoor thermal pool is set in green surroundings, offering a calm setting away from the shoreline.",
+          "It is a quiet place to spend a few unhurried hours surrounded by greenery when you feel like a change of pace from the sea.",
         ],
         officialUrl: "https://www.termecaronte.it/piscina",
         officialLabel: "Visit official site",
@@ -197,7 +197,7 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
         roadDistance: "approx. 36 km",
         paragraphs: [
           "Heading north along the coast brings you to Fiumefreddo Bruzio, listed among I Borghi più Belli d’Italia. The old town sits on a hillside with narrow lanes, stone squares and open views across the Tyrrhenian Sea.",
-          "It lends itself to an unhurried late-afternoon walk through the historic centre, taking in the coastal views and staying for dinner before driving back towards Gizzeria.",
+          "Walking through its stone lanes reveals a compact historic centre with open viewpoints looking out over the coastline.",
         ],
         ownerNote: {
           label: "Owner’s note · Roberto",
@@ -216,7 +216,7 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
         roadDistance: "approx. 38 km",
         paragraphs: [
           "In the hills of Francavilla Angitola, Cantine Benvenuto grew out of Giovanni Benvenuto’s return to the land his grandfather farmed, focusing on the Zibibbo grape alongside wines rooted in the surrounding area.",
-          "For travellers interested in Calabrian viticulture, it offers a grounded look at local winemaking within driving reach of the coast. Check directly with the winery via its official channels regarding visits and availability.",
+          "It reflects the inland winemaking side of Calabria, centred on local vineyards and a historic grape variety.",
         ],
         officialUrl: "https://cantinebenvenuto.it/",
         officialLabel: "Visit official site",
@@ -231,7 +231,7 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
         roadDistance: "approx. 5 km",
         paragraphs: [
           "The Gizzeria shoreline is a well-known kitesurfing spot, with Hang Loose Beach as its dedicated local hub. Sessions depend on the area’s thermal breeze and variable daily sea and wind conditions.",
-          "Even if you prefer watching from the shore, seeing kites on the water introduces a lively side of the coast. Kitesurfing takes place at dedicated coastal spots rather than from Villa Paola’s beach, and any questions on access or lessons should go directly to the centre.",
+          "Even from the shore, watching kites on the water shows a lively side of the coast. Kitesurfing takes place at dedicated coastal spots rather than from Villa Paola’s beach.",
         ],
         officialUrl: "https://hangloosebeach.it/kitesurf/",
         officialLabel: "Visit official site",
@@ -248,7 +248,7 @@ export const areaGuideContent: Record<PublicLocale, AreaGuidePageContent> = {
       { to: "/?lang=en", label: "Back to Villa Paola home" },
     ],
     ctaTitle: "Check availability for Villa Paola",
-    ctaText: "Local outings are arranged independently with each venue. To plan your stay at Villa Paola Caposuvero, send your preferred dates using the enquiry form for a personalised villa quote.",
+    ctaText: "To plan your stay at Villa Paola Caposuvero, send your preferred dates using the enquiry form for a personalised villa quote.",
     ctaButton: "Check availability & request a quote",
     homeHref: "/?lang=en",
     homeLabel: "Explore Villa Paola",
