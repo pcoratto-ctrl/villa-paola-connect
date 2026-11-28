@@ -134,9 +134,7 @@
       "lidoDist": "Nearby",
       "center": "Gizzeria town centre",
       "centerDist": "Short distance"
-    },
-    "tipLabel": "Local tip",
-    "tipText": "For a memorable dinner, we recommend <strong>Lido Mediterraneo</strong>, a short distance from the villa. Fresh fish and unforgettable sunsets."
+    }
   },
   "reviews": {
     "eyebrow": "Guest reviews",

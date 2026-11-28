@@ -134,9 +134,7 @@
       "lidoDist": "Nelle vicinanze",
       "center": "Centro di Gizzeria",
       "centerDist": "Breve distanza"
-    },
-    "tipLabel": "Consiglio locale",
-    "tipText": "Per una cena memorabile, vi consigliamo il <strong>Lido Mediterraneo</strong>, a breve distanza dalla villa. Pesce freschissimo e tramonti indimenticabili."
+    }
   },
   "reviews": {
     "eyebrow": "Recensioni degli ospiti",

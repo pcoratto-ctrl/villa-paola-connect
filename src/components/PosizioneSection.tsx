@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, Plane, UtensilsCrossed, Waves, Navigation } from "lucide-react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import GettingHere from "./GettingHere";
 
 const PosizioneSection = () => {
@@ -76,13 +76,6 @@ const PosizioneSection = () => {
                   </div>
                 ))}
               </div>
-            </div>
-
-            <div className="p-6 md:p-8 rounded-villa bg-villa-sea-light border border-primary/10">
-              <p className="text-sm font-medium text-primary mb-2">{t("position.tipLabel")}</p>
-              <p className="text-foreground text-sm leading-relaxed">
-                <Trans i18nKey="position.tipText" components={{ strong: <strong /> }} />
-              </p>
             </div>
           </motion.div>
         </div>
