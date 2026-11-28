@@ -13,3 +13,4 @@
 - Enquiry measurement uses one analytics-purpose consent module with early worldwide Consent Mode defaults, GPC and sanitized in-memory attribution; call native events at existing handlers, never replay pre-consent custom actions or add attribution to an unsupported lead/export schema.
 - Require a valid saved-lead acknowledgement before displaying success or measuring conversion, and synchronously guard duplicate submissions; a resolved transport or email status alone does not prove a saved request.
 - Lovable hosting has no path-level HTTP 301/308 config; consolidate legacy URLs like `/it/home` via crawlable static HTML with canonical `/` and instant meta refresh plus React `<Navigate to="/" replace />`, never `robots.txt` Disallow or `noindex`.
+- Arrival diagrams share an SSR-safe IT/EN SVG component with explicit illustrative labels and no routing API; schematic curves must never be presented as verified roads, and reduced motion disables playback.

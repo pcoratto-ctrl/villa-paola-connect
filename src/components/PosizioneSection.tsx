@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { MapPin, Plane, UtensilsCrossed, Waves, Navigation } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
+import GettingHere from "./GettingHere";
 
 const PosizioneSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const nearbyPlaces = [
     { icon: Waves, label: t("position.nearby.beach"), distance: t("position.nearby.beachDist") },
     { icon: Plane, label: t("position.nearby.airport"), distance: t("position.nearby.airportDist") },
@@ -38,21 +39,9 @@ const PosizioneSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-            className="p-3 bg-card rounded-villa shadow-soft border border-border"
+            className="min-w-0"
           >
-            <div className="rounded-[calc(1.5rem-12px)] overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2949.1276407277846!2d16.15359086450813!3d38.9549634504173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133fdd8bb1030d7f%3A0xe19638cf63fa3e39!2sSS18%2C%20Contrada%20Caposuvero%206%2C%2088040%20Gizzeria%20CZ!5e1!3m2!1sit!2sit!4v1773575805100!5m2!1sit!2sit"
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={t("position.mapTitle")}
-                className="w-full h-[350px] md:h-[450px]"
-              />
-            </div>
+            <GettingHere locale={i18n.resolvedLanguage?.startsWith("en") ? "en" : "it"} />
           </motion.div>
 
           <motion.div

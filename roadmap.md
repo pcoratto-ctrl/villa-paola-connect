@@ -1,4 +1,5 @@
 # SEO corrections
+- [x] Come raggiungerci IT/EN: illustrazione SVG, selettori, animazione di 6 secondi, pausa/replay; 67 test e verifiche desktop/mobile/reduced-motion, build OK; solo anteprima.
 - [x] Focused rental SEO and shared consent-aware enquiry measurement; 69 tests, build OK and ten desktop/mobile checks; unsupported Sender/CRM attribution documented; no live leads, email or publication.
 - [x] Correct property address to Caposuvero 6 in IT/EN, maps and generated HTML; 17 SEO tests and seven browser routes passed; photo preserved; no publication.
 - [x] Three connected English previews: useful beach/season content, static metadata, sitemap and desktop/mobile/CTA verification; 39 tests passed; no deployment.

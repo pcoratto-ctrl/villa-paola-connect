@@ -6,6 +6,8 @@ import gardenPathAsset from "../assets/villa-garden-path-sea.webp.asset.json";
 import novemberGardenAsset from "../assets/villa-paola-november-observed.webp.asset.json";
 import EnglishHeroBookingLink from "./EnglishHeroBookingLink";
 import seafrontVerandaAsset from "../assets/villa-paola-seafront-veranda.webp.asset.json";
+import GettingHere from "./GettingHere";
+import { gettingHereContent } from "../lib/gettingHereContent";
 
 export function PublicLanguageLinks({ locale }: { locale?: PublicLocale }) {
   return <nav aria-label="Language / Lingua" className="flex flex-wrap items-center gap-5 text-sm">
@@ -59,7 +61,7 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
             {index === 0 && locale === "en" && !topic && <figure className="m-0 mb-8">
               <img src={seafrontVerandaAsset.url} alt="A table set for a meal on Villa Paola's covered seafront veranda, overlooking the blue sea" width={1077} height={1077} loading="eager" className="block w-full h-auto rounded-villa" />
             </figure>}
-            <h2 className="font-display text-3xl md:text-4xl mb-5 text-primary">{index === 3 ? c.arrival.title : section.title}</h2>
+            <h2 className="font-display text-3xl md:text-4xl mb-5 text-primary">{index === 3 ? gettingHereContent[locale].title : section.title}</h2>
             <p className="text-lg leading-relaxed text-foreground">{index === 3 ? c.arrival.text : section.text}</p>
             {index === 0 && !(locale === "en" && !topic) && (topic === "beach" ? <figure className="mt-8 mx-auto w-full max-w-md">
               <img src={gardenPathAsset.url} alt="A paved path through Villa Paola's garden, with the sea alongside on the right" width={1152} height={2048} loading="lazy" className="block w-full h-auto rounded-villa" />
@@ -67,6 +69,7 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
             {locale === "en" && index === 0 && !topic && <p className="mt-5 text-muted-foreground leading-relaxed">For the route, steps and mobility considerations, <a className="underline underline-offset-4 text-primary" href={englishVillaTopics.beach.path}>see the garden-to-beach access details</a>.</p>}
             {locale === "en" && index === 2 && !topic && <p className="mt-5 text-muted-foreground leading-relaxed">Explore <a className="underline underline-offset-4 text-primary" href={englishVillaTopics.seasons.path}>May and October holiday ideas</a> before choosing your dates.</p>}
             {index === 3 && <div className="mt-5">
+              <GettingHere locale={locale} heading={false} />
               <p className="text-muted-foreground leading-relaxed mb-5">{c.arrival.flights}</p>
               <div className="flex flex-wrap gap-x-6 gap-y-3"><a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-primary">{c.arrival.directions}</a><a href={AIRPORT_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 text-primary">{c.arrival.airport}</a></div>
             </div>}
