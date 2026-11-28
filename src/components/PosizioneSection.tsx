@@ -39,7 +39,7 @@ const PosizioneSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-            className="min-w-0"
+            className="min-w-0 lg:col-span-2"
           >
             <GettingHere locale={i18n.resolvedLanguage?.startsWith("en") ? "en" : "it"} />
           </motion.div>
@@ -49,7 +49,7 @@ const PosizioneSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="flex flex-col gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:col-span-2"
           >
             <div className="p-6 md:p-8 rounded-villa bg-card shadow-soft border border-border">
               <div className="flex items-start gap-4">

@@ -1,10 +1,10 @@
 # Come raggiungerci / Getting here
 
 ## Scope and placement
-- The existing English homepage is `/?lang=en`, not a separate `/en` route or the main commercial article. Both home languages and all three English articles use one `#getting-here` diagram each; no duplicate anchor or new route is introduced.
+- The existing English homepage is `/?lang=en`, not a separate `/en` route or the main commercial article. Both home languages and all three English articles use one `#getting-here` section with two maps each; no duplicate anchor or new route is introduced.
 - One shared IT/EN SVG component in the existing position area on the homepage and legacy Italian landing pages; within the existing arrival section of the Italian commercial article and three English articles.
 - Same diagram/content is included in build-time public HTML on the homepage and commercial articles. No new pages, sitemap entries, marketing copy, backend changes or publication.
-- Select airport or railway station, then play/pause/resume/replay a six-second car journey. Playback is user-initiated, silent and disabled with reduced motion; selecting an origin resets playback.
+- Airport and station maps are always visible: side by side from 768px, stacked below. Each fixed-origin card owns its independent six-second play/pause/resume/replay state. Playback is user-initiated, silent and disabled with reduced motion. Homepage maps span the full position container; address and nearby information remain below.
 - Both origins show the owner-supplied approximately 15-minute drive indication, with a traffic caveat. No kilometres, realtime travel estimates or claimed verified roads.
 
 ## Geographic limits
@@ -20,3 +20,8 @@
 - Chromium: ten desktop/mobile route checks (IT/EN home and three English articles), both selectors, visible origin/destination/time, no horizontal overflow or page errors. Additional 320px check with reduced motion and 390/1280px screenshots reviewed after existing entrance transitions settled.
 - Real browser SVG geometry: both journeys reach the villa in six seconds, tangent rotation follows the curve, pause holds the car position, resume/replay work, selection resets the route. Reduced motion disables playback but preserves selectors and directions. Enabled playback control is unobstructed after scrolling into view; existing privacy banner and mobile enquiry bar are unchanged.
 - No live lead, email, CRM operation, production publish or geographic API validation performed. Local preview screenshots verified; deployed preview-origin rendering was not independently inspected.
+## Two-map follow-up — 28 November 2026
+- 34 tests passed across arrival controls, public SEO, rental metadata and static renderer. Preview build OK.
+- Ten Chromium layout checks: both home languages and all three English pages at 1280px/390px; maps measure 528px on desktop home, 432px on desktop articles and 350px on mobile. One section anchor, unique SVG description references, no horizontal overflow.
+- Browser playback checks confirm independent starts/pauses, stationary paused car while the other moves, six-second completion, replay and reduced-motion disabling both controls. Four IT/EN desktop/mobile component screenshots captured locally.
+- Forms, CRM, SEO content and nearby guide are unchanged; no deployment or publication.
