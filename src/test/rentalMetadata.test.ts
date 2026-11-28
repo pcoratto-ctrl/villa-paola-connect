@@ -32,10 +32,10 @@ describe("Rental metadata and discoverability", () => {
     expect(schema).not.toHaveProperty("aggregateRating");
     expect(schema).not.toHaveProperty("offers");
   });
-  it("keeps 11 existing sitemap URLs, public rendering and crawler access without new language pages", () => {
+  it("keeps 13 canonical sitemap URLs, public rendering and crawler access without new language pages", () => {
     const sitemap = new DOMParser().parseFromString(readFileSync("public/sitemap.xml", "utf8"), "application/xml");
     const urls = [...sitemap.querySelectorAll("loc")].map(loc => new URL(loc.textContent ?? ""));
-    expect(urls).toHaveLength(11);
+    expect(urls).toHaveLength(13);
     for (const url of urls) { expect(url.origin).toBe(SITE_ORIGIN); expect(staticPaths).toContain(url.pathname); }
     expect(urls.some(url => /^\/(pl|de)\//.test(url.pathname))).toBe(false);
     const robots = readFileSync("public/robots.txt", "utf8");

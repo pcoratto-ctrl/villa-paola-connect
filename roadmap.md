@@ -1,4 +1,5 @@
 # SEO corrections
+- [x] Guida dintorni IT/EN (`/esperienze-dintorni`, `/en/things-to-do-near-gizzeria`) con Terme Caronte, Fiumefreddo Bruzio (nota proprietario), Cantine Benvenuto e kitesurf Gizzeria, mappa illustrativa, distanze stradali OSRM, collegamento da home/footer/landing EN e static HTML (solo anteprima).
 - [x] Anteprima GettingHere: due mappe sempre visibili, comandi indipendenti, spazio pieno in homepage; 34 test e dieci verifiche desktop/mobile, nessun deploy.
 - [x] Uniformare #getting-here: home IT, /?lang=en e tre landing EN senza duplicati; 28 test, dieci verifiche browser e quattro screenshot IT/EN desktop/mobile; nessun deploy.
 - [x] Come raggiungerci IT/EN: illustrazione SVG, selettori, animazione di 6 secondi, pausa/replay; 67 test e verifiche desktop/mobile/reduced-motion, build OK; solo anteprima.

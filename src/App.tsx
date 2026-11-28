@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import ConsentChoices from "@/components/ConsentChoices";
 import Index from "./pages/Index.tsx";
 import InternationalVilla from "./pages/InternationalVilla";
+import AreaGuide from "./pages/AreaGuide";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
@@ -40,6 +41,8 @@ const App = () => (
           <Route path="/en/beachfront-villa-calabria" element={<InternationalVilla locale="en" />} />
           <Route path="/en/villa-direct-beach-access-calabria" element={<InternationalVilla locale="en" topic="beach" />} />
           <Route path="/en/calabria-spring-autumn-holidays" element={<InternationalVilla locale="en" topic="seasons" />} />
+          <Route path="/esperienze-dintorni" element={<AreaGuide locale="it" />} />
+          <Route path="/en/things-to-do-near-gizzeria" element={<AreaGuide locale="en" />} />
           <Route path="/villa-accesso-diretto-spiaggia-calabria" element={<VillaAccessoDirettoSpiaggia />} />
           <Route path="/casa-vacanze-gizzeria" element={<CasaVacanzeGizzeria />} />
           <Route path="/villa-vicino-aeroporto-lamezia" element={<VillaVicinoAeroportoLamezia />} />

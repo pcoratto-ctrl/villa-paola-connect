@@ -25,6 +25,7 @@ const Footer = () => {
         { to: "/villa-per-famiglie-calabria", label: t("footer.seo.family") },
         { to: "/villa-pet-friendly-calabria", label: t("footer.seo.pet") },
         { to: "/vacanze-settembre-calabria", label: t("footer.seo.september") },
+        { to: "/esperienze-dintorni", label: "Cosa vedere vicino a Gizzeria" },
       ];
 
   const homeHash = (hash: string) => (isEnglish ? `/?lang=en#${hash}` : `/#${hash}`);

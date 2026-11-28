@@ -52,6 +52,7 @@ export const englishDiscoveryLinks = [
   { to: publicVillaContent.en.path, label: "Beachfront villa in Calabria" },
   { to: englishVillaTopics.beach.path, label: "Villa with direct beach access" },
   { to: englishVillaTopics.seasons.path, label: "Spring & autumn holidays in Calabria" },
+  { to: "/en/things-to-do-near-gizzeria", label: "Things to do near Gizzeria" },
 ] as const;
 export const englishTopicImages = {
   beach: { hero: "gallery-spiaggia-e-isola-allorizzonte.webp", detail: "gallery-passaggio-laterale-vista-mare.webp", alt: "The sea-facing side passage at Villa Paola" },

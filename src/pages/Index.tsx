@@ -13,6 +13,7 @@ import AmbientiSection from "@/components/AmbientiSection";
 import ServiziSection from "@/components/ServiziSection";
 import GalleriaSection from "@/components/GalleriaSection";
 import PosizioneSection from "@/components/PosizioneSection";
+import ExploreAreaSection from "@/components/ExploreAreaSection";
 import DisponibilitaSection from "@/components/DisponibilitaSection";
 import FaqSection from "@/components/FaqSection";
 import ContattiSection from "@/components/ContattiSection";
@@ -47,6 +48,7 @@ const Index = () => {
         <GalleriaSection />
         <CalabriaSection />
         <PosizioneSection />
+        <ExploreAreaSection />
         <RecensioniHighlight />
         <DisponibilitaSection />
         <FaqSection />

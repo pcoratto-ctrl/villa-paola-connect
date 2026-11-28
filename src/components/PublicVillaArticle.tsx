@@ -8,6 +8,7 @@ import EnglishHeroBookingLink from "./EnglishHeroBookingLink";
 import seafrontVerandaAsset from "../assets/villa-paola-seafront-veranda.webp.asset.json";
 import GettingHere from "./GettingHere";
 import { gettingHereContent } from "../lib/gettingHereContent";
+import { areaGuideContent } from "../lib/areaGuideContent";
 
 export function PublicLanguageLinks({ locale }: { locale?: PublicLocale }) {
   return <nav aria-label="Language / Lingua" className="flex flex-wrap items-center gap-5 text-sm">
@@ -84,10 +85,16 @@ export default function PublicVillaArticle({ locale, topic }: { locale: PublicLo
             </dl>
           </section>}
           <a href="#disponibilita" onClick={async () => { if (await measurementAllowed()) window.__lovableEvents?.track?.("project.availability_cta_clicked", enquiryMeasurementProperties(locale)); }} className="inline-flex rounded-villa bg-primary text-primary-foreground px-6 py-4 font-semibold">{c.cta}</a>
+          {locale === "it" && <nav aria-label="Esplora i dintorni" className="mt-12 border-t border-border pt-8">
+            <p>Vuoi alternare il mare con brevi uscite tra borghi, terme, cantine e sport sul litorale? <a className="underline underline-offset-4 text-primary" href={areaGuideContent.it.path}>Scopri cosa vedere vicino a Gizzeria</a>.</p>
+          </nav>}
           {locale === "en" && <nav aria-label="Explore your stay" className="mt-12 border-t border-border pt-8 space-y-4">
             {topic && <p>Considering a whole private villa rental in Calabria? For the rooms, garden and veranda, <a className="underline underline-offset-4 text-primary" href={publicVillaContent.en.path}>explore the beachfront villa</a>.</p>}
             {topic !== "beach" && <p>Planning days by the shore? <a className="underline underline-offset-4 text-primary" href={englishVillaTopics.beach.path}>Read about direct beach access</a>.</p>}
             {topic !== "seasons" && <p>Travelling outside high summer? <a className="underline underline-offset-4 text-primary" href={englishVillaTopics.seasons.path}>Plan a spring or autumn stay</a>.</p>}
+            {!topic && <p>Curious about outings along the coast and inland? <a className="underline underline-offset-4 text-primary" href={areaGuideContent.en.path}>See things to do near Gizzeria</a>.</p>}
+            {topic === "beach" && <p>Curious about wind sports along the Gizzeria coastline? Kitesurfing takes place at dedicated local spots rather than from Villa Paola’s beach — <a className="underline underline-offset-4 text-primary" href={areaGuideContent.en.path}>explore things to do near Gizzeria</a>.</p>}
+            {topic === "seasons" && <p>Outside peak summer, hilltop villages, local wine and thermal baths pair naturally with a coastal base — check seasonal opening details in our <a className="underline underline-offset-4 text-primary" href={areaGuideContent.en.path}>guide to things to do near Gizzeria</a>.</p>}
           </nav>}
         </div>
       </div>
